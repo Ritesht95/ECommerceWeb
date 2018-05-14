@@ -4,7 +4,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { SudashboradComponent } from './sudashborad/sudashborad.component';
-import { WebInfoComponent } from './web-info/web-info.component'
+import { WebInfoComponent } from './web-info/web-info.component';
+import { ShopsComponent } from './shops/shops.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', component: WebInfoComponent},
+  { path: 'shops', component: ShopsComponent},
   { path: '**', redirectTo: 'not-found' }
 ];
 
