@@ -1,0 +1,16 @@
+import './assets/bower_components/bootstrap/dist/js/bootstrap.min.js';
+import './assets/bower_components/raphael/raphael.min.js';
+import './assets/bower_components/morris.js/morris.min.js';
+import './assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js';
+import './assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js';
+import './assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js';
+import './assets/bower_components/jquery-knob/dist/jquery.knob.min.js';
+import './assets/bower_components/moment/min/moment.min.js';
+import './assets/bower_components/bootstrap-daterangepicker/daterangepicker.js';
+import './assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js';
+import './assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js';
+import './assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js';
+import './assets/bower_components/fastclick/lib/fastclick.js';
+import './assets/dist/js/adminlte.min.js';
+import './assets/dist/js/pages/dashboard.js';
+import './assets/dist/js/demo.js';

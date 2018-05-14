@@ -25,7 +25,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/JS.js",
+              "src/assets/bower_components/jquery/dist/jquery.min.js",
+              "src/assets/bower_components/jquery-ui/jquery-ui.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -74,7 +78,11 @@
             "styles": [
               "styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/JS.js",
+              "src/assets/bower_components/jquery/dist/jquery.min.js",
+              "src/assets/bower_components/jquery-ui/jquery-ui.min.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
