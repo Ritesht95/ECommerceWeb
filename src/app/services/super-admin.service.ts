@@ -6,33 +6,40 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class SuperAdminService {
 
+
+
   constructor(private _http: Http) { }
 
-  checkLogin(username: string, password: string): Observable<string> {
+  checkLogin(username: string, password: string): Observable<any> {
     const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' });
     const options = new RequestOptions({ headers: headers });
 
     const data: object = { 'username' : username , 'password' : password };
-    console.log(data);
+    // console.log(data);
 
-    console.log(
-      this._http
-      .post('http://192.168.0.108/OnlinestoreApi/SuperAdmin/CheckLogin.php', data , options)
+    // console.log(
+    //   this._http
+    //   .post('http://192.168.0.105/OnlinestoreApi/SuperAdmin/CheckLogin.php', data , options)
+    //   // tslint:disable-next-line:no-shadowed-variable
+    //   .pipe(
+    //     map(
+    //       this.resData = res => res.json()
+    //     )
+    //   )
+    // );
+
+    // console.log(this.resData);
+
+
+
+      // console.log(this.resData);
+      return this._http
+      .post('http://192.168.0.105/OnlinestoreApi/SuperAdmin/CheckLogin.php', data , options)
       // tslint:disable-next-line:no-shadowed-variable
       .pipe(
         map(
           res => res.json()
         )
-      )
-    );
-
-    return this._http
-    .post('http://192.168.0.108/OnlinestoreApi/SuperAdmin/CheckLogin.php', data , options)
-    // tslint:disable-next-line:no-shadowed-variable
-    .pipe(
-      map(
-        res => res.json()
-      )
-    );
+      );
   }
 }

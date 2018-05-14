@@ -12,6 +12,8 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SudashboradComponent } from './sudashborad/sudashborad.component';
 import { WebInfoComponent } from './web-info/web-info.component';
+import { LoginauthService } from './loginauth.service';
+import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
 
 @NgModule({
@@ -33,7 +35,7 @@ import { ShopsComponent } from './shops/shops.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [{provide: APP_BASE_HREF, useValue: '/' }, LoginauthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

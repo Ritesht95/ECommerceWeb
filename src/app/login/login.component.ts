@@ -2,6 +2,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { SuperAdminService } from '../services/super-admin.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { LoginauthService } from '../loginauth.service';
+import { SuperAdmin } from '../classes/super-admin';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +16,39 @@ import { Observable } from 'rxjs';
 export class LoginComponent {
 
   loginform: FormGroup;
+  public resData: SuperAdmin;
+  errormessage: string;
 
   // @Output() check_login_event = new EventEmitter();
 
-  constructor(private superadminservice: SuperAdminService) {
+  constructor(
+          private superadminservice: SuperAdminService
+          , private router: Router
+          , private loginAuth: LoginauthService,
+        ) {
     }
 
   CheckLogin(Email: string, Password: string) {
-    this.superadminservice.checkLogin(Email, Password)
-    .subscribe(string => {console.log('hello'); },
-    error => console.log(error));
+    this.superadminservice.checkLogin(Email, Password).subscribe(
+      res => {
+        this.resData =  res;
+        if (res === 0) {
+          console.log('login failed!');
+        } else {
+          console.log('login success!');
+          this.loginAuth.setUserLoggedIn(true);
+          this.loginAuth.setValues(res['Adminid'], res['Email'], 'SuperAdmin', res['Adminname']);
+          this.router.navigate(['dashboard']);
+        }
+      },
+      error => { console.log(error); }
+    );
+    // if (res) {
+    //   // this.loginAuth.setUserLoggedIn(true);
+    //   // this.router.navigate(['dashboard']);
+    // } else {
+
+    // }
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
