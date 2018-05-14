@@ -6,6 +6,8 @@ import { SignupComponent } from './signup/signup.component';
 import { SudashboradComponent } from './sudashborad/sudashborad.component';
 import { WebInfoComponent } from './web-info/web-info.component';
 import { AuthGuard } from './auth.guard';
+import { ShopsComponent } from './shops/shops.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -13,6 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
   { path: 'webinfo', component: WebInfoComponent},
+  { path: 'shops', component: ShopsComponent},
   { path: '**', redirectTo: 'not-found' }
 ];
 

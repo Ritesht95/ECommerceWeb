@@ -14,6 +14,7 @@ import { SudashboradComponent } from './sudashborad/sudashborad.component';
 import { WebInfoComponent } from './web-info/web-info.component';
 import { LoginauthService } from './loginauth.service';
 import { AuthGuard } from './auth.guard';
+import { ShopsComponent } from './shops/shops.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthGuard } from './auth.guard';
     HeaderComponent,
     SidebarComponent,
     SudashboradComponent,
-    WebInfoComponent
+    WebInfoComponent,
+    ShopsComponent
   ],
   imports: [
     BrowserModule,
