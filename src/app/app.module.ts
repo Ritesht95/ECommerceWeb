@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SudashboradComponent } from './sudashborad/sudashborad.component';
 import { WebInfoComponent } from './web-info/web-info.component';
+import { ShopsComponent } from './shops/shops.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WebInfoComponent } from './web-info/web-info.component';
     HeaderComponent,
     SidebarComponent,
     SudashboradComponent,
-    WebInfoComponent
+    WebInfoComponent,
+    ShopsComponent
   ],
   imports: [
     BrowserModule,
