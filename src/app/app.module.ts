@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SudashboradComponent } from './sudashborad/sudashborad.component';
+import { WebInfoComponent } from './web-info/web-info.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SudashboradComponent } from './sudashborad/sudashborad.component';
     SudashboradComponent,
     HeaderComponent,
     SidebarComponent,
-    SudashboradComponent
+    SudashboradComponent,
+    WebInfoComponent
   ],
   imports: [
     BrowserModule,
