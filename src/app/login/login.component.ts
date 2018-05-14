@@ -43,12 +43,6 @@ export class LoginComponent {
       },
       error => { console.log(error); }
     );
-    // if (res) {
-    //   // this.loginAuth.setUserLoggedIn(true);
-    //   // this.router.navigate(['dashboard']);
-    // } else {
-
-    // }
   }
 
   // tslint:disable-next-line:use-life-cycle-interface
