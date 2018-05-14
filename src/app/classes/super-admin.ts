@@ -1,6 +1,6 @@
 export class SuperAdmin {
   constructor(
-    AdminId: number,
+    Adminid: number,
     AdminName: string,
     AdminImage: string,
     PhoneNo: string,
