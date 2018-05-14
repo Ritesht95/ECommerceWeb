@@ -10,26 +10,43 @@
                 <div class="logo text-center"><img src='../../assets/img/logo-dark.png' alt="Klorofil Logo"></div>
                 <p class="lead">Login to your account</p>
               </div>
-              <form class="form-auth-small">
+              <form class="form-auth-small" #frm="ngForm">
                 <div class="form-group">
                   <label for="signin-email" class="control-label sr-only">Email</label>
-                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" value="" placeholder="Email" required>
+                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" >
                 </div>
                 <div class="form-group">
                   <label for="signin-password" class="control-label sr-only">Password</label>
-                  <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" value="" placeholder="Password" required>
+                  <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" value="" placeholder="Password" pattern="[a-zA-Z0-9]*" required>
                 </div>
+               <!--<div *ngIf="">
+
+                </div>-->
                 <div class="form-group clearfix">
                   <label class="fancy-checkbox element-left">
                     <input type="checkbox">
                     <span>Remember me</span>
                   </label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="CheckLogin(txtEmail.value,txtPassword.value);" >Login</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="CheckLogin(txtEmail.value,txtPassword.value);" [disabled]="frm.invalid">Login</button>
                 <div class="bottom">
                   <span class="helper-text"><i class="fa fa-lock"></i>
                     <!-- <a routerLink="sublogin"> Forgot password?</a> -->
                   </span>
+                </div>
+                <div *ngIf="txtEmail.touched || txtPassword.touched">
+                  <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
+                    <span class="text-danger">Email is Required</span>
+                  </div>
+                  <div *ngIf="txtEmail.errors?.pattern">
+                    <span class="text-danger">Email Invalid</span>
+                  </div>
+                  <div *ngIf="txtPassword.errors?.required && txtPassword.touched">
+                    <span class="text-danger">Password is Required</span>
+                  </div>
+                  <div *ngIf="txtPassword.errors?.pattern">
+                    <span class="text-danger">Password Invalid</span>
+                  </div>
                 </div>
               </form>
             </div>
