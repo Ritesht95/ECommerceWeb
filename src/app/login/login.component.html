@@ -13,7 +13,7 @@
               <form class="form-auth-small" #frm="ngForm">
                 <div class="form-group">
                   <label for="signin-email" class="control-label sr-only">Email</label>
-                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" >
+                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" placeholder="Email" required >
                 </div>
                 <div class="form-group">
                   <label for="signin-password" class="control-label sr-only">Password</label>
@@ -37,9 +37,6 @@
                 <div *ngIf="txtEmail.touched || txtPassword.touched">
                   <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
                     <span class="text-danger">Email is Required</span>
-                  </div>
-                  <div *ngIf="txtEmail.errors?.pattern">
-                    <span class="text-danger">Email Invalid</span>
                   </div>
                   <div *ngIf="txtPassword.errors?.required && txtPassword.touched">
                     <span class="text-danger">Password is Required</span>
