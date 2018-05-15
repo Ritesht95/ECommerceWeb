@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
+  // { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', component: WebInfoComponent},
   { path: 'shops', component: ShopsComponent},
   { path: '**', redirectTo: 'not-found' }
