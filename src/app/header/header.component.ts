@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginauthService } from '../loginauth.service';
+import { SuperAdmin } from '../classes/super-admin';
+import { SuperAdminService } from '../services/super-admin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +10,61 @@ import { LoginauthService } from '../loginauth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   UserID: number;
   Name: string;
 
-  constructor(private loginAuth: LoginauthService) { }
+  constructor(
+    private loginAuth: LoginauthService,
+    private superAdminService: SuperAdminService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.UserID = this.loginAuth.getUserID();
     this.Name = this.loginAuth.getName();
   }
 
+  changePassword(oldPassword: string, newPassword: string) {
+    this.superAdminService.changePassword(oldPassword, newPassword).subscribe(
+      res => {
+        if (res['key'] === 'incorrect') {
+          // Wrong old Password
+          console.log('Wrong old Password');
+        } else if (res['key'] === 'same') {
+          // Same as Current Password
+          console.log('Same as Current Password');
+        } else if (res['key'] === 'oldsame') {
+          // Same as Previous Password
+          console.log('Same as Previous Password');
+        } else if (res['key'] === '0') {
+          // Server Error
+          console.log('Server Error');
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  logout() {
+    this.loginAuth
+      .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
+      .subscribe(
+        res => {
+          if (res.json()['key'] === 'true') {
+            localStorage.removeItem('sessionUserID');
+            localStorage.removeItem('sessionName');
+            localStorage.removeItem('sessionEmail');
+            localStorage.removeItem('sessionUserType');
+            localStorage.setItem('loggedIn', 'false');
+            this.loginAuth.setUserLoggedIn(false);
+            this.router.navigate(['login']);
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 }
