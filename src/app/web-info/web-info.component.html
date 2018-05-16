@@ -22,35 +22,39 @@
       </div> -->
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form">
+      <form role="form" #frm="ngForm">
         <div class="box-body">
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="txtWebsiteName">Website Name</label>
-                <input type="text" class="form-control" id="txtWebsiteName" placeholder="Website Name">
+                <label for="txtWebsiteName">Website Name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtWebsiteName" placeholder="Website Name" name="txtWebsiteName" ngModel required #txtWebsiteName="ngModel" pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
               </div>
               <div class="form-group">
-                  <label for="txttagline">Tag Line</label>
+                  <label for="txttagline">Tag Line<span class="text-danger">*</span></label>
                   <input type="text" class="form-control" id="txttagline" placeholder="Tag Line">
                 </div>
               <div class="form-group">
-                <label for="txtEmail">Email</label>
-                <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+                <label for="txtEmail">Email<span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="txtEmail" placeholder="Email" name="txtEmail" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #txtEmail="ngModel">
               </div>
               <div class="form-group">
-                <label for="txtgstno">GST No</label>
-                <input type="text" class="form-control" id="txtgstno" placeholder="GST No">
+                <label for="txtgstno">GST No<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtgstno" placeholder="GST No" name="txtgstno" ngModel required #txtgstno="ngModel" pattern="[a-zA-Z0-9]{15}">
               </div>
               <div class="form-group">
-                <label for="txtaboutus">About Us</label>
-                <textarea class="form-control" id="txtaboutus" rows="2" placeholder="About Us"></textarea>
+                <label for="txtaboutus">About Us<span class="text-danger">*</span></label>
+                <textarea class="form-control" id="txtaboutus" rows="2" placeholder="About Us" name="txtaboutus" ngModel required #txtaboutus="ngModel"></textarea>
               </div>
               <div class="form-group">
-                  <label for="txtlogo">Logo</label>
-                  <input type="file" id="txtlogo">
+                  <label for="txtlogo">Logo<span class="text-danger">*</span></label>
+                  <input type="file" id="txtlogo" (change)="upload($event)" name="txtlogo" required ngModel #txtlogo="ngModel" >
                   <!-- <p class="help-block">Example block-level help text here.</p> -->
-                </div>
+              </div>
+              <div class="form-group">
+                <label for="txtcontact">Contact Number<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtcontact" name="txtcontact" placeholder="Contact Number" ngModel required pattern="[0-9]{10}" #txtcontact="ngModel">
+              </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
@@ -70,13 +74,54 @@
                 <input type="text" class="form-control" id="txtyoutubelink" placeholder="YouTube Link">
               </div>
               <div class="form-group">
-                <label for="txtcontactus">Contact Us</label>
-                <textarea class="form-control" id="txtcontactus" rows="2" placeholder="Contact Us"></textarea>
+                <label for="txtcontactus">Contact Us<span class="text-danger">*</span></label>
+                <textarea class="form-control" id="txtcontactus" rows="2" placeholder="Contact Us" name="txtcontactus" ngModel required #txtcontactus="ngModel"></textarea>
               </div>
               <div class="form-group">
-                  <label for="txtlogoalt">Logo Alternate</label>
-                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate">
+                  <label for="txtlogoalt">Logo Alternate</label><span class="text-danger">*</span>
+                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+              </div>
+              <div *ngIf="txtcontact.touched || txtaboutus.touched || txtgstno.touched || txtWebsiteName.touched || txtEmail.touched || txtcontactus.touched || txtlogoalt.touched || txtlogo.touched">
+                <div *ngIf="txtWebsiteName.errors?.required && txtWebsiteName.touched">
+                  <span class="text-danger">Website is required</span>
                 </div>
+                <div *ngIf="txtWebsiteName.errors?.pattern && txtWebsiteName.touched">
+                  <span class="text-danger">Website is Invalid</span>
+                </div>
+                <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
+                  <span class="text-danger">Email is required</span>
+                </div>
+                <div *ngIf="txtEmail.errors?.pattern && txtEmail.touched">
+                  <span class="text-danger">Email is Invalid</span>
+                </div>
+                <div *ngIf="txtgstno.errors?.required && txtgstno.touched">
+                  <span class="text-danger">GST No is required</span>
+                </div>
+                <div *ngIf="txtgstno.errors?.pattern && txtgstno.touched">
+                  <span class="text-danger">GST No is Invalid</span>
+                </div>
+                <div *ngIf="txtaboutus.errors?.required && txtaboutus.touched">
+                  <span class="text-danger">About Us is required</span>
+                </div>
+                <div *ngIf="txtlogo.errors?.required && txtlogo.touched">
+                  <span class="text-danger">Logo is required</span>
+                </div>
+                <div *ngIf="txtcontact.errors?.required && txtcontact.touched">
+                  <span class="text-danger">Contact is required</span>
+                </div>
+                <div *ngIf="txtcontact.errors?.pattern && txtcontact.touched">
+                  <span class="text-danger">Contact is Invalid</span>
+                </div>
+                <div *ngIf="txtcontactus.errors?.required && txtcontactus.touched">
+                  <span class="text-danger">Contact Us is required</span>
+                </div>
+                <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
+                  <span class="text-danger">Logo Alternate is required</span>
+                </div>
+              </div>
+              <div *ngIf=" flag && txtlogo.touched">
+                <span class="text-danger">Select .png, .jpg and .jpeg only</span>
+              </div>
             </div>
           </div>
         </div>
@@ -84,7 +129,7 @@
 
         <div class="box-footer">
           <button type="reset" class="btn btn-primary">Cancle</button>&nbsp;
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="frm.invalid || flag">Submit</button>
         </div>
       </form>
     </div>
