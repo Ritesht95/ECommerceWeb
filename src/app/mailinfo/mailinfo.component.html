@@ -22,23 +22,35 @@
           </div> -->
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form">
+      <form role="form" #frm="ngForm">
         <div class="box-body">
           <div class="form-group">
             <label for="txtEmail">Email</label>
-            <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+            <input type="email" class="form-control" id="txtEmail" placeholder="Email" name="txtEmail" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #txtEmail="ngModel">
           </div>
           <div class="form-group">
             <label for="txtPassword">Password</label>
-            <input type="password" class="form-control" id="txtPassword" placeholder="Password">
+            <input type="password" class="form-control" id="txtPassword" placeholder="Password" required ngModel name="txtPassword" #txtPassword="ngModel">
+          </div>
+          <div *ngIf="txtEmail.touched || txtPassword.touched">
+            <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
+              <span class="text-danger">Email is required</span>
+            </div>
+            <div *ngIf="txtEmail.errors?.pattern && txtEmail.touched">
+              <span class="text-danger">Email is Invalid</span>
+            </div>
+            <div *ngIf="txtPassword.errors?.required && txtPassword.touched">
+              <span class="text-danger">Password is required</span>
+            </div>
           </div>
         </div>
         <!-- /.box-body -->
 
         <div class="box-footer">
           <button type="reset" class="btn btn-primary">Cancle</button>&nbsp;
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" [disabled]="frm.invalid">Submit</button>
         </div>
+
       </form>
     </div>
   </section>
