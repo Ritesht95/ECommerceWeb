@@ -17,6 +17,8 @@ import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { MailinfoComponent } from './mailinfo/mailinfo.component';
+import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     WebInfoComponent,
     ShopsComponent,
     ForgotpasswordComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    MailinfoComponent,
+    AdminprofileComponent
   ],
   imports: [
     BrowserModule,
