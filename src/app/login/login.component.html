@@ -1,40 +1,48 @@
-
 <!-- WRAPPER -->
-  <div id="wrapper">
-    <div class="vertical-align-wrap">
-      <div class="vertical-align-middle">
-        <div class="auth-box ">
-          <div class="left">
-            <div class="content">
-              <div class="header">
-                <div class="logo text-center"><img src='../../assets/img/logo-dark.png' alt="Klorofil Logo"></div>
-                <p class="lead">Login to your account</p>
+<div id="wrapper">
+  <div class="vertical-align-wrap">
+    <div class="vertical-align-middle">
+      <div class="auth-box ">
+        <div class="left">
+          <div class="content">
+            <div class="header">
+              <div class="logo text-center">
+                <img src='../../assets/img/logo-dark.png' alt="Klorofil Logo">
               </div>
-              <form class="form-auth-small" #frm="ngForm">
-                <div class="form-group">
-                  <label for="signin-email" class="control-label sr-only">Email</label>
-                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" placeholder="Email" required >
-                </div>
-                <div class="form-group">
-                  <label for="signin-password" class="control-label sr-only">Password</label>
-                  <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" placeholder="Password" pattern="[a-zA-Z0-9]*" required>
-                </div>
-               <!--<div *ngIf="">
-
-                </div>-->
-                <div class="form-group clearfix">
-                  <label class="fancy-checkbox element-left">
-                    <input type="checkbox" ngModel #chkAdmin="ngModel" name="chkAdmin" class="form-control">
-                    <span>Remember me</span>
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="CheckLogin(txtEmail.value,txtPassword.value,chkAdmin.value);" [disabled]="frm.invalid">Login</button>
-                <div class="bottom">
-                  <span class="helper-text"><i class="fa fa-lock"></i>
-                    <!-- <a routerLink="sublogin"> Forgot password?</a> -->
+              <p class="lead">Login to your account</p>
+            </div>
+            <form class="form-auth-small" #frm="ngForm">
+              <div class="form-group">
+                <label for="signin-email" class="control-label sr-only">Email</label>
+                <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <label for="signin-password" class="control-label sr-only">Password</label>
+                <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" placeholder="Password" pattern="[a-zA-Z0-9]*" required>
+              </div>
+              <div class="form-group text-left">
+                <input type="radio" value="Admin" name="optType" required #optType="ngModel" ngModel> Administrator &nbsp;&nbsp;&nbsp;
+                <input type="radio" value="Seller" name="optType" required #optType="ngModel" ngModel> Sellers
+              </div>
+              <!-- </div> -->
+              <button type="submit" class="btn btn-primary btn-lg btn-block" (click)="CheckLogin(txtEmail.value,txtPassword.value,optType.value);"
+                [disabled]="frm.invalid">Login</button>
+              <div class="row">
+                <div class="bottom col-sm-5">
+                  <span class="helper-text">
+                    <i class="fa fa-lock"></i>
+                    <a [routerLink]="['/forgotpassword']"> Forgot password?</a>
                   </span>
                 </div>
-                <div *ngIf="txtEmail.touched || txtPassword.touched">
+                <div class="bottom col-sm-7 text-right">
+                  <span class="helper-text">
+                    <a [routerLink]="['/signup']">Register as new seller </a>
+                    <i class="fa fa-user"></i>
+                  </span>
+                </div>
+              </div>
+              <div *ngIf="txtEmail.touched || txtPassword.touched">
+                <div id='alertDiv'>
                   <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
                     <span class="text-danger">Email is Required</span>
                   </div>
@@ -44,20 +52,24 @@
                   <div *ngIf="txtPassword.errors?.pattern">
                     <span class="text-danger">Password Invalid</span>
                   </div>
+                  <div ng-if="!loginErrorMsg == null">
+                    <span class="text-danger">{{loginErrorMsg}}</span>
+                  </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-          <div class="right">
-            <div class="overlay"></div>
-            <div class="content text">
-              <h1 class="heading">Free Bootstrap dashboard template</h1>
-              <p>by The Develovers</p>
-            </div>
-          </div>
-          <div class="clearfix"></div>
         </div>
+        <div class="right">
+          <div class="overlay"></div>
+          <div class="content text">
+            <h1 class="heading">Online Shopping : Admin/Seller Portal</h1>
+            <p>by The Develovers</p>
+          </div>
+        </div>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
-  <!-- END WRAPPER -->
+</div>
+<!-- END WRAPPER -->

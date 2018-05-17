@@ -7,6 +7,8 @@ import { SudashboradComponent } from './sudashborad/sudashborad.component';
 import { WebInfoComponent } from './web-info/web-info.component';
 import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   // { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', component: WebInfoComponent},
   { path: 'shops', component: ShopsComponent},
+  { path: 'forgotpassword', component: ForgotpasswordComponent},
+  { path: 'reset', component: ResetpasswordComponent},
   { path: '**', redirectTo: 'not-found' }
 ];
 

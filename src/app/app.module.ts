@@ -15,6 +15,8 @@ import { WebInfoComponent } from './web-info/web-info.component';
 import { LoginauthService } from './loginauth.service';
 import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ShopsComponent } from './shops/shops.component';
     SidebarComponent,
     SudashboradComponent,
     WebInfoComponent,
-    ShopsComponent
+    ShopsComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,
