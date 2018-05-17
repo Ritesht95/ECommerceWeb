@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'reset', component: ResetpasswordComponent},
   { path: 'mailinfo', component: MailinfoComponent},
-  { path: 'adminProfile', component: AdminprofileComponent },
+  { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: '**', redirectTo: 'not-found' },
   { path: 'adminProfile', component: AdminprofileComponent },
   { path: 'shopInfo', component: ShopInfoComponent }
