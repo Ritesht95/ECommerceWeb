@@ -16,6 +16,7 @@ import { LoginauthService } from './loginauth.service';
 import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
+import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MailinfoComponent } from './mailinfo/mailinfo.component';
     SudashboradComponent,
     WebInfoComponent,
     ShopsComponent,
-    MailinfoComponent
+    MailinfoComponent,
+    AdminprofileComponent
   ],
   imports: [
     BrowserModule,

@@ -7,8 +7,8 @@ import { SudashboradComponent } from './sudashborad/sudashborad.component';
 import { WebInfoComponent } from './web-info/web-info.component';
 import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
-import { MailinfoComponent } from './mailinfo/mailinfo.component'
-
+import { MailinfoComponent } from './mailinfo/mailinfo.component';
+import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'webinfo', component: WebInfoComponent},
   { path: 'shops', component: ShopsComponent},
   { path: 'mailinfo', component: MailinfoComponent},
-  { path: '**', redirectTo: 'not-found' }
+  { path: '**', redirectTo: 'not-found' },
+  { path: 'adminProfile', component: AdminprofileComponent }
 ];
 
 @NgModule({
