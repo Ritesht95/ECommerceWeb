@@ -11,6 +11,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
+import { ShopInfoComponent } from './shop-info/shop-info.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,6 +26,8 @@ const routes: Routes = [
   { path: 'mailinfo', component: MailinfoComponent},
   { path: 'adminProfile', component: AdminprofileComponent },
   { path: '**', redirectTo: 'not-found' },
+  { path: 'adminProfile', component: AdminprofileComponent },
+  { path: 'shopInfo', component: ShopInfoComponent }
 ];
 
 @NgModule({

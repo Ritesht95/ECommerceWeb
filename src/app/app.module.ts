@@ -19,6 +19,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
+import { ShopInfoComponent } from './shop-info/shop-info.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AdminprofileComponent } from './adminprofile/adminprofile.component';
     ForgotpasswordComponent,
     ResetpasswordComponent,
     MailinfoComponent,
-    AdminprofileComponent
+    AdminprofileComponent,
+    ShopInfoComponent
   ],
   imports: [
     BrowserModule,
