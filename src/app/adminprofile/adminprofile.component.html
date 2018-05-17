@@ -1,4 +1,5 @@
-<app-header></app-header>
+<body>
+  <app-header></app-header>
 <app-sidebar></app-sidebar>
 <div class="content-wrapper">
   <section class="content-header">
@@ -100,7 +101,7 @@
       </div>
 </section>-->
 
-<section class="content">
+<section class="content" >
     <div class="box box-primary col-md-offset-3 col-md-6">
       <div class="box-body ">
         <table class="table" style="border: 0;">
@@ -115,7 +116,7 @@
             </td>
           </tr>
           <tr>
-              <table class="table table-bordered">
+              <table class="table table-bordered" id="tableDetail" name="tableDetail" >
                   <tr>
 
                     <th>Name</th>
@@ -134,8 +135,28 @@
                 </table>
           </tr>
           <tr>
+            <table class="table table-bordered " id="tableDetail2" name="tableDetail2" style="display:none">
+                <tr>
+                  <th>Name</th>
+                  <th><input type="text" name="txtName" id="txtName" class="form-control" ></th>
+                </tr>
+                <tr>
+
+                    <th>Phone No.</th>
+                    <th><input type="number" name="txtPhone" id="txtPhone" class="form-control" ></th>
+                 </tr>
+                 <tr>
+
+                      <th>Email</th>
+                      <th><input type="email" name="txtEmail" id="txtEmail" class="form-control" ></th>
+                  </tr>
+              </table>
+        </tr>
+          <tr>
             <td>
-              <button class="btn btn-primary">Edit Profile Detail</button>
+              <button class="btn btn-primary" (click)="hideTable()" name="btnEC" id="btnEC">Edit Profile Detail</button>
+              <button class="btn btn-success" (click)="hideButton()" name="btnSave" id="btnSave" style="display:none;">Save</button> &nbsp;
+              <button class="btn btn-default" (click)="hideButton()" name="btnCancel" id="btnCancel" style="display:none;">Cancel</button>
             </td>
           </tr>
         </table>
@@ -145,3 +166,4 @@
 
 </div>
 <!-- content wrapper -->
+</body>
