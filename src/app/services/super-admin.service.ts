@@ -43,4 +43,49 @@ export class SuperAdminService {
         .pipe(map(res => res.json()))
     );
   }
+
+  forgotPassword(Username: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { 'username': Username };
+
+    return (
+      this._http
+        .post(environment.apiURL + 'SuperAdmin/ForgetPassword.php', data, options)
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
+
+  checkRandomString(RandomString: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { 'rand': RandomString };
+
+    return (
+      this._http
+        .post(environment.apiURL + 'SuperAdmin/CheckRandomString.php', data, options)
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
+
+  resetPassword(Username: string, VerificationCode: string, NewPassword: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { 'username': Username, 'verificationcode': VerificationCode, 'newpassword': NewPassword};
+
+    return (
+      this._http
+        .post(environment.apiURL + 'SuperAdmin/ResetPassword.php', data, options)
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
 }

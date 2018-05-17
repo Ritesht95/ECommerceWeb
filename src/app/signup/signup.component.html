@@ -1,81 +1,83 @@
-<body>
-  <div id="wrapper">
-    <div class="vertical-align-wrap">
-      <div class="vertical-align-middle">
-        <div class="auth-box ">
+<div id="wrapper">
+  <div class="vertical-align-wrap">
+    <div class="vertical-align-middle">
+      <div class="auth-box ">
 
-          <div class="left">
-            <div class="content">
-              <div class="header">
-                <div class="logo text-center">
-                  <img src='../../assets/img/logo-dark.png' alt="Klorofil Logo">
-                </div>
-                <p class="lead">Register your online shop here</p>
+        <div class="left">
+          <div class="content">
+            <div class="header">
+              <div class="logo text-center">
+                <img src='../../assets/img/logo-dark.png' alt="Klorofil Logo">
               </div>
-              <form class="form-auth-small" action="index.php" #frm="ngForm">
-                <div class="form-group">
-                  <label for="txtShopName" class="control-label sr-only">Shop Name</label>
-                  <input type="text" ngModel #txtSName="ngModel" class="form-control" id="txtShopname" name="txtSName" placeholder="Shop Name" pattern="[a-zA-Z0-9]*" required>
-                </div>
-                <div class="form-group">
-                  <label for="txtOwnerName" class="control-label sr-only">Owner Name</label>
-                  <input type="text" ngModel #txtOName="ngModel" class="form-control" id="txtOwnerName" name="txtOName" placeholder="Owner Name" pattern="[a-zA-Z0-9]*" required>
-                </div>
-                <div class="form-group">
-                  <label for="txtShopType" class="control-label sr-only">Shop Type</label>
-                  <input type="text" ngModel #txtSType="ngModel" class="form-control" id="txtShopType" name="txtSType" placeholder="Shop Type" pattern="[a-zA-Z]*" required>
-                </div>
-                <div class="form-group">
-                  <label for="txt_Email" class="control-label sr-only">Email</label>
-                  <input type="email" ngModel #txtEmail="ngModel" class="form-control" id="txtEmail" name="txtEmail" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
-                </div>
-                <div class="form-group">
-                  <label for="txtPhoneNo" class="control-label sr-only">Phone no</label>
-                  <input type="text" ngModel #txtPhone="ngModel" class="form-control" id="txtPhoneNo" name="txtPhone" placeholder="Phone no" pattern="^\d{10}$" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm.invalid">Sign up</button>
-                <!--   || txtSType.touched || txtSName.touched || txtOName.touched  -->
-                <div *ngIf="txtEmail.touched || txtSType.touched || txtSName.touched || txtOName.touched || txtPhone.touched">
-                  <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
-                    <span class="text-danger">Email is Required</span>
-                  </div>
-                  <div *ngIf="txtEmail.errors?.pattern">
-                    <span class="text-danger">Email Invalid</span>
-                  </div>
-                  <div *ngIf="txtSName.errors?.required && txtSName.touched">
-                    <span class="text-danger">Shop Name is Required</span>
-                  </div>
-                  <div *ngIf="txtSName.errors?.pattern">
-                    <span class="text-danger">Shop Name Invalid</span>
-                  </div>
-                  <div *ngIf="txtOName.errors?.required && txtOName.touched">
-                    <span class="text-danger">Owner Name is Required</span>
-                  </div>
-                  <div *ngIf="txtOName.errors?.pattern">
-                    <span class="text-danger">Owner Name Invalid</span>
-                  </div>
-                  <div *ngIf="txtSType.errors?.required && txtSType.touched">
-                    <span class="text-danger">Shop Type is Required</span>
-                  </div>
-                  <div *ngIf="txtSType.errors?.pattern">
-                    <span class="text-danger">Shop Type Invalid</span>
-                  </div>
-                  <div *ngIf="txtPhone.errors?.required && txtPhone.touched">
-                    <span class="text-danger">Phone number is Required</span>
-                  </div>
-                  <div *ngIf="txtPhone.errors?.pattern">
-                    <span class="text-danger">Phone number is Invalid</span>
-                  </div>
-                </div>
-              </form>
+              <p class="lead">Register your online shop here</p>
             </div>
+            <form class="form-auth-small" action="index.php" #frm="ngForm">
+              <div class="form-group">
+                <label for="txtShopName" class="control-label sr-only">Shop Name</label>
+                <input type="text" ngModel #txtSName="ngModel" class="form-control" id="txtShopname" name="txtSName" placeholder="Shop Name"
+                  pattern="[a-zA-Z0-9]*" required>
+              </div>
+              <div class="form-group">
+                <label for="txtOwnerName" class="control-label sr-only">Owner Name</label>
+                <input type="text" ngModel #txtOName="ngModel" class="form-control" id="txtOwnerName" name="txtOName" placeholder="Owner Name"
+                  pattern="[a-zA-Z0-9]*" required>
+              </div>
+              <div class="form-group">
+                <label for="txtShopType" class="control-label sr-only">Shop Type</label>
+                <input type="text" ngModel #txtSType="ngModel" class="form-control" id="txtShopType" name="txtSType" placeholder="Shop Type"
+                  pattern="[a-zA-Z]*" required>
+              </div>
+              <div class="form-group">
+                <label for="txt_Email" class="control-label sr-only">Email</label>
+                <input type="email" ngModel #txtEmail="ngModel" class="form-control" id="txtEmail" name="txtEmail" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  required>
+              </div>
+              <div class="form-group">
+                <label for="txtPhoneNo" class="control-label sr-only">Phone no</label>
+                <input type="text" ngModel #txtPhone="ngModel" class="form-control" id="txtPhoneNo" name="txtPhone" placeholder="Phone no"
+                  pattern="^\d{10}$" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm.invalid">Sign up</button>
+              <!--   || txtSType.touched || txtSName.touched || txtOName.touched  -->
+              <div *ngIf="txtEmail.touched || txtSType.touched || txtSName.touched || txtOName.touched || txtPhone.touched">
+                <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
+                  <span class="text-danger">Email is Required</span>
+                </div>
+                <div *ngIf="txtEmail.errors?.pattern">
+                  <span class="text-danger">Email Invalid</span>
+                </div>
+                <div *ngIf="txtSName.errors?.required && txtSName.touched">
+                  <span class="text-danger">Shop Name is Required</span>
+                </div>
+                <div *ngIf="txtSName.errors?.pattern">
+                  <span class="text-danger">Shop Name Invalid</span>
+                </div>
+                <div *ngIf="txtOName.errors?.required && txtOName.touched">
+                  <span class="text-danger">Owner Name is Required</span>
+                </div>
+                <div *ngIf="txtOName.errors?.pattern">
+                  <span class="text-danger">Owner Name Invalid</span>
+                </div>
+                <div *ngIf="txtSType.errors?.required && txtSType.touched">
+                  <span class="text-danger">Shop Type is Required</span>
+                </div>
+                <div *ngIf="txtSType.errors?.pattern">
+                  <span class="text-danger">Shop Type Invalid</span>
+                </div>
+                <div *ngIf="txtPhone.errors?.required && txtPhone.touched">
+                  <span class="text-danger">Phone number is Required</span>
+                </div>
+                <div *ngIf="txtPhone.errors?.pattern">
+                  <span class="text-danger">Phone number is Invalid</span>
+                </div>
+              </div>
+            </form>
           </div>
-
-          <div class="clearfix"></div>
         </div>
+
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
-  <!-- END WRAPPER -->
-
-</body>
+</div>
+<!-- END WRAPPER -->
