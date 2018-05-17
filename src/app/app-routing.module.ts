@@ -9,6 +9,7 @@ import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
+import { ShopInfoComponent } from './shop-info/shop-info.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'shops', component: ShopsComponent},
   { path: 'mailinfo', component: MailinfoComponent},
   { path: '**', redirectTo: 'not-found' },
-  { path: 'adminProfile', component: AdminprofileComponent }
+  { path: 'adminProfile', component: AdminprofileComponent },
+  { path: 'shopInfo', component: ShopInfoComponent }
 ];
 
 @NgModule({
