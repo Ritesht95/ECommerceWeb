@@ -15,6 +15,8 @@ import { WebInfoComponent } from './web-info/web-info.component';
 import { LoginauthService } from './loginauth.service';
 import { AuthGuard } from './auth.guard';
 import { ShopsComponent } from './shops/shops.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
@@ -30,6 +32,8 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
     SudashboradComponent,
     WebInfoComponent,
     ShopsComponent,
+    ForgotpasswordComponent,
+    ResetpasswordComponent,
     MailinfoComponent,
     AdminprofileComponent,
     ShopInfoComponent
