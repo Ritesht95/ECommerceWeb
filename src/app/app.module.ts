@@ -20,6 +20,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ShopInfoComponent } from './shop-info/shop-info.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ResetpasswordComponent,
     MailinfoComponent,
     AdminprofileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ShopInfoComponent
   ],
   imports: [
     BrowserModule,

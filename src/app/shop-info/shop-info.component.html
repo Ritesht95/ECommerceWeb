@@ -1,0 +1,102 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Shop Information
+      </h1>
+      <ol class="breadcrumb">
+        <li>
+          <a href="#">
+            <i class="fa fa-dashboard"></i> Home
+          </a>
+        </li>
+        <li class="active">Shop Information</li>
+      </ol>
+    </section>
+
+    <section class="content">
+        <div class="box box-primary">
+          <div class="box-body">
+            <div class="header">
+              <div class="col-md-3" style="background-color: #4693be; margin-right: 10px;">
+                  <h3><font color="white">1.Shop Information</font></h3>
+              </div>
+              <div class="col-md-3" style="background-color: #4693be;  margin-right: 10px;">
+                  <h3><font color="white">2.Business Information</font></h3>
+              </div>
+              <div class="col-md-3" style="background-color: #4693be;">
+                  <h3><font color="white">3.Social Detail</font></h3>
+              </div>
+            </div> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+            <div style="margin-top: 60px;" >
+
+              <div class="col-sm-12 well" >
+
+                    <div class="box-body">
+                      <div class="row ">
+                        <form role="form" #frm="ngForm">
+                        <div class="col-md-6">
+
+                          <div class="form-group">
+                            <label for="txtShopName">Shop Name<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="txtShopName" placeholder="Shop Name" name="txtShopName" ngModel required #txtShopName="ngModel" pattern="[a-zA-Z0-9]+">
+                          </div>
+                          <div class="form-group">
+                              <label for="txtShopType">Shop Type<span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" id="txtShopType" placeholder="Shop Type" name="txtShopType" ngModel required #txtShopType="ngModel" pattern="[a-zA-Z]+">
+                          </div>
+                          <div class="form-group">
+                              <label for="txtContact">Contact Number<span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" id="txtContact" placeholder="Contact Number" name="txtContact" ngModel required #txtContact="ngModel" pattern="[0-9]{10}">
+                          </div>
+                          <div class="form-group">
+                              <label for="txtEmail">Email<span class="text-danger">*</span></label>
+                              <input type="email" class="form-control" id="txtEmail" placeholder="Email" name="txtEmail" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #txtEmail="ngModel">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="hidden" id="id">
+                            <div class="form-group">
+                              <label for="txtAddress">Address<span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" id="txtAddress" placeholder="Address" name="txtAddress" ngModel required #txtAddress="ngModel" pattern="[a-zA-Z0-9/-/.]+">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtCity">City<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="txtCity" placeholder="City" name="txtCity" ngModel required #txtCity="ngModel" pattern="[a-zA-Z]+">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtState">State<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="txtState" placeholder="State" name="txtState" ngModel required #txtState="ngModel" pattern="[a-zA-Z]">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPincode">Pincode<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="txtPincode" placeholder="Pincode" name="txtPincode" ngModel required pattern="[0-9]{6}" #pinocde="ngModel">
+                            </div>
+                        </div>
+
+
+
+
+
+                          </form>
+                        </div>
+                      <div class="col-md-offset-9">
+                          <button  class="btn btn-primary">Previous</button>&nbsp;
+                          <button  class="btn btn-primary" [disabled]="frm.invalid ">Next</button>
+                      </div>
+                    </div>
+
+
+              </div>
+
+
+
+               </div>
+
+          </div>
+        </div>
+    </section>
+
+</div>
