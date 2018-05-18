@@ -11,6 +11,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
+import { NotFoundComponent } from './not-found/not-found.component'
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'reset', component: ResetpasswordComponent},
   { path: 'mailinfo', component: MailinfoComponent},
+  { path: 'adminProfile', component: AdminprofileComponent },
+  { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: '**', redirectTo: 'not-found' },
   { path: 'adminProfile', component: AdminprofileComponent },
