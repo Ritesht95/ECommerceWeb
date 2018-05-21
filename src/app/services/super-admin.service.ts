@@ -155,4 +155,18 @@ export class SuperAdminService {
       res => res.json()
     ));
   }
+
+  updateProfileImage(formData: FormData) {
+
+    const endpoint = environment.apiURL + 'SuperAdmin/AdminImage.php';
+    return this._http
+      .post(endpoint, formData)
+      .pipe(map( res => {
+        return res.json();
+      // tslint:disable-next-line:no-shadowed-variable
+      }, error => {
+        console.log(error);
+      }
+    ));
+  }
 }

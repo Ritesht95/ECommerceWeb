@@ -3,6 +3,7 @@ import { LoginauthService } from '../loginauth.service';
 import { SuperAdmin } from '../classes/super-admin';
 import { SuperAdminService } from '../services/super-admin.service';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -10,18 +11,32 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  adminData: any;
   UserID: number;
   Name: string;
+  
 
   constructor(
     private loginAuth: LoginauthService,
     private superAdminService: SuperAdminService,
     private router: Router
-  ) {}
+  ) {
 
-  ngOnInit() {
     this.UserID = this.loginAuth.getUserID();
     this.Name = this.loginAuth.getName();
+  }
+
+  ngOnInit() {
+    console.log('sddvjsdk');
+    this.superAdminService.getAdminData(this.loginAuth.getUserID()).subscribe(
+      // tslint:disable-next-line:no-shadowed-variable
+      res => {
+        this.adminData = res;
+        document.getElementById('userImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
+        document.getElementById('userHeaderImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
+        console.log(res);
+      }
+    );
   }
 
   changePassword(oldPassword: string, newPassword: string) {
