@@ -169,4 +169,21 @@ export class SuperAdminService {
       }
     ));
   }
+
+  getMailInfo() {
+    return this._http.get(environment.apiURL + 'Website/GetMail.php').pipe(map(
+      res => res.json()
+    ));
+  }
+
+  updateMailInfo(Email: string, Password: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { Email: Email, Password: Password, Id: 1 };
+    return this._http.post(environment.apiURL + '/Website/MailSetting.php', data, options).pipe(map(
+      res => res.json()
+    ));
+  }
 }

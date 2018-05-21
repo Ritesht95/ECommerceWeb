@@ -22,6 +22,7 @@ import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { DataTablesModule } from 'angular-datatables';
+import { LockscreenComponent } from './lockscreen/lockscreen.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DataTablesModule } from 'angular-datatables';
     MailinfoComponent,
     AdminprofileComponent,
     NotFoundComponent,
-    ShopInfoComponent
+    ShopInfoComponent,
+    LockscreenComponent
   ],
   imports: [
     BrowserModule,

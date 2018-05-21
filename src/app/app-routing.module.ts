@@ -11,8 +11,9 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
-import { NotFoundComponent } from './not-found/not-found.component'
+import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
+import { LockscreenComponent } from './lockscreen/lockscreen.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,11 +26,11 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'reset', component: ResetpasswordComponent},
   { path: 'mailinfo', component: MailinfoComponent},
+  { path: 'lockscreen', component: LockscreenComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
-  { path: '**', redirectTo: 'not-found' },
-  { path: 'adminProfile', component: AdminprofileComponent },
-  { path: 'shopInfo', component: ShopInfoComponent }
+  { path: 'shopInfo', component: ShopInfoComponent },
+  { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({
