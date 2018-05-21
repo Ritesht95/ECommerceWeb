@@ -1,3 +1,8 @@
+import {ViewChild} from '@angular/core';
+// import '../../../assets/bower_components/datatables.net/js/jquery.dataTables.min.js';
+// import '../../../assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
+// import '../../assets/bower_components/datatables.net/js/jquery.dataTables.min.js';
+// import '../../assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopsComponent implements OnInit {
 
-  constructor() { 
-   
+  constructor() {
+
   }
 
   ngOnInit() {
