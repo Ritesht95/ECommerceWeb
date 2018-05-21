@@ -16,11 +16,6 @@ export class AdminprofileComponent implements OnInit {
   fileToUpload: File = null;
   formData: FormData = new FormData();
   adminData: any;
-  headerComp: HeaderComponent = new HeaderComponent(
-    this.loginAuth,
-    this.superadminservice,
-    this.router
-  );
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
     this.superadminservice
@@ -111,34 +106,12 @@ export class AdminprofileComponent implements OnInit {
                   this.loginAuth.getUserType(),
                   this.adminData.Adminname
                 );
-                this.headerComp.ngOnInit();
+                // this.headerComp.ngOnInit();
                 this.sidebarComp.ngOnInit();
               }
             );
         }
       });
-  }
-
-  updateImage() {
-    this.superadminservice.updateProfileImage(this.formData).subscribe(res => {
-      console.log(res);
-      if (res['key'] === 'true') {
-        this.superadminservice
-          .getAdminData(this.loginAuth.getUserID())
-          .subscribe(
-            // tslint:disable-next-line:no-shadowed-variable
-            res => {
-              this.adminData = res;
-              document.getElementById('profileImageIn').src =
-                environment.apiURL +
-                'Assets/AdminImages/' +
-                this.adminData.AdminImage;
-              this.headerComp.ngOnInit();
-              this.sidebarComp.ngOnInit();
-            }
-          );
-      }
-    });
   }
 
   ngOnInit() {

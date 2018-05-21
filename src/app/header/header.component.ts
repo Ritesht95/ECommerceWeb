@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { LoginauthService } from '../loginauth.service';
 import { SuperAdmin } from '../classes/super-admin';
 import { SuperAdminService } from '../services/super-admin.service';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { AdminprofileComponent } from '../adminprofile/adminprofile.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-header',
@@ -11,14 +13,28 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  fileToUpload: File = null;
+  formData: FormData = new FormData();
   adminData: any;
   UserID: number;
   Name: string;
-  
+  flag: boolean;
+  headerComp: AdminprofileComponent = new AdminprofileComponent(
+    this.superadminservice,
+    this.loginAuth,
+    this.elem,
+    this.router
+  );
+  sidebarComp: SidebarComponent = new SidebarComponent(
+    this.loginAuth,
+    this.superadminservice
+  );
+
 
   constructor(
     private loginAuth: LoginauthService,
-    private superAdminService: SuperAdminService,
+    private superadminservice: SuperAdminService,
+    private elem: ElementRef,
     private router: Router
   ) {
 
@@ -26,9 +42,39 @@ export class HeaderComponent implements OnInit {
     this.Name = this.loginAuth.getName();
   }
 
+  upload(event: any) {
+    const files = this.elem.nativeElement.querySelector('#image').files;
+    // const files: any = event.target.files;
+
+    this.formData.append('image', files[0], files[0].name);
+    this.formData.append('AdminId', this.loginAuth.getUserID());
+
+    if (!this.validateFile(files[0].name)) {
+      console.log('Selected file format is not supported');
+      return false;
+    } else {
+      this.fileToUpload = files.item(0);
+    }
+  }
+
+  validateFile(name: String) {
+    const ext: string = name.substring(name.lastIndexOf('.') + 1);
+    if (
+      ext.toLowerCase() === 'png' ||
+      ext.toLowerCase() === 'jpg' ||
+      ext.toLowerCase() === 'jpeg'
+    ) {
+      this.flag = false;
+      return true;
+    } else {
+      this.flag = true;
+      return false;
+    }
+  }
+
   ngOnInit() {
     console.log('sddvjsdk');
-    this.superAdminService.getAdminData(this.loginAuth.getUserID()).subscribe(
+    this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       res => {
         this.adminData = res;
@@ -60,6 +106,28 @@ export class HeaderComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  updateImage() {
+    this.superadminservice.updateProfileImage(this.formData).subscribe(res => {
+      console.log(res);
+      if (res['key'] === 'true') {
+        this.superadminservice
+          .getAdminData(this.loginAuth.getUserID())
+          .subscribe(
+            // tslint:disable-next-line:no-shadowed-variable
+            res => {
+              this.adminData = res;
+              document.getElementById('profileImageIn').src =
+                environment.apiURL +
+                'Assets/AdminImages/' +
+                this.adminData.AdminImage;
+                document.getElementById('userHeaderImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
+              this.sidebarComp.ngOnInit();
+            }
+          );
+      }
+    });
   }
 
   logout() {
