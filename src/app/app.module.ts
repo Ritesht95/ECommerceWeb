@@ -21,6 +21,7 @@ import { MailinfoComponent } from './mailinfo/mailinfo.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DataTablesModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/' }, LoginauthService, AuthGuard],
   bootstrap: [AppComponent]

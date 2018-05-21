@@ -21,9 +21,11 @@
           <tr>
             <td>
               <div class="container" style=" width:36%;">
-                <img style="justify-self: center; height:170px; width:170px;" class="img-circle image" src="../assets/img/avatar.png">
+                <img id="profileImageIn" style="justify-self: center; height:170px; width:170px;" class="img-circle image">
                 <div class="middle">
-                  <i class="far fa-edit"></i>
+                  <a href="#" data-toggle="modal" data-target="#changeImageModal">
+                    <i class="far fa-edit"></i>
+                  </a>
                 </div>
               </div>
             </td>
@@ -74,7 +76,8 @@
           <tr>
             <td>
               <button class="btn btn-primary" (click)="hideTable()" name="btnEC" id="btnEC">Edit Profile Detail</button>
-              <button class="btn btn-success" (click)="updateProfile(txtName.value,txtPhone.value,txtEmail.value)" name="btnSave" id="btnSave" style="display:none;">Save</button> &nbsp;
+              <button class="btn btn-success" (click)="updateProfile(txtName.value,txtPhone.value,txtEmail.value)" name="btnSave" id="btnSave"
+                style="display:none;">Save</button> &nbsp;
               <button class="btn btn-default" (click)="hideButton()" name="btnCancel" id="btnCancel" style="display:none;">Cancel</button>
             </td>
           </tr>
@@ -84,3 +87,4 @@
   </section>
 
 </div>
+
