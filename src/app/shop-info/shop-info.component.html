@@ -28,14 +28,16 @@
               <div class="col-md-3" style="background-color: #4693be;">
                   <h3><font color="white">3.Social Detail</font></h3>
               </div>
-            </div> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+            </div>
+
             <div style="margin-top: 60px;" >
 
               <div class="col-sm-12 well" >
 
-                    <div class="box-body">
-                      <div class="row ">
-                        <form role="form" #frm="ngForm">
+                <div class="box-body">
+                  <div class="row ">
+                    <div class="form1" name="form1" id="form1">
+                      <form role="form" #frm="ngForm">
                         <div class="col-md-6">
 
                           <div class="form-group">
@@ -57,7 +59,6 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input type="hidden" id="id">
                             <div class="form-group">
                               <label for="txtAddress">Address<span class="text-danger">*</span></label>
                               <input type="text" class="form-control" id="txtAddress" placeholder="Address" name="txtAddress" ngModel required #txtAddress="ngModel" pattern="[a-zA-Z0-9/-/.]+">
@@ -68,35 +69,161 @@
                             </div>
                             <div class="form-group">
                                 <label for="txtState">State<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="txtState" placeholder="State" name="txtState" ngModel required #txtState="ngModel" pattern="[a-zA-Z]">
+                                <input type="text" class="form-control" id="txtState" placeholder="State" name="txtState" ngModel required #txtState="ngModel" pattern="[a-zA-Z]+">
                             </div>
                             <div class="form-group">
                                 <label for="txtPincode">Pincode<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="txtPincode" placeholder="Pincode" name="txtPincode" ngModel required pattern="[0-9]{6}" #pinocde="ngModel">
+                                <input type="text" class="form-control" id="txtPincode" placeholder="Pincode" name="txtPincode" ngModel required pattern="[0-9]{6}" #txtPincode="ngModel">
                             </div>
                         </div>
+                        <div class="col-md-offset-9">
+                            <button  class="btn btn-primary" disabled >Previous</button>&nbsp;
+                            <button  class="btn btn-primary" [disabled]="frm.invalid"  (click)="myForm2()">Next</button>
+                        </div>
+                        <div *ngIf="txtEmail.touched || txtShopName.touched || txtShopType.touched || txtAddress.touched || txtCity.touched || txtState.touched || txtContact.touched || txtPincode.touched">
+                            <div *ngIf="txtShopName.errors?.required && txtShopName.touched">
+                              <span class="text-danger">Shop Name is required</span>
+                            </div>
+                            <div *ngIf="txtShopName.errors?.pattern && txtShopName.touched">
+                              <span class="text-danger">Shop Name is Invalid</span>
+                            </div>
+                            <div *ngIf="txtShopType.errors?.required && txtShopType.touched">
+                                <span class="text-danger">Shop Type is required</span>
+                              </div>
+                              <div *ngIf="txtShopType.errors?.pattern && txtShopType.touched">
+                                <span class="text-danger">Shop Type is Invalid</span>
+                            </div>
+                            <div *ngIf="txtAddress.errors?.required && txtAddress.touched">
+                                <span class="text-danger">Address is required</span>
+                              </div>
+                              <div *ngIf="txtAddress.errors?.pattern && txtAddress.touched">
+                                <span class="text-danger">Address is Invalid</span>
+                            </div>
+                            <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
+                                <span class="text-danger">Email is required</span>
+                              </div>
+                              <div *ngIf="txtEmail.errors?.pattern && txtEmail.touched">
+                                <span class="text-danger">Email is Invalid</span>
+                            </div>
+                            <div *ngIf="txtCity.errors?.required && txtCity.touched">
+                                <span class="text-danger">City is required</span>
+                              </div>
+                              <div *ngIf="txtCity.errors?.pattern && txtCity.touched">
+                                <span class="text-danger">City is Invalid</span>
+                            </div>
+                            <div *ngIf="txtState.errors?.required && txtState.touched">
+                                <span class="text-danger">State is required</span>
+                              </div>
+                              <div *ngIf="txtState.errors?.pattern && txtState.touched">
+                                <span class="text-danger">State is Invalid</span>
+                            </div>
+                            <div *ngIf="txtPincode.errors?.required && txtPincode.touched">
+                                <span class="text-danger">Pincode is required</span>
+                              </div>
+                              <div *ngIf="txtPincode.errors?.pattern && txtPincode.touched">
+                                <span class="text-danger">Pincode is Invalid</span>
+                            </div>
+                            <div *ngIf="txtContact.errors?.required && txtContact.touched">
+                                <span class="text-danger">Contact is required</span>
+                              </div>
+                        </div>
+                      </form>
+                    </div>
 
+                   <div class="form2" name="form2" id="form2">
+                      <div >
+                        <form role="form" #frm2="ngForm" style="display: flex; flex-direction: column;">
+                            <div class="col-md-6">
 
+                                <div class="form-group">
+                                    <label for="txtgstno">GST No<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="txtgstno" placeholder="GST No" name="txtgstno" ngModel required #txtgstno="ngModel" pattern="[a-zA-Z0-9]{15}">
+                                  </div>
+                              <div class="form-group">
+                                <label for="txtlogo">Logo<span class="text-danger">*</span></label>
+                                <input type="file" id="txtlogo" (change)="upload($event)" name="txtlogo" required ngModel #txtlogo="ngModel" >
+                            </div>
+                            <div class="form-group">
+                              <label for="txttagline">Tag Line<span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" id="txttagline" name="txttagline" placeholder="Tag Line" ngModel required #txttagline="ngModel">
+                            </div>
+                            <div class="form-group">
+                                <label for="txtlogoalt">Logo Alternate</label><span class="text-danger">*</span>
+                                <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+                            </div>
+                            </div>
+
+                            <div class="col-md-offset-5">
+                                <button  class="btn btn-primary" (click)="myPrev2()">Previous</button>&nbsp;
+                                <button  class="btn btn-primary" [disabled]="frm2.invalid"  (click)="myForm3()">Next</button>
+                            </div>
+
+                            <div *ngIf=" txtgstno.touched || txtlogoalt.touched || txtlogo.touched || txttagline.touched">
+                                <div *ngIf="txtgstno.errors?.required && txtgstno.touched">
+                                  <span class="text-danger">GST No is required</span>
+                                </div>
+                                <div *ngIf="txtgstno.errors?.pattern && txtgstno.touched">
+                                  <span class="text-danger">GST No is Invalid</span>
+                                </div>
+                                <!--<div *ngIf="txtaboutus.errors?.required && txtaboutus.touched">
+                                  <span class="text-danger">About Us is required</span>
+                                </div>-->
+                                <div *ngIf="txtlogo.errors?.required && txtlogo.touched">
+                                  <span class="text-danger">Logo is required</span>
+                                </div>
+                                <div *ngIf="txttagline.errors?.required && txttagline.touched">
+                                    <span class="text-danger">tag line is required</span>
+                                  </div>
+                                <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
+                                  <span class="text-danger">Logo Alternate is required</span>
+                                </div>
+                                <div *ngIf=" flag && txtlogo.touched">
+                                    <span class="text-danger">Select .png, .jpg and .jpeg only</span>
+                                  </div>
+                              </div>
 
 
 
                           </form>
                         </div>
-                      <div class="col-md-offset-9">
-                          <button  class="btn btn-primary">Previous</button>&nbsp;
-                          <button  class="btn btn-primary" [disabled]="frm.invalid ">Next</button>
-                      </div>
+                   </div>
+
+                    <div class="form3" name="form3" id="form3">
+                        <div >
+                          <form role="form" #frm3="ngForm" style="display: flex; flex-direction: column;">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="txtFL">Facebook Link</label>
+                                      <input type="text" class="form-control" id="txtFL" placeholder="Facebook Link" name="txtFL" ngModel #txtFL="ngModel">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="txtTL">Twitter Link</label>
+                                      <input type="text" class="form-control" id="txtTL" placeholder="Twitter Link" name="txtTL" ngModel #txtTL="ngModel">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="txtIL">Instagram Link</label>
+                                      <input type="text" class="form-control" id="txtIL" placeholder="Instagram Link" name="txtIL" ngModel #txtIL="ngModel">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="txtYL">Youtube Link</label>
+                                      <input type="text" class="form-control" id="txtYL" placeholder="Youtube Link" name="txtYL" ngModel #txtFL="ngModel">
+                                  </div>
+                              </div>
+
+                              <div class="col-md-offset-5">
+                                  <button  class="btn btn-primary" (click)="myPrev3()" >Previous</button>&nbsp;
+                                  <button  class="btn btn-primary" [disabled]="frm3.invalid"  (click)="myForm3()">Next</button>
+                              </div>
+                            </form>
+                          </div>
                     </div>
 
-
+                  </div>
               </div>
-
-
-
-               </div>
-
+            </div>
           </div>
         </div>
+      </div>
     </section>
 
 </div>
