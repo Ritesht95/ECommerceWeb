@@ -16,6 +16,46 @@
   </section>
 
   <section class="content">
+      <div class="box box-primary">
+          <form role="form" #frm="ngForm">
+              <table class="table" style="border: 0;">
+                  <tr >
+                    <td class="col-md-2">
+                      <div class="container" style=" width:36%;">
+                        <div  style="display: flex; justify-content: center;">
+                        <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+                        </div>
+                        <div class="middle">
+                          <a href="#" data-toggle="modal" data-target="#changeImageModal">
+                            <i class="far fa-edit"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="col-md-5">
+                      <div>
+                        <div class="form-group">
+                            <label for="txtlogo">Logo<span class="text-danger">*</span></label>
+                            <input type="file" id="image" (change)="upload($event)" name="image" required ngModel #image="ngModel" >
+                        </div>
+                        <div class="form-group">
+                            <label for="txtlogoalt">Logo Alternate</label><span class="text-danger">*</span>
+                            <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+                        </div>
+                      </div>
+                    </td>
+                    <td class="col-md-5">
+                      <br><br><br><br><br><br>
+                        <div>
+                            <button class="btn btn-primary">Edit Logo</button>
+                        </div>
+                    </td>
+                  </tr>
+                </table>
+          </form>
+        </div>
+
+
     <div class="box box-primary">
       <form role="form" #frm="ngForm">
         <div class="box-body">
@@ -31,21 +71,12 @@
                   <input type="text" class="form-control" id="txttagline" placeholder="Tag Line">
                 </div>
               <div class="form-group">
-                <label for="txtEmail">Email<span class="text-danger">*</span></label>
-                <input type="email" class="form-control" id="txtEmail" placeholder="Email" name="txtEmail" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #txtEmail="ngModel">
-              </div>
-              <div class="form-group">
                 <label for="txtgstno">GST No<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="txtgstno" placeholder="GST No" name="txtgstno" ngModel required #txtgstno="ngModel" pattern="[a-zA-Z0-9]{15}">
               </div>
               <div class="form-group">
                 <label for="txtaboutus">About Us<span class="text-danger">*</span></label>
                 <textarea class="form-control" id="txtaboutus" rows="2" placeholder="About Us" name="txtaboutus" ngModel required #txtaboutus="ngModel"></textarea>
-              </div>
-              <div class="form-group">
-                  <label for="txtlogo">Logo<span class="text-danger">*</span></label>
-                  <input type="file" id="image" (change)="upload($event)" name="image" required ngModel #image="ngModel" >
-                  <!-- <p class="help-block">Example block-level help text here.</p> -->
               </div>
               <div class="form-group">
                 <label for="txtcontact">Contact Number<span class="text-danger">*</span></label>
@@ -73,22 +104,12 @@
                 <label for="txtcontactus">Contact Us<span class="text-danger">*</span></label>
                 <textarea class="form-control" id="txtcontactus" rows="2" placeholder="Contact Us" name="txtcontactus" ngModel required #txtcontactus="ngModel"></textarea>
               </div>
-              <div class="form-group">
-                  <label for="txtlogoalt">Logo Alternate</label><span class="text-danger">*</span>
-                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
-              </div>
               <div *ngIf="txtcontact.touched || txtaboutus.touched || txtgstno.touched || txtWebsiteName.touched || txtEmail.touched || txtcontactus.touched || txtlogoalt.touched || txtlogo.touched">
                 <div *ngIf="txtWebsiteName.errors?.required && txtWebsiteName.touched">
                   <span class="text-danger">Website is required</span>
                 </div>
                 <div *ngIf="txtWebsiteName.errors?.pattern && txtWebsiteName.touched">
                   <span class="text-danger">Website is Invalid</span>
-                </div>
-                <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
-                  <span class="text-danger">Email is required</span>
-                </div>
-                <div *ngIf="txtEmail.errors?.pattern && txtEmail.touched">
-                  <span class="text-danger">Email is Invalid</span>
                 </div>
                 <div *ngIf="txtgstno.errors?.required && txtgstno.touched">
                   <span class="text-danger">GST No is required</span>
