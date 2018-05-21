@@ -54,21 +54,21 @@
               <tr>
                 <th>Name</th>
                 <th>
-                  <input type="text" ngModel #txtName="ngModel" name="txtName" id="txtName" class="form-control">
+                  <input type="text" [(ngModel)]='adminData.Adminname' #txtName="ngModel" name="txtName" id="txtName" class="form-control">
                 </th>
               </tr>
               <tr>
 
                 <th>Phone No.</th>
                 <th>
-                  <input type="text" ngModel #txtPhone="ngModel" name="txtPhone" id="txtPhone" class="form-control">
+                  <input type="text" [(ngModel)]='adminData.PhoneNo' #txtPhone="ngModel" name="txtPhone" id="txtPhone" class="form-control">
                 </th>
               </tr>
               <tr>
 
                 <th>Email</th>
                 <th>
-                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" id="txtEmail" class="form-control">
+                  <input type="email" [(ngModel)]='adminData.Email' #txtEmail="ngModel" name="txtEmail" id="txtEmail" class="form-control">
                 </th>
               </tr>
             </table>

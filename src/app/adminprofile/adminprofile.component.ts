@@ -32,9 +32,6 @@ export class AdminprofileComponent implements OnInit {
     const btn1 = document.getElementById('btnSave');
     const btn2 = document.getElementById('btnCancel');
     const btn3 = document.getElementById('btnEC');
-    document.getElementById('txtName').value = this.adminData.Adminname;
-    document.getElementById('txtPhone').value = this.adminData.PhoneNo;
-    document.getElementById('txtEmail').value = this.adminData.Email;
     if (x.style.display === 'none') {
       x.style.display = 'table';
       y.style.display = 'none';
@@ -153,7 +150,6 @@ export class AdminprofileComponent implements OnInit {
           environment.apiURL +
           'Assets/AdminImages/' +
           this.adminData.AdminImage;
-        console.log(res);
       });
   }
 }
