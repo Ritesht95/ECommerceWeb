@@ -68,6 +68,8 @@ export class HeaderComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       res => {
         this.adminData = res;
+        document.getElementById('headerName').innerHTML = res['Adminname'];
+        document.getElementById('headerName1').innerHTML = res['Adminname'];
         document
           .getElementById('userImage')
           .setAttribute(

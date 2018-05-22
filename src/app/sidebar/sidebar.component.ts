@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  adminData: any;
+  adminData: any = '';
   Name: string;
 
   constructor(
@@ -18,11 +18,12 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.Name = this.loginAuth.getName();
     this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       res => {
+        this.Name = res['Adminname'];
         this.adminData = res;
+        document.getElementById('sidebarName').innerHTML = res['Adminname'];
         document
           .getElementById('profileImage')
           .setAttribute(

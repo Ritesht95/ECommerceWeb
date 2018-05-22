@@ -66,16 +66,16 @@
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img id="userImage" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{ Name }}</span>
+            <span class="hidden-xs" id="headerName">{{ adminData.Adminname }}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
               <img id="userHeaderImage" class="img-circle" alt="User Image">
 
-              <p>
-                  {{ Name }}
-                <small>Member since Nov. 2012</small>
+              <p id="headerName1">
+                  {{ adminData.Adminname }}
+                <!-- <small>Member since Nov. 2012</small> -->
               </p>
             </li>
             <!-- Menu Body -->
@@ -85,7 +85,7 @@
                   <a href="#" data-toggle="modal" data-target="#exampleModal">Change Password</a>
                 </div>
                <div class="col-xs-5">
-                  <a href="#" data-toggle="modal" data-target="#changeImageModal">Edit Image</a>
+                  <a href="#">Sleep</a>
                 </div>
                   <!-- <div class="col-xs-4 text-center">
                   <a href="#">Friends</a>

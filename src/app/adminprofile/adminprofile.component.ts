@@ -122,7 +122,7 @@ export class AdminprofileComponent implements OnInit {
   }
 
   updateProfile(Name: string, PhoneNo: string, Email: string) {
-    this.hideButton();
+
     this.superadminservice
       .setAdminData(this.loginAuth.getUserID(), Name, PhoneNo, Email)
       .subscribe(res => {
@@ -145,6 +145,7 @@ export class AdminprofileComponent implements OnInit {
             );
         }
       });
+      this.hideButton();
   }
 
   ngOnInit() {
