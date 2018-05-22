@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       return this.loginAuth
-        .getServerLoggedIn('rk@gmail.com', 'superadmin')
+        .getServerLoggedIn(this.loginAuth.getEmail(), 'superadmin')
         .pipe(
           map(
             // tslint:disable-next-line:arrow-return-shorthand
