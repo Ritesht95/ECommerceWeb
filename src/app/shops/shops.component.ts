@@ -1,5 +1,6 @@
 import {ViewChild} from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { SuperAdminService } from '../services/super-admin.service';
 
 @Component({
   selector: 'app-shops',
@@ -8,11 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopsComponent implements OnInit {
 
-  constructor() {
+  shopsData: any;
+
+  constructor(private superadminservice: SuperAdminService) {
 
   }
 
   ngOnInit() {
+    this.superadminservice.getShopsData().subscribe(
+      res => {
+        this.shopsData = res['records'];
+      }
+    );
   }
 
 }

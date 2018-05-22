@@ -26,7 +26,6 @@ export class LoginComponent {
 
 
   timeout(val: boolean) {
-    console.log('form');
     setTimeout( this.ShowAlert, 5000 , val);
   }
 
@@ -43,20 +42,15 @@ export class LoginComponent {
   ) {}
 
   CheckLogin(Email: string, Password: string, Type: string) {
-    console.log(Type);
     if (Type === 'Admin') {
       this.superadminservice.checkLogin(Email, Password).subscribe(
         res => {
-          // this.resData = res;
-          console.log(res);
           // Change 0 to False using JSON in below line
           if (res['key'] === 'false' || res === undefined) {
-            console.log('login failed!');
             this.loginErrorMsg = 'Incorrect Username or Password!';
             this.ShowAlert(true);
             this.timeout(false);
           } else {
-            console.log('login success!');
             this.loginAuth.setUserLoggedIn(true);
             this.loginAuth.setValues(
               res['Adminid'],

@@ -21,15 +21,15 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
   // { path: 'dashboard', component: SudashboradComponent },
-  { path: 'webinfo', component: WebInfoComponent},
-  { path: 'shops', component: ShopsComponent},
+  { path: 'webinfo', canActivate: [AuthGuard] , component: WebInfoComponent},
+  { path: 'shops', canActivate: [AuthGuard], component: ShopsComponent},
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'reset', component: ResetpasswordComponent},
-  { path: 'mailinfo', component: MailinfoComponent},
+  { path: 'mailinfo', canActivate: [AuthGuard], component: MailinfoComponent},
   { path: 'lockscreen', component: LockscreenComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
-  { path: 'shopInfo', component: ShopInfoComponent },
+  { path: 'shopInfo', canActivate: [AuthGuard], component: ShopInfoComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
