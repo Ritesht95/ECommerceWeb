@@ -89,7 +89,11 @@ export class SuperAdminService {
     );
   }
 
-  resetPassword(Username: string, VerificationCode: string, NewPassword: string) {
+  resetPassword(
+    Username: string,
+    VerificationCode: string,
+    NewPassword: string
+  ) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
@@ -112,21 +116,23 @@ export class SuperAdminService {
     );
   }
 
-  postFile(formData: FormData): Observable<boolean> {
+  postFile(formData: FormData) {
     // const headers = new Headers({
     //   'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     // });
     // const options = new RequestOptions({ headers: headers });
-    const endpoint = environment.apiURL + 'temp.php';
-    return this._http
-      .post(endpoint, formData)
-      .pipe(map( res => {
-        return true;
-      // tslint:disable-next-line:no-shadowed-variable
-      }, error => {
-        console.log(error);
-      }
-    ));
+    const endpoint = environment.apiURL + 'Website/WebsiteLogo.php';
+    return this._http.post(endpoint, formData).pipe(
+      map(
+        res => {
+          return res.json();
+        },
+        // tslint:disable-next-line:no-shadowed-variable
+        error => {
+          console.log(error);
+        }
+      )
+    );
   }
 
   getAdminData(UserID: number) {
@@ -135,9 +141,9 @@ export class SuperAdminService {
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = { ID: UserID };
-    return this._http.post(environment.apiURL + 'SuperAdmin/ReadInfo.php', data, options).pipe(map(
-      res => res.json()
-    ));
+    return this._http
+      .post(environment.apiURL + 'SuperAdmin/ReadInfo.php', data, options)
+      .pipe(map(res => res.json()));
   }
 
   setAdminData(UserID: number, Name: string, PhoneNo: string, Email: string) {
@@ -151,29 +157,29 @@ export class SuperAdminService {
       phone_no: PhoneNo,
       email: Email
     };
-    return this._http.post(environment.apiURL + '/SuperAdmin/UpdateInfo.php', data, options).pipe(map(
-      res => res.json()
-    ));
+    return this._http
+      .post(environment.apiURL + '/SuperAdmin/UpdateInfo.php', data, options)
+      .pipe(map(res => res.json()));
   }
 
   updateProfileImage(formData: FormData) {
-
     const endpoint = environment.apiURL + 'SuperAdmin/AdminImage.php';
-    return this._http
-      .post(endpoint, formData)
-      .pipe(map( res => {
-        return res.json();
-      // tslint:disable-next-line:no-shadowed-variable
-      }, error => {
-        console.log(error);
-      }
-    ));
+    return this._http.post(endpoint, formData).pipe(
+      map(
+        res => {
+          return res.json();
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    );
   }
 
   getMailInfo() {
-    return this._http.get(environment.apiURL + 'Website/GetMail.php').pipe(map(
-      res => res.json()
-    ));
+    return this._http
+      .get(environment.apiURL + 'Website/GetMail.php')
+      .pipe(map(res => res.json()));
   }
 
   updateMailInfo(Email: string, Password: string) {
@@ -182,8 +188,55 @@ export class SuperAdminService {
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = { Email: Email, Password: Password, Id: 1 };
-    return this._http.post(environment.apiURL + '/Website/MailSetting.php', data, options).pipe(map(
-      res => res.json()
-    ));
+    return this._http
+      .post(environment.apiURL + '/Website/MailSetting.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  getWebInfo() {
+    return this._http
+      .get(environment.apiURL + 'Website/GetWebInfo.php')
+      .pipe(map(res => res.json()));
+  }
+
+  updateWebInfo(
+    WebsiteName: string,
+    Contact: string,
+    GSTNo: string,
+    TagLine: string,
+    AboutUs: string,
+    ContactUs: string,
+    FacebookLink: string,
+    TwitterLink: string,
+    InstagramLink: string,
+    YoutubeLink: string,
+    Id: string
+  ) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      WebsiteName: WebsiteName,
+      Contact: Contact,
+      GSTNo: GSTNo,
+      TagLine: TagLine,
+      AboutUs: AboutUs,
+      ContactUs: ContactUs,
+      FacebookLink: FacebookLink,
+      TwitterLink: TwitterLink,
+      InstagramLink: InstagramLink,
+      YoutubeLink: YoutubeLink,
+      Id: Id
+    };
+    return this._http
+      .post(environment.apiURL + '/Website/UpdateInfo.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  getShopsData() {
+    return this._http
+      .get(environment.apiURL + 'Shop/ShopData.php')
+      .pipe(map(res => res.json()));
   }
 }

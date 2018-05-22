@@ -31,15 +31,12 @@ export class ForgotpasswordComponent implements OnInit {
       this.superadminservice.forgotPassword(Username).subscribe(
         res => {
           if (res['key'] === 'false') {
-            console.log('false');
             this.errorMsg = 'Something went wrong!';
             this.timeout(false);
           } else if (res['key'] === 'nexist') {
-            console.log('nexist');
             this.errorMsg = 'This Email or Phone no is not registered with us!';
             this.timeout(false);
           } else {
-            console.log('true');
             document.getElementById('alertInnerDiv').classList.remove('text-danger');
             document.getElementById('alertInnerDiv').classList.add('text-success');
             this.errorMsg = 'Reset link and Verification Code has been sent to your mail.';

@@ -16,6 +16,12 @@ export class AdminprofileComponent implements OnInit {
   fileToUpload: File = null;
   formData: FormData = new FormData();
   adminData: any;
+  headerComp: HeaderComponent = new HeaderComponent(
+    this.loginAuth,
+    this.superadminservice,
+    this.elem,
+    this.router
+  );
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
     this.superadminservice
@@ -77,7 +83,9 @@ export class AdminprofileComponent implements OnInit {
     private loginAuth: LoginauthService,
     private elem: ElementRef,
     private router: Router
-  ) {}
+  ) {
+    this.adminData = '';
+  }
 
   hideButton() {
     document.getElementById('btnEC').style.display = 'block';
@@ -85,6 +93,32 @@ export class AdminprofileComponent implements OnInit {
     document.getElementById('btnCancel').style.display = 'none';
     document.getElementById('tableDetail2').style.display = 'none';
     document.getElementById('tableDetail').style.display = 'table';
+  }
+
+  updateImage() {
+    this.superadminservice.updateProfileImage(this.formData).subscribe(res => {
+      if (res['key'] === 'true') {
+        this.superadminservice
+          .getAdminData(this.loginAuth.getUserID())
+          .subscribe(
+            // tslint:disable-next-line:no-shadowed-variable
+            res => {
+              this.adminData = res;
+
+              document
+                .getElementById('profileImageIn')
+                .setAttribute(
+                  'src',
+                  environment.apiURL +
+                    'Assets/AdminImages/' +
+                    this.adminData.AdminImage
+                );
+              this.headerComp.ngOnInit();
+              this.sidebarComp.ngOnInit();
+            }
+          );
+      }
+    });
   }
 
   updateProfile(Name: string, PhoneNo: string, Email: string) {
@@ -99,14 +133,13 @@ export class AdminprofileComponent implements OnInit {
               // tslint:disable-next-line:no-shadowed-variable
               res => {
                 this.adminData = res;
-                console.log(res);
                 this.loginAuth.setValues(
                   this.loginAuth.getUserID(),
                   this.adminData.Email,
                   this.loginAuth.getUserType(),
                   this.adminData.Adminname
                 );
-                // this.headerComp.ngOnInit();
+                this.headerComp.ngOnInit();
                 this.sidebarComp.ngOnInit();
               }
             );
@@ -119,10 +152,14 @@ export class AdminprofileComponent implements OnInit {
       .getAdminData(this.loginAuth.getUserID())
       .subscribe(res => {
         this.adminData = res;
-        document.getElementById('profileImageIn').src =
-          environment.apiURL +
-          'Assets/AdminImages/' +
-          this.adminData.AdminImage;
+        document
+          .getElementById('profileImageIn')
+          .setAttribute(
+            'src',
+            environment.apiURL +
+              'Assets/AdminImages/' +
+              this.adminData.AdminImage
+          );
       });
   }
 }

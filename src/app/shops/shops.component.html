@@ -3,7 +3,7 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Website Information
+      Shops
     </h1>
     <ol class="breadcrumb">
       <li>
@@ -17,88 +17,35 @@
 
   <section class="content">
     <div class="box">
-      <div class="box-header">
-        <h3 class="box-title">Data Table With Full Features</h3>
-      </div>
-      <!-- /.box-header -->
       <div class="box-body">
-
-
         <table datatable class="row-border hover">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>First name</th>
-              <th>Last name</th>
+              <th></th>
+              <th>Shop Name</th>
+              <th>Shop Type</th>
+              <th>Email</th>
+              <th>Contact No</th>
+              <th>Owner Name</th>
+              <th>Is Active?</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Foo</td>
-              <td>Bar</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Someone</td>
-              <td>Youknow</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Iamout</td>
-              <td>Ofinspiration</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Yoda</td>
-              <td>Skywalker</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Patrick</td>
-              <td>Dupont</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>Barack</td>
-              <td>Obama</td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>François</td>
-              <td>Holland</td>
-            </tr>
-            <tr>
-              <td>8</td>
-              <td>Michel</td>
-              <td>Popo</td>
-            </tr>
-            <tr>
-              <td>9</td>
-              <td>Chuck</td>
-              <td>Norris</td>
-            </tr>
-            <tr>
-              <td>10</td>
-              <td>Simon</td>
-              <td>Robin</td>
-            </tr>
-            <tr>
-              <td>11</td>
-              <td>Louis</td>
-              <td>Lin</td>
-            </tr>
-            <tr>
-              <td>12</td>
-              <td>Zelda</td>
-              <td>Link</td>
+            <tr *ngFor="let shop of shopsData">
+              <td><a><span class="fa fa-2x fa-info-circle"></span></a></td>
+              <td>{{ shop.ShopName }}</td>
+              <td>{{ shop.ShopType }}</td>
+              <td>{{ shop.Email }}</td>
+              <td>{{ shop.PhoneNo }}</td>
+              <td>{{ shop.OwnerName }}</td>
+              <td *ngIf="shop.IsActive == 1"><a><span class="fa fa-2x fa-check"></span></a></td>
+              <td *ngIf="shop.IsActive == 0"><a><span class="fa fa-2x fa-times"></span></a></td>
             </tr>
           </tbody>
         </table>
-
-
       </div>
       <!-- /.box-body -->
     </div>
   </section>
 </div>
+

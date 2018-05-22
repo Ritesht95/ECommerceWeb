@@ -4,7 +4,6 @@ import { SuperAdmin } from '../classes/super-admin';
 import { SuperAdminService } from '../services/super-admin.service';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { AdminprofileComponent } from '../adminprofile/adminprofile.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
@@ -19,17 +18,10 @@ export class HeaderComponent implements OnInit {
   UserID: number;
   Name: string;
   flag: boolean;
-  headerComp: AdminprofileComponent = new AdminprofileComponent(
-    this.superadminservice,
-    this.loginAuth,
-    this.elem,
-    this.router
-  );
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
     this.superadminservice
   );
-
 
   constructor(
     private loginAuth: LoginauthService,
@@ -37,7 +29,6 @@ export class HeaderComponent implements OnInit {
     private elem: ElementRef,
     private router: Router
   ) {
-
     this.UserID = this.loginAuth.getUserID();
     this.Name = this.loginAuth.getName();
   }
@@ -73,20 +64,32 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('sddvjsdk');
     this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       res => {
         this.adminData = res;
-        document.getElementById('userImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
-        document.getElementById('userHeaderImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
-        console.log(res);
+        document
+          .getElementById('userImage')
+          .setAttribute(
+            'src',
+            environment.apiURL +
+              'Assets/AdminImages/' +
+              this.adminData.AdminImage
+          );
+        document
+          .getElementById('userHeaderImage')
+          .setAttribute(
+            'src',
+            environment.apiURL +
+              'Assets/AdminImages/' +
+              this.adminData.AdminImage
+          );
       }
     );
   }
 
   changePassword(oldPassword: string, newPassword: string) {
-    this.superAdminService.changePassword(oldPassword, newPassword).subscribe(
+    this.superadminservice.changePassword(oldPassword, newPassword).subscribe(
       res => {
         if (res['key'] === 'incorrect') {
           // Wrong old Password
@@ -106,28 +109,6 @@ export class HeaderComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  updateImage() {
-    this.superadminservice.updateProfileImage(this.formData).subscribe(res => {
-      console.log(res);
-      if (res['key'] === 'true') {
-        this.superadminservice
-          .getAdminData(this.loginAuth.getUserID())
-          .subscribe(
-            // tslint:disable-next-line:no-shadowed-variable
-            res => {
-              this.adminData = res;
-              document.getElementById('profileImageIn').src =
-                environment.apiURL +
-                'Assets/AdminImages/' +
-                this.adminData.AdminImage;
-                document.getElementById('userHeaderImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
-              this.sidebarComp.ngOnInit();
-            }
-          );
-      }
-    });
   }
 
   logout() {

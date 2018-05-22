@@ -14,7 +14,6 @@ export class ResetpasswordComponent implements OnInit {
   Username = null;
 
   timeout(val: boolean) {
-    console.log('form');
     setTimeout(this.ShowAlert, 5000, val);
   }
 
@@ -42,9 +41,8 @@ export class ResetpasswordComponent implements OnInit {
         } else if (res['key'] === 'expired') {
           document.getElementById('frmReset').style.display = 'none';
           document.getElementById('divLinkExpired').style.display = 'block';
-          console.log('Link Expired!');
+          // Link Expired
         } else {
-          console.log('true');
           this.Username = res['Email'];
         }
       });

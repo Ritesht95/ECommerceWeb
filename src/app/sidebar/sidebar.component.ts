@@ -9,11 +9,13 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
   adminData: any;
   Name: string;
 
-  constructor(private loginAuth: LoginauthService, private superadminservice: SuperAdminService) { }
+  constructor(
+    private loginAuth: LoginauthService,
+    private superadminservice: SuperAdminService
+  ) {}
 
   ngOnInit() {
     this.Name = this.loginAuth.getName();
@@ -21,10 +23,15 @@ export class SidebarComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       res => {
         this.adminData = res;
-        document.getElementById('profileImage').src = environment.apiURL + 'Assets/AdminImages/' +  this.adminData.AdminImage;
-        console.log(res);
+        document
+          .getElementById('profileImage')
+          .setAttribute(
+            'src',
+            environment.apiURL +
+              'Assets/AdminImages/' +
+              this.adminData.AdminImage
+          );
       }
     );
   }
-
 }
