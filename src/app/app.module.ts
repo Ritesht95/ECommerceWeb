@@ -24,7 +24,6 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { DataTablesModule } from 'angular-datatables';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
-
 import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 
