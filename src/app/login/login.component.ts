@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginauthService } from '../loginauth.service';
 import { SuperAdmin } from '../classes/super-admin';
+import { SellerService } from '../services/seller.service';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ export class LoginComponent {
 
   constructor(
     private superadminservice: SuperAdminService,
+    private sellerservice: SellerService,
     private router: Router,
     private loginAuth: LoginauthService
   ) {}
@@ -66,7 +68,11 @@ export class LoginComponent {
         }
       );
     } else {
-      console.log('Seller Login');
+      this.sellerservice.checkLogin(Email, Password).subscribe(
+        res => {
+          console.log(res);
+        }
+      );
     }
   }
 
