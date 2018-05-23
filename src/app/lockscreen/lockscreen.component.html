@@ -19,13 +19,18 @@
       <!-- lockscreen credentials (contains the form) -->
       <form class="lockscreen-credentials">
         <div class="input-group">
-          <input type="password" class="form-control" placeholder="password">
+          <input type="password" class="form-control" ngModel #txtPassword="ngModel" id="txtPassword" name="txtPassword" placeholder="password" >
 
           <div class="input-group-btn">
-            <button type="button" class="btn">
+            <button type="button" class="btn" (click)="login(txtPassword.value);">
               <i class="fa fa-arrow-right text-muted"></i>
             </button>
           </div>
+          <div id='alertDiv'>
+              <div ng-if="!loginErrorMsg == null">
+                <span class="text-danger">{{loginErrorMsg}}</span>
+              </div>
+            </div>
         </div>
       </form>
       <!-- /.lockscreen credentials -->
@@ -36,7 +41,7 @@
       Enter your password to retrieve your session
     </div>
     <div class="text-center">
-      <a href="login.html">Or sign in as a different user</a>
+      <a routerLink="login">Or sign in as a different user</a>
     </div>
     <div class="lockscreen-footer text-center">
       Copyright &copy; 2014-2016
