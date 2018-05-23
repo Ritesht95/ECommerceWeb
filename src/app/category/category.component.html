@@ -1,0 +1,153 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <h1>
+      Add Category
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-home"></i> Home
+        </a>
+      </li>
+      <li class="active">Category</li>
+      <li class="active">Add category</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary">
+      <form role="form" #frm1="ngForm">
+        <table class="table" style="border: 0;">
+          <tr>
+            <td class="col-md-2">
+              <div class="container" style=" width:36%;">
+                <div style="display: flex; justify-content: center;">
+                  <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+                </div>
+              </div>
+            </td>
+            <td class="col-md-5">
+              <div>
+                <div class="form-group">
+                  <label for="txtlogo">Logo
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input type="file" id="imageWebInfo" (change)="upload($event)" name="imageWebInfo" required ngModel #imageWebInfo="ngModel">
+                </div>
+                <div class="form-group">
+                  <label for="txtlogoalt">Logo Alternate</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+                </div>
+                <div *ngIf=" imageWebInfo.touched || txtlogoalt.touched">
+                  <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
+                    <span class="text-danger">Logo Alternate is required</span>
+                  </div>
+                  <div *ngIf="flag && imageWebInfo.touched">
+                    <span class="text-danger">Select .png, .jpg and .jpeg only</span>
+                  </div>
+                  <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
+                    <span class="text-danger">Logo is required</span>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td class="col-md-5" style="padding-top: 7.5%;">
+              <div>
+                <button class="btn btn-primary" [disabled]="frm1.invalid || flag">Submit</button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-md-6 container">
+        <form role="form" #frm="ngForm">
+          <div class="box box-primary">
+            <div class="box-body">
+              <div class="row">
+                <div>
+                  <input type="hidden" [(ngModel)]="webInfo.Id" id="txtId" name="txtId" #txtId="ngModel">
+                  <div class="form-group col-sm-12 ">
+                    <h3>
+                      <label for="txtWebsiteName">Category
+                        <span class="text-danger">*</span>
+                      </label>
+                    </h3>
+
+                    <div class="form-group">
+                      <label for="txtCatName">Category Name</label>
+                      <span class="text-danger">*</span>
+                      <input type="text" class="form-control" ngModel id="txtCatName" name="txtCatName" #txtCatName="ngModel" placeholder="Category Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="txtDis">Category Description
+                        <span class="text-danger">*</span>
+                      </label>
+                      <textarea class="form-control" ngModel id="txtDis" name="txtDis" #txtDis="ngModel" rows="2" placeholder="Category Description"
+                        required></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box box-primary">
+            <div class="box-body">
+              <div class="row">
+                <div>
+                  <input type="hidden" [(ngModel)]="webInfo.Id" id="txtId" name="txtId" #txtId="ngModel">
+                  <div class="form-group col-sm-12 ">
+                    <h3>
+                      <label for="txtWebsiteName">Properties
+                        <span class="text-danger">*</span>
+                      </label>
+                    </h3>
+
+                    <div class="form-group">
+                      <label for="txtProName">Property Name</label>
+                      <span class="text-danger">*</span>
+                      <input type="text" class="form-control" ngModel id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Property Name">
+                    </div>
+                    <div class="form-group">
+                      <label for="txtProDis">Property Description
+                        <span class="text-danger">*</span>
+                      </label>
+                      <textarea class="form-control" ngModel id="txtProDis" name="txtProDis" #txtProDis="ngModel" rows="2" placeholder="Property Description"
+                        required></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <div class="col-md-6">
+          <table datatable class="row-border hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Shop Name</th>
+                  <th>Shop Type</th>
+                  <th>Email</th>
+                  <th>Contact No</th>
+                  <th>Owner Name</th>
+                  <th>Is Active?</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </section>
+</div>
