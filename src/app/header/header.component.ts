@@ -157,6 +157,29 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  Sleep() {
+    localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
+
+    this.loginAuth
+      .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
+      .subscribe(
+        res => {
+          if (res.json()['key'] === 'true') {
+            localStorage.removeItem('sessionUserID');
+            localStorage.removeItem('sessionName');
+            localStorage.removeItem('sessionEmail');
+            localStorage.removeItem('sessionUserType');
+            localStorage.setItem('loggedIn', 'false');
+            this.loginAuth.setUserLoggedIn(false);
+            this.router.navigate(['lockscreen']);
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
   logout() {
     this.loginAuth
       .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
