@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [AuthGuard], component: ShopInfoComponent },
-  { path: 'shopDetail', component: ShopDetailComponent  },
+  { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
   { path: '**', redirectTo: 'not-found' }
 ];

@@ -14,7 +14,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 export class HeaderComponent implements OnInit {
   fileToUpload: File = null;
   formData: FormData = new FormData();
-  adminData: any;
+  adminData: any = '';
   UserID: number;
   Name: string;
   flag: boolean;

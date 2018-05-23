@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SuperAdminService } from '../services/super-admin.service';
 
 @Component({
   selector: 'app-shop-detail',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopDetailComponent implements OnInit {
 
-  constructor() { }
+  private shopDetailID: number;
+  shopData: any;
+  
 
-  ngOnInit() {
+  constructor(private actRoute: ActivatedRoute, private superadminservice: SuperAdminService) {
+    this.actRoute.queryParams.subscribe(params => {
+      this.shopDetailID = params['shopID'];
+    });
   }
 
+  ngOnInit() {
+    this.superadminservice.getShopDetails(this.shopDetailID).subscribe(
+      res => {
+        this.shopData = res;
+      }
+    );
+  }
 }
