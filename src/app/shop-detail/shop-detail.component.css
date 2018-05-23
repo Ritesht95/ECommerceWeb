@@ -34,3 +34,8 @@
 .mytable{
   display: block;
 }
+
+hr{
+  font-weight: bolder;
+  
+}
