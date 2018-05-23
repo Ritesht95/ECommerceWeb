@@ -18,10 +18,42 @@ export class HeaderComponent implements OnInit {
   UserID: number;
   Name: string;
   flag: boolean;
+  errorMessage: string;
+  successMessage: string;
+
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
     this.superadminservice
   );
+
+  timeout(val: boolean) {
+    setTimeout(this.ShowAlert, 5000, val);
+    this.clearForm();
+  }
+
+  ShowAlert(val: boolean) {
+    const alertDiv = document.getElementById('alertDiv');
+    alertDiv.style.display = val ? 'block' : 'none';
+  }
+
+  timeoutS(val: boolean) {
+    setTimeout(this.ShowAlertS, 2000, val);
+    this.clearForm();
+  }
+
+  clearForm() {
+    document.getElementById('txtNewPassword').value = '';
+    document.getElementById('txtCPassword').value = '';
+    document.getElementById('txtOldPassword').value = '';
+  }
+
+  ShowAlertS(val: boolean) {
+    const alertDiv = document.getElementById('alertDivS');
+    alertDiv.style.display = val ? 'block' : 'none';
+    if (!val) {
+      document.getElementById('btnClose').click();
+    }
+  }
 
   constructor(
     private loginAuth: LoginauthService,
@@ -95,16 +127,28 @@ export class HeaderComponent implements OnInit {
       res => {
         if (res['key'] === 'incorrect') {
           // Wrong old Password
-          console.log('Wrong old Password');
+          this.errorMessage = 'Wrong old Password';
+          this.ShowAlert(true);
+          this.timeout(false);
         } else if (res['key'] === 'same') {
           // Same as Current Password
-          console.log('Same as Current Password');
+          this.errorMessage = 'Same as Current Password';
+          this.ShowAlert(true);
+          this.timeout(false);
         } else if (res['key'] === 'oldsame') {
           // Same as Previous Password
-          console.log('Same as Previous Password');
-        } else if (res['key'] === '0') {
+          this.errorMessage = 'Same as Previous Password';
+          this.ShowAlert(true);
+          this.timeout(false);
+        } else if (res['key'] === 'false') {
           // Server Error
-          console.log('Server Error');
+          this.errorMessage = 'Server Error';
+          this.ShowAlert(true);
+          this.timeout(false);
+        } else {
+          this.successMessage = 'Password changed succesfully';
+          this.ShowAlertS(true);
+          this.timeoutS(false);
         }
       },
       error => {

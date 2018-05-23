@@ -74,7 +74,7 @@
               <img id="userHeaderImage" class="img-circle" alt="User Image">
 
               <p id="headerName1">
-                  {{ adminData.Adminname }}
+                {{ adminData.Adminname }}
                 <!-- <small>Member since Nov. 2012</small> -->
               </p>
             </li>
@@ -84,10 +84,10 @@
                 <div class="col-xs-7">
                   <a href="#" data-toggle="modal" data-target="#exampleModal">Change Password</a>
                 </div>
-               <div class="col-xs-5">
+                <div class="col-xs-5">
                   <a href="#">Sleep</a>
                 </div>
-                  <!-- <div class="col-xs-4 text-center">
+                <!-- <div class="col-xs-4 text-center">
                   <a href="#">Friends</a>
                 </div> -->
               </div>
@@ -99,7 +99,7 @@
                 <a routerLink="/adminProfile" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
-                <a class="btn btn-default btn-flat" (click)="logout();" >Sign out</a>
+                <a class="btn btn-default btn-flat" (click)="logout();">Sign out</a>
               </div>
             </li>
           </ul>
@@ -113,32 +113,42 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
       </div>
       <div class="modal-body">
         <form #frm="ngForm">
-            <div class="form-group">
-              <label for="txtOldPassword" class="control-label">Old Password</label>
-              <input type="password" ngModel #txtOldPassword="ngModel" name="txtOldPassword" class="form-control" id="txtOldPassword" placeholder="Password"
-                pattern="[a-zA-Z0-9]*" required>
-            </div>
-            <div class="form-group">
-              <label for="txtNewPassword" class="control-label">New Password</label>
-              <input type="password" ngModel #txtNewPassword="ngModel" name="txtNewPassword" class="form-control" id="txtNewPassword" placeholder="Password"
-                pattern="[a-zA-Z0-9]*" required>
-            </div>
-            <div class="form-group">
-              <label for="txtCPassword" class="control-label">Confirm Password</label>
-              <input type="password" ngModel #txtCPassword="ngModel" name="txtCPassword" class="form-control" id="txtCPassword" placeholder="Password"
-                pattern="[a-zA-Z0-9]*" required>
-            </div>
+          <div class="form-group">
+            <label for="txtOldPassword" class="control-label">Old Password</label>
+            <input type="password" ngModel #txtOldPassword="ngModel" name="txtOldPassword" class="form-control" id="txtOldPassword" placeholder="Password"
+              pattern="[a-zA-Z0-9]*" required>
+          </div>
+          <div class="form-group">
+            <label for="txtNewPassword" class="control-label">New Password</label>
+            <input type="password" ngModel #txtNewPassword="ngModel" name="txtNewPassword" class="form-control" id="txtNewPassword" placeholder="Password"
+              pattern="[a-zA-Z0-9]*" required>
+          </div>
+          <div class="form-group">
+            <label for="txtCPassword" class="control-label">Confirm Password</label>
+            <input type="password" ngModel #txtCPassword="ngModel" name="txtCPassword" class="form-control" id="txtCPassword" placeholder="Password"
+              pattern="[a-zA-Z0-9]*" required>
+          </div>
         </form>
+        <div id='alertDiv'>
+          <div ng-if="!errorMessage == null">
+            <span class="text-danger">{{errorMessage}}</span>
+          </div>
+        </div>
+        <div id='alertDivS'>
+          <div ng-if="!successMessage == null">
+            <span class="text-successc">{{successMessage}}</span>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id='btnClose' type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="changePassword(txtOldPassword.value, txtCPassword.value);">Save changes</button>
       </div>
     </div>

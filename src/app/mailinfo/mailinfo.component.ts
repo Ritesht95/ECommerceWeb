@@ -34,16 +34,17 @@ export class MailinfoComponent implements OnInit {
     private superadminservice: SuperAdminService,
     private loginAuth: LoginauthService
   ) {
+
+  }
+
+  ngOnInit() {
     this.superadminservice.getMailInfo().subscribe(
       res => {
+        console.log(res);
         this.infoEmail = res['Email'];
         this.emailValidFlag = true;
       }
     );
-  }
-
-  ngOnInit() {
-
   }
 
   updateMailInfo(Email: string, Password: string) {
@@ -52,12 +53,12 @@ export class MailinfoComponent implements OnInit {
         this.loginErrorMsg = 'Mail Settings updated Successfully.';
         this.ShowAlert(true);
         this.timeout(false);
-        document.getElementById('txtPassword').setAttribute('value', '');
+        document.getElementById('txtPassword').value = '';
       } else {
         this.loginErrorMsg = 'Oops! Mail Settings could not be updated!';
         this.ShowAlertD(true);
         this.timeoutD(false);
-        document.getElementById('txtPassword').setAttribute('value', '');
+        document.getElementById('txtPassword').value = '';
       }
     });
   }
