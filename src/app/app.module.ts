@@ -23,6 +23,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { DataTablesModule } from 'angular-datatables';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
+import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LockscreenComponent } from './lockscreen/lockscreen.component';
     AdminprofileComponent,
     NotFoundComponent,
     ShopInfoComponent,
-    LockscreenComponent
+    LockscreenComponent,
+    ShopDetailComponent
   ],
   imports: [
     BrowserModule,

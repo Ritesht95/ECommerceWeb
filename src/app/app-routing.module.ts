@@ -14,6 +14,7 @@ import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
+import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [AuthGuard], component: ShopInfoComponent },
+  { path: 'shopDetail', component: ShopDetailComponent  },
   { path: '**', redirectTo: 'not-found' }
 ];
 
