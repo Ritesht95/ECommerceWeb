@@ -239,4 +239,49 @@ export class SuperAdminService {
       .get(environment.apiURL + 'Shop/ShopData.php')
       .pipe(map(res => res.json()));
   }
+
+  getNewShops() {
+    return this._http
+      .get(environment.apiURL + 'Shop/NewShopData.php')
+      .pipe(map(res => res.json()));
+  }
+
+  getShopDetails(ShopID: number) {
+    return this._http
+      .get(environment.apiURL + 'Shop/SingleShop.php?id=' + ShopID)
+      .pipe(map(res => res.json()));
+  }
+
+  setShopStatus(ShopID: number, Status: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ShopID: ShopID, Status: Status };
+    return this._http
+      .post(environment.apiURL + 'Shop/SetShopStatus.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  setShopApproveStatus(ShopID: number, Status: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ShopID: ShopID, Status: Status };
+    return this._http
+      .post(environment.apiURL + 'Shop/SetShopApproveStatus.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  setShopDelete(ShopID: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ShopID: ShopID };
+    return this._http
+      .post(environment.apiURL + 'Shop/DeleteShop.php', data, options)
+      .pipe(map(res => res.json()));
+  }
 }

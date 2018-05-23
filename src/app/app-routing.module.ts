@@ -15,11 +15,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
-<<<<<<< HEAD
 import { CategoryComponent } from './category/category.component';
-=======
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
->>>>>>> 84dca4c234a9e5c7160098f3aedec40baa4b3ad1
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -37,11 +34,9 @@ const routes: Routes = [
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [AuthGuard], component: ShopInfoComponent },
   { path: 'shopDetail', component: ShopDetailComponent  },
-<<<<<<< HEAD
   { path: 'category', component: CategoryComponent },
-=======
+  { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
->>>>>>> 84dca4c234a9e5c7160098f3aedec40baa4b3ad1
   { path: '**', redirectTo: 'not-found' }
 ];
 
