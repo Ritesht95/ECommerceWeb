@@ -24,6 +24,7 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { DataTablesModule } from 'angular-datatables';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ShopDetailComponent } from './shop-detail/shop-detail.component';
     NotFoundComponent,
     ShopInfoComponent,
     LockscreenComponent,
-    ShopDetailComponent
+    ShopDetailComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,55 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+
+<section class="content-header">
+    <h1>
+      Category
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Add category</li>
+    </ol>
+</section>
+
+<section class="content">
+  <div class="box box-primary">
+    <form role="form" #frm1="ngForm">
+      <table class="table" style="border: 0;">
+        <tr>
+          <td class="col-md-2">
+            <div class="container" style=" width:36%;">
+              <div style="display: flex; justify-content: center;">
+                <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+              </div>
+            </div>
+          </td>
+          <td class="col-md-5">
+            <div>
+              <div class="form-group">
+                <label for="txtlogo">Logo
+                  <span class="text-danger">*</span>
+                </label>
+                <input type="file" id="imageWebInfo" (change)="upload($event)" name="imageWebInfo" required ngModel #imageWebInfo="ngModel">
+              </div>
+              <div class="form-group">
+                <label for="txtlogoalt">Logo Alternate</label>
+                <span class="text-danger">*</span>
+                <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+              </div>
+            </div>
+          </td>
+          <td class="col-md-5" style="padding-top: 7.5%;">
+            <div>
+              <button class="btn btn-primary">Submit</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</section>
