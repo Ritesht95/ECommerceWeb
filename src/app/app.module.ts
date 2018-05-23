@@ -24,11 +24,9 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { DataTablesModule } from 'angular-datatables';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
-<<<<<<< HEAD
+
 import { CategoryComponent } from './category/category.component';
-=======
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
->>>>>>> 84dca4c234a9e5c7160098f3aedec40baa4b3ad1
 
 @NgModule({
   declarations: [
@@ -49,11 +47,8 @@ import { IntialSetupComponent } from './intial-setup/intial-setup.component';
     ShopInfoComponent,
     LockscreenComponent,
     ShopDetailComponent,
-<<<<<<< HEAD
-    CategoryComponent
-=======
+    CategoryComponent,
     IntialSetupComponent
->>>>>>> 84dca4c234a9e5c7160098f3aedec40baa4b3ad1
   ],
   imports: [
     BrowserModule,
