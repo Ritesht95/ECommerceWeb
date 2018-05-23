@@ -15,6 +15,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
+import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [AuthGuard], component: ShopInfoComponent },
   { path: 'shopDetail', component: ShopDetailComponent  },
+  { path: 'initial-setup', component: IntialSetupComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
