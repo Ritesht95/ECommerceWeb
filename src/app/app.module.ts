@@ -28,6 +28,7 @@ import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ProductComponent } from './product/product.component';
 import { ShopauthGuard } from './shopauth.guard';
+import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ShopauthGuard } from './shopauth.guard';
     IntialSetupComponent,
     IntialSetupComponent,
     ProductComponent
+    ShopDashboardComponent
   ],
   imports: [
     BrowserModule,

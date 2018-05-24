@@ -38,7 +38,6 @@ const routes: Routes = [
   { path: 'shopDetail', component: ShopDetailComponent  },
   { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
-  { path: 'product', component: ProductComponent},
   { path: 'initial-setup', component: IntialSetupComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
