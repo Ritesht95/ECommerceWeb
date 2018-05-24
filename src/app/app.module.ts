@@ -26,6 +26,7 @@ import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
+import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { IntialSetupComponent } from './intial-setup/intial-setup.component';
     LockscreenComponent,
     ShopDetailComponent,
     CategoryComponent,
-    IntialSetupComponent
+    IntialSetupComponent,
+    ShopDashboardComponent
   ],
   imports: [
     BrowserModule,

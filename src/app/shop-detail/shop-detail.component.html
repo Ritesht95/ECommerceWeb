@@ -71,18 +71,18 @@
                 </td>
               </tr>
               <tr>
-                <td style="color: green;" *ngIf="shopData.IsActive == 1">
+                <td style="color: green;" *ngIf="shopData.IsApproved == 1">
                   <span class="fa fa-thumbs-up"></span>
                 </td>
               </tr>
               <tr>
-                <td style="color: red;" *ngIf="shopData.IsActive == 0">
+                <td style="color: red;" *ngIf="shopData.IsApproved == 0">
                   <span class="fa fa-thumbs-down"></span>
                 </td>
               </tr>
               <tr>
-                <td *ngIf="shopData.IsActive == 1">Approved</td>
-                <td *ngIf="shopData.IsActive == 0">Not Approved</td>
+                <td *ngIf="shopData.IsApproved == 1">Approved</td>
+                <td *ngIf="shopData.IsApproved == 0">Not Approved</td>
               </tr>
             </table>
           </div>
