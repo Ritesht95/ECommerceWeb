@@ -20,12 +20,14 @@ import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ProductComponent } from './product/product.component';
 
 import { ShopauthGuard } from './shopauth.guard';
+import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
+  { path: 'shopdashboard', canActivate: [ShopauthGuard], component: ShopDashboardComponent },
   // { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', canActivate: [AuthGuard] , component: WebInfoComponent},
   { path: 'shops', canActivate: [AuthGuard], component: ShopsComponent},

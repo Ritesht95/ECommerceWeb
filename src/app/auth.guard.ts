@@ -31,30 +31,30 @@ export class AuthGuard implements CanActivate {
       );
       return true;
     } else {
-      return this.loginAuth
-        .getServerLoggedIn(this.loginAuth.getEmail(), 'superadmin')
-        .pipe(
-          map(
-            // tslint:disable-next-line:arrow-return-shorthand
-            res => {
-              if (res.json()['key'] === 'true') {
-                this.loginAuth.setValues(
-                  res.json()['Adminid'],
-                  res.json()['Email'],
-                  'superadmin',
-                  res.json()['Adminname']
-                );
+      // return this.loginAuth
+        // .getServerLoggedIn(this.loginAuth.getEmail(), 'superadmin')
+        // .pipe(
+        //   map(
+        //     // tslint:disable-next-line:arrow-return-shorthand
+        //     res => {
+        //       if (res.json()['key'] === 'true') {
+        //         this.loginAuth.setValues(
+        //           res.json()['Adminid'],
+        //           res.json()['Email'],
+        //           'superadmin',
+        //           res.json()['Adminname']
+        //         );
 
-                return true;
-              } else {
-                this.router.navigate(['login']);
-                return false;
-              }
-            }
-          )
-        );
-      // this.router.navigate(['login']);
+        //         return true;
+        //       } else {
+        //         this.router.navigate(['login']);
+        //         return false;
+        //       }
+        //     }
+        //   )
+        // );
+      this.router.navigate(['login']);
+      return false;
     }
-    // return this.loginAuth.getUserLoggedIn();
   }
 }

@@ -80,7 +80,7 @@ export class LoginComponent {
             'seller',
             res['ShopName']
           );
-          // this.router.navigate(['dashboard']);
+          this.router.navigate(['shopdashboard']);
         }
       });
     }

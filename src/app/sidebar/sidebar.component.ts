@@ -11,6 +11,7 @@ import { environment } from '../../environments/environment';
 export class SidebarComponent implements OnInit {
   adminData: any = '';
   Name: string;
+  userType: boolean;
 
   constructor(
     private loginAuth: LoginauthService,
@@ -18,6 +19,11 @@ export class SidebarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.loginAuth.getSUserLoggedIn()) {
+      this.userType = true;
+    } else {
+      this.userType = false;
+    }
     this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       res => {

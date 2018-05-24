@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginauthService {
-  private IsServerLoggedIn = false;
+  // private IsServerLoggedIn = false;
   private IsUserLoggedIn = JSON.parse(
     localStorage.getItem('loggedIn' || 'false')
   );
 
-  private IsSServerLoggedIn = false;
+  // private IsSServerLoggedIn = false;
   private IsSUserLoggedIn = JSON.parse(
     localStorage.getItem('SloggedIn' || 'false')
   );
@@ -27,7 +27,6 @@ export class LoginauthService {
 
   private SUserID;
   private SEmail;
-  private SUserType;
   private SName;
   private SpostData;
 
@@ -42,59 +41,63 @@ export class LoginauthService {
   }
 
   setUserLoggedIn(value: boolean) {
+    if (value) {
+      this.IsSUserLoggedIn = false ;
+    }
     this.IsUserLoggedIn = value;
     localStorage.setItem('loggedIn', value.toString());
   }
 
   setSUserLoggedIn(value: boolean) {
+    if (value) {
+      this.IsUserLoggedIn = false;
+    }
     this.IsSUserLoggedIn = value;
     localStorage.setItem('SloggedIn', value.toString());
   }
 
-  getServerLoggedIn(Email: string, Type: string): Observable<any> {
-    const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-    });
-    const options = new RequestOptions({ headers: headers });
-    const qry: string =
-      environment.apiURL +
-      'Config/Session.php?' +
-      'Id=' +
-      Email +
-      '&type=' +
-      Type +
-      '&status=0&operation=get';
-    return this.http.get(qry);
-  }
+  // getServerLoggedIn(Email: string, Type: string): Observable<any> {
+  //   const headers = new Headers({
+  //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  //   });
+  //   const options = new RequestOptions({ headers: headers });
+  //   const qry: string =
+  //     environment.apiURL +
+  //     'Config/Session.php?' +
+  //     'Id=' +
+  //     Email +
+  //     '&type=' +
+  //     Type +
+  //     '&status=0&operation=get';
+  //   return this.http.get(qry);
+  // }
 
-  setServerLogout(Email: string, Type: string): Observable<any> {
-    const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-    });
-    const options = new RequestOptions({ headers: headers });
-    const qry: string =
-      environment.apiURL +
-      'Config/Session.php?' +
-      'Id=' +
-      Email +
-      '&type=' +
-      Type +
-      '&status=0&operation=set';
-    return this.http.get(qry);
-  }
+  // setServerLogout(Email: string, Type: string): Observable<any> {
+  //   const headers = new Headers({
+  //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  //   });
+  //   const options = new RequestOptions({ headers: headers });
+  //   const qry: string =
+  //     environment.apiURL +
+  //     'Config/Session.php?' +
+  //     'Id=' +
+  //     Email +
+  //     '&type=' +
+  //     Type +
+  //     '&status=0&operation=set';
+  //   return this.http.get(qry);
+  // }
 
   setValues(UserID: number, Email: string, UserType: string, Name: string) {
-    console.log(Email);
-    console.log(UserType);
     if (UserType === 'seller') {
       this.SUserID = UserID;
       this.SName = Name;
       this.SEmail = Email;
-      this.SUserType = UserType;
+      this.UserType = UserType;
       localStorage.setItem('sessionShopUserID', this.SUserID);
       localStorage.setItem('sessionShopName', this.SName);
       localStorage.setItem('sessionShopEmail', this.SEmail);
-      localStorage.setItem('sessionShopUserType', this.SUserType);
+      localStorage.setItem('sessionUserType', this.UserType);
     } else {
       this.UserID = UserID;
       this.Name = Name;
@@ -133,9 +136,5 @@ export class LoginauthService {
 
   getSEmail() {
     return this.SEmail;
-  }
-
-  getSUserType() {
-    return this.SUserType;
   }
 }

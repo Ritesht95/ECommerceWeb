@@ -95,7 +95,8 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a routerLink="/adminProfile" class="btn btn-default btn-flat">Profile</a>
+                <a routerLink="/adminProfile" class="btn btn-default btn-flat" *ngIf="!userType">Profile</a>
+                <a routerLink="/shopProfile" class="btn btn-default btn-flat" *ngIf="userType">Profile</a>
               </div>
               <div class="pull-right">
                 <a class="btn btn-default btn-flat" (click)="logout();">Sign out</a>

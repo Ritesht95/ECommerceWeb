@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginauthService } from '../loginauth.service';
 import { Router } from '@angular/router';
 import { SuperAdminService } from '../services/super-admin.service';
+import { SellerService } from '../services/seller.service';
 
 @Component({
   selector: 'app-lockscreen',
@@ -12,6 +13,7 @@ export class LockscreenComponent implements OnInit {
   loginErrorMsg: string;
   constructor(
     private superadminservice: SuperAdminService,
+    private sellerservice: SellerService,
     private loginAuth: LoginauthService,
     private router: Router
   ) {
@@ -43,7 +45,8 @@ export class LockscreenComponent implements OnInit {
     if (localStorage.getItem('SleepUsername') === null) {
       this.router.navigate(['login']);
     } else {
-      this.superadminservice
+      if (localStorage.getItem('SleepType') === 'seller') {
+        this.sellerservice
         .checkLogin(localStorage.getItem('SleepUsername'), Password)
         .subscribe(
           res => {
@@ -82,6 +85,48 @@ export class LockscreenComponent implements OnInit {
             console.log(error);
           }
         );
+      } else {
+        this.superadminservice
+        .checkLogin(localStorage.getItem('SleepUsername'), Password)
+        .subscribe(
+          res => {
+            // Change 0 to False using JSON in below line
+            if (res['key'] === 'false' || res === undefined) {
+              this.loginErrorMsg = 'Incorrect Username or Password!';
+              this.ShowAlert(true);
+              this.timeout(false);
+            } else {
+              this.loginAuth.setUserLoggedIn(true);
+              this.loginAuth.setValues(
+                res['Adminid'],
+                res['Email'],
+                'superadmin',
+                res['Adminname']
+              );
+              document
+                .getElementsByTagName('body')[0]
+                .classList.add('skin-blue');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.add('sidebar-mini');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.add('fixed');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.remove('lockscreen');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.remove('hold-transition');
+              this.router.navigate(['dashboard']);
+            }
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+
     }
   }
 
