@@ -169,6 +169,7 @@ export class SuperAdminService {
         res => {
           return res.json();
         },
+        // tslint:disable-next-line:no-shadowed-variable
         error => {
           console.log(error);
         }

@@ -18,17 +18,18 @@ import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ProductComponent } from './product/product.component';
-
 import { ShopauthGuard } from './shopauth.guard';
 import { ProductDataComponent } from './product-data/product-data.component';
 import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
+import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
+  { path: 'shopdashboard', canActivate: [ShopauthGuard], component: ShopDashboardComponent },
   // { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', canActivate: [AuthGuard] , component: WebInfoComponent},
   { path: 'shops', canActivate: [AuthGuard], component: ShopsComponent},
