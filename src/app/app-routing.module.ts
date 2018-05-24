@@ -17,6 +17,7 @@ import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'category', component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
+  { path: 'product', component: ProductComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 

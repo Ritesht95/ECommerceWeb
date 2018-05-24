@@ -18,19 +18,40 @@
   </section>
 
   <section class="content">
-    <div class="box box-primary">
-      <form role="form" #frm1="ngForm">
-        <table class="table" style="border: 0;">
-          <tr>
-            <td class="col-md-2">
-              <div class="container" style=" width:36%;">
-                <div style="display: flex; justify-content: center;">
-                  <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+
+    <div class="col-md-2">
+      <div class="box box-primary">
+        <div class="container" style=" width:100%;">
+          <div style="display: flex; justify-content: center;">
+            <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-10">
+      <div class="box box-primary">
+        <form role="form" #frm="ngForm">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="txtProDetail">Product Detail
+                  </label>
                 </div>
-              </div>
-            </td>
-            <td class="col-md-5">
-              <div>
+                <div class="form-group">
+                  <label for="txtProName">Product Name</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" ngModel id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Product Name"
+                    pattern="[a-zA-Z]+" required>
+                </div>
+                <div class="form-group">
+                  <label for="txtDescription">Description
+                    <span class="text-danger">*</span>
+                  </label>
+                  <textarea class="form-control" ngModel id="txtDescription" name="txtDescription" #txtDescription="ngModel" rows="2" placeholder="Description"
+                    required></textarea>
+                </div>
                 <div class="form-group">
                   <label for="txtlogo">Logo
                     <span class="text-danger">*</span>
@@ -42,7 +63,39 @@
                   <span class="text-danger">*</span>
                   <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
                 </div>
-                <div *ngIf=" imageWebInfo.touched || txtlogoalt.touched">
+                <div class="form-group">
+                  <label for="txtUnit">Unit</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" ngModel id="txtUnit" name="txtUnit" #txtUnit="ngModel" placeholder="Unit" pattern="[a-zA-Z]+"
+                    required>
+                </div>
+                <div class="form-group">
+                  <label for="txtPrice">Price</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" ngModel id="txtPrice" name="txtPrice" #txtPrice="ngModel" placeholder="Price" pattern="[0-9]+"
+                    required>
+                </div>
+                <div class="form-group">
+                  <label for="txtMiniStock">Minimun Stock</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" ngModel id="txtMiniStock" name="txtMiniStock" #txtMiniStock="ngModel" placeholder="Minimun Stock"
+                    pattern="[0-9]+" required>
+                </div>
+                <div class="form-group">
+                  <label for="txtCurStock">Current Stock</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" ngModel id="txtCurStock" name="txtCurStock" #txtCurStock="ngModel" placeholder="Current Stock"
+                    pattern="[0-9]+" required>
+                </div>
+                <button type="reset" class="btn btn-primary">Cancel</button> &nbsp;
+                <button type="submit" class="btn btn-primary" [disabled]="frm.invalid">Submit</button>
+                <div *ngIf="txtProName.touched || txtDescription.touched || txtUnit.touched || txtPrice.touched || txtMiniStock.touched || txtCurStock.touched">
+                  <div *ngIf="txtProName.errors?.required && txtProName.touched">
+                    <span class="text-danger">Product Name is required</span>
+                  </div>
+                  <div *ngIf="txtProName.errors?.pattern && txtProName.touched">
+                    <span class="text-danger">Product Name is Invalid</span>
+                  </div>
                   <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
                     <span class="text-danger">Logo Alternate is required</span>
                   </div>
@@ -52,105 +105,43 @@
                   <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
                     <span class="text-danger">Logo is required</span>
                   </div>
+                  <div *ngIf="txtDescription.errors?.required && txtDescription.touched">
+                    <span class="text-danger">Description required</span>
+                  </div>
+                  <div *ngIf="txtUnit.errors?.required && txtUnit.touched">
+                    <span class="text-danger">Unit is required</span>
+                  </div>
+                  <div *ngIf="txtUnit.errors?.pattern && txtUnit.touched">
+                    <span class="text-danger">Unit is Invalid</span>
+                  </div>
+                  <div *ngIf="txtPrice.errors?.required && txtPrice.touched">
+                    <span class="text-danger">Price is required</span>
+                  </div>
+                  <div *ngIf="txtPrice.errors?.pattern && txtPrice.touched">
+                    <span class="text-danger">Price is Invalid</span>
+                  </div>
+                  <div *ngIf="txtMiniStock.errors?.required && txtMiniStock.touched">
+                    <span class="text-danger">Minimun Stock is required</span>
+                  </div>
+                  <div *ngIf="txtMiniStock.errors?.pattern && txtMiniStock.touched">
+                    <span class="text-danger">Minimum Stock Invalid</span>
+                  </div>
+                  <div *ngIf="txtCurStock.errors?.required && txtCurStock.touched">
+                    <span class="text-danger">Current Stock is required</span>
+                  </div>
+                  <div *ngIf="txtCurStock.errors?.pattern && txtCurStock.touched">
+                    <span class="text-danger">Current Stock Invalid</span>
+                  </div>
                 </div>
               </div>
-            </td>
-            <td class="col-md-5" style="padding-top: 7.5%;">
-              <div>
-                <button class="btn btn-primary" [disabled]="frm1.invalid || flag">Submit</button>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </div>
-
-    <div class="box box-primary">
-      <form role="form" #frm="ngForm">
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="txtProDetail">Product Detail
-                </label>
-              </div>
-              <div class="form-group">
-                <label for="txtProName">Product Name</label>
-                <span class="text-danger">*</span>
-                <input type="text" class="form-control" ngModel id="txtProName" name="txtProName" #txtProName="ngModel"
-                  placeholder="Product Name" pattern="[a-zA-Z]+" required>
-              </div>
-              <div class="form-group">
-                <label for="txtDescription">Description
-                  <span class="text-danger">*</span>
-                </label>
-                <textarea class="form-control" ngModel id="txtDescription" name="txtDescription" #txtDescription="ngModel" rows="2"
-                  placeholder="Description" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="txtUnit">Unit</label>
-                <span class="text-danger">*</span>
-                <input type="text" class="form-control" ngModel id="txtUnit" name="txtUnit" #txtUnit="ngModel"
-                  placeholder="Unit" pattern="[a-zA-Z]+" required>
-              </div>
-              <div class="form-group">
-                <label for="txtPrice">Price</label>
-                <span class="text-danger">*</span>
-                <input type="text" class="form-control" ngModel id="txtPrice" name="txtPrice" #txtPrice="ngModel"
-                  placeholder="Price" pattern="[0-9]+" required>
-              </div>
-              <div class="form-group">
-                <label for="txtMiniStock">Minimun Stock</label>
-                <span class="text-danger">*</span>
-                <input type="text" class="form-control" ngModel id="txtMiniStock" name="txtMiniStock" #txtMiniStock="ngModel"
-                  placeholder="Minimun Stock" pattern="[0-9]+" required>
-              </div>
-              <div class="form-group">
-                <label for="txtCurStock">Current Stock</label>
-                <span class="text-danger">*</span>
-                <input type="text" class="form-control" ngModel id="txtCurStock" name="txtCurStock" #txtCurStock="ngModel"
-                  placeholder="Current Stock" pattern="[0-9]+" required>
-              </div>
-              <button type="reset" class="btn btn-primary">Cancel</button> &nbsp;
-            <button type="submit" class="btn btn-primary" [disabled]="frm.invalid">Submit</button>
-            <div *ngIf="txtProName.touched || txtDescription.touched || txtUnit.touched || txtPrice.touched || txtMiniStock.touched || txtCurStock.touched">
-              <div *ngIf="txtProName.errors?.required && txtProName.touched">
-                <span class="text-danger">Product Name is required</span>
-              </div>
-              <div *ngIf="txtProName.errors?.pattern && txtProName.touched">
-                <span class="text-danger">Product Name is Invalid</span>
-              </div>
-              <div *ngIf="txtDescription.errors?.required && txtDescription.touched">
-                <span class="text-danger">Description required</span>
-              </div>
-              <div *ngIf="txtUnit.errors?.required && txtUnit.touched">
-                <span class="text-danger">Unit is required</span>
-              </div>
-              <div *ngIf="txtUnit.errors?.pattern && txtUnit.touched">
-                <span class="text-danger">Unit is Invalid</span>
-              </div>
-              <div *ngIf="txtPrice.errors?.required && txtPrice.touched">
-                <span class="text-danger">Price is required</span>
-              </div>
-              <div *ngIf="txtPrice.errors?.pattern && txtPrice.touched">
-                <span class="text-danger">Price is Invalid</span>
-              </div>
-              <div *ngIf="txtMiniStock.errors?.required && txtMiniStock.touched">
-                <span class="text-danger">Minimun Stock is required</span>
-              </div>
-              <div *ngIf="txtMiniStock.errors?.pattern && txtMiniStock.touched">
-                <span class="text-danger">Minimum Stock Invalid</span>
-              </div>
-              <div *ngIf="txtCurStock.errors?.required && txtCurStock.touched">
-                <span class="text-danger">Current Stock is required</span>
-              </div>
-              <div *ngIf="txtCurStock.errors?.pattern && txtCurStock.touched">
-                <span class="text-danger">Current Stock Invalid</span>
-              </div>
-            </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-</section>
+
+
+
+
+  </section>
+</div>
