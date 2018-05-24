@@ -10,7 +10,11 @@ import { SuperAdminService } from '../services/super-admin.service';
 })
 export class LockscreenComponent implements OnInit {
   loginErrorMsg: string;
-  constructor(private superadminservice: SuperAdminService, private loginAuth: LoginauthService, private router: Router) {
+  constructor(
+    private superadminservice: SuperAdminService,
+    private loginAuth: LoginauthService,
+    private router: Router
+  ) {
     document.getElementsByTagName('body')[0].classList.remove('skin-blue');
     document.getElementsByTagName('body')[0].classList.remove('sidebar-mini');
     document.getElementsByTagName('body')[0].classList.remove('fixed');
@@ -22,45 +26,62 @@ export class LockscreenComponent implements OnInit {
   }
 
   ngOnInit() {
-    localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
-    this.logout();
+    // localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
+    // this.logout();
   }
 
   timeout(val: boolean) {
-    setTimeout( this.ShowAlert, 5000 , val);
+    setTimeout(this.ShowAlert, 5000, val);
   }
 
   ShowAlert(val: boolean) {
     const alertDiv = document.getElementById('alertDiv');
-    alertDiv.style.display = (val) ? 'block' : 'none';
+    alertDiv.style.display = val ? 'block' : 'none';
   }
 
   login(Password: string) {
     if (localStorage.getItem('SleepUsername') === null) {
       this.router.navigate(['login']);
     } else {
-      this.superadminservice.checkLogin(localStorage.getItem('SleepUsername'), Password).subscribe(
-        res => {
-          // Change 0 to False using JSON in below line
-          if (res['key'] === 'false' || res === undefined) {
-            this.loginErrorMsg = 'Incorrect Username or Password!';
-            this.ShowAlert(true);
-            this.timeout(false);
-          } else {
-            this.loginAuth.setUserLoggedIn(true);
-            this.loginAuth.setValues(
-              res['Adminid'],
-              res['Email'],
-              'superadmin',
-              res['Adminname']
-            );
-            this.router.navigate(['dashboard']);
+      this.superadminservice
+        .checkLogin(localStorage.getItem('SleepUsername'), Password)
+        .subscribe(
+          res => {
+            // Change 0 to False using JSON in below line
+            if (res['key'] === 'false' || res === undefined) {
+              this.loginErrorMsg = 'Incorrect Username or Password!';
+              this.ShowAlert(true);
+              this.timeout(false);
+            } else {
+              this.loginAuth.setUserLoggedIn(true);
+              this.loginAuth.setValues(
+                res['Adminid'],
+                res['Email'],
+                'superadmin',
+                res['Adminname']
+              );
+              document
+                .getElementsByTagName('body')[0]
+                .classList.add('skin-blue');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.add('sidebar-mini');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.add('fixed');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.remove('lockscreen');
+              document
+                .getElementsByTagName('body')[0]
+                .classList.remove('hold-transition');
+              this.router.navigate(['dashboard']);
+            }
+          },
+          error => {
+            console.log(error);
           }
-        },
-        error => {
-          console.log(error);
-        }
-      );
+        );
     }
   }
 
