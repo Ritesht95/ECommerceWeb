@@ -75,7 +75,7 @@
                   <span class="text-danger">*</span>
                 </label>
                 <input type="text" class="form-control" [(ngModel)]="webInfo.Name" id="txtWebsiteName" name="txtWebsiteName" #txtWebsiteName="ngModel"
-                  placeholder="Website Name" required pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
+                  placeholder="Website Name" required pattern="[a-zA-Z0-9 ]*">
               </div>
               <div class="form-group">
                 <label for="txttagline">Tag Line</label>
