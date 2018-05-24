@@ -24,35 +24,33 @@ export class ShopauthGuard implements CanActivate {
         localStorage.getItem('sessionShopUserType'),
         localStorage.getItem('sessionShopName')
       );
-      console.log('local login');
       return true;
     } else {
-      console.log(this.loginAuth.getSUserID());
-      return this.loginAuth
-        .getServerLoggedIn(this.loginAuth.getSUserID(), 'seller')
-        .pipe(
-          map(
-            // tslint:disable-next-line:arrow-return-shorthand
-            res => {
-              if (res.json()['key'] === 'true') {
-                this.loginAuth.setValues(
-                  res.json()['ShopID'],
-                  res.json()['Email'],
-                  'seller',
-                  res.json()['ShopName']
-                );
-                console.log('server login true');
-                return true;
-              } else {
-                console.log('server login false');
-                this.router.navigate(['login']);
-                return false;
-              }
-            }
-          )
-        );
-      // this.router.navigate(['login']);
+      // return this.loginAuth
+        // .getServerLoggedIn(this.loginAuth.getSUserID(), 'seller')
+        // .pipe(
+        //   map(
+        //     // tslint:disable-next-line:arrow-return-shorthand
+        //     res => {
+        //       if (res.json()['key'] === 'true') {
+        //         this.loginAuth.setValues(
+        //           res.json()['ShopID'],
+        //           res.json()['Email'],
+        //           'seller',
+        //           res.json()['ShopName']
+        //         );
+        //         console.log('server login true');
+        //         return true;
+        //       } else {
+        //         console.log('server login false');
+        //         this.router.navigate(['login']);
+        //         return false;
+        //       }
+        //     }
+        //   )
+        // );
+      this.router.navigate(['login']);
+      return false;
     }
-    // return this.loginAuth.getUserLoggedIn();
   }
 }

@@ -52,7 +52,7 @@ import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.componen
     CategoryComponent,
     IntialSetupComponent,
     IntialSetupComponent,
-    ProductComponent
+    ProductComponent,
     ShopDashboardComponent
   ],
   imports: [

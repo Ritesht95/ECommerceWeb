@@ -20,142 +20,134 @@
   <section class="content">
     <div class="row">
       <div class="container col-md-12">
-          <div class="box box-primary">
-            <div class="box-body">
-              <div class="row">
-                <form role="form" #frm="ngForm">
+        <div class="box box-primary">
+          <div class="box-body">
+            <div class="row">
+              <form role="form" #frm="ngForm">
                 <div>
                   <input type="hidden" ngModel id="txtId" name="txtId" #txtId="ngModel">
                   <div class="form-group col-md-12 ">
                     <table>
-                    <tr>
-                    <td class="col-md-3">
-                    <div class="container" style=" width:36%;">
-                          <div style="display: flex; justify-content: center;">
-                            <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+                      <tr>
+                        <td class="col-md-3">
+                          <div class="container" style=" width:36%;">
+                            <div style="display: flex; justify-content: center;">
+                              <img id="profileImageIn" src="../../assets/img/avatar.png" style="height:130px; width:130px;" class="img-circle image">
+                            </div>
                           </div>
-                    </div>
-                    </td>
-                    <td class="col-md-7">
-                    <div class="form-group">
-                      <label for="txtlogo">Logo
-                        <span class="text-danger">*</span>
-                      </label>
-                      <input type="file" id="imageWebInfo" (change)="upload($event)" name="imageWebInfo" required ngModel #imageWebInfo="ngModel">
-                    </div>
-                    <div class="form-group">
-                      <label for="txtlogoalt">Logo Alternate</label>
-                      <span class="text-danger">*</span>
-                       <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
-                    </div>
-                    <div class="form-group">
-                      <label for="txtCatName">Category Name</label>
-                      <span class="text-danger">*</span>
-                      <input type="text" class="form-control" ngModel id="txtCatName" name="txtCatName" #txtCatName="ngModel" placeholder="Category Name" pattern="[a-zA-Z]+" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="txtCatDis">Description</label>
-                      <span class="text-danger">*</span>
-                      <textarea class="form-control" ngModel id="txtDis" name="txtDis" #txtDis="ngModel" rows="2" placeholder="Category Description" required></textarea>
-                    </div>
-                    <div class="col-md-offset-8" >
-                        <button class="btn btn-primary" type="reset">Cancel</button> &nbsp;
-                        <button class="btn btn-primary" type="submit" [disabled]="frm.invalid">Submit</button>
-                    </div>
-                    </td>
-                    </tr>
+                        </td>
+                        <td class="col-md-7">
+                          <div class="form-group">
+                            <label for="txtlogo">Logo
+                              <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" id="imageWebInfo" (change)="upload($event)" name="imageWebInfo" required ngModel #imageWebInfo="ngModel">
+                          </div>
+                          <div class="form-group">
+                            <label for="txtlogoalt">Logo Alternate</label>
+                            <span class="text-danger">*</span>
+                            <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+                          </div>
+                          <div class="form-group">
+                            <label for="txtCatName">Category Name</label>
+                            <span class="text-danger">*</span>
+                            <input type="text" class="form-control" ngModel id="txtCatName" name="txtCatName" #txtCatName="ngModel" placeholder="Category Name"
+                              pattern="[a-zA-Z]+" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="txtCatDis">Description</label>
+                            <span class="text-danger">*</span>
+                            <textarea class="form-control" ngModel id="txtDis" name="txtDis" #txtDis="ngModel" rows="2" placeholder="Category Description"
+                              required></textarea>
+                          </div>
+                          <div class="col-md-offset-8">
+                            <button class="btn btn-primary" type="reset">Cancel</button> &nbsp;
+                            <button class="btn btn-primary" type="submit" [disabled]="frm.invalid">Submit</button>
+                          </div>
+                        </td>
+                      </tr>
                     </table>
 
                     <div *ngIf="txtCatName.touched || txtDis.touched || imageWebInfo.touched || txtlogoalt.touched">
-                        <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
-                            <span class="text-danger">Logo Alternate is required</span>
-                          </div>
-                          <div *ngIf="flag && imageWebInfo.touched">
-                            <span class="text-danger">Select .png, .jpg and .jpeg only</span>
-                          </div>
-                          <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
-                            <span class="text-danger">Logo is required</span>
-                          </div>
+                      <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
+                        <span class="text-danger">Logo Alternate is required</span>
+                      </div>
+                      <div *ngIf="flag && imageWebInfo.touched">
+                        <span class="text-danger">Select .png, .jpg and .jpeg only</span>
+                      </div>
+                      <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
+                        <span class="text-danger">Logo is required</span>
+                      </div>
                       <div *ngIf="txtCatName.touched && txtCatName.errors?.required">
-                          <span class="text-danger">Category Name is required</span>
+                        <span class="text-danger">Category Name is required</span>
                       </div>
                       <div *ngIf="txtCatName.touched && txtCatName.errors?.pattern">
-                          <span class="text-danger">Category Name is invalid</span>
+                        <span class="text-danger">Category Name is invalid</span>
                       </div>
                       <div *ngIf="txtDis.errors?.required && txtDis.touched">
-                          <span class="text-danger">Description is required</span>
+                        <span class="text-danger">Description is required</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                </form>
-              </div>
+              </form>
             </div>
           </div>
-
-          <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
           <div class="box box-primary">
             <div class="box-body">
               <div class="row">
                 <form role="form" #frm2="ngForm">
-                <div>
-                  <input type="hidden" ngModel id="txtId" name="txtId" #txtId="ngModel">
-                  <div class="form-group col-sm-12 ">
-                    <h3>
-                      <label for="txtWebsiteName">Properties
-                        <span class="text-danger">*</span>
-                      </label>
-                    </h3>
+                  <div>
+                    <input type="hidden" ngModel id="txtId" name="txtId" #txtId="ngModel">
+                    <div class="form-group col-sm-12 ">
+                      <h3>
+                        <label for="txtWebsiteName">Properties
+                          <span class="text-danger">*</span>
+                        </label>
+                      </h3>
 
-                    <div class="form-group">
-                      <label for="txtProName">Property Name</label>
-                      <span class="text-danger">*</span>
-                      <input type="text" class="form-control" ngModel id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Property Name" required pattern="[a-zA-Z]+">
-                    </div>
-                    <div class="form-group">
-                      <label for="txtProDis">Property Description
+                      <div class="form-group">
+                        <label for="txtProName">Property Name</label>
                         <span class="text-danger">*</span>
-                      </label>
-                      <textarea class="form-control" ngModel id="txtProDis" name="txtProDis" #txtProDis="ngModel" rows="2" placeholder="Property Description" required></textarea>
+                        <input type="text" class="form-control" ngModel id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Property Name"
+                          required pattern="[a-zA-Z]+">
+                      </div>
+                      <div class="form-group">
+                        <label for="txtProDis">Property Description
+                          <span class="text-danger">*</span>
+                        </label>
+                        <textarea class="form-control" ngModel id="txtProDis" name="txtProDis" #txtProDis="ngModel" rows="2" placeholder="Property Description"
+                          required></textarea>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </form>
               </div>
             </div>
           </div>
-        <button class="btn btn-primary" [disabled]="frm2.invalid">Submit</button>
+          <button class="btn btn-primary" [disabled]="frm2.invalid">Submit</button>
         </div>
-
-
         <div class="box col-md-6 ">
-            <div class="container" style="margin-left: -30px;">
-              <div class="col-md-6">
-                  <table datatable class="row-border hover">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Property Name</th>
-                          <th>Property Description</th>
-                          <th>Filter</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                      </tbody>
-                    </table>
-              </div>
+          <div class="container" style="margin-left: -30px;">
+            <div class="col-md-6">
+              <table datatable class="row-border hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Property Name</th>
+                    <th>Property Description</th>
+                    <th>Filter</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
             </div>
           </div>
-
-
+        </div>
       </div>
-
-     <!--  -->
     </div>
-
-
-
-
   </section>
 </div>

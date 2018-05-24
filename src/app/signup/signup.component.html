@@ -15,17 +15,17 @@
               <div class="form-group">
                 <label for="txtShopName" class="control-label sr-only">Shop Name</label>
                 <input type="text" ngModel #txtSName="ngModel" class="form-control" id="txtShopname" name="txtSName" placeholder="Shop Name"
-                  pattern="[a-zA-Z0-9]*" required>
+                  pattern="[a-zA-Z0-9 ]*" required>
               </div>
               <div class="form-group">
                 <label for="txtOwnerName" class="control-label sr-only">Owner Name</label>
                 <input type="text" ngModel #txtOName="ngModel" class="form-control" id="txtOwnerName" name="txtOName" placeholder="Owner Name"
-                  pattern="[a-zA-Z0-9]*" required>
+                  pattern="[a-zA-Z0-9 ]*" required>
               </div>
               <div class="form-group">
                 <label for="txtShopType" class="control-label sr-only">Shop Type</label>
                 <input type="text" ngModel #txtSType="ngModel" class="form-control" id="txtShopType" name="txtSType" placeholder="Shop Type"
-                  pattern="[a-zA-Z]*" required>
+                  pattern="[a-zA-Z ]*" required>
               </div>
               <div class="form-group">
                 <label for="txt_Email" class="control-label sr-only">Email</label>
@@ -37,7 +37,7 @@
                 <input type="text" ngModel #txtPhone="ngModel" class="form-control" id="txtPhoneNo" name="txtPhone" placeholder="Phone no"
                   pattern="^\d{10}$" required>
               </div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm.invalid">Sign up</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm.invalid" (click)="signUp(txtSName.value,txtSType.value,txtPhone.value,txtEmail.value,txtOName.value);" >Sign up</button>
               <!--   || txtSType.touched || txtSName.touched || txtOName.touched  -->
               <div *ngIf="txtEmail.touched || txtSType.touched || txtSName.touched || txtOName.touched || txtPhone.touched">
                 <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
