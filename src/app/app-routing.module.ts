@@ -18,6 +18,7 @@ import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ProductComponent } from './product/product.component';
+
 import { ShopauthGuard } from './shopauth.guard';
 import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
+  { path: 'product', component: ProductComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
