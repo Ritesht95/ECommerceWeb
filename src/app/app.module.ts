@@ -26,6 +26,8 @@ import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
+import { ProductComponent } from './product/product.component';
+import { ShopauthGuard } from './shopauth.guard';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { IntialSetupComponent } from './intial-setup/intial-setup.component';
     LockscreenComponent,
     ShopDetailComponent,
     CategoryComponent,
-    IntialSetupComponent
+    IntialSetupComponent,
+    IntialSetupComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,7 @@ import { IntialSetupComponent } from './intial-setup/intial-setup.component';
     AppRoutingModule,
     DataTablesModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/' }, LoginauthService, AuthGuard],
+  providers: [{provide: APP_BASE_HREF, useValue: '/' }, LoginauthService, AuthGuard, ShopauthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
