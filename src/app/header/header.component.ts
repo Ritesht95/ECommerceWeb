@@ -2,9 +2,16 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { LoginauthService } from '../loginauth.service';
 import { SuperAdmin } from '../classes/super-admin';
 import { SuperAdminService } from '../services/super-admin.service';
-import { Router } from '@angular/router';
+import {
+  Router,
+  ActivatedRoute,
+  RouterStateSnapshot,
+  ActivatedRouteSnapshot
+} from '@angular/router';
 import { environment } from '../../environments/environment';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { ShopauthGuard } from '../shopauth.guard';
+import { AuthGuard } from '../auth.guard';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +27,7 @@ export class HeaderComponent implements OnInit {
   flag: boolean;
   errorMessage: string;
   successMessage: string;
+  userType: boolean;
 
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
@@ -96,6 +104,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.loginAuth.getSUserLoggedIn()) {
+      this.userType = true;
+    } else {
+      this.userType = false;
+    }
     this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
       // tslint:disable-next-line:no-shadowed-variable
       res => {
@@ -157,24 +170,98 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  Sleep() {
+
+    if (this.loginAuth.getUserType() === 'seller') {
+      localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
+      localStorage.setItem('SleepType', 'seller');
+      localStorage.removeItem('sessionShopUserID');
+      localStorage.removeItem('sessionShopName');
+      localStorage.removeItem('sessionShopEmail');
+      localStorage.removeItem('sessionShopUserType');
+      localStorage.setItem('SloggedIn', 'false');
+      this.loginAuth.setSUserLoggedIn(false);
+      this.router.navigate(['lockscreen']);
+    } else {
+      localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
+      localStorage.setItem('SleepType', 'superadmin');
+      localStorage.removeItem('sessionUserID');
+      localStorage.removeItem('sessionName');
+      localStorage.removeItem('sessionEmail');
+      localStorage.removeItem('sessionUserType');
+      localStorage.setItem('loggedIn', 'false');
+      this.loginAuth.setUserLoggedIn(false);
+      this.router.navigate(['lockscreen']);
+    }
+
+    // this.loginAuth
+    //   .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
+    //   .subscribe(
+    //     res => {
+    //       if (res.json()['key'] === 'true') {
+    //         localStorage.removeItem('sessionUserID');
+    //         localStorage.removeItem('sessionName');
+    //         localStorage.removeItem('sessionEmail');
+    //         localStorage.removeItem('sessionUserType');
+    //         localStorage.setItem('loggedIn', 'false');
+    //         this.loginAuth.setUserLoggedIn(false);
+    //         this.router.navigate(['lockscreen']);
+    //       }
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
+  }
+
   logout() {
-    this.loginAuth
-      .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
-      .subscribe(
-        res => {
-          if (res.json()['key'] === 'true') {
-            localStorage.removeItem('sessionUserID');
-            localStorage.removeItem('sessionName');
-            localStorage.removeItem('sessionEmail');
-            localStorage.removeItem('sessionUserType');
-            localStorage.setItem('loggedIn', 'false');
-            this.loginAuth.setUserLoggedIn(false);
-            this.router.navigate(['login']);
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    if (this.loginAuth.getUserType() === 'seller') {
+      localStorage.removeItem('sessionUserID');
+      localStorage.removeItem('sessionName');
+      localStorage.removeItem('sessionEmail');
+      localStorage.removeItem('sessionUserType');
+      localStorage.setItem('loggedIn', 'false');
+      this.loginAuth.setUserLoggedIn(false);
+      this.router.navigate(['login']);
+    } else {
+      localStorage.removeItem('sessionShopUserID');
+      localStorage.removeItem('sessionShopName');
+      localStorage.removeItem('sessionShopEmail');
+      localStorage.removeItem('sessionShopUserType');
+      localStorage.setItem('SloggedIn', 'false');
+      this.loginAuth.setSUserLoggedIn(false);
+      this.router.navigate(['login']);
+    }
+
+    // this.loginAuth
+    //   .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
+    //   .subscribe(
+    //     res => {
+    //       if (this.loginAuth.getUserType() === 'seller') {
+    //         if (res.json()['key'] === 'true') {
+    //           localStorage.removeItem('sessionUserID');
+    //           localStorage.removeItem('sessionName');
+    //           localStorage.removeItem('sessionEmail');
+    //           localStorage.removeItem('sessionUserType');
+    //           localStorage.setItem('loggedIn', 'false');
+    //           this.loginAuth.setUserLoggedIn(false);
+    //           this.router.navigate(['login']);
+    //         }
+    //       } else {
+    //         if (res.json()['key'] === 'true') {
+    //           localStorage.removeItem('sessionShopUserID');
+    //           localStorage.removeItem('sessionShopName');
+    //           localStorage.removeItem('sessionShopEmail');
+    //           localStorage.removeItem('sessionShopUserType');
+    //           localStorage.setItem('SloggedIn', 'false');
+    //           this.loginAuth.setSUserLoggedIn(false);
+    //           this.router.navigate(['login']);
+    //         }
+    //       }
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
   }
 }

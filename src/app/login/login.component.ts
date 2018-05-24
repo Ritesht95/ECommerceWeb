@@ -25,16 +25,14 @@ export class LoginComponent {
   errormessage: string;
   loginErrorMsg = null;
 
-
   timeout(val: boolean) {
-    setTimeout( this.ShowAlert, 5000 , val);
+    setTimeout(this.ShowAlert, 5000, val);
   }
 
   ShowAlert(val: boolean) {
     const alertDiv = document.getElementById('alertDiv');
-    alertDiv.style.display = (val) ? 'block' : 'none';
+    alertDiv.style.display = val ? 'block' : 'none';
   }
-  // @Output() check_login_event = new EventEmitter();
 
   constructor(
     private superadminservice: SuperAdminService,
@@ -68,14 +66,25 @@ export class LoginComponent {
         }
       );
     } else {
-      this.sellerservice.checkLogin(Email, Password).subscribe(
-        res => {
-          console.log(res);
+      this.sellerservice.checkLogin(Email, Password).subscribe(res => {
+        if (res['key'] === 'false' || res === undefined) {
+          this.loginErrorMsg = 'Incorrect Username or Password!';
+          this.ShowAlert(true);
+          this.timeout(false);
+        } else {
+          this.loginAuth.setSUserLoggedIn(true);
+          console.log(res['Email']);
+          this.loginAuth.setValues(
+            res['ShopID'],
+            res['Email'],
+            'seller',
+            res['ShopName']
+          );
+          this.router.navigate(['shopdashboard']);
         }
-      );
+      });
     }
   }
-
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {}
 }

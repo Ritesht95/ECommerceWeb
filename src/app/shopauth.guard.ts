@@ -8,45 +8,41 @@ import {
 import { Observable } from 'rxjs';
 import { LoginauthService } from './loginauth.service';
 import { map } from 'rxjs/operators';
-import { SuperAdminService } from './services/super-admin.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(
-    private loginAuth: LoginauthService,
-    private router: Router,
-    private suservice: SuperAdminService
-  ) {}
+export class ShopauthGuard implements CanActivate {
+  constructor(private loginAuth: LoginauthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.loginAuth.getUserLoggedIn()) {
+    if (this.loginAuth.getSUserLoggedIn()) {
       this.loginAuth.setValues(
-        +localStorage.getItem('sessionUserID'),
-        localStorage.getItem('sessionEmail'),
-        localStorage.getItem('sessionUserType'),
-        localStorage.getItem('sessionName'),
+        +localStorage.getItem('sessionShopUserID'),
+        localStorage.getItem('sessionShopEmail'),
+        localStorage.getItem('sessionShopUserType'),
+        localStorage.getItem('sessionShopName')
       );
       return true;
     } else {
       // return this.loginAuth
-        // .getServerLoggedIn(this.loginAuth.getEmail(), 'superadmin')
+        // .getServerLoggedIn(this.loginAuth.getSUserID(), 'seller')
         // .pipe(
         //   map(
         //     // tslint:disable-next-line:arrow-return-shorthand
         //     res => {
         //       if (res.json()['key'] === 'true') {
         //         this.loginAuth.setValues(
-        //           res.json()['Adminid'],
+        //           res.json()['ShopID'],
         //           res.json()['Email'],
-        //           'superadmin',
-        //           res.json()['Adminname']
+        //           'seller',
+        //           res.json()['ShopName']
         //         );
-
+        //         console.log('server login true');
         //         return true;
         //       } else {
+        //         console.log('server login false');
         //         this.router.navigate(['login']);
         //         return false;
         //       }
