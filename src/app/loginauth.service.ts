@@ -42,7 +42,7 @@ export class LoginauthService {
 
   setUserLoggedIn(value: boolean) {
     if (value) {
-      this.IsSUserLoggedIn = false ;
+      this.IsSUserLoggedIn = false;
     }
     this.IsUserLoggedIn = value;
     localStorage.setItem('loggedIn', value.toString());
@@ -127,14 +127,17 @@ export class LoginauthService {
   }
 
   getSName() {
+    this.SName = localStorage.getItem('sessionShopName');
     return this.SName;
   }
 
   getSUserID() {
+    this.SUserID = localStorage.getItem('sessionShopUserID');
     return this.SUserID;
   }
 
   getSEmail() {
+    this.SEmail = localStorage.getItem('sessionShopEmail');
     return this.SEmail;
   }
 }

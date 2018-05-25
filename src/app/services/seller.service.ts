@@ -110,4 +110,56 @@ export class SellerService {
         .pipe(map(res => res.json()))
     );
   }
+
+  addCategory(formData: FormData) {
+    const endpoint = environment.apiURL + 'Category/CategoryImage.php';
+    return this._http.post(endpoint, formData).pipe(
+      map(
+        res => {
+          return res.json();
+        },
+        // tslint:disable-next-line:no-shadowed-variable
+        error => {
+          console.log(error);
+        }
+      )
+    );
+  }
+
+  getCategory(CategoryID: string) {
+    return this._http
+      .get(environment.apiURL + 'Category/SingleCategoryData.php?id=' + CategoryID)
+      .pipe(map(res => res.json()));
+  }
+
+  getAllCategories(ShopID: string) {
+    return this._http
+      .get(environment.apiURL + 'Category/CategoryData.php?id=' + ShopID)
+      .pipe(map(res => res.json()));
+  }
+
+  addProperties(CategoryID: number, Properties: any) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { CategoryID: CategoryID, Properties: Properties };
+
+    return (
+      this._http
+        .post(
+          environment.apiURL + 'Category/AddProperties.php',
+          data,
+          options
+        )
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
+
+  getPropertiesforCategory(CategoryID: string) {
+    return this._http
+      .get(environment.apiURL + 'Category/CategoryPropertyData.php?id=' + CategoryID)
+      .pipe(map(res => res.json()));
+  }
 }
