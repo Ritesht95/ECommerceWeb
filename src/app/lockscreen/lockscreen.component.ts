@@ -131,22 +131,22 @@ export class LockscreenComponent implements OnInit {
   }
 
   logout() {
-    this.loginAuth
-      .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
-      .subscribe(
-        res => {
-          if (res.json()['key'] === 'true') {
-            localStorage.removeItem('sessionUserID');
-            localStorage.removeItem('sessionName');
-            localStorage.removeItem('sessionEmail');
-            localStorage.removeItem('sessionUserType');
-            localStorage.setItem('loggedIn', 'false');
-            this.loginAuth.setUserLoggedIn(false);
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    // this.loginAuth
+    //   .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
+    //   .subscribe(
+    //     res => {
+    //       if (res.json()['key'] === 'true') {
+    //         localStorage.removeItem('sessionUserID');
+    //         localStorage.removeItem('sessionName');
+    //         localStorage.removeItem('sessionEmail');
+    //         localStorage.removeItem('sessionUserType');
+    //         localStorage.setItem('loggedIn', 'false');
+    //         this.loginAuth.setUserLoggedIn(false);
+    //       }
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
   }
 }
