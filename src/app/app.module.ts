@@ -32,6 +32,8 @@ import { ProductComponent } from './product/product.component';
 import { ProductDataComponent } from './product-data/product-data.component';
 import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
+import { TestComponent } from './test/test.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { ShopProfileComponent } from './shop-profile/shop-profile.component';
     ShopDashboardComponent,
     ProductDataComponent,
     CategoryDataComponent,
-    ShopProfileComponent
+    ShopProfileComponent,
+    TestComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

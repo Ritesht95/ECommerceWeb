@@ -1,0 +1,21 @@
+.wrapper {
+  background-color: #F3F5F8;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 15px;
+  color: #676a6d; }
+
+.auth-box .right{
+  background-image: url('../../assets/img/ECommerce-BG.png') !important;
+}
+
+.overlay{
+  opacity: 0.8;
+}
+
+.left-side{
+  background-color: transparent;
+}
+
+a{
+  text-decoration: none;
+}
