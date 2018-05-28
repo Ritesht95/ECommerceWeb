@@ -23,6 +23,7 @@ import { ProductDataComponent } from './product-data/product-data.component';
 import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
 import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'productData', canActivate: [ShopauthGuard], component: ProductDataComponent },
   { path: 'categoryData', canActivate: [ShopauthGuard], component: CategoryDataComponent},
   { path: 'shopProfile', canActivate: [ShopauthGuard], component: ShopProfileComponent},
+  { path: 'contactUs', component: ContactComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
