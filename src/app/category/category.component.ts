@@ -97,6 +97,7 @@ export class CategoryComponent implements OnInit {
       if (res['key'] === 'true') {
         this.categoryID = res['id'];
         document.getElementById('categoryFormDiv').style.display = 'none';
+        document.getElementById('txtPId').value = 'new';
         console.log('Category Added Successfully');
       } else {
         console.log('Cannot add category');
@@ -105,16 +106,20 @@ export class CategoryComponent implements OnInit {
   }
 
   addProperties(ID: string, PropertyName: string, PropertyDesc: string, Filterable: boolean, ColumnOrder: number) {
+    
     if (this.categoryID !== 0) {
-      if (ID === '') {
+      if(ID === undefined){
         ID = 'new';
       }
+        
+        console.log(ID);
       // tslint:disable-next-line:max-line-length
       this.propertiesData.push({ ID: ID, PropertyName : PropertyName, PropertyDesc : PropertyDesc, IsFilterable: Filterable, ColumnOrder: ColumnOrder });
       this.propertyData.ID = 'new';
       this.propertyData.PropertyName = '';
       this.propertyData.PropertyDesc = '';
       this.propertyData.IsFilterable = false;
+      console.log(this.propertiesData);
     } else {
       console.log('first Add category to add properties to it.');
     }
