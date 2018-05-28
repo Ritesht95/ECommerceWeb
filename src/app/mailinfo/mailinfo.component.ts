@@ -53,12 +53,12 @@ export class MailinfoComponent implements OnInit {
         this.loginErrorMsg = 'Mail Settings updated Successfully.';
         this.ShowAlert(true);
         this.timeout(false);
-        document.getElementById('txtPassword').value = '';
+        (<HTMLInputElement>document.getElementById('txtPassword')).value = '';
       } else {
         this.loginErrorMsg = 'Oops! Mail Settings could not be updated!';
         this.ShowAlertD(true);
         this.timeoutD(false);
-        document.getElementById('txtPassword').value = '';
+        (<HTMLInputElement>document.getElementById('txtPassword')).value = '';
       }
     });
   }

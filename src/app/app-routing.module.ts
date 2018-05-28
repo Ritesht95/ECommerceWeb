@@ -45,10 +45,10 @@ const routes: Routes = [
   { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
-  { path: 'product', component: ProductComponent },
-  { path: 'ProductData', component: ProductDataComponent },
-  { path: 'categoryData', component: CategoryDataComponent},
-  { path: 'shopProfile', component: ShopProfileComponent},
+  { path: 'product', canActivate: [ShopauthGuard], component: ProductComponent },
+  { path: 'productData', canActivate: [ShopauthGuard], component: ProductDataComponent },
+  { path: 'categoryData', canActivate: [ShopauthGuard], component: CategoryDataComponent},
+  { path: 'shopProfile', canActivate: [ShopauthGuard], component: ShopProfileComponent},
   { path: 'contactUs', component: ContactComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
