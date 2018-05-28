@@ -17,23 +17,94 @@
   </section>
 
   <section class="content">
-      <div class="box box-primary">
-        <div class="box-body">
-          <table datatable class="row-border hover">
-            <thead>
-              <tr>
-                <th>Product Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Minimum Stock</th>
-                <th>Current Stock</th>
-                <th>Is Active?</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+    <div class="box box-primary">
+      <div class="box-body">
+        <table datatable class="row-border hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Minimum Stock</th>
+              <th>Current Stock</th>
+              <th>Is Active?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productsData">
+              <td>
+                <button (click)="getSingleProduct(product.ProductID);" data-toggle="modal" data-target="#productDetailsModal" class="transbtn">
+                  <span class="fa fa-info"></span>
+                </button>
+              </td>
+              <td>{{product.ProductName}}</td>
+              <td>{{product.Price}}</td>
+              <td>{{product.MinStock}}</td>
+              <td>{{product.CurrentStock}}</td>
+              <td>{{product.IsActive}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <h1 class="modalTitle" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
+            <small>({{productSingleData.CategoryName}})</small>
+          </h1>
+        </div>
+        <div class="row text-center">
+          <span *ngFor="let image of productSingleData.image">
+            <img style="margin: 10px;" height="100" width="100" class="img-rounded img-bordered" src="{{env}}Assets/ProductImages/{{image}}">
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div>
+                <label class="labelTitle">Description: </label>
+              </div>
+              <div>
+                <span class="labelValue">{{productSingleData.ProductDesc}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="labelTitle">Price:</label>
+              <span class="labelValue">{{productSingleData.Price}}</span>
+            </div>
+            <div class="form-group">
+              <label class="labelTitle">Unit:</label>
+              <span class="labelValue">{{productSingleData.Unit}}</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="labelTitle">Minimum Stock:</label>
+              <span class="labelValue">{{productSingleData.MinStock}}</span>
+            </div>
+            <div class="form-group">
+              <label class="labelTitle">Current Stock:</label>
+              <span class="labelValue">{{productSingleData.CurrentStock}}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 </div>
