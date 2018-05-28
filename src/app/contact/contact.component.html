@@ -1,0 +1,63 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-home"></i> Home
+        </a>
+      </li>
+      <li class="active">Contact Us</li>
+    </ol>
+  </section>
+
+  <section class="content" style="padding: inherit;">
+
+    <div class="box box-primary">
+      <div class="container">
+        <div class="row">
+          <div style="text-align: center;">
+            <font size="6" color="#357ca5">Contact Us</font>
+          </div>
+          <form role="form" #frm="ngForm">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="txtName">Name</label>
+                <input type="text" class="form-control" ngModel id="txtName" name="txtName" #txtName="ngModel" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label for="txtEmail">Email</label>
+                <input type="text" class="form-control" ngModel id="txtEmail" name="txtEmail" #txtEmail="ngModel" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="txtMsg">Message</label>
+                <textarea type="text" class="form-control" ngModel id="txtMsg" name="txtMsg" #txtMsg="ngModel" placeholder="Message" rows="2"></textarea>
+              </div>
+              <button class="btn btn-primary" [disabled]="frm.invalid">Submit</button> &nbsp;
+              <button class="btn btn-primary" [disabled]="frm.invalid">Submit</button>
+            </div>
+            <div class="col-md-6">
+              <div style="text-align: center;">
+                <i class="fas fa-map-marker fa-3x"></i>
+                <h4>a-098,xyz socity</h4>
+                <h6>surat</h6>
+              </div>
+              <div style="text-align: center;">
+                <i class="fas fa-phone fa-3x"></i>
+                <h4>1234567890</h4>
+              </div>
+              <div style="text-align: center;">
+                <i class="fas fa-envelope fa-3x"></i>
+                <h4>amazon@gmail.com</h4>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
