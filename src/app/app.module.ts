@@ -29,9 +29,11 @@ import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ShopauthGuard } from './shopauth.guard';
 import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 import { ProductDataComponent } from './product-data/product-data.component';
+import { ProductComponent } from './product/product.component';
 import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
 import { ContactComponent } from './contact/contact.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +62,8 @@ import { ContactComponent } from './contact/contact.component';
     ProductDataComponent,
     CategoryDataComponent,
     ShopProfileComponent,
-    TestComponent,
-    ContactComponent
+    ContactComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
