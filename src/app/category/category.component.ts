@@ -19,7 +19,15 @@ export class CategoryComponent implements OnInit {
   categoryID = 0;
   updateID = 'new';
   public propertyData: any = '';
-  public propertiesData = Array<{ ID: string, PropertyName: string, PropertyDesc: string, IsFilterable: boolean, ColumnOrder: number }>();
+  errorMessage: string;
+  successMessage: string;
+  public propertiesData = Array<{
+    ID: string;
+    PropertyName: string;
+    PropertyDesc: string;
+    IsFilterable: boolean;
+    ColumnOrder: number;
+  }>();
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -27,8 +35,6 @@ export class CategoryComponent implements OnInit {
     private sellerservice: SellerService,
     private loginAuth: LoginauthService
   ) {}
-
-
 
   ngOnInit() {
     this.actRoute.queryParams.subscribe(params => {
@@ -43,16 +49,42 @@ export class CategoryComponent implements OnInit {
           } else {
             this.categoryData = res;
             this.categoryID = res.CategoryID;
-             this.sellerservice.getPropertiesforCategory(this.categoryData.CategoryID).subscribe(
-              res1 => {
-                console.log(res);
+            // tslint:disable-next-line:max-line-length
+            document
+              .getElementById('categoryLogoImg')
+              .setAttribute(
+                'src',
+                environment.apiURL +
+                  'Assets/CategoryImages/' +
+                  res.CategoryImage
+              );
+            this.sellerservice
+              .getPropertiesforCategory(this.categoryData.CategoryID)
+              .subscribe(res1 => {
                 this.propertiesData = res1['records'];
-              }
-             );
+              });
           }
         });
       }
     });
+  }
+
+  timeout(val: boolean) {
+    setTimeout(this.ShowAlert, 5000, val);
+  }
+
+  ShowAlert(val: boolean) {
+    const alertDiv = document.getElementById('alertDiv');
+    alertDiv.style.display = val ? 'block' : 'none';
+  }
+
+  timeoutS(val: boolean) {
+    setTimeout(this.ShowAlertS, 2000, val);
+  }
+
+  ShowAlertS(val: boolean) {
+    const alertDiv = document.getElementById('alertDivS');
+    alertDiv.style.display = val ? 'block' : 'none';
   }
 
   upload(event: any) {
@@ -87,58 +119,96 @@ export class CategoryComponent implements OnInit {
     Logo: string,
     LogoAlt: string
   ) {
-    this.formData.append('CategoryID', this.updateID);
+    if (this.categoryID !== 0) {
+      this.formData.append('CategoryID', this.categoryID.toString());
+    } else {
+      this.formData.append('CategoryID', this.updateID);
+    }
+
     this.formData.append('CategoryName', CategoryName);
     this.formData.append('CategoryDesc', Description);
     this.formData.append('ShopID', this.loginAuth.getSUserID());
     this.formData.append('CategoryImage', Logo);
     this.formData.append('CategoryImageAlt', LogoAlt);
     this.sellerservice.addCategory(this.formData).subscribe(res => {
+      console.log(res);
       if (res['key'] === 'true') {
+        console.log('True');
         this.categoryID = res['id'];
-        document.getElementById('categoryFormDiv').style.display = 'none';
-        document.getElementById('txtPId').value = 'new';
-        console.log('Category Added Successfully');
+        document
+          .getElementById('categoryLogoImg')
+          .setAttribute(
+            'src',
+            environment.apiURL + 'Assets/CategoryImages/' + res.CategoryImage
+          );
+          document.getElementById('txtlogoalt').setAttribute('disabled', 'true');
+          document.getElementById('imageCategory').setAttribute('disabled', 'true');
+          document.getElementById('txtCatName').setAttribute('disabled', 'true');
+          document.getElementById('txtDis').setAttribute('disabled', 'true');
+          document.getElementById('btnCatSubmit').setAttribute('disabled', 'true');
+        this.successMessage = 'Category Added succesfully';
+        this.ShowAlertS(true);
+        this.timeoutS(false);
       } else {
-        console.log('Cannot add category');
+        this.errorMessage = 'Cannot add category! Try Again';
+        this.ShowAlert(true);
+        this.timeout(false);
       }
     });
   }
 
-  addProperties(ID: string, PropertyName: string, PropertyDesc: string, Filterable: boolean, ColumnOrder: number) {
-    
+  addProperties(
+    ID: string,
+    PropertyName: string,
+    PropertyDesc: string,
+    Filterable: boolean,
+    ColumnOrder: number
+  ) {
+    console.log('call' + ID);
     if (this.categoryID !== 0) {
-      if(ID === undefined){
+      if (ID === undefined) {
         ID = 'new';
       }
-        
-        console.log(ID);
+      if (!Filterable) {
+        Filterable = false;
+      }
       // tslint:disable-next-line:max-line-length
-      this.propertiesData.push({ ID: ID, PropertyName : PropertyName, PropertyDesc : PropertyDesc, IsFilterable: Filterable, ColumnOrder: ColumnOrder });
-      this.propertyData.ID = 'new';
-      this.propertyData.PropertyName = '';
-      this.propertyData.PropertyDesc = '';
-      this.propertyData.IsFilterable = false;
-      console.log(this.propertiesData);
+      // this.propertiesData.push({
+      //   ID: ID,
+      //   PropertyName: PropertyName,
+      //   PropertyDesc: PropertyDesc,
+      //   IsFilterable: Filterable,
+      //   ColumnOrder: ColumnOrder
+      // });
+
+      this.sellerservice
+        .addProperty(this.categoryID, {
+          ID: ID,
+          PropertyName: PropertyName,
+          PropertyDesc: PropertyDesc,
+          IsFilterable: Filterable,
+          ColumnOrder: ColumnOrder
+        })
+        .subscribe(res => {
+          this.propertiesData = res['records'];
+          this.propertyData = '';
+        });
     } else {
       console.log('first Add category to add properties to it.');
     }
-  }
-
-  submitAllProperties() {
-    console.log(this.propertiesData);
-    this.sellerservice.addProperties(this.categoryID, this.propertiesData).subscribe(
-      res => {
-        console.log(res);
-      }
-    );
   }
 
   EditProperty(Property: any, ID: string) {
     console.log('new' + this.propertyData.ID + this.propertyData);
     if (this.propertyData.ID !== 'new' && this.propertyData !== '') {
       // tslint:disable-next-line:max-line-length
-      this.addProperties(this.propertyData.ID, this.propertyData.PropertyName, this.propertyData.PropertyDesc, this.propertyData.IsFilterable, this.propertyData.ColumnOrder);
+      // this.addProperties(
+      //   this.propertyData.ID,
+      //   this.propertyData.PropertyName,
+      //   this.propertyData.PropertyDesc,
+      //   this.propertyData.IsFilterable,
+      //   this.propertyData.ColumnOrder
+      // );
     }
     const index = this.propertiesData.indexOf(Property);
     console.log('index: ' + index);
@@ -146,5 +216,13 @@ export class CategoryComponent implements OnInit {
     console.log('d: ' + d.length);
     this.propertyData = Property;
     console.log('this.propertyData: ' + this.propertyData.PropertyName);
+  }
+
+  DeleteProperty(PropertyID: number) {
+    this.sellerservice
+      .deleteProperty(PropertyID, this.categoryID)
+      .subscribe(res => {
+        this.propertiesData = res['records'];
+      });
   }
 }

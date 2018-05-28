@@ -50,9 +50,9 @@ export class HeaderComponent implements OnInit {
   }
 
   clearForm() {
-    document.getElementById('txtNewPassword').value = '';
-    document.getElementById('txtCPassword').value = '';
-    document.getElementById('txtOldPassword').value = '';
+    (<HTMLInputElement>document.getElementById('txtNewPassword')).value = '';
+    (<HTMLInputElement>document.getElementById('txtCPassword')).value = '';
+    (<HTMLInputElement>document.getElementById('txtOldPassword')).value = '';
   }
 
   ShowAlertS(val: boolean) {

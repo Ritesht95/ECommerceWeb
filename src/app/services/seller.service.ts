@@ -115,9 +115,7 @@ export class SellerService {
     const endpoint = environment.apiURL + 'Category/CategoryImage.php';
     return this._http.post(endpoint, formData).pipe(
       map(
-        res => {
-          return res.json();
-        },
+        res => res.json(),
         // tslint:disable-next-line:no-shadowed-variable
         error => {
           console.log(error);
@@ -138,12 +136,12 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
-  addProperties(CategoryID: number, Properties: any) {
+  addProperty(CategoryID: number, Property: any) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = { CategoryID: CategoryID, Properties: Properties };
+    const data: object = { CategoryID: CategoryID, Property: Property };
 
     return (
       this._http
@@ -161,5 +159,24 @@ export class SellerService {
     return this._http
       .get(environment.apiURL + 'Category/CategoryPropertyData.php?id=' + CategoryID)
       .pipe(map(res => res.json()));
+  }
+
+  deleteProperty(PropertyID: number, CatgoryID: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ID: PropertyID, CID: CatgoryID };
+
+    return (
+      this._http
+        .post(
+          environment.apiURL + 'Category/DeleteProperty.php',
+          data,
+          options
+        )
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
   }
 }
