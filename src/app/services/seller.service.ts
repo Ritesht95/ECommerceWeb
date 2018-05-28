@@ -8,23 +8,30 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SellerService {
+  constructor(private _http: Http, private userSession: LoginauthService) {}
 
-  constructor(private _http: Http, private userSession: LoginauthService) { }
-
-  setSignUp(SName: string, SType: string, PhoneNo: string, Email: string, OName: string) {
+  setSignUp(
+    SName: string,
+    SType: string,
+    PhoneNo: string,
+    Email: string,
+    OName: string
+  ) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = { ShopName: SName, ShopType: SType, PhoneNo: PhoneNo, Email: Email, OwnerName: OName };
+    const data: object = {
+      ShopName: SName,
+      ShopType: SType,
+      PhoneNo: PhoneNo,
+      Email: Email,
+      OwnerName: OName
+    };
 
     return (
       this._http
-        .post(
-          environment.apiURL + 'Shop/Signup.php',
-          data,
-          options
-        )
+        .post(environment.apiURL + 'Shop/Signup.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -34,7 +41,7 @@ export class SellerService {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
-    const options = new RequestOptions({ headers : headers });
+    const options = new RequestOptions({ headers: headers });
 
     const data: object = { username: Username, password: Password };
 
@@ -55,11 +62,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(
-          environment.apiURL + 'Shop/ForgetPassword.php',
-          data,
-          options
-        )
+        .post(environment.apiURL + 'Shop/ForgetPassword.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -74,11 +77,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(
-          environment.apiURL + 'Shop/CheckRandomString.php',
-          data,
-          options
-        )
+        .post(environment.apiURL + 'Shop/CheckRandomString.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -101,11 +100,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(
-          environment.apiURL + 'Shop/ResetPassword.php',
-          data,
-          options
-        )
+        .post(environment.apiURL + 'Shop/ResetPassword.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -126,7 +121,9 @@ export class SellerService {
 
   getCategory(CategoryID: string) {
     return this._http
-      .get(environment.apiURL + 'Category/SingleCategoryData.php?id=' + CategoryID)
+      .get(
+        environment.apiURL + 'Category/SingleCategoryData.php?id=' + CategoryID
+      )
       .pipe(map(res => res.json()));
   }
 
@@ -145,11 +142,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(
-          environment.apiURL + 'Category/AddProperties.php',
-          data,
-          options
-        )
+        .post(environment.apiURL + 'Category/AddProperties.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -157,7 +150,11 @@ export class SellerService {
 
   getPropertiesforCategory(CategoryID: string) {
     return this._http
-      .get(environment.apiURL + 'Category/CategoryPropertyData.php?id=' + CategoryID)
+      .get(
+        environment.apiURL +
+          'Category/CategoryPropertyData.php?id=' +
+          CategoryID
+      )
       .pipe(map(res => res.json()));
   }
 
@@ -170,13 +167,21 @@ export class SellerService {
 
     return (
       this._http
-        .post(
-          environment.apiURL + 'Category/DeleteProperty.php',
-          data,
-          options
-        )
+        .post(environment.apiURL + 'Category/DeleteProperty.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
+  }
+
+  getAllProducts(ShopID: number) {
+    return this._http
+      .get(environment.apiURL + 'Product/GetProductData.php?id=' + ShopID)
+      .pipe(map(res => res.json()));
+  }
+
+  getSingleProduct(ProductID: number) {
+    return this._http
+    .get(environment.apiURL + 'Product/SingleProductData.php?id=' + ProductID)
+    .pipe(map(res => res.json()));
   }
 }

@@ -1,3 +1,29 @@
+
+.row {
+  margin: 15px;
+}
+
+.labelTitle {
+  padding: 0px 5px;
+  margin-right: 5px;
+}
+
+.modalTitle {
+  margin-left: 20px;
+}
+
+.labelValue {
+  padding: 0px 5px;
+  margin-right: 5px;
+  width: 100%;
+  overflow: auto;
+}
+
+button.transbtn {
+  background: transparent;
+  border: none;
+}
+
 textarea {
   resize: none;
 }
