@@ -28,7 +28,6 @@ import { CategoryComponent } from './category/category.component';
 import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ShopauthGuard } from './shopauth.guard';
 import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
-import { ProductComponent } from './product/product.component';
 import { ProductDataComponent } from './product-data/product-data.component';
 import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';

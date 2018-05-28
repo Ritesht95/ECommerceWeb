@@ -19,14 +19,16 @@
 
   <section class="content">
     <div class="row">
-      <div class="container col-md-12">
+      <div class="container col-md-12" >
         <div class="box box-primary">
           <div class="box-body">
-            <div class="row">
+            <p> Category added successfully, now added it's properties. </p>
+            <div class="row" id="categoryFormDiv">
               <form role="form" #frm="ngForm">
                 <div>
-                  <input type="hidden" ngModel id="txtId" name="txtId" #txtId="ngModel">
-                  <div class="form-group col-md-12 ">
+                  <input type="hidden" [(ngModel)]="updateID" id="txtId" name="txtId" #txtId="ngModel">
+                  <input type="hidden" [(ngModel)]="categoryData.CategoryImage" id="txthdnImg" name="txthdnImg" #txthdnImg="ngModel">
+                  <div class="form-group col-md-12">
                     <table>
                       <tr>
                         <td class="col-md-3">
@@ -41,41 +43,41 @@
                             <label for="txtlogo">Logo
                               <span class="text-danger">*</span>
                             </label>
-                            <input type="file" id="imageWebInfo" (change)="upload($event)" name="imageWebInfo" required ngModel #imageWebInfo="ngModel">
+                            <input type="file" id="imageCategory" (change)="upload($event)" name="imageCategory" required [(ngModel)]="categoryData.CategoryImage" #imageCategory="ngModel">
                           </div>
                           <div class="form-group">
                             <label for="txtlogoalt">Logo Alternate</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" ngModel required #txtlogoalt="ngModel">
+                            <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" [(ngModel)]="categoryData.CategoryImageAlt" required #txtlogoalt="ngModel">
                           </div>
                           <div class="form-group">
                             <label for="txtCatName">Category Name</label>
                             <span class="text-danger">*</span>
-                            <input type="text" class="form-control" ngModel id="txtCatName" name="txtCatName" #txtCatName="ngModel" placeholder="Category Name"
+                            <input type="text" class="form-control" [(ngModel)]="categoryData.CategoryName" id="txtCatName" name="txtCatName" #txtCatName="ngModel" placeholder="Category Name"
                               pattern="[a-zA-Z]+" required>
                           </div>
                           <div class="form-group">
                             <label for="txtCatDis">Description</label>
                             <span class="text-danger">*</span>
-                            <textarea class="form-control" ngModel id="txtDis" name="txtDis" #txtDis="ngModel" rows="2" placeholder="Category Description"
+                            <textarea class="form-control" [(ngModel)]="categoryData.CategoryDesc" id="txtDis" name="txtDis" #txtDis="ngModel" rows="2" placeholder="Category Description"
                               required></textarea>
                           </div>
                           <div class="col-md-offset-8">
                             <button class="btn btn-primary" type="reset">Cancel</button> &nbsp;
-                            <button class="btn btn-primary" type="submit" [disabled]="frm.invalid">Submit</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="frm.invalid" (click)="AddCategory(txtCatName.value, txtDis.value, txthdnImg.value, txtlogoalt.value);" >Submit</button>
                           </div>
                         </td>
                       </tr>
                     </table>
 
-                    <div *ngIf="txtCatName.touched || txtDis.touched || imageWebInfo.touched || txtlogoalt.touched">
+                    <div *ngIf="txtCatName.touched || txtDis.touched || imageCategory.touched || txtlogoalt.touched">
                       <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
                         <span class="text-danger">Logo Alternate is required</span>
                       </div>
-                      <div *ngIf="flag && imageWebInfo.touched">
+                      <div *ngIf="flag && imageCategory.touched">
                         <span class="text-danger">Select .png, .jpg and .jpeg only</span>
                       </div>
-                      <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
+                      <div *ngIf="imageCategory.errors?.required && imageCategory.touched">
                         <span class="text-danger">Logo is required</span>
                       </div>
                       <div *ngIf="txtCatName.touched && txtCatName.errors?.required">
@@ -102,7 +104,7 @@
               <div class="row">
                 <form role="form" #frm2="ngForm">
                   <div>
-                    <input type="hidden" ngModel id="txtId" name="txtId" #txtId="ngModel">
+                    <input type="hidden" [(ngModel)]="propertyData.ID" id="txtPId" name="txtPId" #txtPId="ngModel">
                     <div class="form-group col-sm-12 ">
                       <h3>
                         <label for="txtWebsiteName">Add Properties
@@ -113,15 +115,26 @@
                       <div class="form-group">
                         <label for="txtProName">Property Name</label>
                         <span class="text-danger">*</span>
-                        <input type="text" class="form-control" ngModel id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Property Name"
+                        <input type="text" class="form-control" [(ngModel)]="propertyData.PropertyName" id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Property Name"
                           required pattern="[a-zA-Z]+">
                       </div>
                       <div class="form-group">
                         <label for="txtProDis">Property Description
                           <span class="text-danger">*</span>
                         </label>
-                        <textarea class="form-control" ngModel id="txtProDis" name="txtProDis" #txtProDis="ngModel" rows="2" placeholder="Property Description"
+                        <textarea class="form-control" [(ngModel)]="propertyData.PropertyDesc" id="txtProDis" name="txtProDis" #txtProDis="ngModel" rows="2" placeholder="Property Description"
                           required></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="txtProDis">Order Number
+                            <span class="text-danger">*</span>
+                          </label>
+                          <input type="number" class="form-control" [(ngModel)]="propertyData.ColumnOrder" id="txtColOrd" name="txtColOrd" #txtColOrd="ngModel">
+                        </div>
+                      <div class="form-group">
+                        <label for="txtProDis">Is Filterable?
+                        </label>
+                        <input type="checkbox" [(ngModel)]="propertyData.IsFilterable" id="chkFilter" name="chkFilter" #chkFilter="ngModel">
                       </div>
                     </div>
                   </div>
@@ -129,7 +142,7 @@
 
               </div>
               <button class="btn btn-primary" type="reset">Cancel</button> &nbsp;
-              <button class="btn btn-primary">Add</button> &nbsp;
+              <button class="btn btn-primary" (click)="addProperties(txtPId.value,txtProName.value, txtProDis.value, chkFilter.value, txtColOrd.value);">Add</button> &nbsp;
 
             </div>
             <div class="col-md-6 ">
@@ -150,11 +163,21 @@
                   </tr>
                 </thead>
                 <tbody>
-
+                  <tr *ngFor="let property of propertiesData">
+                    <td>
+                      <input type="hidden" [(ngModel)]="property.ID" id="txtPID" name="txtPID">
+                      <span (click)="EditProperty(property,property.ID);" class="fa fa-pencil-alt"></span>
+                      <span class="fa fa-trash-o"></span>
+                    </td>
+                    <td>{{ property.PropertyName }}</td>
+                    <td>{{ property.PropertyDesc }}</td>
+                    <td>{{ property.IsFilterable }}</td>
+                    <td>{{ property.ColumnOrder }}</td>
+                  </tr>
                 </tbody>
               </table>
 
-              <button class="btn btn-primary" [disabled]="frm2.invalid">Submit</button>
+              <button class="btn btn-primary" (click)="submitAllProperties();" >Submit</button>
 
             </div>
           </div>
