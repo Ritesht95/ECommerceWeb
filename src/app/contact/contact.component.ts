@@ -33,4 +33,16 @@ export class ContactComponent implements OnInit {
     this.email = this.loginAuth.getEmail();
   }
 
+  sendFeedback(Email: string, Message: string) {
+    this.superadminservice.sendMessage(this.user, Email, Message).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+            console.log('sucessfully send feedback');
+        } else {
+          console.log('error');
+        }
+      }
+    );
+  }
+
 }

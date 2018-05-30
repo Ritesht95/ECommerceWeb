@@ -37,7 +37,7 @@
                 <textarea class="form-control" ngModel id="txtMsg" name="txtMsg" #txtMsg="ngModel" rows="2" placeholder="Message"
                 required></textarea>
               </div>
-              <button class="btn btn-primary" type="submit" [disabled]="frm.invalid">Submit</button> &nbsp;
+              <button class="btn btn-primary" type="submit" [disabled]="frm.invalid" (click)="sendFeedback(txtEmail.value, txtMsg.value)">Submit</button> &nbsp;
               <button class="btn btn-primary" type="reset">Cancel</button>
               <div *ngIf="txtEmail.touched || txtMsg.touched ">
                   <div *ngIf="txtEmail.errors?.required && txtEmail.touched">

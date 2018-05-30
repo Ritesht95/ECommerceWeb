@@ -286,4 +286,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  sendMessage(Name: string, Email: string, Message: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { Name: Name, Email: Email, Feedback: Message, Type: 'seller'};
+    return this._http
+      .post(environment.apiURL + 'feedback/addfeedback.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
 }
