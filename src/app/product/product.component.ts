@@ -18,6 +18,8 @@ export class ProductComponent implements OnInit {
   categoriesData: any = '';
   productID = '';
   singleProductData = '';
+  updateCategoryID = '';
+  env = environment.apiURL;
 
   imgURL: String = '../../assets/img/avatar.png';
   // FileToUpload: File = null;
@@ -79,8 +81,8 @@ export class ProductComponent implements OnInit {
     } else {
       this.sellerservice.getSingleProduct(this.productID).subscribe(
         res => {
-          console.log(res);
           this.singleProductData = res;
+          this.updateCategoryID = res.CategoryID;
         }
       );
     }
@@ -103,8 +105,13 @@ export class ProductComponent implements OnInit {
     ProductID: string
   ) {
     this.formData.append('ProductName', PName);
-    this.formData.append('CategoryID', CategoryID);
-    if (ProductID === '') {
+    if (CategoryID === undefined) {
+      this.formData.append('CategoryID', this.updateCategoryID);
+    } else {
+      this.formData.append('CategoryID', CategoryID);
+    }
+
+    if (ProductID === undefined) {
       this.formData.append('ProductID', 'new');
     } else {
       this.formData.append('ProductID', ProductID);
@@ -121,6 +128,8 @@ export class ProductComponent implements OnInit {
         console.log('Product added. But,images cannot be uploaded.');
       } else if (res['key'] === 'false') {
         console.log('Product cannot be added.');
+      } else if (res['key'] === 'overflow') {
+        console.log('You cannot add more than 4 images for a Product.');
       }
     });
   }

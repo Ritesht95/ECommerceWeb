@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'productData', canActivate: [ShopauthGuard], component: ProductDataComponent },
   { path: 'categoryData', canActivate: [ShopauthGuard], component: CategoryDataComponent},
   { path: 'shopProfile', canActivate: [ShopauthGuard], component: ShopProfileComponent},
-  { path: 'contactUs', component: ContactComponent },
+  { path: 'contactUs', canActivate: [ShopauthGuard], component: ContactComponent },
   { path: 'aboutUs', component: AboutUsComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
