@@ -30,7 +30,25 @@ export class ProductDataComponent implements OnInit {
       res => {
         this.productSingleData = res;
       }
-    )
+    );
+  }
+
+  AddStock(ProductID: string, Stock: number) {
+    this.sellerservice.addStock(ProductID, Stock).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+          console.log('stock updated successfully.');
+          document.getElementById('btnCloseStock').click();
+          this.sellerservice.getAllProducts(this.loginAuth.getSUserID()).subscribe(
+            res1 => {
+              this.productsData = res1['records'];
+            }
+          );
+        } else  {
+          console.log('cannot update stock.');
+        }
+      }
+    );
   }
 
 }
