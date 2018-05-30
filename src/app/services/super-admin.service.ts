@@ -285,4 +285,5 @@ export class SuperAdminService {
       .post(environment.apiURL + 'Shop/DeleteShop.php', data, options)
       .pipe(map(res => res.json()));
   }
+
 }
