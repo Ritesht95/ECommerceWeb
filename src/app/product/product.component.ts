@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { SellerService } from '../services/seller.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginauthService } from '../loginauth.service';
 
 @Component({
   selector: 'app-product',
@@ -8,30 +11,26 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-
   flag: boolean;
-  fileToUpload: File = null;
+  filesToUpload: string[] = [];
   formData: FormData = new FormData();
   webInfo: any;
+  categoriesData: any = '';
+  productID = '';
+  singleProductData = '';
 
   imgURL: String = '../../assets/img/avatar.png';
-  FileToUpload: File = null;
+  // FileToUpload: File = null;
   urls = new Array<string>();
 
-
-  constructor( private elem: ElementRef ) { }
-
-  upload(event: any) {
-    const files = this.elem.nativeElement.querySelector('#imageWebInfo').files;
-    this.formData.append('image', files[0], files[0].name);
-    this.formData.append('Id', '1');
-    if (!this.validateFile(files[0].name)) {
-      console.log('Selected file format is not supported');
-      return false;
-    } else {
-      this.fileToUpload = files.item(0);
-    }
-  }
+  // tslint:disable-next-line:max-line-length
+  constructor(
+    private elem: ElementRef,
+    private sellerservice: SellerService,
+    private router: Router,
+    private loginAuth: LoginauthService,
+    private actRoute: ActivatedRoute
+  ) {}
 
   validateFile(name) {
     const ext = name.substring(name.lastIndexOf('.') + 1);
@@ -48,47 +47,81 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  imagePreview(file: FileList) {
-    /*const files = this.elem.nativeElement.querySelector('#image').files;
-    let i = 0;
-    const url: any;
-    const n = files.length;
-    for ( i = 0; i < n ; i++) {
-      console.log(files[i]) ;
-      console.log(files[i].name) ;
-      console.log('path: ' + files[i].eventtarget );
-      this.url = event.target.result;
-      console.log(event.eventtarget);
-      // tslint:disable-next-line:max-line-length
-      document.getElementById('gallery').innerHTML += '<img src="~/' + files[i].target.eventtarget + '" width="450" height="300"/>'; // attr('src', files[0].target.result) ;
-    }
-    if (files) {
-      console.log('file seleted');
-    } */
-
-    var reader = new FileReader();
+  imagePreview(event: any) {
     this.urls = [];
-    let files = event.target.files;
-    if ( files.length <= 4 ) {
-      for (let file of files) {
-        let reader = new FileReader();
+    const files = event.target.files;
+    console.log(files);
+    let cnt = 0;
+    if (files.length <= 4) {
+      for (const file of files) {
+        // tslint:disable-next-line:no-shadowed-variable
+        const reader = new FileReader();
         reader.onload = (e: any) => {
           this.urls.push(e.target.result);
         };
-        if (!this.validateFile(files[0].name)) {
+        if (!this.validateFile(file.name)) {
           console.log('Selected file format is not supported');
           return false;
         } else {
-          this.fileToUpload = files.item(0);
+          this.formData.append('image' + cnt++, file, file.name);
+          this.filesToUpload.push(file);
         }
         reader.readAsDataURL(file);
       }
     }
   }
-
-
-
   ngOnInit() {
+    this.actRoute.queryParams.subscribe(params => {
+      this.productID = params['ProdID'];
+    });
+    if (this.productID === '') {
+
+    } else {
+      this.sellerservice.getSingleProduct(this.productID).subscribe(
+        res => {
+          console.log(res);
+          this.singleProductData = res;
+        }
+      );
+    }
+    this.sellerservice
+      .getAllCategories(this.loginAuth.getSUserID())
+      .subscribe(res => {
+        this.categoriesData = res['records'];
+      });
   }
 
+  // tslint:disable-next-line:max-line-length
+  AddProduct(
+    PName: string,
+    Description: string,
+    LogoAlt: string,
+    Unit: string,
+    Price: string,
+    MinStock: string,
+    CategoryID: string,
+    ProductID: string
+  ) {
+    this.formData.append('ProductName', PName);
+    this.formData.append('CategoryID', CategoryID);
+    if (ProductID === '') {
+      this.formData.append('ProductID', 'new');
+    } else {
+      this.formData.append('ProductID', ProductID);
+    }
+    this.formData.append('ProductDesc', Description);
+    this.formData.append('Unit', Unit);
+    this.formData.append('LogoAlt', LogoAlt);
+    this.formData.append('Price', Price);
+    this.formData.append('MinStock', MinStock);
+    this.sellerservice.addProduct(this.formData).subscribe(res => {
+      if (res['key'] === 'true') {
+        this.router.navigate(['productData']);
+      } else if (res['key'] === 'nup') {
+        console.log('Product added. But,images cannot be uploaded.');
+      } else if (res['key'] === 'false') {
+        console.log('Product cannot be added.');
+      }
+    });
+  }
 }

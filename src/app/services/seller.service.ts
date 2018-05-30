@@ -179,9 +179,22 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
-  getSingleProduct(ProductID: number) {
+  getSingleProduct(ProductID: string) {
     return this._http
     .get(environment.apiURL + 'Product/SingleProductData.php?id=' + ProductID)
     .pipe(map(res => res.json()));
   }
+
+  addProduct(formData: FormData) {
+    const endpoint = environment.apiURL + 'Product/AddProduct.php';
+    return this._http.post(endpoint, formData).pipe(
+      map(
+        res => res.json(),
+        error => {
+          console.log(error);
+        }
+      )
+    );
+  }
+
 }
