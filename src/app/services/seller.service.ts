@@ -197,4 +197,18 @@ export class SellerService {
     );
   }
 
+  addStock(ProductID: string, stockNumber: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ProductID: ProductID, Stock: stockNumber };
+
+    return (
+      this._http
+        .post(environment.apiURL + 'Product/AddStock.php', data, options)
+        .pipe(map(res => res.json()))
+    );
+  }
+
 }
