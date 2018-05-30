@@ -25,7 +25,7 @@ export class ProductDataComponent implements OnInit {
     );
   }
 
-  getSingleProduct(ProductID: number) {
+  getSingleProduct(ProductID: string) {
     this.sellerservice.getSingleProduct(ProductID).subscribe(
       res => {
         this.productSingleData = res;

@@ -54,6 +54,10 @@
                 <div style="display: flex; justify-content: center;">
                   <img id="profileImageIn" *ngFor="let imgURL of urls" [src]="imgURL" #image (change)="imagePreview($event)" style="height:130px; width:130px;margin: 10px;"
                     class="image"> &nbsp;
+                    <span *ngFor="let imgURL of singleProductData['image']">
+                    <img id="prodImages" src='{{env}}Assets/ProductImages/{{imgURL.image}}' #imagesP="ngModel" ngModel style="height:130px; width:130px;margin: 10px;"
+                      class="image"> &nbsp;
+                    </span>
                 </div>
                 <!-- <div style="display: flex; justify-content: center;">
                     <img id="prodImages" *ngFor="let imgURL of singleProductData.image" [src]="imgURL" #imagesP="ngModel" ngModel style="height:130px; width:130px;margin: 10px;"
@@ -76,16 +80,19 @@
                   <label for="txtlogo">Product Image
                     <span class="text-danger">*</span>
                   </label>
-                  <input type="file" id="imageWebInfo" (change)="imagePreview($event)" name="imageWebInfo" required ngModel #imageWebInfo="ngModel"
+                  <input type="file" id="imageWebInfo" (change)="imagePreview($event)" name="imageWebInfo" ngModel #imageWebInfo="ngModel"
                     multiple>
                 </div>
                 <div class="form-group">
                   <label for="txtDescription">Category
                     <span class="text-danger">*</span>
                   </label>
-                  <select class="form-control" id="ddCategory" #ddCategory="ngModel" name="ddCategory" ngModel aria-placeholder="Select Category" required>
-                      <option *ngFor="let cat of categoriesData" ng-if="cat.CategoryID !== singleProductData['CategoryID']" value="{{cat.CategoryID}}">{{cat.CategoryName}}</option>
-                      <option *ngFor="let cat of categoriesData" ng-if="cat.CategoryID === singleProductData['CategoryID']" value="{{cat.CategoryID}}" selected>{{cat.CategoryName}}</option>
+                  <select class="form-control" id="ddCategory" #ddCategory="ngModel" name="ddCategory" [(ngModel)]="categoriesData.CategoryID">
+                    <!--  <option selected>dsjvdsjk</option> -->
+                    <!-- <template *ngFor="let cat of categoriesData"> -->
+                      <option *ngFor="let cat of categoriesData" [attr.selected]="cat.CategoryID === singleProductData['CategoryID'] ? 'selected' : null" value="{{cat.CategoryID}}">{{cat.CategoryName}}</option>
+                      <!-- <option *ngIf="cat.CategoryID === singleProductData['CategoryID']" value="{{cat.CategoryID}}" selected>{{cat.CategoryName}}</option> -->
+                    <!-- </template> -->
                   </select>
                 </div>
                 <div class="form-group">
@@ -125,12 +132,12 @@
                   <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
                     <span class="text-danger">Logo Alternate is required</span>
                   </div>
-                  <div *ngIf="flag && imageWebInfo.touched">
+                  <!-- <div *ngIf="flag && imageWebInfo.touched">
                     <span class="text-danger">Select .png, .jpg and .jpeg only</span>
-                  </div>
-                  <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
+                  </div> -->
+                  <!-- <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
                     <span class="text-danger">Product image is required</span>
-                  </div>
+                  </div> -->
                   <div *ngIf="txtDescription.errors?.required && txtDescription.touched">
                     <span class="text-danger">Description required</span>
                   </div>
@@ -152,9 +159,9 @@
                   <div *ngIf="txtMinStock.errors?.pattern && txtMinStock.touched">
                     <span class="text-danger">Minimum Stock Invalid</span>
                   </div>
-                  <div *ngIf="ddCategory.errors?.required && ddCategory.touched">
+                  <!-- <div *ngIf="ddCategory.errors?.required">
                     <span class="text-danger">Current Stock is required</span>
-                  </div>
+                  </div> -->
                   <!-- <div *ngIf="txtCurStock.errors?.pattern && txtCurStock.touched">
                     <span class="text-danger">Current Stock Invalid</span>
                   </div> -->
