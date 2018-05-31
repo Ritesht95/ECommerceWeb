@@ -297,4 +297,10 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  getFeedback() {
+    return this._http
+      .get(environment.apiURL + 'feedback/getfeedbacks.php')
+      .pipe(map(res => res.json()));
+  }
+
 }
