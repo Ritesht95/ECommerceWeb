@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   fileToUpload: File = null;
   formData: FormData = new FormData();
   adminData: any = '';
+  shopData: any = '';
   UserID: number;
   Name: string;
   flag: boolean;
@@ -109,30 +110,58 @@ export class HeaderComponent implements OnInit {
     } else {
       this.userType = false;
     }
-    this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
-      // tslint:disable-next-line:no-shadowed-variable
-      res => {
-        this.adminData = res;
-        document.getElementById('headerName').innerHTML = res['Adminname'];
-        document.getElementById('headerName1').innerHTML = res['Adminname'];
-        document
-          .getElementById('userImage')
-          .setAttribute(
-            'src',
-            environment.apiURL +
-              'Assets/AdminImages/' +
-              this.adminData.AdminImage
-          );
-        document
-          .getElementById('userHeaderImage')
-          .setAttribute(
-            'src',
-            environment.apiURL +
-              'Assets/AdminImages/' +
-              this.adminData.AdminImage
-          );
-      }
-    );
+    if (!this.userType) {
+      this.superadminservice.getAdminData(this.loginAuth.getUserID()).subscribe(
+        // tslint:disable-next-line:no-shadowed-variable
+        res => {
+          this.adminData = res;
+          document.getElementById('headerName').innerHTML = res['Adminname'];
+          document.getElementById('headerName1').innerHTML = res['Adminname'];
+          document
+            .getElementById('userImage')
+            .setAttribute(
+              'src',
+              environment.apiURL +
+                'Assets/AdminImages/' +
+                this.adminData.AdminImage
+            );
+          document
+            .getElementById('userHeaderImage')
+            .setAttribute(
+              'src',
+              environment.apiURL +
+                'Assets/AdminImages/' +
+                this.adminData.AdminImage
+            );
+        }
+      );
+    } else {
+      this.superadminservice.getShopDetails(this.loginAuth.getSUserID()).subscribe(
+        // tslint:disable-next-line:no-shadowed-variable
+        res => {
+          this.shopData = res;
+          document.getElementById('headerName').innerHTML = res['ShopName'];
+          document.getElementById('headerName1').innerHTML = res['ShopName'];
+          document
+            .getElementById('userImage')
+            .setAttribute(
+              'src',
+              environment.apiURL +
+                'Assets/ShopLogo/' +
+                this.shopData.LogoImage
+            );
+          document
+            .getElementById('userHeaderImage')
+            .setAttribute(
+              'src',
+              environment.apiURL +
+                'Assets/ShopLogo/' +
+                this.shopData.LogoImage
+            );
+        }
+      );
+    }
+
   }
 
   changePassword(oldPassword: string, newPassword: string) {
