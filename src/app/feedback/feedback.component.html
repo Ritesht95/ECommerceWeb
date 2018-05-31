@@ -1,0 +1,43 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Feedback
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Feedback</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary">
+      <div class="box-body">
+        <table datatable class="row-border hover">
+          <thead>
+            <tr>
+              <th>Shop Name</th>
+              <th>Email</th>
+              <th>Feedback</th>
+              <th>Reply</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let f of feedback">
+                  <td>{{ f.Name }}</td>
+                  <td>{{ f.Email }}</td>
+                  <td>{{ f.Feedback }}</td>
+                  <td><i class="fas fa-reply"></i></td>
+                </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>

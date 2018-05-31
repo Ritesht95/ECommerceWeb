@@ -285,7 +285,7 @@ export class SuperAdminService {
       .post(environment.apiURL + 'Shop/DeleteShop.php', data, options)
       .pipe(map(res => res.json()));
   }
-
+  
   getAllCategories() {
     return this._http
     .get(environment.apiURL + 'Category/AllCategoriesData.php')
@@ -302,7 +302,18 @@ export class SuperAdminService {
       .post(environment.apiURL + 'Category/DisableCategory.php', data, options)
       .pipe(map(res => res.json()));
   }
-
+  
+  sendMessage(Name: string, Email: string, Message: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { Name: Name, Email: Email, Feedback: Message, Type: 'seller'};
+    return this._http
+      .post(environment.apiURL + 'feedback/addfeedback.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+  
   getAllProducts() {
     return this._http
     .get(environment.apiURL + 'Product/AllProductData.php')
@@ -318,5 +329,12 @@ export class SuperAdminService {
     return this._http
       .post(environment.apiURL + 'Product/DisableProduct.php', data, options)
       .pipe(map(res => res.json()));
+  }   
+
+  getFeedback() {
+    return this._http
+      .get(environment.apiURL + 'feedback/getfeedbacks.php')
+      .pipe(map(res => res.json()));
   }
+  
 }
