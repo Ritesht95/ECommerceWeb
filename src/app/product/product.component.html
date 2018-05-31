@@ -54,10 +54,10 @@
                 <div style="display: flex; justify-content: center;">
                   <img id="profileImageIn" *ngFor="let imgURL of urls" [src]="imgURL" #image (change)="imagePreview($event)" style="height:130px; width:130px;margin: 10px;"
                     class="image"> &nbsp;
-                    <span *ngFor="let imgURL of singleProductData['image']">
+                  <span *ngFor="let imgURL of singleProductData['image']">
                     <img id="prodImages" src='{{env}}Assets/ProductImages/{{imgURL.image}}' #imagesP="ngModel" ngModel style="height:130px; width:130px;margin: 10px;"
                       class="image"> &nbsp;
-                    </span>
+                  </span>
                 </div>
                 <!-- <div style="display: flex; justify-content: center;">
                     <img id="prodImages" *ngFor="let imgURL of singleProductData.image" [src]="imgURL" #imagesP="ngModel" ngModel style="height:130px; width:130px;margin: 10px;"
@@ -66,15 +66,15 @@
                 <div class="form-group">
                   <label for="txtProName">Product Name</label>
                   <span class="text-danger">*</span>
-                  <input type="text" class="form-control" [(ngModel)]="singleProductData['ProductName']" id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Product Name"
-                    pattern="[a-zA-Z]+" required>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['ProductName']" id="txtProName" name="txtProName"
+                    #txtProName="ngModel" placeholder="Product Name" pattern="[a-zA-Z]+" required>
                 </div>
                 <div class="form-group">
                   <label for="txtDescription">Description
                     <span class="text-danger">*</span>
                   </label>
-                  <textarea class="form-control" [(ngModel)]="singleProductData['ProductDesc']" id="txtDescription" name="txtDescription" #txtDescription="ngModel" rows="2" placeholder="Description"
-                    required></textarea>
+                  <textarea class="form-control" [(ngModel)]="singleProductData['ProductDesc']" id="txtDescription" name="txtDescription" #txtDescription="ngModel"
+                    rows="2" placeholder="Description" required></textarea>
                 </div>
                 <div class="form-group">
                   <label for="txtlogo">Product Image
@@ -90,34 +90,36 @@
                   <select class="form-control" id="ddCategory" #ddCategory="ngModel" name="ddCategory" [(ngModel)]="categoriesData.CategoryID">
                     <!--  <option selected>dsjvdsjk</option> -->
                     <!-- <template *ngFor="let cat of categoriesData"> -->
-                      <option *ngFor="let cat of categoriesData" [attr.selected]="cat.CategoryID === singleProductData['CategoryID'] ? 'selected' : null" value="{{cat.CategoryID}}">{{cat.CategoryName}}</option>
-                      <!-- <option *ngIf="cat.CategoryID === singleProductData['CategoryID']" value="{{cat.CategoryID}}" selected>{{cat.CategoryName}}</option> -->
+                    <option *ngFor="let cat of categoriesData" [attr.selected]="cat.CategoryID === singleProductData['CategoryID'] ? 'selected' : null"
+                      value="{{cat.CategoryID}}">{{cat.CategoryName}}</option>
+                    <!-- <option *ngIf="cat.CategoryID === singleProductData['CategoryID']" value="{{cat.CategoryID}}" selected>{{cat.CategoryName}}</option> -->
                     <!-- </template> -->
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="txtlogoalt">Logo Alternate</label>
                   <span class="text-danger">*</span>
-                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" [(ngModel)]="singleProductData['ImageAlt']" required #txtlogoalt="ngModel">
+                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" [(ngModel)]="singleProductData['ImageAlt']"
+                    required #txtlogoalt="ngModel">
                 </div>
                 <div class="form-group">
                   <label for="txtUnit">Unit</label>
                   <span class="text-danger">*</span>
-                  <input type="text" class="form-control" [(ngModel)]="singleProductData['Unit']" id="txtUnit" name="txtUnit" #txtUnit="ngModel" placeholder="Unit" pattern="[a-zA-Z]+"
-                    required>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['Unit']" id="txtUnit" name="txtUnit" #txtUnit="ngModel"
+                    placeholder="Unit" pattern="[a-zA-Z]+" required>
                 </div>
                 <div class="form-group">
                   <label for="txtPrice">Price</label>
                   <span class="text-danger">*</span>
-                  <input type="text" class="form-control" [(ngModel)]="singleProductData['Price']" id="txtPrice" name="txtPrice" #txtPrice="ngModel" placeholder="Price" pattern="[0-9]+"
-                    required>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['Price']" id="txtPrice" name="txtPrice" #txtPrice="ngModel"
+                    placeholder="Price" pattern="[0-9]+" required>
                 </div>
 
                 <div class="form-group">
                   <label for="txtMinStock">Minimum Stock</label>
                   <span class="text-danger">*</span>
-                  <input type="text" class="form-control" [(ngModel)]="singleProductData['MinStock']" id="txtMinStock" name="txtMinStock" #txtMinStock="ngModel" placeholder="Miinimum Stock"
-                    pattern="[0-9]+" required>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['MinStock']" id="txtMinStock" name="txtMinStock" #txtMinStock="ngModel"
+                    placeholder="Miinimum Stock" pattern="[0-9]+" required>
                 </div>
 
                 <button type="reset" class="btn btn-primary">Cancel</button> &nbsp;
