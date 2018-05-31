@@ -34,6 +34,8 @@ import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { SucategoryComponent } from './sucategory/sucategory.component';
+import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
@@ -65,6 +67,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     ShopProfileComponent,
     ContactComponent,
     AboutUsComponent,
+    SucategoryComponent,
+    SuproductComponent,
     FeedbackComponent
   ],
   imports: [

@@ -27,19 +27,3 @@ button.transbtn {
 textarea {
   resize: none;
 }
-
-.detailsImage {
-  display:inline-block;
-    position:relative;
-}
-
-.detailsImage a {
-  position:absolute;
-  top:15px;
-  right:18px;
-  background:transparent;
-  color: red;
-  background-color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
