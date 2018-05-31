@@ -1,0 +1,51 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Order Detail
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Order Detail</li>
+    </ol>
+  </section>
+
+  <section class="content">
+      <div class="box box-primary">
+        <div class="box-body">
+          <table datatable class="row-border hover">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th style="text-align: center">Confirm Order</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let o of order">
+                    <td>{{ o.ProductName }}</td>
+                    <td>{{ o.Price }}</td>
+                    <td>{{ o.Qty }}</td>
+                    <td>{{ o.Status }}</td>
+                    <td style="text-align: center" *ngIf="o.Status === 'Pending'"><button class="fas fa-times btn btn-danger" (click)="sendOrderId(o.OrderDetailID)"></button></td>
+                    <td style="text-align: center" *ngIf="o.Status !== 'Pending'"><button class="fas fa-check-circle btn btn-success"></button></td>
+                    <td><button class="fab fa-product-hunt btn btn-warning"></button> &nbsp;
+                    <button class="fas fa-users btn btn-primary"></button>  &nbsp;
+                    <button class="fas fa-truck-moving btn btn-info"></button></td>
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+</div>
