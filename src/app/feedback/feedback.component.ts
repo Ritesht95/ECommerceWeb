@@ -9,6 +9,9 @@ import { SuperAdminService } from '../services/super-admin.service';
 export class FeedbackComponent implements OnInit {
 
   feedback: any;
+  Feedback: string;
+  Id: number;
+  Reply: string;
 
   constructor(private superadminservice: SuperAdminService) { }
 
@@ -19,6 +22,30 @@ export class FeedbackComponent implements OnInit {
         this.feedback = res['records'];
       }
     );
+  }
+
+  sendReply(Subject: string , Reply: string) {
+    this.superadminservice.sendReply(this.Id, Subject, Reply).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+            console.log('sucessfully send reply');
+            document.getElementById('btnClose').click();
+            this.ngOnInit();
+        } else {
+          console.log('error');
+        }
+      }
+    );
+
+  }
+
+  getSingleFeedback(Id: number, Feedback: string) {
+    this.Id = Id;
+    this.Feedback = Feedback;
+  }
+
+  getReply(Reply: string) {
+    this.Reply = Reply;
   }
 
 }

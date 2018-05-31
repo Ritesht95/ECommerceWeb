@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuperAdminService } from '../services/super-admin.service';
 import { environment } from '../../environments/environment';
 import { LoginauthService } from '../loginauth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -9,13 +10,12 @@ import { LoginauthService } from '../loginauth.service';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-
   WebInfo: any;
   infoEmail: any;
   user: any;
   email: any;
 
-  constructor(private superadminservice: SuperAdminService, private loginAuth: LoginauthService) { }
+  constructor(private superadminservice: SuperAdminService, private loginAuth: LoginauthService, private router: Router) { }
 
   ngOnInit() {
     this.superadminservice.getWebInfo().subscribe( res => {
@@ -43,6 +43,7 @@ export class ContactComponent implements OnInit {
         }
       }
     );
+    this.router.navigate(['shopdashboard']);
   }
 
 }

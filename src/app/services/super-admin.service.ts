@@ -331,6 +331,17 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }   
 
+  sendReply(Id: number, Subject: string , Reply: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {Id: Id, Subject: Subject , Reply: Reply};
+    return this._http
+      .post(environment.apiURL + 'feedback/reply.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
   getFeedback() {
     return this._http
       .get(environment.apiURL + 'feedback/getfeedbacks.php')

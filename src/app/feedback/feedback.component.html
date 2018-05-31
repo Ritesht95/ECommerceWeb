@@ -28,12 +28,17 @@
             </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let f of feedback">
-                  <td>{{ f.Name }}</td>
-                  <td>{{ f.Email }}</td>
-                  <td>{{ f.Feedback }}</td>
-                  <td><i class="fas fa-reply"></i></td>
-                </tr>
+            <tr *ngFor="let f of feedback">
+              <td>{{ f.Name }}</td>
+              <td>{{ f.Email }}</td>
+              <td>{{ f.Feedback }}</td>
+              <td *ngIf="f.Reply === null">
+                <button class="fas fa-reply btn btn-primary" data-toggle="modal" data-target="#replyModal" (click)="getSingleFeedback(f.FeedbackID,f.Feedback)"></button>
+              </td>
+              <td *ngIf="f.Reply !== null">
+                  <button class="fas fa-eye btn btn-success" data-toggle="modal" data-target="#viewModal" (click)="getReply(f.Reply)"></button>
+                </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -41,3 +46,63 @@
   </section>
 
 </div>
+
+<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Write your reply</h5>
+      </div>
+      <div class="modal-body">
+        <form #frm="ngForm">
+            <div class="form-group">
+                <label for="feedback" class="control-label">Feedback</label>
+                <div style="border: 1">
+                  {{ Feedback }}
+                  {{ Id }}
+                </div>
+              </div>
+            <div class="form-group">
+                <label for="subject" class="control-label">Subject</label>
+                <input type="text" ngModel #txtSubject="ngModel" name="txtSubject"  class="form-control" id="txtSubject" placeholder="Subject of your reply"
+                  required>
+              </div>
+          <div class="form-group">
+            <label for="reply" class="control-label">Reply</label>
+            <textarea type="text" ngModel #txtReply="ngModel" name="txtReply" rows="3" class="form-control" id="txtReply" placeholder="write here"
+              required></textarea>
+          </div>
+          <div *ngIf="txtReply.errors?.required && txtReply.touched">
+            <span class="text-danger">Reply is Required</span>
+          </div>
+          <div *ngIf="txtSubject.errors?.required && txtSubject.touched">
+              <span class="text-danger">Subject is Required</span>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button id='btnClose' type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" id="btnSend" class="btn btn-primary" [disabled]="frm.invalid" (click)="sendReply(txtSubject.value,txtReply.value) ">Send</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="exampleModalLabel">View your reply</h5>
+        </div>
+        <div class="modal-body">
+          {{ Reply }}
+        </div>
+      </div>
+    </div>
+  </div>
