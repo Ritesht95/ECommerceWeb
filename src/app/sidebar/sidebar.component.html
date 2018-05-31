@@ -36,6 +36,18 @@
           <span> Website Mail Settings</span>
         </a>
       </li>
+      <li *ngIf="!userType">
+        <a href="" [routerLink]="['/sucategory']">
+          <i class="fa fa-envelope"></i>
+          <span> Seller Categories</span>
+        </a>
+      </li>
+      <li *ngIf="!userType">
+        <a href="" [routerLink]="['/suproduct']">
+          <i class="fa fa-envelope"></i>
+          <span> Products Products</span>
+        </a>
+      </li>
 
 
       <li *ngIf="userType">

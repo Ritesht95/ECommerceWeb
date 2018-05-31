@@ -40,7 +40,6 @@ export class MailinfoComponent implements OnInit {
   ngOnInit() {
     this.superadminservice.getMailInfo().subscribe(
       res => {
-        console.log(res);
         this.infoEmail = res['Email'];
         this.emailValidFlag = true;
       }
