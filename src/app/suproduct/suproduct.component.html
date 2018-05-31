@@ -19,7 +19,7 @@
   <section class="content">
     <div class="box box-primary">
       <div class="box-body">
-        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" datatable>
+        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="row-border hover">
           <thead>
             <tr>
               <th></th>
@@ -27,8 +27,7 @@
               <th>Price</th>
               <th>Minimum Stock</th>
               <th>Current Stock</th>
-              <th>Is Active?</th>
-              <th>Add Stock</th>
+              <th>Is Approved?</th>
             </tr>
           </thead>
           <tbody>
@@ -42,10 +41,14 @@
               <td>{{product.Price}}</td>
               <td>{{product.MinStock}}</td>
               <td>{{product.CurrentStock}}</td>
-              <td>{{product.IsActive}}</td>
-              <td>
-                <button (click)="getSingleProduct(product.ProductID);" data-toggle="modal" data-target="#stockManModal" class="transbtn">
-                  <span class="fa fa-store"></span>
+              <td *ngIf="product.IsApproved == 1">
+                <button (click)="setApproved(product.ProductID,false);">
+                  <span style="color: green;" class="fa fa-2x fa-check"></span>
+                </button>
+              </td>
+              <td *ngIf="product.IsApproved == 0">
+                <button (click)="setApproved(product.ProductID,true);">
+                  <span style="color: red;" class="fa fa-2x fa-times"></span>
                 </button>
               </td>
             </tr>
@@ -55,7 +58,6 @@
     </div>
   </section>
 </div>
-<!-- Modal -->
 <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -72,9 +74,8 @@
           </h1>
         </div>
         <div class="row text-center">
-          <span *ngFor="let image of productSingleData.image" class="detailsImage">
+          <span *ngFor="let image of productSingleData.image">
             <img style="margin: 10px;" height="100" width="100" class="img-rounded img-bordered" src="{{env}}Assets/ProductImages/{{image.image}}">
-            <a (click)="deleteImage(productSingleData.ProductID,image.id);"><span class="fa fa-times"></span></a>
           </span>
         </div>
         <div class="row">
@@ -110,46 +111,6 @@
               <span class="labelValue">{{productSingleData.CurrentStock}}</span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="stockManModal" tabindex="-1" role="dialog" aria-labelledby="stockManModal" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h5 class="modal-title" id="exampleModalLabel">Stock Mangement</h5>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <h1 class="modalTitle" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
-            <small>({{productSingleData.CategoryName}})</small>
-          </h1>
-        </div>
-        <div class="row">
-          <form role="form" #frm="ngForm">
-            <div class="form-group">
-              <label class="labelTitle">Add or Withraw Stock (number in minus to withdraw stock):</label>
-              <input class="form-control" type="number" id="txtStock" #txtStock="ngModel" name="txtStock" ngModel>
-              <!-- <span class="labelValue">{{productSingleData.Price}}</span> -->
-            </div>
-            <!-- <button type="submit" class="btn btn-primary" [disabled]="frm.invalid" (click)="AddStock(txtStock.value);">Submit</button> -->
-            <div *ngIf="txtStock.touched">
-              <div *ngIf="txtStock.errors?.required && txtStock.touched">
-                <span class="text-danger">Stock number is required</span>
-              </div>
-            </div>
-          </form>
-
-          <div class="modal-footer">
-              <button id='btnCloseStock' type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" [disabled]="frm.invalid" (click)="AddStock(productSingleData.ProductID,txtStock.value);">Submit</button>
-            </div>
         </div>
       </div>
     </div>

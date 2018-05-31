@@ -211,4 +211,18 @@ export class SellerService {
     );
   }
 
+  deleteImage(ID: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ID: ID};
+
+    return (
+      this._http
+        .post(environment.apiURL + 'Product/DeleteImage.php', data, options)
+        .pipe(map(res => res.json()))
+    );
+  }
+
 }

@@ -25,6 +25,8 @@ import { ShopProfileComponent } from './shop-profile/shop-profile.component';
 import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { SucategoryComponent } from './sucategory/sucategory.component';
+import { SuproductComponent } from './suproduct/suproduct.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -52,6 +54,8 @@ const routes: Routes = [
   { path: 'shopProfile', canActivate: [ShopauthGuard], component: ShopProfileComponent},
   { path: 'contactUs', canActivate: [ShopauthGuard], component: ContactComponent },
   { path: 'aboutUs', component: AboutUsComponent },
+  { path: 'sucategory', canActivate: [AuthGuard], component: SucategoryComponent },
+  { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 

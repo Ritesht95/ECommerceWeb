@@ -13,7 +13,7 @@ export class WebInfoComponent implements OnInit {
   flag: boolean;
   fileToUpload: File = null;
   formData: FormData = new FormData();
-  webInfo: any;
+  webInfo: any = '';
 
   constructor(
     private superadminservice: SuperAdminService,
