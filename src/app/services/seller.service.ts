@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { LoginauthService } from '../loginauth.service';
-import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { LoginauthService } from "../loginauth.service";
+import { environment } from "../../environments/environment";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class SellerService {
   constructor(private _http: Http, private userSession: LoginauthService) {}
@@ -18,7 +18,7 @@ export class SellerService {
     OName: string
   ) {
     const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = {
@@ -31,7 +31,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(environment.apiURL + 'Shop/Signup.php', data, options)
+        .post(environment.apiURL + "Shop/Signup.php", data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -39,7 +39,7 @@ export class SellerService {
 
   checkLogin(Username: string, Password: string) {
     const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     });
     const options = new RequestOptions({ headers: headers });
 
@@ -47,7 +47,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(environment.apiURL + 'Shop/CheckLogin.php', data, options)
+        .post(environment.apiURL + "Shop/CheckLogin.php", data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -55,14 +55,14 @@ export class SellerService {
 
   forgotPassword(Username: string) {
     const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = { username: Username };
 
     return (
       this._http
-        .post(environment.apiURL + 'Shop/ForgetPassword.php', data, options)
+        .post(environment.apiURL + "Shop/ForgetPassword.php", data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -70,14 +70,14 @@ export class SellerService {
 
   checkRandomString(RandomString: string) {
     const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = { rand: RandomString };
 
     return (
       this._http
-        .post(environment.apiURL + 'Shop/CheckRandomString.php', data, options)
+        .post(environment.apiURL + "Shop/CheckRandomString.php", data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -89,7 +89,7 @@ export class SellerService {
     NewPassword: string
   ) {
     const headers = new Headers({
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = {
@@ -220,6 +220,23 @@ export class SellerService {
       .post(environment.apiURL + 'Product/DeleteImage.php', data, options)
       .pipe(map(res => res.json()));
   }
+  
+  getOrder(Id: number) {
+    return this._http
+      .get(environment.apiURL + 'order/getShopOrders.php?id=' + Id)
+      .pipe(map(res => res.json()));
+  }
+
+  sendOrder(OrderDetailID: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {OrderDetailID: OrderDetailID};
+    return this._http
+      .post(environment.apiURL + 'order/OrderConfirm.php?id=' + OrderDetailID, data, options)
+      .pipe(map(res => res.json()));
+  }
 
   getSellerProfile(ShopID: number) {
     return this._http
@@ -238,11 +255,13 @@ export class SellerService {
     State: string,
     Pincode: string
   ) {
-    const headers = new Headers({
+  
+      const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = {
+      
+      const data: object = {
       ShopID: ShopID,
       ShopName: ShopName,
       ShopType: ShopType,

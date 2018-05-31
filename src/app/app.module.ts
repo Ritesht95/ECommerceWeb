@@ -37,6 +37,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { SucategoryComponent } from './sucategory/sucategory.component';
 import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     AboutUsComponent,
     SucategoryComponent,
     SuproductComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

@@ -28,6 +28,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { SucategoryComponent } from './sucategory/sucategory.component';
 import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { OrderComponent } from './order/order.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -57,6 +58,7 @@ const routes: Routes = [
   { path: 'sucategory', canActivate: [AuthGuard], component: SucategoryComponent },
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
+  { path: 'orderDetail', component: OrderComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
