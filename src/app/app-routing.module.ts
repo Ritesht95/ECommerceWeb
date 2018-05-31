@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'lockscreen', component: LockscreenComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
-  { path: 'shopInfo', canActivate: [AuthGuard], component: ShopInfoComponent },
+  { path: 'shopInfo', canActivate: [ShopauthGuard], component: ShopInfoComponent },
   { path: 'shopDetail', component: ShopDetailComponent  },
   { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },

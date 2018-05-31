@@ -220,7 +220,7 @@ export class SellerService {
       .post(environment.apiURL + 'Product/DeleteImage.php', data, options)
       .pipe(map(res => res.json()));
   }
-
+  
   getOrder(Id: number) {
     return this._http
       .get(environment.apiURL + 'order/getShopOrders.php?id=' + Id)
@@ -238,4 +238,79 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  getSellerProfile(ShopID: number) {
+    return this._http
+      .get(environment.apiURL + 'Shop/SingleShop.php?id=' + ShopID)
+      .pipe(map(res => res.json()));
+  }
+
+  setSellerProfile(
+    ShopID: number,
+    ShopName: string,
+    ShopType: string,
+    Contact: string,
+    Email: string,
+    Address: string,
+    City: string,
+    State: string,
+    Pincode: string
+  ) {
+  
+      const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+      
+      const data: object = {
+      ShopID: ShopID,
+      ShopName: ShopName,
+      ShopType: ShopType,
+      Contact: Contact,
+      Email: Email,
+      Address: Address,
+      City: City,
+      State: State,
+      Pincode: Pincode
+    };
+
+    return this._http
+      .post(environment.apiURL + 'Shop/UpdateShopInfo.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  setSellerProfile2(formData: FormData) {
+    const endpoint = environment.apiURL + 'Shop/UpdateBusinessDetails.php';
+    return this._http.post(endpoint, formData).pipe(
+      map(
+        res => res.json(),
+        error => {
+          console.log(error);
+        }
+      )
+    );
+  }
+
+  setSellerProfile3(
+    ShopID: number,
+    FL: string,
+    TL: string,
+    IL: string,
+    YL: string
+  ) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      ShopID: ShopID,
+      FL: FL,
+      TL: TL,
+      IL: IL,
+      YL: YL
+    };
+
+    return this._http
+      .post(environment.apiURL + 'Shop/UpdateSocialLinks.php', data, options)
+      .pipe(map(res => res.json()));
+  }
 }
