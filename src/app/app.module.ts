@@ -34,6 +34,7 @@ import { CategoryDataComponent } from './category-data/category-data.component';
 import { ShopProfileComponent } from './shop-profile/shop-profile.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
     CategoryDataComponent,
     ShopProfileComponent,
     ContactComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,
