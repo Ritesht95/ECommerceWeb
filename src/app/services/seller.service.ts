@@ -220,7 +220,7 @@ export class SellerService {
       .post(environment.apiURL + 'Product/DeleteImage.php', data, options)
       .pipe(map(res => res.json()));
   }
-  
+
   getOrder(Id: number) {
     return this._http
       .get(environment.apiURL + 'order/getShopOrders.php?id=' + Id)
@@ -235,6 +235,17 @@ export class SellerService {
     const data: object = {OrderDetailID: OrderDetailID};
     return this._http
       .post(environment.apiURL + 'order/OrderConfirm.php?id=' + OrderDetailID, data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  getCustomerDetail(oid: number, cid: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {oid: oid, cid: cid};
+    return this._http
+      .post(environment.apiURL + 'User/UserDetailsOrder.php?oid=' + oid + '&cid=' + cid, data, options)
       .pipe(map(res => res.json()));
   }
 
@@ -255,12 +266,12 @@ export class SellerService {
     State: string,
     Pincode: string
   ) {
-  
+
       const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-      
+
       const data: object = {
       ShopID: ShopID,
       ShopName: ShopName,

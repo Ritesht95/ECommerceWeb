@@ -29,6 +29,7 @@ import { SucategoryComponent } from './sucategory/sucategory.component';
 import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { OrderComponent } from './order/order.component';
+import { TrackingComponent } from './tracking/tracking.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
   { path: 'orderDetail', component: OrderComponent },
+  { path: 'tracking', component: TrackingComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
