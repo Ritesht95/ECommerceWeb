@@ -1,11 +1,13 @@
-import { Injectable } from "@angular/core";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { LoginauthService } from "../loginauth.service";
-import { environment } from "../../environments/environment";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { LoginauthService } from '../loginauth.service';
+import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { INSPECT_MAX_BYTES } from 'buffer';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class SellerService {
   constructor(private _http: Http, private userSession: LoginauthService) {}
@@ -18,7 +20,7 @@ export class SellerService {
     OName: string
   ) {
     const headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = {
@@ -31,7 +33,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(environment.apiURL + "Shop/Signup.php", data, options)
+        .post(environment.apiURL + 'Shop/Signup.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -39,7 +41,7 @@ export class SellerService {
 
   checkLogin(Username: string, Password: string) {
     const headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
 
@@ -47,7 +49,7 @@ export class SellerService {
 
     return (
       this._http
-        .post(environment.apiURL + "Shop/CheckLogin.php", data, options)
+        .post(environment.apiURL + 'Shop/CheckLogin.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -55,14 +57,14 @@ export class SellerService {
 
   forgotPassword(Username: string) {
     const headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = { username: Username };
 
     return (
       this._http
-        .post(environment.apiURL + "Shop/ForgetPassword.php", data, options)
+        .post(environment.apiURL + 'Shop/ForgetPassword.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -70,14 +72,14 @@ export class SellerService {
 
   checkRandomString(RandomString: string) {
     const headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = { rand: RandomString };
 
     return (
       this._http
-        .post(environment.apiURL + "Shop/CheckRandomString.php", data, options)
+        .post(environment.apiURL + 'Shop/CheckRandomString.php', data, options)
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -89,7 +91,7 @@ export class SellerService {
     NewPassword: string
   ) {
     const headers = new Headers({
-      "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
     const data: object = {
@@ -101,6 +103,50 @@ export class SellerService {
     return (
       this._http
         .post(environment.apiURL + 'Shop/ResetPassword.php', data, options)
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
+
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      oldpassword: oldPassword,
+      newpassword: newPassword,
+      ShopID: this.userSession.getSUserID()
+    };
+
+    return (
+      this._http
+        .post(
+          environment.apiURL + 'Shop/ChangePassword.php',
+          data,
+          options
+        )
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
+
+  InitialSetup(UserID: string, NUsername: string, NPassword: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      ShopID: UserID, NUsername: NUsername, NPassword : NPassword
+    };
+
+    return (
+      this._http
+        .post(
+          environment.apiURL + 'Shop/InitialSetup.php',
+          data,
+          options
+        )
         // tslint:disable-next-line:no-shadowed-variable
         .pipe(map(res => res.json()))
     );
@@ -322,6 +368,28 @@ export class SellerService {
 
     return this._http
       .post(environment.apiURL + 'Shop/UpdateSocialLinks.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  getCategoryProperties(CategoryID: string, ProductID: string) {
+    return this._http
+      .get(environment.apiURL + 'Category/getProperties.php?id=' + CategoryID + '&pid=' + ProductID)
+      .pipe(map(res => res.json()));
+  }
+
+  setProductProperties(ProductID: string, FormValues: any[], Operation: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      ProductID: ProductID,
+      FormValues: FormValues,
+      operation: Operation
+    };
+
+    return this._http
+      .post(environment.apiURL + 'Category/AddPropertyValue.php', data, options)
       .pipe(map(res => res.json()));
   }
 }

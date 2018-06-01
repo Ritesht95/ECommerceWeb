@@ -18,7 +18,8 @@
               </div>
               <div class="form-group">
                 <label for="signin-password" class="control-label sr-only">Password</label>
-                <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" placeholder="Password" pattern="[a-zA-Z0-9]*" required>
+                <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" placeholder="Password"
+                  pattern="[a-zA-Z0-9]*" required>
               </div>
               <div class="form-group text-left">
                 <input type="radio" value="Admin" name="optType" required #optType="ngModel" ngModel> Administrator &nbsp;&nbsp;&nbsp;
@@ -33,20 +34,6 @@
                     <i class="fa fa-lock"></i>
                     <a [routerLink]="['/forgotpassword']"> Forgot password?</a>
                   </span>
-<!--               <form class="form-auth-small" #frm="ngForm">
-                <div class="form-group">
-                  <label for="signin-email" class="control-label sr-only">Email</label>
-                  <input type="email" ngModel #txtEmail="ngModel" name="txtEmail" class="form-control" id="txtEmail" placeholder="Email"  required >
-                </div>
-                <div class="form-group">
-                  <label for="signin-password" class="control-label sr-only">Password</label>
-                  <input type="password" ngModel #txtPassword="ngModel" name="txtPassword" class="form-control" id="txtPassword" placeholder="Password" pattern="[a-zA-Z0-9]*" required>
-                </div>
-                <div class="form-group clearfix">
-                  <label class="fancy-checkbox element-left">
-                    <input type="checkbox" ngModel #chkAdmin="ngModel" name="chkAdmin" class="form-control">
-                    <span>Remember me</span>
-                  </label> -->
                 </div>
                 <div class="bottom col-sm-7 text-right">
                   <span class="helper-text">
@@ -87,3 +74,61 @@
   </div>
 </div>
 <!-- END WRAPPER -->
+<a href="#" id="btnIniItModal" style="display: none;" data-toggle="modal" data-target="#InitialSetupModal"></a>
+<div class="modal fade" id="InitialSetupModal" tabindex="-1" role="dialog" aria-labelledby="InitialSetupModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">First Login (Initial Setup)</h5>
+      </div>
+      <div class="modal-body">
+        <form #frm1="ngForm">
+          <div class="form-group">
+            <label for="txtOldPassword" class="control-label">New Username</label>
+            <input type="text" ngModel #txtNUsername="ngModel" name="txtNUsername" class="form-control" id="txtNUsername" placeholder="New Username"
+              pattern="[a-zA-Z0-9]*" required>
+          </div>
+          <div class="form-group">
+            <label for="txtNewPassword" class="control-label">New Password</label>
+            <input type="password" ngModel #txtNewPassword="ngModel" name="txtNewPassword" class="form-control" id="txtNewPassword" placeholder="Password"
+              pattern="[a-zA-Z0-9]*" required>
+          </div>
+          <div class="form-group">
+            <label for="txtCPassword" class="control-label">Confirm Password</label>
+            <input type="password" ngModel #txtCPassword="ngModel" name="txtCPassword" class="form-control" id="txtCPassword" placeholder="Password"
+              pattern="[a-zA-Z0-9]*" required>
+          </div>
+        </form>
+        <div *ngIf="txtCPassword.touched">
+          <div id='alertDiv'>
+            <div *ngIf="txtNewPassword.errors?.required && txtNewPassword.touched">
+              <span class="text-danger">Password is Required</span>
+            </div>
+            <div *ngIf="txtCPassword.errors?.required && txtCPassword.touched">
+              <span class="text-danger">Password is Required</span>
+            </div>
+            <div *ngIf="txtCPassword.errors?.pattern">
+              <span class="text-danger">Password Invalid</span>
+            </div>
+            <div *ngIf="txtNewPassword.errors?.pattern">
+                <span class="text-danger">Password Invalid</span>
+              </div>
+            <!-- <div ng-if="txtNewPassword.value !== txtCPassword.value">
+              <span class="text-danger">Passwords do not match</span>
+            </div> -->
+            <div ng-if="!errorMessage == null">
+              <span class="text-danger">{{loginErrorMsg}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id='btnCloseFeedback' type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" [disabled]="frm1.invalid" class="btn btn-primary" (click)="InitSetup(txtNUsername.value,txtCPassword.value);">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
