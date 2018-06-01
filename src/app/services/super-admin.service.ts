@@ -331,6 +331,28 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  sendShipped(OrderDetailID: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {OrderDetailID: OrderDetailID};
+    return this._http
+      .post(environment.apiURL + 'order/OrderShipped.php?id=' + OrderDetailID, data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  sendDelievered(OrderDetailID: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {OrderDetailID: OrderDetailID};
+    return this._http
+      .post(environment.apiURL + 'order/OrderDelievered.php?id=' + OrderDetailID, data, options)
+      .pipe(map(res => res.json()));
+  }
+
   sendReply(Id: number, Subject: string , Reply: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -347,5 +369,12 @@ export class SuperAdminService {
       .get(environment.apiURL + 'feedback/getfeedbacks.php')
       .pipe(map(res => res.json()));
   }
+
+  getOrder() {
+    return this._http
+      .get(environment.apiURL + 'Order/GetAllOrder.php')
+      .pipe(map(res => res.json()));
+  }
+
 
 }

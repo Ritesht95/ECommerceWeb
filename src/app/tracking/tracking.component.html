@@ -25,7 +25,8 @@
               <th>Price</th>
               <th>Quantity</th>
               <th>Status</th>
-              <th style="text-align: center">Confirm Order</th>
+              <th style="text-align: center">Shipped</th>
+              <th style="text-align: center">Delivered</th>
               <th></th>
             </tr>
           </thead>
@@ -36,10 +37,28 @@
               <td>{{ o.Qty }}</td>
               <td>{{ o.Status }}</td>
               <td style="text-align: center" *ngIf="o.Status === 'Pending'">
-                <button class="fas fa-times btn btn-danger" (click)="sendOrderId(o.OrderDetailID)"></button>
+                <button class="fas fa-times btn btn-danger" (click)="sendShipped(o.OrderDetailID)"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status !== 'Pending'">
+              <td style="text-align: center" *ngIf="o.Status === 'Confirmed'">
+                <button class="fas fa-times btn btn-danger" (click)="sendShipped(o.OrderDetailID)"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status === 'Shipped'">
                 <button class="fas fa-check-circle btn btn-success"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status === 'Delievered'">
+                  <button class="fas fa-check-circle btn btn-success"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status === 'Pending'">
+                <button class="fas fa-times btn btn-danger" (click)="sendDelievered(o.OrderDetailID)"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status === 'Confirmed'">
+                <button class="fas fa-times btn btn-danger" (click)="sendDelievered(o.OrderDetailID)"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status === 'Shipped'">
+                <button class="fas fa-times btn btn-danger" (click)="sendDelievered(o.OrderDetailID)"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status === 'Delievered'">
+                  <button class="fas fa-check-circle btn btn-success"></button>
               </td>
               <td>
                 <button class="fab fa-product-hunt btn btn-warning" data-toggle="modal" data-target="#productDetailsModal" (click)="getSingleProduct(o.ProductID)"></button> &nbsp;
@@ -53,7 +72,7 @@
     </div>
   </section>
 
-   <div class="modal fade" id="trackingModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal fade" id="trackingModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -63,7 +82,27 @@
           <h5 class="modal-title" id="exampleModalLabel">Tracking Detail</h5>
         </div>
         <div class="modal-body">
-          hello tracking detail
+            <form #frm="ngForm">
+                <div class="form-group">
+                  <label for="txtOldPassword" class="control-label">Tracking Text</label>
+                  <input type="password" ngModel #txtOldPassword="ngModel" name="txtOldPassword" class="form-control" id="txtOldPassword" placeholder="Tracking Text"
+                   required>
+                </div>
+                <div class="form-group">
+                  <label for="txtNewPassword" class="control-label">Arrival Time</label>
+                  <input ngModel #txtAT="ngModel" type="text" name="txtAT" class="form-control" id="txtAT"  required>
+                </div>
+                <div class="form-group">
+                    <label for="txtNewPassword" class="control-label">departure Time</label>
+                    <input type="date" ngModel #txtDT="ngModel" name="txtDT" class="form-control" id="txtDT"  required>
+                  </div>
+                  <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="reservationtime">
+                    </div>
+            </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -73,67 +112,67 @@
   </div>
 
   <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <h1 class="modalTitle" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
+              <small>({{productSingleData.CategoryName}})</small>
+            </h1>
           </div>
-          <div class="modal-body">
-            <div class="row">
-              <h1 class="modalTitle" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
-                <small>({{productSingleData.CategoryName}})</small>
-              </h1>
-            </div>
-            <!-- <div class="row text-center">
+          <!-- <div class="row text-center">
               <span *ngFor="let image of productSingleData.image" class="detailsImage">
                 <img style="margin: 10px;" height="100" width="100" class="img-rounded img-bordered" src="{{env}}Assets/ProductImages/{{image.image}}">
               </span>
             </div> -->
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <div>
-                    <label class="labelTitle">Description: </label>
-                  </div>
-                  <div>
-                    <span class="labelValue">{{productSingleData.ProductDesc}}</span>
-                  </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <div>
+                  <label class="labelTitle">Description: </label>
+                </div>
+                <div>
+                  <span class="labelValue">{{productSingleData.ProductDesc}}</span>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label class="labelTitle">Price:</label>
-                  <span class="labelValue">{{productSingleData.Price}}</span>
-                </div>
-                <div class="form-group">
-                  <label class="labelTitle">Unit:</label>
-                  <span class="labelValue">{{productSingleData.Unit}}</span>
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="labelTitle">Price:</label>
+                <span class="labelValue">{{productSingleData.Price}}</span>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label class="labelTitle">Minimum Stock:</label>
-                  <span class="labelValue">{{productSingleData.MinStock}}</span>
-                </div>
-                <div class="form-group">
-                  <label class="labelTitle">Current Stock:</label>
-                  <span class="labelValue">{{productSingleData.CurrentStock}}</span>
-                </div>
+              <div class="form-group">
+                <label class="labelTitle">Unit:</label>
+                <span class="labelValue">{{productSingleData.Unit}}</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="labelTitle">Minimum Stock:</label>
+                <span class="labelValue">{{productSingleData.MinStock}}</span>
+              </div>
+              <div class="form-group">
+                <label class="labelTitle">Current Stock:</label>
+                <span class="labelValue">{{productSingleData.CurrentStock}}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
 
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
+  <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
