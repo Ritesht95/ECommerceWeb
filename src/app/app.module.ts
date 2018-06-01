@@ -41,6 +41,7 @@ import { OrderComponent } from './order/order.component';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
 import { SutrackingComponent } from './sutracking/sutracking.component';
+import { TrackingComponent } from './tracking/tracking.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { SutrackingComponent } from './sutracking/sutracking.component';
     OrderComponent,
     ProductdetailsComponent,
     TrackingdetailsComponent,
-    SutrackingComponent
+    SutrackingComponent,
+    TrackingComponent
   ],
   imports: [
     BrowserModule,

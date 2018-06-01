@@ -284,6 +284,17 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  getCustomerDetail(oid: number, cid: number) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {oid: oid, cid: cid};
+    return this._http
+      .post(environment.apiURL + 'User/UserDetailsOrder.php?oid=' + oid + '&cid=' + cid, data, options)
+      .pipe(map(res => res.json()));
+  }
+
   getSellerProfile(ShopID: number) {
     return this._http
       .get(environment.apiURL + 'Shop/SingleShop.php?id=' + ShopID)

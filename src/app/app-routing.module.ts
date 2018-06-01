@@ -32,6 +32,8 @@ import { OrderComponent } from './order/order.component';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
 import { SutrackingComponent } from './sutracking/sutracking.component';
+import { TrackingComponent } from './tracking/tracking.component';
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -63,8 +65,9 @@ const routes: Routes = [
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
   { path: 'orderDetail', component: OrderComponent },
-  { path: 'tracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
+  { path: 'sellertracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
   { path: 'sutracking', canActivate: [AuthGuard], component: SutrackingComponent },
+  { path: 'tracking', component: TrackingComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
