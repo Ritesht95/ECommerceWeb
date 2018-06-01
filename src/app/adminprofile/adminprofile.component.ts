@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { LoginauthService } from '../loginauth.service';
 import { SuperAdminService } from '../services/super-admin.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SellerService } from '../services/seller.service';
 
 @Component({
   selector: 'app-adminprofile',
@@ -19,6 +20,7 @@ export class AdminprofileComponent implements OnInit {
   headerComp: HeaderComponent = new HeaderComponent(
     this.loginAuth,
     this.superadminservice,
+    this.sellerservice,
     this.elem,
     this.router
   );
@@ -80,6 +82,7 @@ export class AdminprofileComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(
     private superadminservice: SuperAdminService,
+    private sellerservice: SellerService,
     private loginAuth: LoginauthService,
     private elem: ElementRef,
     private router: Router

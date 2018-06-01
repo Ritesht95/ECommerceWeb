@@ -348,4 +348,10 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  getTrackingDetails(OrderDetailsID: string) {
+    return this._http
+    .get(environment.apiURL + 'Tracking/ViewTracking.php?id=' + OrderDetailsID)
+    .pipe(map(res => res.json()));
+  }
+
 }

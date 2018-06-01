@@ -29,6 +29,9 @@ import { SucategoryComponent } from './sucategory/sucategory.component';
 import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { OrderComponent } from './order/order.component';
+import { ProductdetailsComponent } from './productdetails/productdetails.component';
+import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
+import { SutrackingComponent } from './sutracking/sutracking.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -45,12 +48,13 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [ShopauthGuard], component: ShopInfoComponent },
-  { path: 'shopDetail', component: ShopDetailComponent  },
+  { path: 'shopDetail',canActivate: [AuthGuard] , component: ShopDetailComponent  },
   { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
   { path: 'product', canActivate: [ShopauthGuard], component: ProductComponent },
   { path: 'productData', canActivate: [ShopauthGuard], component: ProductDataComponent },
+  { path: 'productdetails', canActivate: [ShopauthGuard], component: ProductdetailsComponent },
   { path: 'categoryData', canActivate: [ShopauthGuard], component: CategoryDataComponent},
   { path: 'shopProfile', canActivate: [ShopauthGuard], component: ShopProfileComponent},
   { path: 'contactUs', canActivate: [ShopauthGuard], component: ContactComponent },
@@ -59,6 +63,8 @@ const routes: Routes = [
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
   { path: 'orderDetail', component: OrderComponent },
+  { path: 'tracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
+  { path: 'sutracking', canActivate: [AuthGuard], component: SutrackingComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 

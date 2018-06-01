@@ -38,6 +38,9 @@ import { SucategoryComponent } from './sucategory/sucategory.component';
 import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { OrderComponent } from './order/order.component';
+import { ProductdetailsComponent } from './productdetails/productdetails.component';
+import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
+import { SutrackingComponent } from './sutracking/sutracking.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,10 @@ import { OrderComponent } from './order/order.component';
     SucategoryComponent,
     SuproductComponent,
     FeedbackComponent,
-    OrderComponent
+    OrderComponent,
+    ProductdetailsComponent,
+    TrackingdetailsComponent,
+    SutrackingComponent
   ],
   imports: [
     BrowserModule,
