@@ -39,6 +39,7 @@ import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { OrderComponent } from './order/order.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { TrackingComponent } from './tracking/tracking.component';
     HttpModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    DlDateTimePickerDateModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/' }, LoginauthService, AuthGuard, ShopauthGuard],
   bootstrap: [AppComponent]
