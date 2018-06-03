@@ -12,6 +12,7 @@ import { environment } from '../../environments/environment';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ShopauthGuard } from '../shopauth.guard';
 import { AuthGuard } from '../auth.guard';
+import { SellerService } from '../services/seller.service';
 
 @Component({
   selector: 'app-header',
@@ -67,6 +68,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private loginAuth: LoginauthService,
     private superadminservice: SuperAdminService,
+    private sellerservice: SellerService,
     private elem: ElementRef,
     private router: Router
   ) {
@@ -165,7 +167,41 @@ export class HeaderComponent implements OnInit {
   }
 
   changePassword(oldPassword: string, newPassword: string) {
-    this.superadminservice.changePassword(oldPassword, newPassword).subscribe(
+    if (!this.userType){
+      this.superadminservice.changePassword(oldPassword, newPassword).subscribe(
+        res => {
+          if (res['key'] === 'incorrect') {
+            // Wrong old Password
+            this.errorMessage = 'Wrong old Password';
+            this.ShowAlert(true);
+            this.timeout(false);
+          } else if (res['key'] === 'same') {
+            // Same as Current Password
+            this.errorMessage = 'Same as Current Password';
+            this.ShowAlert(true);
+            this.timeout(false);
+          } else if (res['key'] === 'oldsame') {
+            // Same as Previous Password
+            this.errorMessage = 'Same as Previous Password';
+            this.ShowAlert(true);
+            this.timeout(false);
+          } else if (res['key'] === 'false') {
+            // Server Error
+            this.errorMessage = 'Server Error';
+            this.ShowAlert(true);
+            this.timeout(false);
+          } else {
+            this.successMessage = 'Password changed succesfully';
+            this.ShowAlertS(true);
+            this.timeoutS(false);
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+    this.sellerservice.changePassword(oldPassword, newPassword).subscribe(
       res => {
         if (res['key'] === 'incorrect') {
           // Wrong old Password
