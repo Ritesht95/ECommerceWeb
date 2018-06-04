@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
     const alertDiv = document.getElementById('alertDivS');
     alertDiv.style.display = val ? 'block' : 'none';
     if (!val) {
-      document.getElementById('btnClose').click();
+      document.getElementById('btnCPClose1').click();
     }
   }
 
@@ -168,7 +168,7 @@ export class HeaderComponent implements OnInit {
       res => {
         this.webinfoData = res;
       }
-    )
+    );
   }
 
   changePassword(oldPassword: string, newPassword: string) {

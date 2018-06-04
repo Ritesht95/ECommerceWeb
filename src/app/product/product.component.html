@@ -45,14 +45,13 @@
                   <label for="txtProName">Product Name</label>
                   <span class="text-danger">*</span>
                   <input type="text" class="form-control" [(ngModel)]="singleProductData['ProductName']" id="txtProName" name="txtProName"
-                    #txtProName="ngModel" placeholder="Product Name" pattern="[a-zA-Z]+" required>
+                    #txtProName="ngModel" placeholder="Product Name" pattern="[a-zA-Z0-9 ]+" required>
                 </div>
                 <div class="form-group">
                   <label for="txtDescription">Description
-                    <span class="text-danger">*</span>
                   </label>
                   <textarea class="form-control" [(ngModel)]="singleProductData['ProductDesc']" id="txtDescription" name="txtDescription" #txtDescription="ngModel"
-                    rows="2" placeholder="Description" required></textarea>
+                    rows="2" placeholder="Description"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="txtlogo">Product Image
@@ -84,7 +83,7 @@
                   <label for="txtUnit">Unit</label>
                   <span class="text-danger">*</span>
                   <input type="text" class="form-control" [(ngModel)]="singleProductData['Unit']" id="txtUnit" name="txtUnit" #txtUnit="ngModel"
-                    placeholder="Unit" pattern="[a-zA-Z]+" required>
+                    placeholder="Unit" pattern="[a-zA-Z ]+" required>
                 </div>
                 <div class="form-group">
                   <label for="txtPrice">Price</label>

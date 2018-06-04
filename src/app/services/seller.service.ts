@@ -131,6 +131,27 @@ export class SellerService {
     );
   }
 
+  checkUsername(Username: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      username: Username
+    };
+
+    return (
+      this._http
+        .post(
+          environment.apiURL + 'Shop/SameUsername.php',
+          data,
+          options
+        )
+        // tslint:disable-next-line:no-shadowed-variable
+        .pipe(map(res => res.json()))
+    );
+  }
+
   InitialSetup(UserID: string, NUsername: string, NPassword: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
