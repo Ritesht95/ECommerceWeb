@@ -36,34 +36,44 @@
               <td>{{ o.Price }}</td>
               <td>{{ o.Qty }}</td>
               <td>{{ o.Status }}</td>
-              <td style="text-align: center" *ngIf="o.Status === 'Pending'">
-                <button class="fas fa-times btn btn-danger" (click)="sendShipped(o.OrderDetailID)"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Pending'">
+                <button class="fas fa-times btn btn-danger"
+                  (click)="sendShipped(o.OrderDetailID)"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Confirmed'">
-                <button class="fas fa-times btn btn-danger" (click)="sendShipped(o.OrderDetailID)"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Confirmed'">
+                <button class="fas fa-times btn btn-danger"
+                  (click)="sendShipped(o.OrderDetailID)"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Shipped'">
+              <td style="text-align: center" *ngIf="o.Status=== 'Shipped'">
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Delievered'">
-                  <button class="fas fa-check-circle btn btn-success"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
+                <button class="fas fa-check-circle btn btn-success"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Pending'">
-                <button class="fas fa-times btn btn-danger" (click)="sendDelievered(o.OrderDetailID)"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Pending'">
+                <button class="fas fa-times btn btn-danger"
+                  (click)="sendDelievered(o.OrderDetailID)"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Confirmed'">
-                <button class="fas fa-times btn btn-danger" (click)="sendDelievered(o.OrderDetailID)"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Confirmed'">
+                <button class="fas fa-times btn btn-danger"
+                  (click)="sendDelievered(o.OrderDetailID)"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Shipped'">
-                <button class="fas fa-times btn btn-danger" (click)="sendDelievered(o.OrderDetailID)"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Shipped'">
+                <button class="fas fa-times btn btn-danger"
+                  (click)="sendDelievered(o.OrderDetailID)"></button>
               </td>
-              <td style="text-align: center" *ngIf="o.Status === 'Delievered'">
-                  <button class="fas fa-check-circle btn btn-success"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
+                <button class="fas fa-check-circle btn btn-success"></button>
               </td>
               <td>
-                <button class="fab fa-product-hunt btn btn-warning" data-toggle="modal" data-target="#productDetailsModal" (click)="getSingleProduct(o.ProductID)"></button> &nbsp;
-                <button class="fas fa-users btn btn-primary" data-toggle="modal" data-target="#userModal" (click)="getCustomer(o.OrderID,o.CustomerID)"></button> &nbsp;
-                <button class="fas fa-truck-moving btn btn-info" data-toggle="modal" data-target="#trackingModal"></button>
+                <button class="fab fa-product-hunt btn btn-warning"
+                  data-toggle="modal" data-target="#productDetailsModal"
+                  (click)="getSingleProduct(o.ProductID)"></button> &nbsp;
+                <button class="fas fa-users btn btn-primary" data-toggle="modal"
+                  data-target="#userModal"
+                  (click)="getCustomer(o.OrderID,o.CustomerID)"></button> &nbsp;
+                <button class="fas fa-truck-moving btn btn-info"
+                  data-toggle="modal" data-target="#trackingModal" (click)="testId(o.OrderID)"></button>
               </td>
             </tr>
           </tbody>
@@ -72,40 +82,93 @@
     </div>
   </section>
 
-  <div class="modal fade" id="trackingModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal fade" id="trackingModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h5 class="modal-title" id="exampleModalLabel">Tracking Detail</h5>
         </div>
         <div class="modal-body">
-            <form #frm="ngForm">
-                <div class="form-group">
-                  <label for="txtOldPassword" class="control-label">Tracking Text</label>
-                  <input type="password" ngModel #txtOldPassword="ngModel" name="txtOldPassword" class="form-control" id="txtOldPassword" placeholder="Tracking Text"
-                   required>
-                </div>
-                <div class="input-group">
-                  <label for="txtDateTime" class="control-label">Arrival & Departure Date and Time</label>
-                  <input type="text" class="form-control pull-right" ngModel #txtDateTime="ngModel" name="txtDateTime" id="reservationtime">
-                </div>
-            </form>
+          <form #frm="ngForm">
+            <div class="form-group">
+              <label for="txtText" class="control-label">Tracking Text</label>
+              <input type="text" ngModel #txtText="ngModel" name="txtText"
+                class="form-control" id="txtText" placeholder="Tracking Text"
+                required>
+            </div>
+            <div class="input-group col-md-6">
+                <label for="txtDateTime" class="control-label">Arrival Date and Time</label>
+            </div>
+            <table class="table" style="border: 0;">
+              <tr>
+                <td><div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right"
+                      id="datepicker1" ngModel #datepicker1="ngModel">
+                  </div> </td>
+                <td>
+                  <div class="bootstrap-timepicker col-md-12">
+                    <div class="input-group col-md-12">
+                      <input type="text" class="form-control timepicker timepicker1"
+                        id="timepicker1" ngModel #timepicker1="ngModel">
+                      <div class="input-group-addon">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="input-group col-md-6">
+                <label>Departure Date and Time</label>
+            </div>
+            <table class="table" style="border: 0;">
+              <tr>
+                <td><div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right"
+                      id="datepicker2" ngModel #datepicker2="ngModel">
+                  </div> </td>
+                <td>
+                  <div class="bootstrap-timepicker col-md-12">
+                    <div class="input-group col-md-12">
+                      <input type="text" class="form-control timepicker timepicker2"
+                        id="timepicker2" ngModel #timepicker2="ngModel">
+                      <div class="input-group-addon">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-dismiss="modal"
+            (click)="sendTracking(txtText.value)">Submit</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModal" aria-hidden="true">
+  <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog"
+    aria-labelledby="productDetailsModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
@@ -158,18 +221,21 @@
 
 
 
-  <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
+  <div class="modal fade" id="userModal" tabindex="-1" role="dialog"
+    aria-labelledby="userModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h4 class="modal-title" id="exampleModalLabel">Customer Detail</h4>
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-6" style="background-color: #4693be; margin-right: 10px;">
+            <div class="col-md-6" style="background-color: #4693be;
+              margin-right: 10px;">
               <h3>
                 <font color="white">Customer Information</font>
               </h3>
@@ -200,7 +266,8 @@
                 </table>
               </div>
             </div>
-            <div class="col-md-6" style="background-color: #4693be; margin-right: 10px;">
+            <div class="col-md-6" style="background-color: #4693be;
+              margin-right: 10px;">
               <h3>
                 <font color="white">Shipping Information</font>
               </h3>
@@ -267,5 +334,4 @@
 </div>
 
 
-  <!-- /.input group -->
-
+<!-- /.input group -->

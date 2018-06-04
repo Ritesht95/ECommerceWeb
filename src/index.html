@@ -40,19 +40,28 @@
 <script src='./assets/dist/js/adminlte.min.js'></script>
 <script src='./assets/dist/js/pages/dashboard.js'></script>
 <script src='./assets/dist/js/demo.js'></script>
+<script src='./assets/bower_components/select2/dist/js/select2.full.min.js'></script>
+<script src='./assets/plugins/timepicker/bootstrap-timepicker.min.js'></script>
 
 <script>
   $(function () {
 
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-    //Date range as a button
+   $('#datepicker1').datepicker({
+      autoclose: true
+    })
 
 
-    //Date picker
+    $('#datepicker2').datepicker({
+      autoclose: true
+    })
+
+	$('.timepicker').timepicker({
+      showInputs: false
+    })
 
 
 
   })
+
 </script>
 </html>

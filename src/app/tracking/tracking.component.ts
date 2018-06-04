@@ -15,6 +15,12 @@ export class TrackingComponent implements OnInit {
   customer: any = '';
   productSingleData: any = '';
   env = environment.apiURL;
+  id: number;
+  adate: string ;
+  ddate: string ;
+  dtime: string ;
+  atime: string ;
+
 
   constructor(private superadminservice: SuperAdminService, private sellerservice: SellerService, private loginAuth: LoginauthService) { }
 
@@ -60,6 +66,29 @@ export class TrackingComponent implements OnInit {
     this.sellerservice.getSingleProduct(ProductID).subscribe(res => {
       this.productSingleData = res;
     });
+  }
+
+  testId(n: number) {
+    this.id = n;
+  }
+
+  sendTracking(text: string) {
+    this.adate = document.getElementById('datepicker1').value ;
+    this.ddate = document.getElementById('datepicker2').value ;
+    this.atime = document.getElementById('timepicker1').value ;
+    this.dtime = document.getElementById('timepicker2').value ;
+    console.log(this.id, text, this.adate, this.ddate, this.atime, this.dtime);
+    this.superadminservice.sendTracking(this.id, text, this.adate, this.ddate, this.atime, this.dtime).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+            console.log('sucessfully send');
+            this.ngOnInit();
+        } else {
+          console.log('error');
+        }
+      }
+    );
+    this.ngOnInit();
   }
 
   sendShipped(OrderDetailID: number) {
