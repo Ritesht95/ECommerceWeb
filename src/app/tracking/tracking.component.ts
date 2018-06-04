@@ -78,7 +78,7 @@ export class TrackingComponent implements OnInit {
     this.atime = document.getElementById('timepicker1').value ;
     this.dtime = document.getElementById('timepicker2').value ;
     console.log(this.id, text, this.adate, this.ddate, this.atime, this.dtime);
-    this.superadminservice.sendTracking(this.id, text, this.adate, this.ddate, this.atime, this.dtime).subscribe(
+    this.superadminservice.sendTracking(this.id, text, this.adate, this.atime, this.ddate, this.dtime).subscribe(
       res => {
         if (res['key'] === 'true') {
             console.log('sucessfully send');
