@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuperAdminService } from '../services/super-admin.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SellerService } from '../services/seller.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-resetpassword',
@@ -13,6 +14,8 @@ export class ResetpasswordComponent implements OnInit {
   rand: string;
   errorMsg = null;
   Username = null;
+  webinfoData = '';
+  env = environment.apiURL;
 
   timeout(val: boolean) {
     setTimeout(this.ShowAlert, 5000, val);
@@ -61,6 +64,13 @@ export class ResetpasswordComponent implements OnInit {
         }
       });
     }
+
+    this.superadminservice.getWebInfo().subscribe(
+      res => {
+        this.webinfoData = res;
+      }
+    );
+
   }
 
   ResetPassword(VerificationCode: string, NewPassword: string) {
@@ -72,6 +82,7 @@ export class ResetpasswordComponent implements OnInit {
             this.errorMsg = 'Password reset successfully.';
             this.ShowAlert(true);
             this.timeout(false);
+            this.router.navigate(['/login']);
           } else if (res['key'] === 'same') {
             this.errorMsg = 'Use new password, this was already used before!';
             this.ShowAlert(true);
