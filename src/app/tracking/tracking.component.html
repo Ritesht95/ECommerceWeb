@@ -88,20 +88,10 @@
                   <input type="password" ngModel #txtOldPassword="ngModel" name="txtOldPassword" class="form-control" id="txtOldPassword" placeholder="Tracking Text"
                    required>
                 </div>
-                <div class="form-group">
-                  <label for="txtNewPassword" class="control-label">Arrival Time</label>
-                  <input ngModel #txtAT="ngModel" type="text" name="txtAT" class="form-control" id="txtAT"  required>
+                <div class="input-group">
+                  <label for="txtDateTime" class="control-label">Arrival & Departure Date and Time</label>
+                  <input type="text" class="form-control pull-right" ngModel #txtDateTime="ngModel" name="txtDateTime" id="reservationtime">
                 </div>
-                <div class="form-group">
-                    <label for="txtNewPassword" class="control-label">departure Time</label>
-                    <input type="date" ngModel #txtDT="ngModel" name="txtDT" class="form-control" id="txtDT"  required>
-                  </div>
-                  <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fas fa-clock"></i>
-                      </div>
-                      <input type="text" class="form-control pull-right" id="reservationtime">
-                    </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -126,11 +116,7 @@
               <small>({{productSingleData.CategoryName}})</small>
             </h1>
           </div>
-          <!-- <div class="row text-center">
-              <span *ngFor="let image of productSingleData.image" class="detailsImage">
-                <img style="margin: 10px;" height="100" width="100" class="img-rounded img-bordered" src="{{env}}Assets/ProductImages/{{image.image}}">
-              </span>
-            </div> -->
+
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
@@ -279,3 +265,7 @@
     </div>
   </div>
 </div>
+
+
+  <!-- /.input group -->
+

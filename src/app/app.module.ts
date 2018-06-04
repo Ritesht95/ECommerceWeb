@@ -42,6 +42,7 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
 import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { TrackingComponent } from './tracking/tracking.component';
     HttpModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    DlDateTimePickerDateModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/' }, LoginauthService, AuthGuard, ShopauthGuard],
   bootstrap: [AppComponent]
