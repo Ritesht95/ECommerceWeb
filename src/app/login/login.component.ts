@@ -24,6 +24,7 @@ export class LoginComponent {
   public resData: SuperAdmin;
   errormessage: string;
   loginErrorMsg = null;
+  UserID = '';
 
   timeout(val: boolean) {
     setTimeout(this.ShowAlert, 5000, val);
@@ -40,6 +41,9 @@ export class LoginComponent {
     private router: Router,
     private loginAuth: LoginauthService
   ) {}
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnInit() {}
 
   CheckLogin(Email: string, Password: string, Type: string) {
     if (Type === 'Admin') {
@@ -67,24 +71,51 @@ export class LoginComponent {
       );
     } else {
       this.sellerservice.checkLogin(Email, Password).subscribe(res => {
+        console.log(res);
         if (res['key'] === 'false' || res === undefined) {
           this.loginErrorMsg = 'Incorrect Username or Password!';
           this.ShowAlert(true);
           this.timeout(false);
         } else {
-          this.loginAuth.setSUserLoggedIn(true);
-          console.log(res['Email']);
-          this.loginAuth.setValues(
-            res['ShopID'],
-            res['Email'],
-            'seller',
-            res['ShopName']
-          );
-          this.router.navigate(['shopdashboard']);
+          if (res['IsInitialSetup'] === '0') {
+            this.UserID = res['ShopID'];
+            document.getElementById('btnIniItModal').click();
+          } else {
+            this.loginAuth.setSUserLoggedIn(true);
+            console.log(res['Email']);
+            this.loginAuth.setValues(
+              res['ShopID'],
+              res['Email'],
+              'seller',
+              res['ShopName']
+            );
+            this.router.navigate(['shopdashboard']);
+          }
         }
       });
     }
   }
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngOnInit() {}
+
+  InitSetup(NUsername: string , NPassword: string) {
+    this.sellerservice.InitialSetup(this.UserID, NUsername, NPassword).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+          document.getElementById('btnCloseFeedback').click();
+          this.loginAuth.setSUserLoggedIn(true);
+            console.log(res['Email']);
+            this.loginAuth.setValues(
+              res['ShopID'],
+              res['Email'],
+              'seller',
+              res['ShopName']
+            );
+            this.router.navigate(['shopdashboard']);
+        } else {
+          this.loginErrorMsg = 'Could not complete Initial Setup! Try again later.';
+          this.ShowAlert(true);
+          this.timeout(false);
+        }
+      }
+    );
+  }
 }

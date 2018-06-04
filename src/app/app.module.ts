@@ -38,6 +38,9 @@ import { SucategoryComponent } from './sucategory/sucategory.component';
 import { SuproductComponent } from './suproduct/suproduct.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { OrderComponent } from './order/order.component';
+import { ProductdetailsComponent } from './productdetails/productdetails.component';
+import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
+import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
 
@@ -74,6 +77,9 @@ import { DlDateTimePickerDateModule } from 'angular-bootstrap-datetimepicker';
     SuproductComponent,
     FeedbackComponent,
     OrderComponent,
+    ProductdetailsComponent,
+    TrackingdetailsComponent,
+    SutrackingComponent,
     TrackingComponent
   ],
   imports: [

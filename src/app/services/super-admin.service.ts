@@ -369,12 +369,16 @@ export class SuperAdminService {
       .get(environment.apiURL + 'feedback/getfeedbacks.php')
       .pipe(map(res => res.json()));
   }
-
+  
+  getTrackingDetails(OrderDetailsID: string) {
+    return this._http
+    .get(environment.apiURL + 'Tracking/ViewTracking.php?id=' + OrderDetailsID)
+    .pipe(map(res => res.json()));
+  }
+  
   getOrder() {
     return this._http
       .get(environment.apiURL + 'Order/GetAllOrder.php')
       .pipe(map(res => res.json()));
   }
-
-
 }

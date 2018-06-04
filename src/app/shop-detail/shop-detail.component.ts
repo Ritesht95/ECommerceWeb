@@ -10,7 +10,7 @@ import { SuperAdminService } from '../services/super-admin.service';
 export class ShopDetailComponent implements OnInit {
 
   private shopDetailID: number;
-  shopData: any;
+  shopData: any = '';
 
   constructor(private actRoute: ActivatedRoute, private superadminservice: SuperAdminService) {
     this.actRoute.queryParams.subscribe(params => {
