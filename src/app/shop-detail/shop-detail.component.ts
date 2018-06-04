@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SuperAdminService } from '../services/super-admin.service';
+import { environment } from '../../environments/environment'
 
 @Component({
   selector: 'app-shop-detail',
@@ -11,6 +12,7 @@ export class ShopDetailComponent implements OnInit {
 
   private shopDetailID: number;
   shopData: any = '';
+  env = environment.apiURL;
 
   constructor(private actRoute: ActivatedRoute, private superadminservice: SuperAdminService) {
     this.actRoute.queryParams.subscribe(params => {
