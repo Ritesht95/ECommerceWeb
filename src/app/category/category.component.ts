@@ -164,7 +164,6 @@ export class CategoryComponent implements OnInit {
     Filterable: boolean,
     ColumnOrder: number
   ) {
-    console.log('call' + ID);
     if (this.categoryID !== 0) {
       if (ID === undefined) {
         ID = 'new';
@@ -172,14 +171,6 @@ export class CategoryComponent implements OnInit {
       if (!Filterable) {
         Filterable = false;
       }
-      // tslint:disable-next-line:max-line-length
-      // this.propertiesData.push({
-      //   ID: ID,
-      //   PropertyName: PropertyName,
-      //   PropertyDesc: PropertyDesc,
-      //   IsFilterable: Filterable,
-      //   ColumnOrder: ColumnOrder
-      // });
 
       this.sellerservice
         .addProperty(this.categoryID, {
@@ -191,7 +182,11 @@ export class CategoryComponent implements OnInit {
         })
         .subscribe(res => {
           this.propertiesData = res['records'];
-          this.propertyData = '';
+          this.propertyData = '{}';
+          (<HTMLInputElement> document.getElementById('txtProName')).value = '';
+          (<HTMLInputElement>document.getElementById('txtProDis')).value = '';
+          (<HTMLInputElement>document.getElementById('txtColOrd')).value = '';
+          (<HTMLInputElement>document.getElementById('chkFilter')).removeAttribute('checked');
         });
     } else {
       console.log('first Add category to add properties to it.');

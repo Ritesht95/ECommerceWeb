@@ -20,6 +20,7 @@ import { environment } from '../../environments/environment';
   providers: [SuperAdminService]
 })
 export class LoginComponent {
+  flag: boolean;
   showStyle = false;
   loginform: FormGroup;
   public resData: SuperAdmin;
@@ -38,6 +39,15 @@ export class LoginComponent {
     alertDiv.style.display = val ? 'block' : 'none';
   }
 
+  timeout1(val: boolean) {
+    setTimeout(this.ShowAlert1, 5000, val);
+  }
+
+  ShowAlert1(val: boolean) {
+    const alertDiv = document.getElementById('alertDiv1');
+    alertDiv.style.display = val ? 'block' : 'none';
+  }
+
   constructor(
     private superadminservice: SuperAdminService,
     private sellerservice: SellerService,
@@ -47,11 +57,9 @@ export class LoginComponent {
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.superadminservice.getWebInfo().subscribe(
-      res => {
-        this.webinfoData = res;
-      }
-    );
+    this.superadminservice.getWebInfo().subscribe(res => {
+      this.webinfoData = res;
+    });
   }
 
   CheckLogin(Email: string, Password: string, Type: string) {
@@ -105,24 +113,40 @@ export class LoginComponent {
     }
   }
 
-  InitSetup(NUsername: string , NPassword: string) {
-    this.sellerservice.InitialSetup(this.UserID, NUsername, NPassword).subscribe(
-      res => {
+  InitSetup(NUsername: string, NPassword: string) {
+    this.sellerservice
+      .InitialSetup(this.UserID, NUsername, NPassword)
+      .subscribe(res => {
         if (res['key'] === 'true') {
           document.getElementById('btnCloseFeedback').click();
           this.loginAuth.setSUserLoggedIn(true);
-            console.log(res['Email']);
-            this.loginAuth.setValues(
-              res['ShopID'],
-              res['Email'],
-              'seller',
-              res['ShopName']
-            );
-            this.router.navigate(['shopdashboard']);
+          console.log(res['Email']);
+          this.loginAuth.setValues(
+            res['ShopID'],
+            res['Email'],
+            'seller',
+            res['ShopName']
+          );
+          this.router.navigate(['shopdashboard']);
         } else {
-          this.loginErrorMsg = 'Could not complete Initial Setup! Try again later.';
-          this.ShowAlert(true);
-          this.timeout(false);
+          this.errormessage =
+            'Could not complete Initial Setup! Try again later.';
+          this.ShowAlert1(true);
+          this.timeout1(false);
+        }
+      });
+  }
+
+  checkUsername(Username: string) {
+    this.sellerservice.checkUsername(Username).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+          this.errormessage = 'Username already exist';
+          this.flag = true;
+          this.ShowAlert1(true);
+          this.timeout1(false);
+        } else {
+          this.flag = false;
         }
       }
     );

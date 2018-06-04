@@ -57,14 +57,14 @@
                           <span class="text-danger">*</span>
                         </label>
                         <input type="text" class="form-control" id="txtShopName" placeholder="Shop Name" name="txtShopName" [(ngModel)]="shopInfo.ShopName"
-                          required #txtShopName="ngModel" pattern="[a-zA-Z0-9]+">
+                          required #txtShopName="ngModel" pattern="[a-zA-Z0-9 ]+">
                       </div>
                       <div class="form-group">
                         <label for="txtShopType">Shop Type
                           <span class="text-danger">*</span>
                         </label>
                         <input type="text" class="form-control" id="txtShopType" placeholder="Shop Type" name="txtShopType" [(ngModel)]="shopInfo.ShopType"
-                          required #txtShopType="ngModel" pattern="[a-zA-Z]+">
+                          required #txtShopType="ngModel" pattern="[a-zA-Z ]+">
                       </div>
                       <div class="form-group">
                         <label for="txtContact">Contact Number
@@ -87,21 +87,21 @@
                           <span class="text-danger">*</span>
                         </label>
                         <input type="text" class="form-control" id="txtAddress" placeholder="Address" name="txtAddress" [(ngModel)]="shopInfo.Address"
-                          required #txtAddress="ngModel" pattern="[a-zA-Z0-9/-/.]+">
+                          required #txtAddress="ngModel" pattern="[a-zA-Z0-9/-/. ]+">
                       </div>
                       <div class="form-group">
                         <label for="txtCity">City
                           <span class="text-danger">*</span>
                         </label>
                         <input type="text" class="form-control" id="txtCity" placeholder="City" name="txtCity" [(ngModel)]="shopInfo.City" required
-                          #txtCity="ngModel" pattern="[a-zA-Z]+">
+                          #txtCity="ngModel" pattern="[a-zA-Z ]+">
                       </div>
                       <div class="form-group">
                         <label for="txtState">State
                           <span class="text-danger">*</span>
                         </label>
                         <input type="text" class="form-control" id="txtState" placeholder="State" name="txtState" [(ngModel)]="shopInfo.State" required
-                          #txtState="ngModel" pattern="[a-zA-Z]+">
+                          #txtState="ngModel" pattern="[a-zA-Z ]+">
                       </div>
                       <div class="form-group">
                         <label for="txtPincode">Pincode
