@@ -13,62 +13,103 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">NAVIGATION</li>
       <li *ngIf="!userType">
-        <a href="" [routerLink]="['/dashboard']">
+        <a [routerLink]="['/dashboard']">
           <i class="fa fa-tachometer-alt"></i>
           <span> Dashboard</span>
         </a>
       </li>
       <li *ngIf="!userType">
-        <a href="" [routerLink]="['/webinfo']">
-          <i class="fa fa-th"></i>
+        <a [routerLink]="['/webinfo']">
+          <i class="fa fa-globe"></i>
           <span> Web Information</span>
         </a>
       </li>
       <li *ngIf="!userType">
-        <a href="" [routerLink]="['/shops']">
+        <a [routerLink]="['/shops']">
           <i class="fa fa-store"></i>
           <span> Shops</span>
         </a>
       </li>
       <li *ngIf="!userType">
-        <a href="" [routerLink]="['/mailinfo']">
+        <a [routerLink]="['/userdata']">
+          <i class="fa fa-users"></i>
+          <span> All Users</span>
+        </a>
+      </li>
+      <li *ngIf="!userType">
+        <a [routerLink]="['/mailinfo']">
           <i class="fa fa-envelope"></i>
           <span> Website Mail Settings</span>
         </a>
       </li>
       <li *ngIf="!userType">
-        <a href="" [routerLink]="['/sucategory']">
-          <i class="fa fa-envelope"></i>
+        <a [routerLink]="['/sucategory']">
+          <i class="fa fa-list"></i>
           <span> Seller Categories</span>
         </a>
       </li>
       <li *ngIf="!userType">
-        <a href="" [routerLink]="['/suproduct']">
-          <i class="fa fa-envelope"></i>
-          <span> Products Products</span>
+        <a [routerLink]="['/suproduct']">
+          <i class="fa fa-gift"></i>
+          <span> Seller Products</span>
+        </a>
+      </li>
+      <li *ngIf="!userType">
+        <a [routerLink]="['/tracking']">
+          <i class="fa fa-file-alt"></i>
+          <span> Orders</span>
+        </a>
+      </li>
+      <li *ngIf="!userType">
+        <a [routerLink]="['/sutracking']">
+          <i class="fa fa-truck-moving"></i>
+          <span> Order Tracking</span>
         </a>
       </li>
 
 
       <li *ngIf="userType">
-        <a href="" [routerLink]="['/shopdashboard']">
+        <a [routerLink]="['/shopdashboard']">
           <i class="fa fa-tachometer-alt"></i>
           <span> Dashboard</span>
         </a>
       </li>
       <li *ngIf="userType">
-        <a href="" [routerLink]="['/categoryData']">
-          <i class="fa fa-tachometer-alt"></i>
+        <a [routerLink]="['/categoryData']">
+          <i class="fa fa-list"></i>
           <span> Category</span>
         </a>
       </li>
       <li *ngIf="userType">
-        <a href="" [routerLink]="['/productData']">
-          <i class="fa fa-tachometer-alt"></i>
+        <a [routerLink]="['/productData']">
+          <i class="fa fa-gift"></i>
           <span> Products</span>
         </a>
       </li>
-
+      <li *ngIf="userType">
+        <a [routerLink]="['/orderDetail']">
+          <i class="fa fa-file-alt"></i>
+          <span> Orders</span>
+        </a>
+      </li>
+      <li *ngIf="userType">
+        <a [routerLink]="['/sellertracking']">
+          <i class="fa fa-truck-moving"></i>
+          <span> Order Tracking</span>
+        </a>
+      </li>
+      <li *ngIf="userType">
+        <a [routerLink]="['/aboutUs']">
+          <i class="fa fa-info-circle"></i>
+          <span> About Us</span>
+        </a>
+      </li>
+      <li *ngIf="userType">
+        <a [routerLink]="['/contactUs']">
+          <i class="fa fa-phone-square"></i>
+          <span> Contact Us</span>
+        </a>
+      </li>
 
     </ul>
   </section>

@@ -9,24 +9,42 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SutrackingComponent implements OnInit {
 
-  private orderDetailsID = '';
+  orderDetailsID = '';
   trackingData = '';
   flag = false;
 
   constructor(private superadminservice: SuperAdminService, private actRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    document.getElementById('divAlert').style.display = 'none';
     this.actRoute.queryParams.subscribe(params => {
       this.orderDetailsID = params['ODID'];
     });
-    this.superadminservice.getTrackingDetails(this.orderDetailsID).subscribe(
+    console.log(this.orderDetailsID);
+    if (this.orderDetailsID === undefined) {
+      document.getElementById('divTimeline').style.display = 'none';
+    } else {
+      this.track(this.orderDetailsID);
+    }
+
+  }
+
+  track(OrderDetailsID: string) {
+    this.superadminservice.getTrackingDetails(OrderDetailsID).subscribe(
       res => {
-        this.trackingData = res['records'];
-        res['records'].forEach(element => {
-          if (element['Status'] === 'Delievered') {
-            this.flag = true;
-          }
-        });
+        if (res['key'] === 'false') {
+          document.getElementById('divAlert').style.display = 'block';
+          document.getElementById('divTimeline').style.display = 'none';
+        } else {
+          document.getElementById('divTimeline').style.display = 'block';
+          document.getElementById('divAlert').style.display = 'none';
+          this.trackingData = res['records'];
+          res['records'].forEach(element => {
+            if (element['Status'] === 'Delievered') {
+              this.flag = true;
+            }
+          });
+        }
       }
     );
   }
