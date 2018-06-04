@@ -392,4 +392,11 @@ export class SellerService {
       .post(environment.apiURL + 'Category/AddPropertyValue.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  getTrackingDetails(OrderDetailsID: string, SellerID: string) {
+    return this._http
+    .get(environment.apiURL + 'Tracking/ViewTracking.php?id=' + OrderDetailsID + '&sid=' + SellerID)
+    .pipe(map(res => res.json()));
+  }
+
 }

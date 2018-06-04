@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { LoginauthService } from '../loginauth.service';
 import { SuperAdmin } from '../classes/super-admin';
 import { SellerService } from '../services/seller.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,8 @@ export class LoginComponent {
   errormessage: string;
   loginErrorMsg = null;
   UserID = '';
+  env = environment.apiURL;
+  webinfoData = '';
 
   timeout(val: boolean) {
     setTimeout(this.ShowAlert, 5000, val);
@@ -43,7 +46,13 @@ export class LoginComponent {
   ) {}
 
   // tslint:disable-next-line:use-life-cycle-interface
-  ngOnInit() {}
+  ngOnInit() {
+    this.superadminservice.getWebInfo().subscribe(
+      res => {
+        this.webinfoData = res;
+      }
+    );
+  }
 
   CheckLogin(Email: string, Password: string, Type: string) {
     if (Type === 'Admin') {

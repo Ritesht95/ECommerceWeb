@@ -369,16 +369,33 @@ export class SuperAdminService {
       .get(environment.apiURL + 'feedback/getfeedbacks.php')
       .pipe(map(res => res.json()));
   }
-  
+
   getTrackingDetails(OrderDetailsID: string) {
     return this._http
     .get(environment.apiURL + 'Tracking/ViewTracking.php?id=' + OrderDetailsID)
     .pipe(map(res => res.json()));
   }
-  
+
   getOrder() {
     return this._http
       .get(environment.apiURL + 'Order/GetAllOrder.php')
+      .pipe(map(res => res.json()));
+  }
+
+  getAllUsers() {
+    return this._http
+      .get(environment.apiURL + 'User/AllUserData.php')
+      .pipe(map(res => res.json()));
+  }
+
+  setUserStatus(UserID: string, Status) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = { ID: UserID, Status: Status};
+    return this._http
+      .post(environment.apiURL + 'User/SetStatus.php', data, options)
       .pipe(map(res => res.json()));
   }
 }

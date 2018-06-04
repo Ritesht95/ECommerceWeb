@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   userType: boolean;
+  webinfoData = '';
 
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
@@ -163,7 +164,11 @@ export class HeaderComponent implements OnInit {
         }
       );
     }
-
+    this.superadminservice.getWebInfo().subscribe(
+      res => {
+        this.webinfoData = res;
+      }
+    )
   }
 
   changePassword(oldPassword: string, newPassword: string) {

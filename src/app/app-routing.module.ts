@@ -33,6 +33,7 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.component';
 import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { UserdataComponent } from './userdata/userdata.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -50,7 +51,7 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [ShopauthGuard], component: ShopInfoComponent },
-  { path: 'shopDetail',canActivate: [AuthGuard] , component: ShopDetailComponent  },
+  { path: 'shopDetail', canActivate: [AuthGuard] , component: ShopDetailComponent  },
   { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
   { path: 'initial-setup', component: IntialSetupComponent },
@@ -64,14 +65,11 @@ const routes: Routes = [
   { path: 'sucategory', canActivate: [AuthGuard], component: SucategoryComponent },
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
-  { path: 'orderDetail', component: OrderComponent },
-<<<<<<< HEAD
+  { path: 'orderDetail', canActivate: [ShopauthGuard], component: OrderComponent },
   { path: 'tracking', canActivate: [AuthGuard], component: TrackingComponent },
-=======
   { path: 'sellertracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
   { path: 'sutracking', canActivate: [AuthGuard], component: SutrackingComponent },
-  { path: 'tracking', component: TrackingComponent },
->>>>>>> a4954f6e1143d406b5963251d1ccc306fce60413
+  { path: 'userdata', canActivate: [AuthGuard], component: UserdataComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 

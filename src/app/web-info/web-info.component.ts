@@ -14,6 +14,7 @@ export class WebInfoComponent implements OnInit {
   fileToUpload: File = null;
   formData: FormData = new FormData();
   webInfo: any = '';
+  env = environment.apiURL;
 
   constructor(
     private superadminservice: SuperAdminService,
