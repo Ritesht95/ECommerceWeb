@@ -73,10 +73,10 @@ export class TrackingComponent implements OnInit {
   }
 
   sendTracking(text: string) {
-    this.adate = document.getElementById('datepicker1').value ;
-    this.ddate = document.getElementById('datepicker2').value ;
-    this.atime = document.getElementById('timepicker1').value ;
-    this.dtime = document.getElementById('timepicker2').value ;
+    this.adate = (<HTMLInputElement>document.getElementById('datepicker1')).value;
+    this.ddate = (<HTMLInputElement>document.getElementById('datepicker2')).value ;
+    this.atime = (<HTMLInputElement>document.getElementById('timepicker1')).value ;
+    this.dtime = (<HTMLInputElement>document.getElementById('timepicker2')).value ;
     console.log(this.id, text, this.adate, this.ddate, this.atime, this.dtime);
     this.superadminservice.sendTracking(this.id, text, this.adate, this.atime, this.ddate, this.dtime).subscribe(
       res => {
