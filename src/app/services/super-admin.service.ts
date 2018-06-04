@@ -364,6 +364,18 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  sendTracking(Id: number, ttext: string , adate: string, atime: string, ddate: string, dtime: string) {
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {OrderDetailsID: Id, TrackingText: ttext, ArrivedDate: adate, DispatchedDate: ddate, ArrivedTime: atime,
+       DispatchedTime: dtime};
+    return this._http
+      .post(environment.apiURL + 'Tracking/AddTracking.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
   getFeedback() {
     return this._http
       .get(environment.apiURL + 'feedback/getfeedbacks.php')
