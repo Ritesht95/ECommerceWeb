@@ -65,9 +65,13 @@ const routes: Routes = [
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
   { path: 'orderDetail', component: OrderComponent },
+<<<<<<< HEAD
+  { path: 'tracking', canActivate: [AuthGuard], component: TrackingComponent },
+=======
   { path: 'sellertracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
   { path: 'sutracking', canActivate: [AuthGuard], component: SutrackingComponent },
   { path: 'tracking', component: TrackingComponent },
+>>>>>>> a4954f6e1143d406b5963251d1ccc306fce60413
   { path: '**', redirectTo: 'not-found' }
 ];
 
