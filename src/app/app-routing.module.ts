@@ -60,7 +60,7 @@ const routes: Routes = [
   { path: 'suproduct', canActivate: [AuthGuard], component: SuproductComponent },
   { path: 'feedback', component: FeedbackComponent},
   { path: 'orderDetail', component: OrderComponent },
-  { path: 'tracking', component: TrackingComponent },
+  { path: 'tracking', canActivate: [AuthGuard], component: TrackingComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 
