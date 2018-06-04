@@ -17,6 +17,10 @@ export class ProductDataComponent implements OnInit {
   env = environment.apiURL;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  categoryProperties = '';
+  operation = '';
+  categoryID = '';
+  productID = '';
 
   constructor(
     private sellerservice: SellerService,
@@ -67,4 +71,19 @@ export class ProductDataComponent implements OnInit {
       }
     });
   }
+
+  getProperty(cid: any, pid: any) {
+    this.categoryID = cid;
+    this.productID = pid;
+    console.log(this.categoryID, this.productID);
+    this.sellerservice
+    .getCategoryProperties(this.categoryID, this.productID)
+    .subscribe(res => {
+      this.categoryProperties = res['records'];
+    });
+    this.sellerservice.getSingleProduct(this.productID).subscribe(res => {
+      this.productSingleData = res;
+    });
+  }
+
 }
