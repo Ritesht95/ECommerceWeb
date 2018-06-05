@@ -27,3 +27,8 @@ button.transbtn {
 textarea {
   resize: none;
 }
+
+.propertytable{
+  border: none !important;
+  padding: 0px;
+}

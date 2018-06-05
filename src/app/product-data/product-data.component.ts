@@ -30,7 +30,7 @@ export class ProductDataComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
     this.sellerservice
       .getAllProducts(this.loginAuth.getSUserID())
@@ -57,7 +57,7 @@ export class ProductDataComponent implements OnInit {
             this.productsData = res1['records'];
           });
       } else {
-        console.log('cannot update stock.');
+       alert("Mimimum Stock is Required");
       }
     });
   }
@@ -70,6 +70,24 @@ export class ProductDataComponent implements OnInit {
         console.log('Cannot delete the image');
       }
     });
+  }
+
+  SetActive(pid: any){
+    this.sellerservice
+    .setProductActive(pid,'1')
+    .subscribe(
+      res => {
+        this.ngOnInit();
+      });
+  }
+
+  SetInactive(pid: any){
+    this.sellerservice
+    .setProductActive(pid,'0')
+    .subscribe(
+      res => {
+        this.ngOnInit();
+      });
   }
 
   getProperty(cid: any, pid: any) {

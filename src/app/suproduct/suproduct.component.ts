@@ -16,6 +16,7 @@ export class SuproductComponent implements OnInit {
   env = environment.apiURL;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  categoryProperties = '';
 
   constructor(private superadminservice: SuperAdminService, private sellerservice: SellerService) { }
 
@@ -50,6 +51,18 @@ export class SuproductComponent implements OnInit {
         }
       }
     );
+  }
+
+  getProperty(cid: any, pid: any) {
+    
+    this.sellerservice
+    .getCategoryProperties(cid, pid)
+    .subscribe(res => {
+      this.categoryProperties = res['records'];
+    });
+    this.sellerservice.getSingleProduct(pid).subscribe(res => {
+      this.productSingleData = res;
+    });
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from '../services/seller.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
@@ -15,10 +15,22 @@ export class ProductdetailsComponent implements OnInit {
   dataToSend = [];
   productSingleData: any = '';
   operation = '';
+  ErrorMsg = null;
+
+  timeout(val: boolean) {
+    setTimeout(this.ShowAlert, 5000, val);
+  }
+
+  ShowAlert(val: boolean) {
+    const alertDiv = document.getElementById('alertDivProp');
+    alertDiv.style.display = val ? 'block' : 'none';
+  }
+
 
   constructor(
     private sellerservice: SellerService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -49,7 +61,14 @@ export class ProductdetailsComponent implements OnInit {
     this.sellerservice
       .setProductProperties(this.productID, this.dataToSend, this.operation)
       .subscribe(res => {
-        console.log(res);
+        if(res['key'] === 'true'){
+          this.router.navigate(['/productData']);
+        }else{
+          this.ErrorMsg = 'Something Went Wrong. Try Again Later...!!!!';
+          this.ShowAlert(true);
+          this.timeout(false);
+        }
+         
       });
   }
 }
