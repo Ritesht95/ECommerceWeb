@@ -66,6 +66,12 @@
           <span> Order Tracking</span>
         </a>
       </li>
+      <li *ngIf="!userType">
+          <a [routerLink]="['/feedback']">
+            <i class="fa fa-comments"></i>
+            <span> Feedback</span>
+          </a>
+        </li>
 
 
       <li *ngIf="userType">

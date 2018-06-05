@@ -194,11 +194,18 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
-  getAllCategories(ShopID: string) {
+  getAllCategories() {
+    return this._http
+      .get(environment.apiURL + 'Category/AllCategoriesData.php')
+      .pipe(map(res => res.json()));
+  }
+
+  getAllShopCategories(ShopID: String) {
     return this._http
       .get(environment.apiURL + 'Category/CategoryData.php?id=' + ShopID)
       .pipe(map(res => res.json()));
   }
+
 
   addProperty(CategoryID: number, Property: any) {
     const headers = new Headers({

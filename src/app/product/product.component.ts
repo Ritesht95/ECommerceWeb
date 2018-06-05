@@ -87,7 +87,7 @@ export class ProductComponent implements OnInit {
       );
     }
     this.sellerservice
-      .getAllCategories(this.loginAuth.getSUserID())
+      .getAllCategories()
       .subscribe(res => {
         this.categoriesData = res['records'];
       });
@@ -102,7 +102,7 @@ export class ProductComponent implements OnInit {
     Price: string,
     MinStock: string,
     CategoryID: string,
-    ProductID: string
+    ProductID: string,
   ) {
     this.formData.append('ProductName', PName);
     if (CategoryID === undefined) {
@@ -121,6 +121,7 @@ export class ProductComponent implements OnInit {
     this.formData.append('LogoAlt', LogoAlt);
     this.formData.append('Price', Price);
     this.formData.append('MinStock', MinStock);
+    this.formData.append('ShopID',this.loginAuth.getSUserID());
     this.sellerservice.addProduct(this.formData).subscribe(res => {
       if (res['key'] === 'true') {
         this.router.navigate(['productData']);

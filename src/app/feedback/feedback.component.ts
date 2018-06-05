@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SuperAdminService } from '../services/super-admin.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-feedback',
@@ -12,14 +13,21 @@ export class FeedbackComponent implements OnInit {
   Feedback: string;
   Id: number;
   Reply: string;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
   constructor(private superadminservice: SuperAdminService) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
     this.superadminservice.getFeedback().subscribe(
       res => {
         this.feedback = '';
         this.feedback = res['records'];
+        this.dtTrigger.next();
       }
     );
   }

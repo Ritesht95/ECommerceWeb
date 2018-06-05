@@ -16,7 +16,6 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
-import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ProductComponent } from './product/product.component';
 import { ShopauthGuard } from './shopauth.guard';
 import { ProductDataComponent } from './product-data/product-data.component';
@@ -52,9 +51,8 @@ const routes: Routes = [
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [ShopauthGuard], component: ShopInfoComponent },
   { path: 'shopDetail', canActivate: [AuthGuard] , component: ShopDetailComponent  },
-  { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
+  { path: 'category', component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
-  { path: 'initial-setup', component: IntialSetupComponent },
   { path: 'product', canActivate: [ShopauthGuard], component: ProductComponent },
   { path: 'productData', canActivate: [ShopauthGuard], component: ProductDataComponent },
   { path: 'productdetails', canActivate: [ShopauthGuard], component: ProductdetailsComponent },

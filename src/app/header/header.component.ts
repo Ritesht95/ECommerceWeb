@@ -285,7 +285,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    if (this.loginAuth.getUserType() === 'seller') {
+    if (this.loginAuth.getUserType() !== 'seller') {
       localStorage.removeItem('sessionUserID');
       localStorage.removeItem('sessionName');
       localStorage.removeItem('sessionEmail');
