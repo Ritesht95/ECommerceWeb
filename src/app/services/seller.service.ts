@@ -427,4 +427,19 @@ export class SellerService {
     .pipe(map(res => res.json()));
   }
 
+  setProductActive(pid: String, Status: String){
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      ProductID: pid,
+      Approved: Status
+    };
+
+    return this._http
+      .post(environment.apiURL + 'Product/ActiveStatusProduct.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
 }

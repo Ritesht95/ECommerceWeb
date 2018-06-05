@@ -43,3 +43,9 @@ textarea {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.propertytable{
+  border: none !important;
+  padding: 0px;
+}
+
