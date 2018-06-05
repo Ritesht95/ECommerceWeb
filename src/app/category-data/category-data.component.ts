@@ -21,9 +21,9 @@ export class CategoryDataComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
-    this.sellerservice.getAllCategories(this.loginAuth.getSUserID()).subscribe(
+    this.sellerservice.getAllShopCategories(this.loginAuth.getSUserID()).subscribe(
       res => {
         this.categoryData = res['records'];
         this.dtTrigger.next();
