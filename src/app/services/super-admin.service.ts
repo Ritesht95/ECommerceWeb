@@ -410,4 +410,22 @@ export class SuperAdminService {
       .post(environment.apiURL + 'User/SetStatus.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  getNotifications(){
+    return this._http
+      .get(environment.apiURL + 'Notification/GetSuperAdminNoti.php')
+      .pipe(map(res => res.json())); 
+  }
+
+  ClearNotification(ID: String){
+    return this._http
+      .get(environment.apiURL + 'Notification/ReadNotification.php?id='+ID)
+      .pipe(map(res => res.json())); 
+  }
+
+  ClearAllNotification(ID: String){
+    return this._http
+      .get(environment.apiURL + 'Notification/ReadNotification.php?id='+ID)
+      .pipe(map(res => res.json())); 
+  }
 }

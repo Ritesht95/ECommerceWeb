@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit {
   successMessage: string;
   userType: boolean;
   webinfoData = '';
+  NotificationData: any = '';
+  NotificationCount: number = 0;
 
   sidebarComp: SidebarComponent = new SidebarComponent(
     this.loginAuth,
@@ -138,6 +140,22 @@ export class HeaderComponent implements OnInit {
             );
         }
       );
+
+      this.superadminservice
+      .getNotifications()
+      .subscribe(
+        res => {
+          if(res['key'] === 'false'){
+            
+            this.NotificationCount = 0;
+            this.NotificationData = "";
+          }else{
+            this.NotificationCount = res['Count'];
+            this.NotificationData = res['records'];
+          }
+          
+      });
+
     } else {
       this.superadminservice.getShopDetails(this.loginAuth.getSUserID()).subscribe(
         // tslint:disable-next-line:no-shadowed-variable
@@ -163,6 +181,22 @@ export class HeaderComponent implements OnInit {
             );
         }
       );
+
+      this.sellerservice
+      .getNotifications()
+      .subscribe(
+        res => {
+          if(res['key'] === 'false'){
+            
+            this.NotificationCount = 0;
+            this.NotificationData = "";
+          }else{
+            this.NotificationCount = res['Count'];
+            this.NotificationData = res['records'];
+          }
+          
+      });
+
     }
     this.superadminservice.getWebInfo().subscribe(
       res => {
@@ -333,5 +367,36 @@ export class HeaderComponent implements OnInit {
     //       console.log(error);
     //     }
     //   );
+  }
+
+  ClearNotification(ID: String,URL: String){
+    this.superadminservice.ClearNotification(ID)
+    .subscribe(
+      res=>{
+          if(res['key'] === 'true'){
+            this.router.navigate([URL]);
+            this.NotificationCount -= 1;
+          }
+      });
+  }
+
+  ClearAllNotification(Type: String){
+    this.superadminservice.ClearAllNotification('1')
+    .subscribe(
+      res => {
+        if(res['key'] === 'true'){
+          this.NotificationCount = 0;
+        }
+      });
+  }
+
+  ClearAllNotificationSeller(){
+    this.sellerservice.ClearAllNotificationSeller('0')
+    .subscribe(
+      res =>{
+        if(res['key'] === 'true'){
+          this.NotificationCount = 0;
+        }
+      });
   }
 }
