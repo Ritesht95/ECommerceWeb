@@ -157,7 +157,18 @@
                 <div *ngIf="txtContactUs.errors?.required && txtContactUs.touched">
                   <span class="text-danger">Contact Us is required</span>
                 </div>
+                
+              </div>
+              <div id='alertDiv'>
+                <div ng-if="SuccessMsg !== null">
+                  <span class="text-success">{{SuccessMsg}}</span>
                 </div>
+              </div>
+              <div id='alertDiv1'>
+                <div ng-if="ErrorMsg !== null">
+                  <span class="text-danger">{{ErrorMsg}}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

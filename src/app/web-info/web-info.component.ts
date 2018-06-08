@@ -15,6 +15,8 @@ export class WebInfoComponent implements OnInit {
   formData: FormData = new FormData();
   webInfo: any = '';
   env = environment.apiURL;
+  ErrorMsg = null;
+  SuccessMsg = null;
 
   constructor(
     private superadminservice: SuperAdminService,
@@ -108,9 +110,34 @@ export class WebInfoComponent implements OnInit {
       )
       .subscribe(res => {
         if (res['key'] === 'true') {
+          this.SuccessMsg = 'Information Succesfully Updated.';
+            this.ShowAlert(true);
+            this.timeout(false);
         } else {
+          this.ErrorMsg = 'Something Went Wrong...!! Try Again Later';
+            this.ShowAlert1(true);
+            this.timeout1(false);
         }
+
       });
+  }
+
+  timeout(val: boolean) {
+    setTimeout(this.ShowAlert, 5000, val);
+  }
+
+  ShowAlert(val: boolean) {
+    const alertDiv = document.getElementById('alertDiv');
+    alertDiv.style.display = val ? 'block' : 'none';
+  }
+
+  timeout1(val: boolean) {
+    setTimeout(this.ShowAlert1, 5000, val);
+  }
+
+  ShowAlert1(val: boolean) {
+    const alertDiv = document.getElementById('alertDiv1');
+    alertDiv.style.display = val ? 'block' : 'none';
   }
 
   ngOnInit() {
