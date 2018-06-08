@@ -35,6 +35,7 @@
             <div class="row">
               <div class="col-md-offset-1 col-md-10">
                 <div class="form-group" *ngFor="let property of categoryProperties">
+                  <input type="hidden" id="hdn{{property['CategoryPropertyId']}}" name="hdn{{property['CategoryPropertyId']}}"  [(ngModel)]="property.Operation" >
                   <label for="txtProName">{{property['PropertyName']}}</label>
                   <span class="text-danger">*</span>
                   <input type="text" class="form-control" [(ngModel)]="property.Value" id="txt{{property['CategoryPropertyId']}}" name="txt{{property['CategoryPropertyId']}}"
