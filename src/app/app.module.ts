@@ -42,6 +42,7 @@ import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.comp
 import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UserdataComponent } from './userdata/userdata.component';
+import { DiscountComponent } from './discount/discount.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { UserdataComponent } from './userdata/userdata.component';
     TrackingdetailsComponent,
     SutrackingComponent,
     TrackingComponent,
-    UserdataComponent
+    UserdataComponent,
+    DiscountComponent
   ],
   imports: [
     BrowserModule,

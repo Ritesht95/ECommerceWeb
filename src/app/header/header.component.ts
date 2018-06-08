@@ -380,7 +380,7 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  ClearAllNotification(Type: String){
+  ClearAllNotification(){
     this.superadminservice.ClearAllNotification('1')
     .subscribe(
       res => {

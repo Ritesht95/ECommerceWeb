@@ -444,7 +444,7 @@ export class SellerService {
 
   ClearAllNotificationSeller(ID: String){
     return this._http
-      .get(environment.apiURL + 'Notification/ClearAllNotificationSeller.php?id='+ID)
+      .get(environment.apiURL + 'Notification/ClearAllNotification.php?id='+ID)
       .pipe(map(res => res.json())); 
   }
 
@@ -454,5 +454,54 @@ export class SellerService {
       .pipe(map(res => res.json())); 
   }
 
+  getDiscount(ID: String){
+    return this._http
+      .get(environment.apiURL + 'Discount/GetAllShopDiscount.php?id='+ID)
+      .pipe(map(res => res.json())); 
+  }
+
+  SetDiscountStatus(ID: String, Status: String){
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      ProdID: ID,
+      Status: Status
+    };
+
+    return this._http
+      .post(environment.apiURL + 'Discount/SetDiscountStatus.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  getAllDiscountProducts(ID: String){
+    return this._http
+      .get(environment.apiURL + 'Product/DiscountProduct.php?id='+ID)
+      .pipe(map(res => res.json())); 
+  }
+
+  AddDiscount(ID: string,ProdID: string,Flat: string,Percentage: string){
+    const headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    });
+    const options = new RequestOptions({ headers: headers });
+    const data: object = {
+      id: ID,
+      ProdID: ProdID,
+      Flat: Flat,
+      Percentage: Percentage
+    };
+
+    return this._http
+      .post(environment.apiURL + 'Discount/AddDiscount.php', data, options)
+      .pipe(map(res => res.json()));
+  }
+
+  SingleDiscount(ID: string){
+    return this._http
+      .get(environment.apiURL + 'Discount/getSingleProductDiscount.php?id='+ID)
+      .pipe(map(res => res.json())); 
+  }
 
 }
