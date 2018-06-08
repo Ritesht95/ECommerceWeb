@@ -1,0 +1,132 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Feedback
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Feedback</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary">
+      <div class="box-body">
+        <a style="cursor: pointer;" data-toggle="modal" (click)="FillProductData();" data-target="#DiscountModal" class="btn btn-info col-sm-4 col-md-2 col-lg-2"
+          style="background-color: #367fa9; margin: 20px;">Add Discount</a>
+        <div class="clearfix">&nbsp;
+          <br>
+        </div>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Flat</th>
+              <th>Percentage</th>
+              <th>IsActive?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of DiscountData">
+              <td>
+                <a (click)="getSingleProductDiscount(data.ProductID);" data-toggle="modal" data-target="#DiscountModal" class="btn btn-info">
+                  <span class="fa fa-edit"></span>
+                </a>
+              </td>
+              <td>{{ data.ProductName }}</td>
+              <td>{{ data.Price }}</td>
+              <td>{{ data.Flat }}</td>
+              <td>{{ data.Percentage}}</td>
+              <td *ngIf="data.IsActive == '1'">
+                <button (click)="SetInactive(data.ProductID);" class="transbtn">
+                  <span style="color: green;" class="fa fa-2x fa-check"></span>
+                </button>
+              </td>
+              <td *ngIf="data.IsActive == '0'">
+                <button (click)="SetActive(data.ProductID);" class="transbtn">
+                  <span style="color: red;" class="fa fa-2x fa-times"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal fade" id="DiscountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" id='btnCPClose1' class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Add Discount</h5>
+      </div>
+      <div class="modal-body">
+        <form #frm="ngForm">
+          <div class="form-group">
+            <label for="txtDescription">Product
+              <span class="text-danger">*</span>
+            </label>
+            <select class="form-control" id="ddProduct" #ddProduct="ngModel" name="ddProduct" [(ngModel)]="singleDiscount.ProductID" required (change)="getSinglePrice(ddProduct.value)">
+              <option *ngFor="let pro of ProductData" value="{{pro.ProductID}}">{{pro.ProductName}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="txtNewPassword" class="control-label">Discount Type</label>
+            &nbsp;&nbsp;&nbsp;
+            <input type="radio" value="Flat" id="optFlat" name="optDisType" #optDisType="ngModel" [(ngModel)]="type" required> Flat &nbsp;
+            <input type="radio" value="Percent" id="optPercent" name="optDisType" #optDisType="ngModel" [(ngModel)]="type" required> Percentage
+          </div>
+          <div class="form-group">
+            <label for="txtDiscount" class="control-label">Discount</label>
+            <input type="number" [(ngModel)]="discountAmount" #txtDiscount="ngModel" name="txtDiscount" class="form-control" id="txtDiscount" required>
+          </div>
+          <div *ngIf="ddProduct.touched || optDisType.touched || txtDiscount.touched">
+            <div *ngIf="txtDiscount.errors?.required && txtDiscount.touched">
+              <span class="text-danger">Discount is required</span>
+            </div>
+            <div *ngIf="ddProduct.errors?.required && ddProduct.touched">
+              <span class="text-danger">Choose a Product</span>
+            </div>
+            <div *ngIf="optDisType.errors?.required && optDisType.touched">
+              <span class="text-danger">Discount type is required</span>
+            </div>
+            <div *ngIf="optDisType.value === 'Percent' && txtDiscount.value > 100 ">
+              <span class="text-danger">Discount cannot be more than 100%.</span>
+            </div>
+            <div *ngIf="optDisType.value === 'Flat' && txtDiscount.value > ProdPrice ">
+              <span class="text-danger">Discount cannot be more than Product Price.</span>
+            </div>
+            <div id="alertDiv">
+              <div ng-if="!errorMsg == null">
+                <span class="text-danger">{{errorMsg}}</span>
+              </div>
+            </div>
+            <div id="alertDivS">
+              <div ng-if="!successMsg == null">
+                <span class="text-success">{{successMsg}}</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id='discountClose' type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="frm.invalid || (optDisType.value === 'Flat' && txtDiscount.value > ProdPrice) || (optDisType.value === 'Percent' && txtDiscount.value > 100)"
+          (click)="InsertDiscount(ddProduct.value, optDisType.value, txtDiscount.value);">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
