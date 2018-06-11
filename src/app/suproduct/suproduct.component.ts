@@ -17,6 +17,7 @@ export class SuproductComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   categoryProperties = '';
+  NoOfTrigger = 0;
 
   constructor(private superadminservice: SuperAdminService, private sellerservice: SellerService) { }
 
@@ -28,7 +29,10 @@ export class SuproductComponent implements OnInit {
     this.superadminservice.getAllProducts().subscribe(
       res => {
         this.productsData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }
@@ -54,7 +58,7 @@ export class SuproductComponent implements OnInit {
   }
 
   getProperty(cid: any, pid: any) {
-    
+
     this.sellerservice
     .getCategoryProperties(cid, pid)
     .subscribe(res => {

@@ -14,6 +14,7 @@ export class SucategoryComponent implements OnInit {
   env: any = environment.apiURL;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  NoOfTrigger = 0;
 
   constructor(private superadminservice: SuperAdminService) { }
 
@@ -26,8 +27,10 @@ export class SucategoryComponent implements OnInit {
       res => {
         this.categoryData = '';
         this.categoryData = res['records'];
-        this.dtTrigger.next();
-
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }

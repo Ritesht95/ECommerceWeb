@@ -451,7 +451,7 @@ export class SellerService {
   getNotifications(){
     return this._http
       .get(environment.apiURL + 'Notification/GetSellerNoti.php')
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
   getDiscount(ID: String){
