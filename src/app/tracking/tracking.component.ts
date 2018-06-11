@@ -3,6 +3,7 @@ import { LoginauthService } from '../loginauth.service';
 import { SellerService } from '../services/seller.service';
 import { environment } from '../../environments/environment';
 import { SuperAdminService } from '../services/super-admin.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tracking',
@@ -19,15 +20,26 @@ export class TrackingComponent implements OnInit {
   ddate: string ;
   dtime: string ;
   atime: string ;
+  NoOfTrigger = 0;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
 
   constructor(private superadminservice: SuperAdminService, private sellerservice: SellerService, private loginAuth: LoginauthService) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
     this.superadminservice.getOrder().subscribe(
       res => {
         this.order = '';
         this.order = res['records'];
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }
