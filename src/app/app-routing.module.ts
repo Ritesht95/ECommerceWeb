@@ -33,6 +33,7 @@ import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.comp
 import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UserdataComponent } from './userdata/userdata.component';
+import { DiscountComponent } from './discount/discount.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'sellertracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
   { path: 'sutracking', canActivate: [AuthGuard], component: SutrackingComponent },
   { path: 'userdata', canActivate: [AuthGuard], component: UserdataComponent },
+  { path: 'discount', canActivate: [ShopauthGuard], component: DiscountComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 

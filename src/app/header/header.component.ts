@@ -365,12 +365,14 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ClearAllNotification(Type: String) {
-    this.superadminservice.ClearAllNotification('1').subscribe(res => {
-      if (res['key'] === 'true') {
-        this.NotificationCount = 0;
-      }
-    });
+  ClearAllNotification(){
+    this.superadminservice.ClearAllNotification('1')
+    .subscribe(
+      res => {
+        if(res['key'] === 'true'){
+          this.NotificationCount = 0;
+        }
+      });
   }
 
   ClearAllNotificationSeller() {

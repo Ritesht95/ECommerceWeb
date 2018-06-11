@@ -31,7 +31,7 @@ export class ProductdetailsComponent implements OnInit {
     private sellerservice: SellerService,
     private actRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.actRoute.queryParams.subscribe(params => {
@@ -51,24 +51,29 @@ export class ProductdetailsComponent implements OnInit {
 
   AddProValues(FormValues: Object) {
     this.dataToSend = [];
+    let cnt = 0;
     Object.keys(FormValues).forEach(element => {
-      const obj = {
-        ID: element.substr(3, element.length),
-        Value: FormValues[element]
-      };
-      this.dataToSend.push(obj);
+      if (cnt % 2 != 0) {
+        const obj = {
+          ID: element.substr(3, element.length),
+          Value: FormValues['txt' + element.substr(3, element.length)],
+          Operation: FormValues['hdn' + element.substr(3, element.length)]
+        };
+        this.dataToSend.push(obj);
+      }
+      cnt++;
     });
     this.sellerservice
       .setProductProperties(this.productID, this.dataToSend, this.operation)
       .subscribe(res => {
-        if(res['key'] === 'true'){
+        if (res['key'] === 'true') {
           this.router.navigate(['/productData']);
-        }else{
+        } else {
           this.ErrorMsg = 'Something Went Wrong. Try Again Later...!!!!';
           this.ShowAlert(true);
           this.timeout(false);
         }
-         
+
       });
   }
 }

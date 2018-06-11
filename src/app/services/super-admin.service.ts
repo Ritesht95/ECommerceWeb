@@ -453,7 +453,7 @@ export class SuperAdminService {
 
   ClearAllNotification(ID: String) {
     return this._http
-      .get(environment.apiURL + 'Notification/ReadNotification.php?id=' + ID)
-      .pipe(map(res => res.json()));
+      .get(environment.apiURL + 'Notification/ClearAllNotification.php?id='+ID)
+      .pipe(map(res => res.json())); 
   }
 }
