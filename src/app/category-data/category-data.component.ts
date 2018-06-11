@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class CategoryDataComponent implements OnInit {
 
+  NoOfTrigger = 0;
   categoryData: any;
   env: any = environment.apiURL;
   dtOptions: DataTables.Settings = {};
@@ -26,7 +27,10 @@ export class CategoryDataComponent implements OnInit {
     this.sellerservice.getAllShopCategories(this.loginAuth.getSUserID()).subscribe(
       res => {
         this.categoryData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }

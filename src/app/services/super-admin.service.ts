@@ -288,8 +288,8 @@ export class SuperAdminService {
 
   getAllCategories() {
     return this._http
-    .get(environment.apiURL + 'Category/AllCategoriesData.php')
-    .pipe(map(res => res.json()));
+      .get(environment.apiURL + 'Category/AllCategoriesData.php')
+      .pipe(map(res => res.json()));
   }
 
   setCategoryApproved(CategoryID: string, value: boolean) {
@@ -308,7 +308,12 @@ export class SuperAdminService {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = { Name: Name, Email: Email, Feedback: Message, Type: 'seller'};
+    const data: object = {
+      Name: Name,
+      Email: Email,
+      Feedback: Message,
+      Type: 'seller'
+    };
     return this._http
       .post(environment.apiURL + 'feedback/addfeedback.php', data, options)
       .pipe(map(res => res.json()));
@@ -316,8 +321,8 @@ export class SuperAdminService {
 
   getAllProducts() {
     return this._http
-    .get(environment.apiURL + 'Product/AllProductData.php')
-    .pipe(map(res => res.json()));
+      .get(environment.apiURL + 'Product/AllProductData.php')
+      .pipe(map(res => res.json()));
   }
 
   setProductApproved(ProductID: string, value: boolean) {
@@ -336,9 +341,13 @@ export class SuperAdminService {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = {OrderDetailID: OrderDetailID};
+    const data: object = { OrderDetailID: OrderDetailID };
     return this._http
-      .post(environment.apiURL + 'order/OrderShipped.php?id=' + OrderDetailID, data, options)
+      .post(
+        environment.apiURL + 'order/OrderShipped.php?id=' + OrderDetailID,
+        data,
+        options
+      )
       .pipe(map(res => res.json()));
   }
 
@@ -347,30 +356,47 @@ export class SuperAdminService {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = {OrderDetailID: OrderDetailID};
+    const data: object = { OrderDetailID: OrderDetailID };
     return this._http
-      .post(environment.apiURL + 'order/OrderDelievered.php?id=' + OrderDetailID, data, options)
+      .post(
+        environment.apiURL + 'order/OrderDelievered.php?id=' + OrderDetailID,
+        data,
+        options
+      )
       .pipe(map(res => res.json()));
   }
 
-  sendReply(Id: number, Subject: string , Reply: string) {
+  sendReply(Id: number, Subject: string, Reply: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = {Id: Id, Subject: Subject , Reply: Reply};
+    const data: object = { Id: Id, Subject: Subject, Reply: Reply };
     return this._http
       .post(environment.apiURL + 'feedback/reply.php', data, options)
       .pipe(map(res => res.json()));
   }
 
-  sendTracking(Id: number, ttext: string , adate: string, atime: string, ddate: string, dtime: string) {
+  sendTracking(
+    Id: number,
+    ttext: string,
+    adate: string,
+    atime: string,
+    ddate: string,
+    dtime: string
+  ) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = {OrderDetailsID: Id, TrackingText: ttext, ArrivedDate: adate, DispatchedDate: ddate, ArrivedTime: atime,
-       DispatchedTime: dtime};
+    const data: object = {
+      OrderDetailsID: Id,
+      TrackingText: ttext,
+      ArrivedDate: adate,
+      DispatchedDate: ddate,
+      ArrivedTime: atime,
+      DispatchedTime: dtime
+    };
     return this._http
       .post(environment.apiURL + 'Tracking/AddTracking.php', data, options)
       .pipe(map(res => res.json()));
@@ -384,8 +410,10 @@ export class SuperAdminService {
 
   getTrackingDetails(OrderDetailsID: string) {
     return this._http
-    .get(environment.apiURL + 'Tracking/ViewTracking.php?id=' + OrderDetailsID)
-    .pipe(map(res => res.json()));
+      .get(
+        environment.apiURL + 'Tracking/ViewTracking.php?id=' + OrderDetailsID
+      )
+      .pipe(map(res => res.json()));
   }
 
   getOrder() {
@@ -405,27 +433,27 @@ export class SuperAdminService {
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
     });
     const options = new RequestOptions({ headers: headers });
-    const data: object = { ID: UserID, Status: Status};
+    const data: object = { ID: UserID, Status: Status };
     return this._http
       .post(environment.apiURL + 'User/SetStatus.php', data, options)
       .pipe(map(res => res.json()));
   }
 
-  getNotifications(){
+  getNotifications() {
     return this._http
       .get(environment.apiURL + 'Notification/GetSuperAdminNoti.php')
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
-  ClearNotification(ID: String){
+  ClearNotification(ID: String) {
     return this._http
-      .get(environment.apiURL + 'Notification/ReadNotification.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .get(environment.apiURL + 'Notification/ReadNotification.php?id=' + ID)
+      .pipe(map(res => res.json()));
   }
 
-  ClearAllNotification(ID: String){
+  ClearAllNotification(ID: String) {
     return this._http
-      .get(environment.apiURL + 'Notification/ReadNotification.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .get(environment.apiURL + 'Notification/ReadNotification.php?id=' + ID)
+      .pipe(map(res => res.json()));
   }
 }

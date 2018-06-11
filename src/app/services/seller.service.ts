@@ -445,13 +445,13 @@ export class SellerService {
   ClearAllNotificationSeller(ID: String){
     return this._http
       .get(environment.apiURL + 'Notification/ClearAllNotificationSeller.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
   getNotifications(){
     return this._http
       .get(environment.apiURL + 'Notification/GetSellerNoti.php')
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
 

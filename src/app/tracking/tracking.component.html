@@ -18,7 +18,7 @@
   <section class="content">
     <div class="box box-primary">
       <div class="box-body">
-        <table datatable class="row-border hover">
+        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="row-border hover">
           <thead>
             <tr>
               <th>Product Name</th>

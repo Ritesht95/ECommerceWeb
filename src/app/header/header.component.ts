@@ -141,72 +141,60 @@ export class HeaderComponent implements OnInit {
         }
       );
 
-      this.superadminservice
-      .getNotifications()
-      .subscribe(
-        res => {
-          if(res['key'] === 'false'){
-            
-            this.NotificationCount = 0;
-            this.NotificationData = "";
-          }else{
-            this.NotificationCount = res['Count'];
-            this.NotificationData = res['records'];
-          }
-          
-      });
-
-    } else {
-      this.superadminservice.getShopDetails(this.loginAuth.getSUserID()).subscribe(
-        // tslint:disable-next-line:no-shadowed-variable
-        res => {
-          this.shopData = res;
-          document.getElementById('headerName').innerHTML = res['ShopName'];
-          document.getElementById('headerName1').innerHTML = res['ShopName'];
-          document
-            .getElementById('userImage')
-            .setAttribute(
-              'src',
-              environment.apiURL +
-                'Assets/ShopLogo/' +
-                this.shopData.LogoImage
-            );
-          document
-            .getElementById('userHeaderImage')
-            .setAttribute(
-              'src',
-              environment.apiURL +
-                'Assets/ShopLogo/' +
-                this.shopData.LogoImage
-            );
+      this.superadminservice.getNotifications().subscribe(res => {
+        if (res['key'] === 'false') {
+          this.NotificationCount = 0;
+          this.NotificationData = '';
+        } else {
+          this.NotificationCount = res['Count'];
+          this.NotificationData = res['records'];
         }
-      );
-
-      this.sellerservice
-      .getNotifications()
-      .subscribe(
-        res => {
-          if(res['key'] === 'false'){
-            
-            this.NotificationCount = 0;
-            this.NotificationData = "";
-          }else{
-            this.NotificationCount = res['Count'];
-            this.NotificationData = res['records'];
-          }
-          
       });
+    } else {
+      this.superadminservice
+        .getShopDetails(this.loginAuth.getSUserID())
+        .subscribe(
+          // tslint:disable-next-line:no-shadowed-variable
+          res => {
+            this.shopData = res;
+            document.getElementById('headerName').innerHTML = res['ShopName'];
+            document.getElementById('headerName1').innerHTML = res['ShopName'];
+            document
+              .getElementById('userImage')
+              .setAttribute(
+                'src',
+                environment.apiURL +
+                  'Assets/ShopLogo/' +
+                  this.shopData.LogoImage
+              );
+            document
+              .getElementById('userHeaderImage')
+              .setAttribute(
+                'src',
+                environment.apiURL +
+                  'Assets/ShopLogo/' +
+                  this.shopData.LogoImage
+              );
+          }
+        );
 
+      this.sellerservice.getNotifications().subscribe(res => {
+        if (res['key'] === 'false') {
+          this.NotificationCount = 0;
+          this.NotificationData = '';
+        } else {
+          this.NotificationCount = res['Count'];
+          this.NotificationData = res['records'];
+        }
+      });
     }
-    this.superadminservice.getWebInfo().subscribe(
-      res => {
-        this.webinfoData = res;
-      }
-    );
+    this.superadminservice.getWebInfo().subscribe(res => {
+      this.webinfoData = res;
+    });
   }
 
   changePassword(oldPassword: string, newPassword: string) {
-    if (!this.userType){
+    if (!this.userType) {
       this.superadminservice.changePassword(oldPassword, newPassword).subscribe(
         res => {
           if (res['key'] === 'incorrect') {
@@ -275,7 +263,6 @@ export class HeaderComponent implements OnInit {
   }
 
   Sleep() {
-
     if (this.loginAuth.getUserType() === 'seller') {
       localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
       localStorage.setItem('SleepType', 'seller');
@@ -369,34 +356,28 @@ export class HeaderComponent implements OnInit {
     //   );
   }
 
-  ClearNotification(ID: String,URL: String){
-    this.superadminservice.ClearNotification(ID)
-    .subscribe(
-      res=>{
-          if(res['key'] === 'true'){
-            this.router.navigate([URL]);
-            this.NotificationCount -= 1;
-          }
-      });
+  ClearNotification(ID: String, URL: String) {
+    this.superadminservice.ClearNotification(ID).subscribe(res => {
+      if (res['key'] === 'true') {
+        this.router.navigate([URL]);
+        this.NotificationCount -= 1;
+      }
+    });
   }
 
-  ClearAllNotification(Type: String){
-    this.superadminservice.ClearAllNotification('1')
-    .subscribe(
-      res => {
-        if(res['key'] === 'true'){
-          this.NotificationCount = 0;
-        }
-      });
+  ClearAllNotification(Type: String) {
+    this.superadminservice.ClearAllNotification('1').subscribe(res => {
+      if (res['key'] === 'true') {
+        this.NotificationCount = 0;
+      }
+    });
   }
 
-  ClearAllNotificationSeller(){
-    this.sellerservice.ClearAllNotificationSeller('0')
-    .subscribe(
-      res =>{
-        if(res['key'] === 'true'){
-          this.NotificationCount = 0;
-        }
-      });
+  ClearAllNotificationSeller() {
+    this.sellerservice.ClearAllNotificationSeller('0').subscribe(res => {
+      if (res['key'] === 'true') {
+        this.NotificationCount = 0;
+      }
+    });
   }
 }
