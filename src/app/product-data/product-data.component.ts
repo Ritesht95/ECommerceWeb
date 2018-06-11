@@ -21,6 +21,7 @@ export class ProductDataComponent implements OnInit {
   operation = '';
   categoryID = '';
   productID = '';
+  NoOfTrigger = 0;
 
   constructor(
     private sellerservice: SellerService,
@@ -36,7 +37,10 @@ export class ProductDataComponent implements OnInit {
       .getAllProducts(this.loginAuth.getSUserID())
       .subscribe(res => {
         this.productsData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       });
   }
 
@@ -51,13 +55,10 @@ export class ProductDataComponent implements OnInit {
       if (res['key'] === 'true') {
         console.log('stock updated successfully.');
         document.getElementById('btnCloseStock').click();
-        this.sellerservice
-          .getAllProducts(this.loginAuth.getSUserID())
-          .subscribe(res1 => {
-            this.productsData = res1['records'];
-          });
+        this.ngOnInit();
       } else {
-       alert("Mimimum Stock is Required");
+        alert('Mimimum Stock is Required');
+        this.ngOnInit();
       }
     });
   }
@@ -72,22 +73,16 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
-  SetActive(pid: any){
-    this.sellerservice
-    .setProductActive(pid,'1')
-    .subscribe(
-      res => {
-        this.ngOnInit();
-      });
+  SetActive(pid: any) {
+    this.sellerservice.setProductActive(pid, '1').subscribe(res => {
+      this.ngOnInit();
+    });
   }
 
-  SetInactive(pid: any){
-    this.sellerservice
-    .setProductActive(pid,'0')
-    .subscribe(
-      res => {
-        this.ngOnInit();
-      });
+  SetInactive(pid: any) {
+    this.sellerservice.setProductActive(pid, '0').subscribe(res => {
+      this.ngOnInit();
+    });
   }
 
   getProperty(cid: any, pid: any) {
@@ -95,13 +90,12 @@ export class ProductDataComponent implements OnInit {
     this.productID = pid;
     console.log(this.categoryID, this.productID);
     this.sellerservice
-    .getCategoryProperties(this.categoryID, this.productID)
-    .subscribe(res => {
-      this.categoryProperties = res['records'];
-    });
+      .getCategoryProperties(this.categoryID, this.productID)
+      .subscribe(res => {
+        this.categoryProperties = res['records'];
+      });
     this.sellerservice.getSingleProduct(this.productID).subscribe(res => {
       this.productSingleData = res;
     });
   }
-
 }

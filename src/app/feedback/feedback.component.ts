@@ -15,6 +15,7 @@ export class FeedbackComponent implements OnInit {
   Reply: string;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  NoOfTrigger = 0;
 
   constructor(private superadminservice: SuperAdminService) { }
 
@@ -27,7 +28,10 @@ export class FeedbackComponent implements OnInit {
       res => {
         this.feedback = '';
         this.feedback = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }

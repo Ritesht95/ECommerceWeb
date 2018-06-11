@@ -14,6 +14,7 @@ export class UserdataComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   env = environment.apiURL;
+  NoOfTrigger = 0;
 
   constructor(private superadminservice: SuperAdminService) {}
 
@@ -25,7 +26,10 @@ export class UserdataComponent implements OnInit {
     this.superadminservice.getAllUsers().subscribe(
       res => {
         this.usersData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }
