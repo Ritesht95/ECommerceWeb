@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SuperAdminService } from '../services/super-admin.service';
 import { SellerService } from '../services/seller.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -10,6 +11,8 @@ import { SellerService } from '../services/seller.service';
 export class ForgotpasswordComponent implements OnInit {
 
   errorMsg = null;
+  webinfoData: any = '';
+  env = environment.apiURL;
 
   timeout(val: boolean) {
     this.ShowAlert(true);
@@ -24,7 +27,11 @@ export class ForgotpasswordComponent implements OnInit {
   constructor(private superadminservice: SuperAdminService, private sellerservice: SellerService) { }
 
   ngOnInit() {
-
+    this.superadminservice.getWebInfo().subscribe(
+      res => {
+        this.webinfoData = res;
+      }
+    );
   }
 
   ForgotPassword(Username: string, Type: string) {

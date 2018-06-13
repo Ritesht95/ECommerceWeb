@@ -3,6 +3,7 @@ import { SuperAdminService } from '../services/super-admin.service';
 import { LoginauthService } from '../loginauth.service';
 import { SellerService } from '../services/seller.service';
 import { environment } from '../../environments/environment';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -15,14 +16,26 @@ export class OrderComponent implements OnInit {
   customer: any = '';
   productSingleData: any = '';
   env = environment.apiURL;
+  NoOfTrigger = 0;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
   constructor(private sellerservice: SellerService, private loginAuth: LoginauthService) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      order: [0,'desc']
+    };
     this.sellerservice.getOrder( this.loginAuth.getSUserID() ).subscribe(
       res => {
         this.order = '';
         this.order = res['records'];
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }
@@ -32,9 +45,8 @@ export class OrderComponent implements OnInit {
     this.sellerservice.sendOrder(orderid).subscribe(
       res => {
         if (res['key'] === 'true') {
-            console.log('sucessfully send');
             this.ngOnInit();
-        } else {
+        }else {
           console.log('error');
         }
       }
