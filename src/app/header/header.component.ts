@@ -178,7 +178,7 @@ export class HeaderComponent implements OnInit {
           }
         );
 
-      this.sellerservice.getNotifications().subscribe(res => {
+      this.sellerservice.getNotifications(this.loginAuth.getSUserID()).subscribe(res => {
         if (res['key'] === 'false') {
           this.NotificationCount = 0;
           this.NotificationData = '';
@@ -366,7 +366,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ClearAllNotification(){
-    this.superadminservice.ClearAllNotification('1')
+    this.superadminservice.ClearAllNotification('0')
     .subscribe(
       res => {
         if(res['key'] === 'true'){
@@ -376,7 +376,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ClearAllNotificationSeller() {
-    this.sellerservice.ClearAllNotificationSeller('0').subscribe(res => {
+    this.sellerservice.ClearAllNotificationSeller(this.loginAuth.getSUserID()).subscribe(res => {
       if (res['key'] === 'true') {
         this.NotificationCount = 0;
       }

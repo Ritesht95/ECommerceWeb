@@ -448,9 +448,9 @@ export class SellerService {
       .pipe(map(res => res.json())); 
   }
 
-  getNotifications(){
+  getNotifications(Id: string){
     return this._http
-      .get(environment.apiURL + 'Notification/GetSellerNoti.php')
+      .get(environment.apiURL + 'Notification/GetSellerNoti.php?id='+Id)
       .pipe(map(res => res.json()));
   }
 

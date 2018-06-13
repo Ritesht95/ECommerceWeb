@@ -63,7 +63,7 @@
                 </button>
               </td>
               <td>
-                <a href="/productdetails?CatID={{product.CategoryID}}&ProdID={{product.ProductID}}" class="btn btn-info">
+                <a routerLink="/productdetails" [queryParams]="{CatID:product.CategoryID,ProdID:product.ProductID}" class="btn btn-info">
                   <i class="fa fa-edit"></i>
                 </a> &nbsp;
                 <a class="btn btn-warning" data-toggle="modal" data-target="#propertyModal" (click)="getProperty(product.CategoryID,product.ProductID)">
