@@ -126,6 +126,22 @@ export class TrackingComponent implements OnInit {
         if (res['key'] === 'true') {
             this.ngOnInit();
         } else if(res['key'] === 'noaccess'){
+          alert("Order Has not been Out For Delivery Yet.");
+        }else {
+          console.log('error');
+        }
+      }
+    );
+    this.ngOnInit();
+  }
+
+  sendOFD(OrderDetailID: number) {
+    console.log(OrderDetailID);
+    this.superadminservice.sendOFD(OrderDetailID).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+            this.ngOnInit();
+        } else if(res['key'] === 'noaccess'){
           alert("Order Has not been Shipped Yet.");
         }else {
           console.log('error');

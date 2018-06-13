@@ -21,6 +21,7 @@ export class DiscountComponent implements OnInit {
   successMsg = null;
   type = '';
   discountAmount = '';
+  NoOfTrigger = 0;
   constructor(private sellerservice: SellerService, private loginAuth: LoginauthService) { }
 
   ngOnInit() {
@@ -31,7 +32,10 @@ export class DiscountComponent implements OnInit {
     this.sellerservice.getDiscount(this.loginAuth.getSUserID()).subscribe(
       res => {
         this.DiscountData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
 

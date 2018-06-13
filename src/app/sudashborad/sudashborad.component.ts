@@ -19,6 +19,8 @@ export class SudashboradComponent implements OnInit {
   NewUserData: any;
   NewShopData: any;
   env = environment.apiURL;
+  NoOfUser : number = 0;
+  NoofShop : number = 0;
 
   constructor(private loginAuth: LoginauthService, private superadminservice: SuperAdminService) { }
 
@@ -39,6 +41,7 @@ export class SudashboradComponent implements OnInit {
     .subscribe(
       res => {
         this.NewUserData = res['records'];
+        this.NoOfUser = this.NewUserData.length;
       }
     );
 
@@ -46,6 +49,7 @@ export class SudashboradComponent implements OnInit {
     .subscribe(
       res => {
         this.NewShopData = res['records'];
+        this.NoofShop = this.NewShopData.length;
       }
     );
       

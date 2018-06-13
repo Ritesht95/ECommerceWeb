@@ -23,6 +23,7 @@ export class FeedbackComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
+      order: []
     };
     this.superadminservice.getFeedback().subscribe(
       res => {
