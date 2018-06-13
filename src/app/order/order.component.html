@@ -21,6 +21,7 @@
         <table datatable class="row-border hover">
           <thead>
             <tr>
+              <th>Order No</th>
               <th>Product Name</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -31,6 +32,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let o of order">
+              <td>{{ o.OrderDetailID }}</td>
               <td>{{ o.ProductName }}</td>
               <td>{{ o.Price }}</td>
               <td>{{ o.Qty }}</td>

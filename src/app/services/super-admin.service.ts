@@ -456,4 +456,22 @@ export class SuperAdminService {
       .get(environment.apiURL + 'Notification/ClearAllNotification.php?id='+ID)
       .pipe(map(res => res.json())); 
   }
+
+  DashboardCounts(){
+    return this._http
+      .get(environment.apiURL + 'Dashborard/SuperAdminDashboard.php')
+      .pipe(map(res => res.json()));  
+  }
+
+  DashboardNewUsers(){
+    return this._http
+      .get(environment.apiURL + 'Dashborard/SuDashUsers.php')
+      .pipe(map(res => res.json()));  
+  }
+
+  DashboardNewShops(){
+    return this._http
+      .get(environment.apiURL + 'Dashborard/SuDashShops.php')
+      .pipe(map(res => res.json()));  
+  }
 }

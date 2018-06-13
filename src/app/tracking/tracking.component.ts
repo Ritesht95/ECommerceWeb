@@ -30,7 +30,8 @@ export class TrackingComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10
+      pageLength: 10,
+      order: [0,'desc']
     };
     this.superadminservice.getOrder().subscribe(
       res => {
@@ -107,8 +108,9 @@ export class TrackingComponent implements OnInit {
     this.superadminservice.sendShipped(OrderDetailID).subscribe(
       res => {
         if (res['key'] === 'true') {
-            console.log('sucessfully send');
             this.ngOnInit();
+        }  else if(res['key'] === 'noaccess'){
+          alert("Order Has not been Confirmed BY the Seller.");
         } else {
           console.log('error');
         }
@@ -122,9 +124,10 @@ export class TrackingComponent implements OnInit {
     this.superadminservice.sendDelievered(OrderDetailID).subscribe(
       res => {
         if (res['key'] === 'true') {
-            console.log('sucessfully send');
             this.ngOnInit();
-        } else {
+        } else if(res['key'] === 'noaccess'){
+          alert("Order Has not been Shipped Yet.");
+        }else {
           console.log('error');
         }
       }

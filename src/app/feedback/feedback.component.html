@@ -21,7 +21,8 @@
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
           <thead>
             <tr>
-              <th>Shop Name</th>
+              <th>Name</th>
+              <th>Type</th>
               <th>Email</th>
               <th>Feedback</th>
               <th>Reply</th>
@@ -30,6 +31,7 @@
           <tbody>
             <tr *ngFor="let f of feedback">
               <td>{{ f.Name }}</td>
+              <td>{{ f.Type }}</td>
               <td>{{ f.Email }}</td>
               <td>{{ f.Feedback }}</td>
               <td *ngIf="f.Reply === null">
