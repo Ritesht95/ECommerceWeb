@@ -32,9 +32,8 @@ export class OrderComponent implements OnInit {
     this.sellerservice.sendOrder(orderid).subscribe(
       res => {
         if (res['key'] === 'true') {
-            console.log('sucessfully send');
             this.ngOnInit();
-        } else {
+        }else {
           console.log('error');
         }
       }
