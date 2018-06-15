@@ -22,39 +22,15 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.loginAuth.getUserLoggedIn()) {
-      this.loginAuth.setValues(
-        +localStorage.getItem('sessionUserID'),
-        localStorage.getItem('sessionEmail'),
-        localStorage.getItem('sessionUserType'),
-        localStorage.getItem('sessionName'),
-      );
+    if (this.loginAuth.getUserLoggedIn() === 'true') {
       return true;
     } else {
-      // return this.loginAuth
-        // .getServerLoggedIn(this.loginAuth.getEmail(), 'superadmin')
-        // .pipe(
-        //   map(
-        //     // tslint:disable-next-line:arrow-return-shorthand
-        //     res => {
-        //       if (res.json()['key'] === 'true') {
-        //         this.loginAuth.setValues(
-        //           res.json()['Adminid'],
-        //           res.json()['Email'],
-        //           'superadmin',
-        //           res.json()['Adminname']
-        //         );
-
-        //         return true;
-        //       } else {
-        //         this.router.navigate(['login']);
-        //         return false;
-        //       }
-        //     }
-        //   )
-        // );
-      this.router.navigate(['login']);
-      return false;
+      if (this.loginAuth.getSUserLoggedIn() === 'true') {
+        this.router.navigate(['shopdashboard']);
+      } else {
+        this.router.navigate(['login']);
+        return false;
+      }
     }
   }
 }

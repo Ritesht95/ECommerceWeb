@@ -4,20 +4,17 @@ import { environment } from '../environments/environment';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginauthService {
   // private IsServerLoggedIn = false;
-  private IsUserLoggedIn = JSON.parse(
-    localStorage.getItem('loggedIn' || 'false')
-  );
+  private IsUserLoggedIn = localStorage.getItem('loggedIn');
 
   // private IsSServerLoggedIn = false;
-  private IsSUserLoggedIn = JSON.parse(
-    localStorage.getItem('SloggedIn' || 'false')
-  );
+  private IsSUserLoggedIn = localStorage.getItem('SloggedIn');
 
   private UserID;
   private Email;
@@ -30,63 +27,27 @@ export class LoginauthService {
   private SName;
   private SpostData;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private router: Router) {}
 
   getUserLoggedIn() {
+    this.IsUserLoggedIn = localStorage.getItem('loggedIn');
     return this.IsUserLoggedIn;
   }
 
   getSUserLoggedIn() {
+    this.IsSUserLoggedIn = localStorage.getItem('SloggedIn');
     return this.IsSUserLoggedIn;
   }
 
-  setUserLoggedIn(value: boolean) {
-    if (value) {
-      this.IsSUserLoggedIn = false;
-    }
+  setUserLoggedIn(value: string) {
     this.IsUserLoggedIn = value;
-    localStorage.setItem('loggedIn', value.toString());
+    localStorage.setItem('loggedIn', value);
   }
 
-  setSUserLoggedIn(value: boolean) {
-    if (value) {
-      this.IsUserLoggedIn = false;
-    }
+  setSUserLoggedIn(value: string) {
     this.IsSUserLoggedIn = value;
-    localStorage.setItem('SloggedIn', value.toString());
+    localStorage.setItem('SloggedIn', value);
   }
-
-  // getServerLoggedIn(Email: string, Type: string): Observable<any> {
-  //   const headers = new Headers({
-  //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-  //   });
-  //   const options = new RequestOptions({ headers: headers });
-  //   const qry: string =
-  //     environment.apiURL +
-  //     'Config/Session.php?' +
-  //     'Id=' +
-  //     Email +
-  //     '&type=' +
-  //     Type +
-  //     '&status=0&operation=get';
-  //   return this.http.get(qry);
-  // }
-
-  // setServerLogout(Email: string, Type: string): Observable<any> {
-  //   const headers = new Headers({
-  //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-  //   });
-  //   const options = new RequestOptions({ headers: headers });
-  //   const qry: string =
-  //     environment.apiURL +
-  //     'Config/Session.php?' +
-  //     'Id=' +
-  //     Email +
-  //     '&type=' +
-  //     Type +
-  //     '&status=0&operation=set';
-  //   return this.http.get(qry);
-  // }
 
   setValues(UserID: number, Email: string, UserType: string, Name: string) {
     if (UserType === 'seller') {
@@ -107,22 +68,26 @@ export class LoginauthService {
       localStorage.setItem('sessionName', this.Name);
       localStorage.setItem('sessionEmail', this.Email);
       localStorage.setItem('sessionUserType', this.UserType);
-    }
   }
+}
 
   getName() {
+    this.Name = localStorage.getItem('sessionName');
     return this.Name;
   }
 
   getUserID() {
+    this.UserID = localStorage.getItem('sessionUserID');
     return this.UserID;
   }
 
   getEmail() {
+    this.Email = localStorage.getItem('sessionEmail');
     return this.Email;
   }
 
   getUserType() {
+    this.UserType = localStorage.getItem('sessionUserType');
     return this.UserType;
   }
 
@@ -140,4 +105,23 @@ export class LoginauthService {
     this.SEmail = localStorage.getItem('sessionShopEmail');
     return this.SEmail;
   }
+
+  logout() {
+    if (this.getUserType() !== 'seller') {
+      localStorage.removeItem('sessionUserID');
+      localStorage.removeItem('sessionName');
+      localStorage.removeItem('sessionEmail');
+      localStorage.setItem('loggedIn', 'false');
+      this.setUserLoggedIn('false');
+      this.router.navigate(['login']);
+    } else {
+      localStorage.removeItem('sessionShopUserID');
+      localStorage.removeItem('sessionShopName');
+      localStorage.removeItem('sessionShopEmail');
+      localStorage.setItem('SloggedIn', 'false');
+      this.setSUserLoggedIn('false');
+      this.router.navigate(['login']);
+    }
+  }
+
 }

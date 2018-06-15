@@ -41,7 +41,6 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
   { path: 'shopdashboard', canActivate: [ShopauthGuard], component: ShopDashboardComponent },
-  // { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', canActivate: [AuthGuard] , component: WebInfoComponent},
   { path: 'shops', canActivate: [AuthGuard], component: ShopsComponent},
   { path: 'forgotpassword', component: ForgotpasswordComponent},

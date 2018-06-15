@@ -56,7 +56,7 @@ export class LockscreenComponent implements OnInit {
               this.ShowAlert(true);
               this.timeout(false);
             } else {
-              this.loginAuth.setUserLoggedIn(true);
+              this.loginAuth.setUserLoggedIn('true');
               this.loginAuth.setValues(
                 res['Adminid'],
                 res['Email'],
@@ -96,7 +96,7 @@ export class LockscreenComponent implements OnInit {
               this.ShowAlert(true);
               this.timeout(false);
             } else {
-              this.loginAuth.setUserLoggedIn(true);
+              this.loginAuth.setUserLoggedIn('true');
               this.loginAuth.setValues(
                 res['Adminid'],
                 res['Email'],
