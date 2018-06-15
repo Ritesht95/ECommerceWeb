@@ -53,7 +53,7 @@ export class ProductdetailsComponent implements OnInit {
     this.dataToSend = [];
     let cnt = 0;
     Object.keys(FormValues).forEach(element => {
-      if (cnt % 2 != 0) {
+      if (cnt % 2 !== 0) {
         const obj = {
           ID: element.substr(3, element.length),
           Value: FormValues['txt' + element.substr(3, element.length)],
