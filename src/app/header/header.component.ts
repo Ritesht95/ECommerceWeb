@@ -271,7 +271,7 @@ export class HeaderComponent implements OnInit {
       localStorage.removeItem('sessionShopEmail');
       localStorage.removeItem('sessionShopUserType');
       localStorage.setItem('SloggedIn', 'false');
-      this.loginAuth.setSUserLoggedIn(false);
+      this.loginAuth.setSUserLoggedIn('false');
       this.router.navigate(['lockscreen']);
     } else {
       localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
@@ -281,7 +281,7 @@ export class HeaderComponent implements OnInit {
       localStorage.removeItem('sessionEmail');
       localStorage.removeItem('sessionUserType');
       localStorage.setItem('loggedIn', 'false');
-      this.loginAuth.setUserLoggedIn(false);
+      this.loginAuth.setUserLoggedIn('false');
       this.router.navigate(['lockscreen']);
     }
 
@@ -306,54 +306,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    if (this.loginAuth.getUserType() !== 'seller') {
-      localStorage.removeItem('sessionUserID');
-      localStorage.removeItem('sessionName');
-      localStorage.removeItem('sessionEmail');
-      localStorage.removeItem('sessionUserType');
-      localStorage.setItem('loggedIn', 'false');
-      this.loginAuth.setUserLoggedIn(false);
-      this.router.navigate(['login']);
-    } else {
-      localStorage.removeItem('sessionShopUserID');
-      localStorage.removeItem('sessionShopName');
-      localStorage.removeItem('sessionShopEmail');
-      localStorage.removeItem('sessionShopUserType');
-      localStorage.setItem('SloggedIn', 'false');
-      this.loginAuth.setSUserLoggedIn(false);
-      this.router.navigate(['login']);
-    }
-
-    // this.loginAuth
-    //   .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
-    //   .subscribe(
-    //     res => {
-    //       if (this.loginAuth.getUserType() === 'seller') {
-    //         if (res.json()['key'] === 'true') {
-    //           localStorage.removeItem('sessionUserID');
-    //           localStorage.removeItem('sessionName');
-    //           localStorage.removeItem('sessionEmail');
-    //           localStorage.removeItem('sessionUserType');
-    //           localStorage.setItem('loggedIn', 'false');
-    //           this.loginAuth.setUserLoggedIn(false);
-    //           this.router.navigate(['login']);
-    //         }
-    //       } else {
-    //         if (res.json()['key'] === 'true') {
-    //           localStorage.removeItem('sessionShopUserID');
-    //           localStorage.removeItem('sessionShopName');
-    //           localStorage.removeItem('sessionShopEmail');
-    //           localStorage.removeItem('sessionShopUserType');
-    //           localStorage.setItem('SloggedIn', 'false');
-    //           this.loginAuth.setSUserLoggedIn(false);
-    //           this.router.navigate(['login']);
-    //         }
-    //       }
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
+    this.loginAuth.logout();
   }
 
   ClearNotification(ID: String, URL: String) {
