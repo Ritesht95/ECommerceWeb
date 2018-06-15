@@ -94,7 +94,7 @@
             <small>({{productSingleData.CategoryName}})</small>
             &nbsp;&nbsp;
             <small>
-              <a href="/product?ProdID={{productSingleData.ProductID}}" class="btn btn-info">
+              <a routerLink="/product" [queryParams]="{'ProdID':productSingleData.ProductID}" data-dismiss="modal" aria-label="Close" class="btn btn-info">
                 <i class="fa fa-edit"></i>
               </a>
             </small>

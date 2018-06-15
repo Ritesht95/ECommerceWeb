@@ -24,7 +24,7 @@
               <th>Order No</th>
               <th>Product Name</th>
               <th>Price</th>
-              <th>Quantity</th>
+              <!-- <th>Quantity</th> -->
               <th>Status</th>
               <th style="text-align: center">Shipped</th>
               <th style="text-align: center"> Out For Delievery</th>
@@ -37,8 +37,8 @@
               <td>{{ o.OrderDetailID }}</td>
               <td>{{ o.ProductName }}</td>
               <td>{{ o.Price }}</td>
-              <td>{{ o.Qty }}</td>
-              <td>{{ o.Status }}</td>
+              <!-- <td>{{ o.Qty }}</td> -->
+              <td><b>{{ o.Status }}</b></td>
               
 
               <td style="text-align: center" *ngIf="o.Status === 'Cancelled'">
@@ -53,7 +53,11 @@
                 <button class="fas fa-times btn btn-danger" disabled></button>
               </td>
 
-              <td style="text-align: center" *ngIf="o.Status=== 'Pending' || o.Status=== 'Confirmed'">
+              <td style="text-align: center" *ngIf="o.Status === 'Pending'">
+                <button class="fas fa-times btn btn-danger" disabled></button>
+              </td>
+
+              <td style="text-align: center" *ngIf="o.Status=== 'Confirmed'">
                 <button class="fas fa-times btn btn-danger"
                   (click)="sendShipped(o.OrderDetailID)"></button>
               </td>
@@ -62,7 +66,12 @@
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
 
-              <td style="text-align: center" *ngIf="o.Status=== 'Pending' || o.Status=== 'Confirmed' || o.Status=== 'Shipped' || o.Status=== 'Transist'">
+              <td style="text-align: center" *ngIf="o.Status=== 'Pending' || o.Status=== 'Confirmed'">
+                <button class="fas fa-times btn btn-danger" disabled></button>
+              </td>
+             
+
+              <td style="text-align: center" *ngIf="o.Status=== 'Shipped' || o.Status=== 'Transist'">
                 <button class="fas fa-times btn btn-danger"
                   (click)="sendOFD(o.OrderDetailID)"></button>
               </td>
@@ -72,55 +81,19 @@
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
 
-              <td style="text-align: center" *ngIf="o.Status !== 'Delievered' && o.Status !== 'Cancelled'">
-                <button class="fas fa-times btn btn-danger"
-                  (click)="sendDelievered(o.OrderDetailID)"></button>
-              </td>
-
-              <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
-                <button class="fas fa-check-circle btn btn-success"></button>
-              </td>
-              
-
-
-
-              <!-- <td style="text-align: center" *ngIf="o.Status=== 'Pending'">
-                <button class="fas fa-times btn btn-danger"
-                  (click)="sendShipped(o.OrderDetailID)"></button>
-              </td>
-              <td style="text-align: center" *ngIf="o.Status=== 'Confirmed'">
-                <button class="fas fa-times btn btn-danger"
-                  (click)="sendShipped(o.OrderDetailID)"></button>
-              </td>
-              <td style="text-align: center" *ngIf="o.Status=== 'Shipped'">
-                <button class="fas fa-check-circle btn btn-success"></button>
-              </td>
-              <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
-                <button class="fas fa-check-circle btn btn-success"></button>
-              </td>
-              
-              <td style="text-align: center" *ngIf="o.Status=== 'Confirmed'">
-                <button class="fas fa-times btn btn-danger"
-                  (click)="sendDelievered(o.OrderDetailID)"></button>
-              </td>
-              <td style="text-align: center" *ngIf="o.Status=== 'Shipped'">
-                <button class="fas fa-times btn btn-danger"
-                  (click)="sendDelievered(o.OrderDetailID)"></button>
+              <td style="text-align: center" *ngIf="o.Status=== 'Pending' || o.Status=== 'Confirmed' || o.Status=== 'Shipped' || o.Status=== 'Transist'">
+                <button class="fas fa-times btn btn-danger" disabled></button>
               </td>
 
               <td style="text-align: center" *ngIf="o.Status === 'OFD'">
-                <button class="fas fa-check-circle btn btn-success"></button>
-              </td>
-
-              <td style="text-align: center" *ngIf="o.Status !== 'OFD'">
                 <button class="fas fa-times btn btn-danger"
-                  (click)="sendOFD(o.OrderDetailID)"></button>
+                  (click)="sendDelievered(o.OrderDetailID)"></button>
               </td>
 
-              
               <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
                 <button class="fas fa-check-circle btn btn-success"></button>
-              </td> -->
+              </td>
+              
               <td>
                 <button class="fab fa-product-hunt btn btn-warning"
                   data-toggle="modal" data-target="#productDetailsModal"
