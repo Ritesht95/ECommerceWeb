@@ -323,7 +323,7 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
-  getSellerProfile(ShopID: number) {
+  getSellerProfile(ShopID: string) {
     return this._http
       .get(environment.apiURL + 'Shop/SingleShop.php?id=' + ShopID)
       .pipe(map(res => res.json()));
@@ -445,7 +445,7 @@ export class SellerService {
   ClearAllNotificationSeller(ID: String){
     return this._http
       .get(environment.apiURL + 'Notification/ClearAllNotification.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
   getNotifications(Id: string){
@@ -457,7 +457,7 @@ export class SellerService {
   getDiscount(ID: String){
     return this._http
       .get(environment.apiURL + 'Discount/GetAllShopDiscount.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
   SetDiscountStatus(ID: String, Status: String){
@@ -478,7 +478,7 @@ export class SellerService {
   getAllDiscountProducts(ID: String){
     return this._http
       .get(environment.apiURL + 'Product/DiscountProduct.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
   AddDiscount(ID: string,ProdID: string,Flat: string,Percentage: string){
@@ -501,7 +501,7 @@ export class SellerService {
   SingleDiscount(ID: string){
     return this._http
       .get(environment.apiURL + 'Discount/getSingleProductDiscount.php?id='+ID)
-      .pipe(map(res => res.json())); 
+      .pipe(map(res => res.json()));
   }
 
   SellerDashBoard(ID: string){

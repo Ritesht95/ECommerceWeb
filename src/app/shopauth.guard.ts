@@ -17,7 +17,7 @@ export class ShopauthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.loginAuth.getSUserLoggedIn()) {
+    if (this.loginAuth.getSUserLoggedIn() === 'true') {
       return true;
     } else {
       if (this.loginAuth.getUserLoggedIn() === 'true') {

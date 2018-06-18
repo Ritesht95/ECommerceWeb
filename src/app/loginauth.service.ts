@@ -106,21 +106,25 @@ export class LoginauthService {
     return this.SEmail;
   }
 
-  logout() {
+  logout(sleep = false) {
     if (this.getUserType() !== 'seller') {
       localStorage.removeItem('sessionUserID');
       localStorage.removeItem('sessionName');
       localStorage.removeItem('sessionEmail');
       localStorage.setItem('loggedIn', 'false');
       this.setUserLoggedIn('false');
-      this.router.navigate(['login']);
+      if (sleep === false) {
+        this.router.navigate(['login']);
+      }
     } else {
       localStorage.removeItem('sessionShopUserID');
       localStorage.removeItem('sessionShopName');
       localStorage.removeItem('sessionShopEmail');
       localStorage.setItem('SloggedIn', 'false');
       this.setSUserLoggedIn('false');
-      this.router.navigate(['login']);
+      if (sleep === false) {
+        this.router.navigate(['login']);
+      }
     }
   }
 
