@@ -489,4 +489,10 @@ export class SuperAdminService {
       .get(environment.apiURL + 'Dashborard/SuDashShops.php')
       .pipe(map(res => res.json()));  
   }
+
+  TotalValue(){
+    return this._http
+      .get(environment.apiURL + 'Dashborard/TotalValue.php?id=0')
+      .pipe(map(res => res.json()));  
+  }
 }
