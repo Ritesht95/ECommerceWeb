@@ -24,6 +24,8 @@ export class FeedbackComponent implements OnInit {
     );
   }
 
+  // send reply
+
   sendReply(Subject: string , Reply: string) {
     this.superadminservice.sendReply(this.Id, Subject, Reply).subscribe(
       res => {

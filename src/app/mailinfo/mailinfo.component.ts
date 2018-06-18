@@ -46,6 +46,8 @@ export class MailinfoComponent implements OnInit {
     );
   }
 
+  // update mail information
+
   updateMailInfo(Email: string, Password: string) {
     this.superadminservice.updateMailInfo(Email, Password).subscribe(res => {
       if (res['key'] === 'true') {

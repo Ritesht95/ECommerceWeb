@@ -3,6 +3,8 @@
     <div class="vertical-align-middle">
       <div class="auth-box ">
 
+        <!-- sign up form -->
+
         <div class="left">
           <div class="content">
             <div class="header">
@@ -22,7 +24,7 @@
                 <input type="password" ngModel #txtpassword="ngModel" class="form-control" id="txtpassword" name="txtpassword" placeholder="Password"
                    required>
               </div>
-              
+
               <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="frm.invalid">Sign up</button>
               <!--   || txtSType.touched || txtSName.touched || txtOName.touched  -->
               <div *ngIf="txtUsername.touched || txtpassword.touched">

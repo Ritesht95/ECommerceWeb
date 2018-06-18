@@ -41,6 +41,8 @@ export class LockscreenComponent implements OnInit {
     alertDiv.style.display = val ? 'block' : 'none';
   }
 
+  // log in function
+
   login(Password: string) {
     if (localStorage.getItem('SleepUsername') === null) {
       this.router.navigate(['login']);

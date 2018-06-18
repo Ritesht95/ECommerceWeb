@@ -29,6 +29,8 @@ export class AdminprofileComponent implements OnInit {
     this.superadminservice
   );
 
+// editable form enable
+
   hideTable() {
     const x = document.getElementById('tableDetail');
     const y = document.getElementById('tableDetail2');
@@ -49,6 +51,9 @@ export class AdminprofileComponent implements OnInit {
       btn3.style.display = 'none';
     }
   }
+
+// to check file type
+
   upload(event: any) {
     const files = this.elem.nativeElement.querySelector('#image').files;
     // const files: any = event.target.files;
@@ -63,6 +68,8 @@ export class AdminprofileComponent implements OnInit {
       this.fileToUpload = files.item(0);
     }
   }
+
+  // validate function to check file type
 
   validateFile(name: String) {
     const ext: string = name.substring(name.lastIndexOf('.') + 1);

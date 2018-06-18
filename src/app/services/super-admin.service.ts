@@ -12,6 +12,8 @@ import { error } from 'protractor';
 export class SuperAdminService {
   constructor(private _http: Http, private userSession: LoginauthService) {}
 
+  // to verify login
+
   checkLogin(username: string, password: string): Observable<any> {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -27,6 +29,8 @@ export class SuperAdminService {
         .pipe(map(res => res.json()))
     );
   }
+
+  // change password
 
   changePassword(oldPassword: string, newPassword: string): Observable<any> {
     const headers = new Headers({
@@ -51,6 +55,8 @@ export class SuperAdminService {
     );
   }
 
+  // forget password
+
   forgotPassword(Username: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -70,6 +76,8 @@ export class SuperAdminService {
     );
   }
 
+  // step after forget password
+
   checkRandomString(RandomString: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -88,6 +96,8 @@ export class SuperAdminService {
         .pipe(map(res => res.json()))
     );
   }
+
+  // reset password
 
   resetPassword(
     Username: string,
@@ -116,6 +126,8 @@ export class SuperAdminService {
     );
   }
 
+  // upload website logo
+
   postFile(formData: FormData) {
     // const headers = new Headers({
     //   'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -135,6 +147,8 @@ export class SuperAdminService {
     );
   }
 
+  // get admin data
+
   getAdminData(UserID: number) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -145,6 +159,8 @@ export class SuperAdminService {
       .post(environment.apiURL + 'SuperAdmin/ReadInfo.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  // set admin detail
 
   setAdminData(UserID: number, Name: string, PhoneNo: string, Email: string) {
     const headers = new Headers({
@@ -162,6 +178,8 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // update profile image
+
   updateProfileImage(formData: FormData) {
     const endpoint = environment.apiURL + 'SuperAdmin/AdminImage.php';
     return this._http.post(endpoint, formData).pipe(
@@ -177,11 +195,15 @@ export class SuperAdminService {
     );
   }
 
+  // get mail information
+
   getMailInfo() {
     return this._http
       .get(environment.apiURL + 'Website/GetMail.php')
       .pipe(map(res => res.json()));
   }
+
+  // update mail information
 
   updateMailInfo(Email: string, Password: string) {
     const headers = new Headers({
@@ -194,11 +216,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // get website information
+
   getWebInfo() {
     return this._http
       .get(environment.apiURL + 'Website/GetWebInfo.php')
       .pipe(map(res => res.json()));
   }
+
+  // update website information
 
   updateWebInfo(
     WebsiteName: string,
@@ -235,11 +261,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // get shop data
+
   getShopsData() {
     return this._http
       .get(environment.apiURL + 'Shop/ShopData.php')
       .pipe(map(res => res.json()));
   }
+
+  // get new shop detail
 
   getNewShops() {
     return this._http
@@ -247,11 +277,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // get shop detail
+
   getShopDetails(ShopID: number) {
     return this._http
       .get(environment.apiURL + 'Shop/SingleShop.php?id=' + ShopID)
       .pipe(map(res => res.json()));
   }
+
+  // set shop status
 
   setShopStatus(ShopID: number, Status: number) {
     const headers = new Headers({
@@ -264,6 +298,8 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // approve shop
+
   setShopApproveStatus(ShopID: number, Status: number) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -274,6 +310,8 @@ export class SuperAdminService {
       .post(environment.apiURL + 'Shop/SetShopApproveStatus.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  // delete shop
 
   setShopDelete(ShopID: number) {
     const headers = new Headers({
@@ -286,11 +324,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // get all categories detail
+
   getAllCategories() {
     return this._http
     .get(environment.apiURL + 'Category/AllCategoriesData.php')
     .pipe(map(res => res.json()));
   }
+
+  // set category is approved or not
 
   setCategoryApproved(CategoryID: string, value: boolean) {
     const headers = new Headers({
@@ -303,6 +345,8 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // send message
+
   sendMessage(Name: string, Email: string, Message: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -314,11 +358,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // get detail of all product
+
   getAllProducts() {
     return this._http
     .get(environment.apiURL + 'Product/AllProductData.php')
     .pipe(map(res => res.json()));
   }
+
+  // set product is approved
 
   setProductApproved(ProductID: string, value: boolean) {
     const headers = new Headers({
@@ -331,6 +379,8 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // send order is shipped
+
   sendShipped(OrderDetailID: number) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -341,6 +391,8 @@ export class SuperAdminService {
       .post(environment.apiURL + 'order/OrderShipped.php?id=' + OrderDetailID, data, options)
       .pipe(map(res => res.json()));
   }
+
+  // send order is delievered
 
   sendDelievered(OrderDetailID: number) {
     const headers = new Headers({
@@ -353,6 +405,8 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // send reply of feedback
+
   sendReply(Id: number, Subject: string , Reply: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -363,6 +417,8 @@ export class SuperAdminService {
       .post(environment.apiURL + 'feedback/reply.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  // send tracking info
 
   sendTracking(Id: number, ttext: string , adate: string, atime: string, ddate: string, dtime: string) {
     const headers = new Headers({
@@ -376,11 +432,15 @@ export class SuperAdminService {
       .pipe(map(res => res.json()));
   }
 
+  // get feedback of seller
+
   getFeedback() {
     return this._http
       .get(environment.apiURL + 'feedback/getfeedbacks.php')
       .pipe(map(res => res.json()));
   }
+
+  // get tracking detail of order
 
   getTrackingDetails(OrderDetailsID: string) {
     return this._http
@@ -388,17 +448,23 @@ export class SuperAdminService {
     .pipe(map(res => res.json()));
   }
 
+  // get all order
+
   getOrder() {
     return this._http
       .get(environment.apiURL + 'Order/GetAllOrder.php')
       .pipe(map(res => res.json()));
   }
 
+  // get all user
+
   getAllUsers() {
     return this._http
       .get(environment.apiURL + 'User/AllUserData.php')
       .pipe(map(res => res.json()));
   }
+
+  // to do active deavtive status of user
 
   setUserStatus(UserID: string, Status) {
     const headers = new Headers({

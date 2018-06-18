@@ -12,6 +12,8 @@ import { INSPECT_MAX_BYTES } from 'buffer';
 export class SellerService {
   constructor(private _http: Http, private userSession: LoginauthService) {}
 
+  // do sign up
+
   setSignUp(
     SName: string,
     SType: string,
@@ -39,6 +41,8 @@ export class SellerService {
     );
   }
 
+  // check log in of seller
+
   checkLogin(Username: string, Password: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -55,6 +59,8 @@ export class SellerService {
     );
   }
 
+  // seller forget password service
+
   forgotPassword(Username: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -70,6 +76,8 @@ export class SellerService {
     );
   }
 
+  // procedure after forger password
+
   checkRandomString(RandomString: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -84,6 +92,8 @@ export class SellerService {
         .pipe(map(res => res.json()))
     );
   }
+
+  // reset password
 
   resetPassword(
     Username: string,
@@ -108,6 +118,8 @@ export class SellerService {
     );
   }
 
+  // change password service
+
   changePassword(oldPassword: string, newPassword: string): Observable<any> {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -130,6 +142,8 @@ export class SellerService {
         .pipe(map(res => res.json()))
     );
   }
+
+  // check username
 
   checkUsername(Username: string) {
     const headers = new Headers({
@@ -173,6 +187,8 @@ export class SellerService {
     );
   }
 
+  // add category
+
   addCategory(formData: FormData) {
     const endpoint = environment.apiURL + 'Category/CategoryImage.php';
     return this._http.post(endpoint, formData).pipe(
@@ -186,6 +202,8 @@ export class SellerService {
     );
   }
 
+  // get category
+
   getCategory(CategoryID: string) {
     return this._http
       .get(
@@ -194,11 +212,15 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  // get all categories
+
   getAllCategories(ShopID: string) {
     return this._http
       .get(environment.apiURL + 'Category/CategoryData.php?id=' + ShopID)
       .pipe(map(res => res.json()));
   }
+
+  // add property of product
 
   addProperty(CategoryID: number, Property: any) {
     const headers = new Headers({
@@ -215,6 +237,8 @@ export class SellerService {
     );
   }
 
+  // get properies for category
+
   getPropertiesforCategory(CategoryID: string) {
     return this._http
       .get(
@@ -224,6 +248,8 @@ export class SellerService {
       )
       .pipe(map(res => res.json()));
   }
+
+  // delete property
 
   deleteProperty(PropertyID: number, CatgoryID: number) {
     const headers = new Headers({
@@ -240,17 +266,23 @@ export class SellerService {
     );
   }
 
+  // get all product
+
   getAllProducts(ShopID: number) {
     return this._http
       .get(environment.apiURL + 'Product/GetProductData.php?id=' + ShopID)
       .pipe(map(res => res.json()));
   }
 
+  // get sinlge product
+
   getSingleProduct(ProductID: string) {
     return this._http
       .get(environment.apiURL + 'Product/SingleProductData.php?id=' + ProductID)
       .pipe(map(res => res.json()));
   }
+
+  // add product
 
   addProduct(formData: FormData) {
     const endpoint = environment.apiURL + 'Product/AddProduct.php';
@@ -264,6 +296,8 @@ export class SellerService {
     );
   }
 
+  // add stock
+
   addStock(ProductID: string, stockNumber: number) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -275,6 +309,8 @@ export class SellerService {
       .post(environment.apiURL + 'Product/AddStock.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  // product delete image
 
   deleteImage(ID: number) {
     const headers = new Headers({
@@ -288,11 +324,15 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  // get all order
+
   getOrder(Id: number) {
     return this._http
       .get(environment.apiURL + 'order/getShopOrders.php?id=' + Id)
       .pipe(map(res => res.json()));
   }
+
+  // send order
 
   sendOrder(OrderDetailID: number) {
     const headers = new Headers({
@@ -305,6 +345,8 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  // get customer detail
+
   getCustomerDetail(oid: number, cid: number) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -316,11 +358,16 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  // get seller profile
+
   getSellerProfile(ShopID: number) {
     return this._http
       .get(environment.apiURL + 'Shop/SingleShop.php?id=' + ShopID)
       .pipe(map(res => res.json()));
   }
+
+  // set seller profile
+  // part 1 of the form
 
   setSellerProfile(
     ShopID: number,
@@ -356,6 +403,8 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  // part 2 of the form
+
   setSellerProfile2(formData: FormData) {
     const endpoint = environment.apiURL + 'Shop/UpdateBusinessDetails.php';
     return this._http.post(endpoint, formData).pipe(
@@ -367,6 +416,8 @@ export class SellerService {
       )
     );
   }
+
+  // part 3 of the form
 
   setSellerProfile3(
     ShopID: number,
@@ -392,11 +443,15 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  // get category properites
+
   getCategoryProperties(CategoryID: string, ProductID: string) {
     return this._http
       .get(environment.apiURL + 'Category/getProperties.php?id=' + CategoryID + '&pid=' + ProductID)
       .pipe(map(res => res.json()));
   }
+
+  // set product properties
 
   setProductProperties(ProductID: string, FormValues: any[], Operation: string) {
     const headers = new Headers({
@@ -413,6 +468,8 @@ export class SellerService {
       .post(environment.apiURL + 'Category/AddPropertyValue.php', data, options)
       .pipe(map(res => res.json()));
   }
+
+  // get tracking detail
 
   getTrackingDetails(OrderDetailsID: string, SellerID: string) {
     return this._http

@@ -17,6 +17,8 @@ export class AboutUsComponent implements OnInit {
 
   constructor(private router: Router, private superadminservice: SuperAdminService) { }
 
+  // get website information
+
   ngOnInit() {
     this.superadminservice.getWebInfo().subscribe(
       res => {

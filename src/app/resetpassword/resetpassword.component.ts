@@ -73,6 +73,8 @@ export class ResetpasswordComponent implements OnInit {
 
   }
 
+  // reset password
+
   ResetPassword(VerificationCode: string, NewPassword: string) {
     if (this.type === 'admin') {
       this.superadminservice

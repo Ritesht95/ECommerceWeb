@@ -46,6 +46,8 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
+  // add stock
+
   AddStock(ProductID: string, Stock: number) {
     this.sellerservice.addStock(ProductID, Stock).subscribe(res => {
       if (res['key'] === 'true') {
@@ -62,6 +64,8 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
+  // delete image
+
   deleteImage(ProductID: string, ID: number) {
     this.sellerservice.deleteImage(ID).subscribe(res => {
       if (res['key'] === 'true') {
@@ -71,6 +75,8 @@ export class ProductDataComponent implements OnInit {
       }
     });
   }
+
+ // get property detail
 
   getProperty(cid: any, pid: any) {
     this.categoryID = cid;

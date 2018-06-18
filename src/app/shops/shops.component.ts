@@ -41,6 +41,8 @@ export class ShopsComponent implements OnInit {
     });
   }
 
+  // set active or not
+
   SetActive(ShopID: number) {
     this.superadminservice.setShopStatus(ShopID, 1).subscribe(res => {
       this.superadminservice.getShopsData().subscribe(res1 => {
@@ -62,6 +64,8 @@ export class ShopsComponent implements OnInit {
       });
     });
   }
+
+  // set inavtive
 
   SetInactive(ShopID: number) {
     this.superadminservice.setShopStatus(ShopID, 0).subscribe(res => {
@@ -85,6 +89,8 @@ export class ShopsComponent implements OnInit {
     });
   }
 
+  // set approved or not
+
   SetApproved(ShopID: number) {
     this.superadminservice.setShopApproveStatus(ShopID, 1).subscribe(res => {
       this.superadminservice.getShopsData().subscribe(res1 => {
@@ -107,6 +113,8 @@ export class ShopsComponent implements OnInit {
     });
   }
 
+  // set not approved
+
   SetNApproved(ShopID: number) {
     this.superadminservice.setShopApproveStatus(ShopID, 0).subscribe(res => {
       this.superadminservice.getShopsData().subscribe(res1 => {
@@ -128,6 +136,8 @@ export class ShopsComponent implements OnInit {
       });
     });
   }
+
+  // set delete shop
 
   SetShopDelete(ShopID: number) {
     this.superadminservice.setShopDelete(ShopID).subscribe(res => {
