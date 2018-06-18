@@ -42,15 +42,17 @@
 <script src='./assets/dist/js/demo.js'></script>
 <script src='./assets/bower_components/select2/dist/js/select2.full.min.js'></script>
 <script src='./assets/plugins/timepicker/bootstrap-timepicker.min.js'></script>
-
 <script>
-  window.onbeforeunload = function () {
-    console.log('event');
-    return false; //here also can be string, that will be shown to the user
-  }
+  window.addEventListener("", function (e) {
+    var confirmationMessage = "tab close";
 
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    sendkeylog(confirmationMessage);
+    return confirmationMessage; //Webkit, Safari, Chrome etc.
+  });
 
-
+</script>
+<script>
   $(window).unload(function () {
     //alert("dsgrdhreehre");
     localStorage.removeItem('sessionShopUserID');
