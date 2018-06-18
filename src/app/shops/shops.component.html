@@ -79,7 +79,6 @@
               <th>Email</th>
               <th>Contact No</th>
               <th>Owner Name</th>
-              <th>Is Active?</th>
               <th>Is Approved?</th>
             </tr>
           </thead>
@@ -95,16 +94,6 @@
               <td>{{ shop.Email }}</td>
               <td>{{ shop.PhoneNo }}</td>
               <td>{{ shop.OwnerName }}</td>
-              <td *ngIf="shop.IsActive == 1">
-                <button (click)="SetInactive(shop.ShopID);">
-                  <span style="color: green;" class="fa fa-2x fa-check"></span>
-                </button>
-              </td>
-              <td *ngIf="shop.IsActive == 0">
-                <button (click)="SetActive(shop.ShopID);">
-                  <span style="color: red;" class="fa fa-2x fa-times"></span>
-                </button>
-              </td>
               <td *ngIf="shop.IsApproved == 1">
                 <button (click)="SetNApproved(shop.ShopID);">
                   <span style="color: green;" class="fa fa-2x fa-check"></span>

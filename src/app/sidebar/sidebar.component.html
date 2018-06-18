@@ -66,6 +66,12 @@
           <span> Order Tracking</span>
         </a>
       </li>
+      <li *ngIf="!userType">
+          <a [routerLink]="['/feedback']">
+            <i class="fa fa-comments"></i>
+            <span> Feedback</span>
+          </a>
+        </li>
 
 
       <li *ngIf="userType">
@@ -98,6 +104,13 @@
           <span> Order Tracking</span>
         </a>
       </li>
+      <li *ngIf="userType">
+        <a [routerLink]="['/discount']">
+          <i class="fa fa-hand-holding-usd"></i>
+          <span> Discounts</span>
+        </a>
+      </li>
+      
       <li *ngIf="userType">
         <a [routerLink]="['/aboutUs']">
           <i class="fa fa-info-circle"></i>

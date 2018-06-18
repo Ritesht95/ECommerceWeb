@@ -11,6 +11,7 @@ import { Subject } from 'rxjs';
 })
 export class CategoryDataComponent implements OnInit {
 
+  NoOfTrigger = 0;
   categoryData: any;
   env: any = environment.apiURL;
   dtOptions: DataTables.Settings = {};
@@ -21,15 +22,22 @@ export class CategoryDataComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
+<<<<<<< HEAD
 
     // get user id
 
     this.sellerservice.getAllCategories(this.loginAuth.getSUserID()).subscribe(
+=======
+    this.sellerservice.getAllShopCategories(this.loginAuth.getSUserID()).subscribe(
+>>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
       res => {
         this.categoryData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }

@@ -74,7 +74,7 @@ export class LoginComponent {
             this.ShowAlert(true);
             this.timeout(false);
           } else {
-            this.loginAuth.setUserLoggedIn(true);
+            this.loginAuth.setUserLoggedIn('true');
             this.loginAuth.setValues(
               res['Adminid'],
               res['Email'],
@@ -100,7 +100,7 @@ export class LoginComponent {
             this.UserID = res['ShopID'];
             document.getElementById('btnIniItModal').click();
           } else {
-            this.loginAuth.setSUserLoggedIn(true);
+            this.loginAuth.setSUserLoggedIn('true');
             console.log(res['Email']);
             this.loginAuth.setValues(
               res['ShopID'],
@@ -123,7 +123,7 @@ export class LoginComponent {
       .subscribe(res => {
         if (res['key'] === 'true') {
           document.getElementById('btnCloseFeedback').click();
-          this.loginAuth.setSUserLoggedIn(true);
+          this.loginAuth.setSUserLoggedIn('true');
           console.log(res['Email']);
           this.loginAuth.setValues(
             res['ShopID'],

@@ -18,9 +18,10 @@
   <section class="content">
     <div class="box box-primary">
       <div class="box-body">
-        <table datatable class="row-border hover">
+        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="row-border hover">
           <thead>
             <tr>
+              <th>Order No</th>
               <th>Product Name</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -31,6 +32,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let o of order">
+              <td>{{ o.OrderDetailID }}</td>
               <td>{{ o.ProductName }}</td>
               <td>{{ o.Price }}</td>
               <td>{{ o.Qty }}</td>
@@ -44,7 +46,7 @@
               <td>
                 <button class="fab fa-product-hunt btn btn-warning" data-toggle="modal" data-target="#productDetailsModal" (click)="getSingleProduct(o.ProductID)"></button> &nbsp;
                 <button class="fas fa-users btn btn-primary" data-toggle="modal" data-target="#userModal" (click)="getCustomer(o.OrderID,o.CustomerID)"></button> &nbsp;
-                <button class="fas fa-truck-moving btn btn-info" data-toggle="modal" data-target="#trackingModal"></button>
+                <button class="fas fa-truck-moving btn btn-info" routerLink="/sellertracking" [queryParams]="{'ODID':o.OrderDetailID}"></button>
               </td>
             </tr>
           </tbody>

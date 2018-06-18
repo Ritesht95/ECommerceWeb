@@ -21,6 +21,7 @@ export class ProductDataComponent implements OnInit {
   operation = '';
   categoryID = '';
   productID = '';
+  NoOfTrigger = 0;
 
   constructor(
     private sellerservice: SellerService,
@@ -30,13 +31,16 @@ export class ProductDataComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2
+      pageLength: 10
     };
     this.sellerservice
       .getAllProducts(this.loginAuth.getSUserID())
       .subscribe(res => {
         this.productsData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       });
   }
 
@@ -53,13 +57,10 @@ export class ProductDataComponent implements OnInit {
       if (res['key'] === 'true') {
         console.log('stock updated successfully.');
         document.getElementById('btnCloseStock').click();
-        this.sellerservice
-          .getAllProducts(this.loginAuth.getSUserID())
-          .subscribe(res1 => {
-            this.productsData = res1['records'];
-          });
+        this.ngOnInit();
       } else {
-        console.log('cannot update stock.');
+        alert('Mimimum Stock is Required');
+        this.ngOnInit();
       }
     });
   }
@@ -76,20 +77,33 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
  // get property detail
+=======
+  SetActive(pid: any) {
+    this.sellerservice.setProductActive(pid, '1').subscribe(res => {
+      this.ngOnInit();
+    });
+  }
+
+  SetInactive(pid: any) {
+    this.sellerservice.setProductActive(pid, '0').subscribe(res => {
+      this.ngOnInit();
+    });
+  }
+>>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
 
   getProperty(cid: any, pid: any) {
     this.categoryID = cid;
     this.productID = pid;
     console.log(this.categoryID, this.productID);
     this.sellerservice
-    .getCategoryProperties(this.categoryID, this.productID)
-    .subscribe(res => {
-      this.categoryProperties = res['records'];
-    });
+      .getCategoryProperties(this.categoryID, this.productID)
+      .subscribe(res => {
+        this.categoryProperties = res['records'];
+      });
     this.sellerservice.getSingleProduct(this.productID).subscribe(res => {
       this.productSingleData = res;
     });
   }
-
 }

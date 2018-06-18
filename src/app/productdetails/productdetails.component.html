@@ -31,10 +31,13 @@
             <h3 class="col-md-offset-1 col-md-10" style="margin: 2px; padding: 5px;">Description:
               <small>{{productSingleData.ProductDesc}}</small>
             </h3>
-            <div class="row"><br></div>
+            <div class="row">
+              <br>
+            </div>
             <div class="row">
               <div class="col-md-offset-1 col-md-10">
                 <div class="form-group" *ngFor="let property of categoryProperties">
+                  <input type="hidden" id="hdn{{property['CategoryPropertyId']}}" name="hdn{{property['CategoryPropertyId']}}"  [(ngModel)]="property.Operation" >
                   <label for="txtProName">{{property['PropertyName']}}</label>
                   <span class="text-danger">*</span>
                   <input type="text" class="form-control" [(ngModel)]="property.Value" id="txt{{property['CategoryPropertyId']}}" name="txt{{property['CategoryPropertyId']}}"
@@ -42,6 +45,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary" (click)="AddProValues(frm.value);">Submit</button>
               </div>
+            </div>
+            <br>
+            <div ng-if="!ErrorMsg == null" id="alertDivProp">
+              <span class="text-danger">{{ErrorMsg}}</span>
             </div>
           </div>
         </form>

@@ -3,6 +3,7 @@ import { LoginauthService } from '../loginauth.service';
 import { SellerService } from '../services/seller.service';
 import { environment } from '../../environments/environment';
 import { SuperAdminService } from '../services/super-admin.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tracking',
@@ -19,15 +20,27 @@ export class TrackingComponent implements OnInit {
   ddate: string ;
   dtime: string ;
   atime: string ;
+  NoOfTrigger = 0;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
 
   constructor(private superadminservice: SuperAdminService, private sellerservice: SellerService, private loginAuth: LoginauthService) { }
 
   ngOnInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      order: [0,'desc']
+    };
     this.superadminservice.getOrder().subscribe(
       res => {
         this.order = '';
         this.order = res['records'];
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       }
     );
   }
@@ -95,8 +108,9 @@ export class TrackingComponent implements OnInit {
     this.superadminservice.sendShipped(OrderDetailID).subscribe(
       res => {
         if (res['key'] === 'true') {
-            console.log('sucessfully send');
             this.ngOnInit();
+        }  else if (res['key'] === 'noaccess') {
+          alert('Order Has not been Confirmed BY the Seller.');
         } else {
           console.log('error');
         }
@@ -110,9 +124,26 @@ export class TrackingComponent implements OnInit {
     this.superadminservice.sendDelievered(OrderDetailID).subscribe(
       res => {
         if (res['key'] === 'true') {
-            console.log('sucessfully send');
             this.ngOnInit();
-        } else {
+        } else if(res['key'] === 'noaccess'){
+          alert("Order Has not been Out For Delivery Yet.");
+        }else {
+          console.log('error');
+        }
+      }
+    );
+    this.ngOnInit();
+  }
+
+  sendOFD(OrderDetailID: number) {
+    console.log(OrderDetailID);
+    this.superadminservice.sendOFD(OrderDetailID).subscribe(
+      res => {
+        if (res['key'] === 'true') {
+            this.ngOnInit();
+        } else if(res['key'] === 'noaccess'){
+          alert("Order Has not been Shipped Yet.");
+        }else {
           console.log('error');
         }
       }

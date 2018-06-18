@@ -13,6 +13,7 @@ export class ShopsComponent implements OnInit {
   shopsDataN: any;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  NoOfTrigger = 0;
 
   constructor(private superadminservice: SuperAdminService) {}
 
@@ -25,7 +26,10 @@ export class ShopsComponent implements OnInit {
       if (res['key'] !== 'false') {
         this.shopsData = '';
         this.shopsData = res['records'];
-        this.dtTrigger.next();
+        if (this.NoOfTrigger === 0) {
+          this.dtTrigger.next();
+          this.NoOfTrigger++;
+        }
       } else {
         document.getElementById('tableShops').style.display = 'none';
       }
@@ -45,23 +49,7 @@ export class ShopsComponent implements OnInit {
 
   SetActive(ShopID: number) {
     this.superadminservice.setShopStatus(ShopID, 1).subscribe(res => {
-      this.superadminservice.getShopsData().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsData = '';
-          this.shopsData = res1['records'];
-        } else {
-          document.getElementById('tableShops').style.display = 'none';
-        }
-      });
-
-      this.superadminservice.getNewShops().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsDataN = '';
-          this.shopsDataN = res1['records'];
-        } else {
-          document.getElementById('tableNewShops').style.display = 'none';
-        }
-      });
+      this.ngOnInit();
     });
   }
 
@@ -69,23 +57,7 @@ export class ShopsComponent implements OnInit {
 
   SetInactive(ShopID: number) {
     this.superadminservice.setShopStatus(ShopID, 0).subscribe(res => {
-      this.superadminservice.getShopsData().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsData = '';
-          this.shopsData = res1['records'];
-        } else {
-          document.getElementById('tableShops').style.display = 'none';
-        }
-      });
-
-      this.superadminservice.getNewShops().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsDataN = '';
-          this.shopsDataN = res1['records'];
-        } else {
-          document.getElementById('tableNewShops').style.display = 'none';
-        }
-      });
+      this.ngOnInit();
     });
   }
 
@@ -93,23 +65,7 @@ export class ShopsComponent implements OnInit {
 
   SetApproved(ShopID: number) {
     this.superadminservice.setShopApproveStatus(ShopID, 1).subscribe(res => {
-      this.superadminservice.getShopsData().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsData = '';
-          this.shopsData = res1['records'];
-        } else {
-          document.getElementById('tableShops').style.display = 'none';
-        }
-      });
-
-      this.superadminservice.getNewShops().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsDataN = '';
-          this.shopsDataN = res1['records'];
-        } else {
-          document.getElementById('tableNewShops').style.display = 'none';
-        }
-      });
+      this.ngOnInit();
     });
   }
 
@@ -117,23 +73,7 @@ export class ShopsComponent implements OnInit {
 
   SetNApproved(ShopID: number) {
     this.superadminservice.setShopApproveStatus(ShopID, 0).subscribe(res => {
-      this.superadminservice.getShopsData().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsData = '';
-          this.shopsData = res1['records'];
-        } else {
-          document.getElementById('tableShops').style.display = 'none';
-        }
-      });
-
-      this.superadminservice.getNewShops().subscribe(res1 => {
-        if (res['key'] !== 'false') {
-          this.shopsDataN = '';
-          this.shopsDataN = res1['records'];
-        } else {
-          document.getElementById('tableNewShops').style.display = 'none';
-        }
-      });
+      this.ngOnInit();
     });
   }
 
@@ -142,23 +82,7 @@ export class ShopsComponent implements OnInit {
   SetShopDelete(ShopID: number) {
     this.superadminservice.setShopDelete(ShopID).subscribe(res => {
       if (res['key'] === 'true') {
-        this.superadminservice.getShopsData().subscribe(res1 => {
-          if (res['key'] !== 'false') {
-            this.shopsData = '';
-            this.shopsData = res1['records'];
-          } else {
-            document.getElementById('tableShops').style.display = 'none';
-          }
-        });
-
-        this.superadminservice.getNewShops().subscribe(res1 => {
-          if (res['key'] !== 'false') {
-            this.shopsDataN = '';
-            this.shopsDataN = res1['records'];
-          } else {
-            document.getElementById('tableNewShops').style.display = 'none';
-          }
-        });
+        this.ngOnInit();
       }
     });
   }

@@ -16,7 +16,6 @@ import { ShopInfoComponent } from './shop-info/shop-info.component';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
-import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ProductComponent } from './product/product.component';
 import { ShopauthGuard } from './shopauth.guard';
 import { ProductDataComponent } from './product-data/product-data.component';
@@ -34,6 +33,7 @@ import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.comp
 import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UserdataComponent } from './userdata/userdata.component';
+import { DiscountComponent } from './discount/discount.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -41,7 +41,6 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'dashboard', canActivate: [AuthGuard], component: SudashboradComponent },
   { path: 'shopdashboard', canActivate: [ShopauthGuard], component: ShopDashboardComponent },
-  // { path: 'dashboard', component: SudashboradComponent },
   { path: 'webinfo', canActivate: [AuthGuard] , component: WebInfoComponent},
   { path: 'shops', canActivate: [AuthGuard], component: ShopsComponent},
   { path: 'forgotpassword', component: ForgotpasswordComponent},
@@ -52,9 +51,8 @@ const routes: Routes = [
   { path: 'adminProfile', canActivate: [AuthGuard], component: AdminprofileComponent },
   { path: 'shopInfo', canActivate: [ShopauthGuard], component: ShopInfoComponent },
   { path: 'shopDetail', canActivate: [AuthGuard] , component: ShopDetailComponent  },
-  { path: 'category', canActivate: [ShopauthGuard], component: CategoryComponent },
+  { path: 'category', component: CategoryComponent },
   { path: 'shopDetail', canActivate: [AuthGuard], component: ShopDetailComponent  },
-  { path: 'initial-setup', component: IntialSetupComponent },
   { path: 'product', canActivate: [ShopauthGuard], component: ProductComponent },
   { path: 'productData', canActivate: [ShopauthGuard], component: ProductDataComponent },
   { path: 'productdetails', canActivate: [ShopauthGuard], component: ProductdetailsComponent },
@@ -70,6 +68,7 @@ const routes: Routes = [
   { path: 'sellertracking', canActivate: [ShopauthGuard], component: TrackingdetailsComponent },
   { path: 'sutracking', canActivate: [AuthGuard], component: SutrackingComponent },
   { path: 'userdata', canActivate: [AuthGuard], component: UserdataComponent },
+  { path: 'discount', canActivate: [ShopauthGuard], component: DiscountComponent },
   { path: '**', redirectTo: 'not-found' }
 ];
 

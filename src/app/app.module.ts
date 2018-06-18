@@ -25,7 +25,6 @@ import { DataTablesModule } from 'angular-datatables';
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CategoryComponent } from './category/category.component';
-import { IntialSetupComponent } from './intial-setup/intial-setup.component';
 import { ShopauthGuard } from './shopauth.guard';
 import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
 import { ProductDataComponent } from './product-data/product-data.component';
@@ -43,6 +42,7 @@ import { TrackingdetailsComponent } from './trackingdetails/trackingdetails.comp
 import { SutrackingComponent } from './sutracking/sutracking.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { UserdataComponent } from './userdata/userdata.component';
+import { DiscountComponent } from './discount/discount.component';
 
 @NgModule({
   declarations: [
@@ -64,8 +64,6 @@ import { UserdataComponent } from './userdata/userdata.component';
     LockscreenComponent,
     ShopDetailComponent,
     CategoryComponent,
-    IntialSetupComponent,
-    IntialSetupComponent,
     ProductComponent,
     ShopDashboardComponent,
     ProductDataComponent,
@@ -81,7 +79,8 @@ import { UserdataComponent } from './userdata/userdata.component';
     TrackingdetailsComponent,
     SutrackingComponent,
     TrackingComponent,
-    UserdataComponent
+    UserdataComponent,
+    DiscountComponent
   ],
   imports: [
     BrowserModule,

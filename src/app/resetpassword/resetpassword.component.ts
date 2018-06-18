@@ -10,8 +10,8 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./resetpassword.component.css']
 })
 export class ResetpasswordComponent implements OnInit {
-  type: string;
-  rand: string;
+  type: string = 'null';
+  rand: string = 'null';
   errorMsg = null;
   Username = null;
   webinfoData = '';
@@ -35,7 +35,8 @@ export class ResetpasswordComponent implements OnInit {
 
   ngOnInit() {
     this.routeAct.queryParams.subscribe(params => {
-      this.rand = params['rand'];
+      if(params['rand'] !== undefined)
+        this.rand = params['rand'];
       this.type = params['type'];
     });
 
