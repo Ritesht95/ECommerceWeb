@@ -44,26 +44,30 @@
 <script src='./assets/plugins/timepicker/bootstrap-timepicker.min.js'></script>
 
 <script>
-  $(window).unload(function(){
-      //alert("dsgrdhreehre");
-      localStorage.removeItem('sessionShopUserID');
-      localStorage.removeItem('sessionShopName');
-      localStorage.removeItem('sessionShopEmail');
-      localStorage.removeItem('sessionShopUserType');
-      localStorage.setItem('SloggedIn', 'false');
-      localStorage.removeItem('sessionUserID');
-      localStorage.removeItem('sessionName');
-      localStorage.removeItem('sessionEmail');
-      localStorage.removeItem('sessionUserType');
-      localStorage.setItem('loggedIn', 'false');
-    });
-    
+  window.onbeforeunload = function () {
+    console.log('event');
+    return false; //here also can be string, that will be shown to the user
+  }
+
+
+
+  $(window).unload(function () {
+    //alert("dsgrdhreehre");
+    localStorage.removeItem('sessionShopUserID');
+    localStorage.removeItem('sessionShopName');
+    localStorage.removeItem('sessionShopEmail');
+    localStorage.removeItem('sessionShopUserType');
+    localStorage.setItem('SloggedIn', 'false');
+    localStorage.removeItem('sessionUserID');
+    localStorage.removeItem('sessionName');
+    localStorage.removeItem('sessionEmail');
+    localStorage.removeItem('sessionUserType');
+    localStorage.setItem('loggedIn', 'false');
+  });
+
   $(function () {
 
-    
-
-
-   $('#datepicker1').datepicker({
+    $('#datepicker1').datepicker({
       autoclose: true
     })
 
@@ -72,7 +76,7 @@
       autoclose: true
     })
 
-	$('.timepicker').timepicker({
+    $('.timepicker').timepicker({
       showInputs: false
     })
 
@@ -81,4 +85,5 @@
   })
 
 </script>
+
 </html>

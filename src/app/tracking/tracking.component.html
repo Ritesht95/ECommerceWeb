@@ -39,7 +39,7 @@
               <td>{{ o.Price }}</td>
               <!-- <td>{{ o.Qty }}</td> -->
               <td><b>{{ o.Status }}</b></td>
-              
+
 
               <td style="text-align: center" *ngIf="o.Status === 'Cancelled'">
                 <button class="fas fa-times btn btn-danger" disabled></button>
@@ -69,14 +69,14 @@
               <td style="text-align: center" *ngIf="o.Status=== 'Pending' || o.Status=== 'Confirmed'">
                 <button class="fas fa-times btn btn-danger" disabled></button>
               </td>
-             
+
 
               <td style="text-align: center" *ngIf="o.Status=== 'Shipped' || o.Status=== 'Transist'">
                 <button class="fas fa-times btn btn-danger"
                   (click)="sendOFD(o.OrderDetailID)"></button>
               </td>
 
-              
+
               <td style="text-align: center" *ngIf="o.Status=== 'OFD' || o.Status=== 'Delievered'">
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
@@ -93,7 +93,7 @@
               <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
-              
+
               <td>
                 <button class="fab fa-product-hunt btn btn-warning"
                   data-toggle="modal" data-target="#productDetailsModal"
