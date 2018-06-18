@@ -24,10 +24,10 @@
               <th>Order No</th>
               <th>Product Name</th>
               <th>Price</th>
-              <!-- <th>Quantity</th> -->
+              <th>Quantity</th>
               <th>Status</th>
               <th style="text-align: center">Shipped</th>
-              <th style="text-align: center"> Out For Delievery</th>
+              <th style="text-align: center">OFD</th>
               <th style="text-align: center">Delivered</th>
               <th></th>
             </tr>
@@ -37,9 +37,9 @@
               <td>{{ o.OrderDetailID }}</td>
               <td>{{ o.ProductName }}</td>
               <td>{{ o.Price }}</td>
-              <!-- <td>{{ o.Qty }}</td> -->
+              <td>{{ o.Qty }}</td>
               <td><b>{{ o.Status }}</b></td>
-              
+
 
               <td style="text-align: center" *ngIf="o.Status === 'Cancelled'">
                 <button class="fas fa-times btn btn-danger" disabled></button>
@@ -69,14 +69,14 @@
               <td style="text-align: center" *ngIf="o.Status=== 'Pending' || o.Status=== 'Confirmed'">
                 <button class="fas fa-times btn btn-danger" disabled></button>
               </td>
-             
+
 
               <td style="text-align: center" *ngIf="o.Status=== 'Shipped' || o.Status=== 'Transist'">
                 <button class="fas fa-times btn btn-danger"
                   (click)="sendOFD(o.OrderDetailID)"></button>
               </td>
 
-              
+
               <td style="text-align: center" *ngIf="o.Status=== 'OFD' || o.Status=== 'Delievered'">
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
@@ -93,7 +93,7 @@
               <td style="text-align: center" *ngIf="o.Status=== 'Delievered'">
                 <button class="fas fa-check-circle btn btn-success"></button>
               </td>
-              
+
               <td>
                 <button class="fab fa-product-hunt btn btn-warning"
                   data-toggle="modal" data-target="#productDetailsModal"
@@ -139,13 +139,13 @@
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right"
+                    <input type="date" class="form-control pull-right"
                       id="datepicker1" ngModel #datepicker1="ngModel" name="datepicker1">
                   </div> </td>
                 <td>
                   <div class="bootstrap-timepicker col-md-12">
                     <div class="input-group col-md-12">
-                      <input type="text" class="form-control timepicker timepicker1"
+                      <input type="time" class="form-control timepicker timepicker1"
                         id="timepicker1" ngModel #timepicker1="ngModel" name="timepicker1">
                       <div class="input-group-addon">
                         <i class="fas fa-clock"></i>
@@ -164,13 +164,13 @@
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" class="form-control pull-right"
+                    <input type="date" class="form-control pull-right"
                       id="datepicker2" ngModel #datepicker2="ngModel" name="datepicker2">
                   </div> </td>
                 <td>
                   <div class="bootstrap-timepicker col-md-12">
                     <div class="input-group col-md-12">
-                      <input type="text" class="form-control timepicker timepicker2"
+                      <input type="time" class="form-control timepicker timepicker2"
                         id="timepicker2" ngModel #timepicker2="ngModel" name="timepicker2">
                       <div class="input-group-addon">
                         <i class="fas fa-clock"></i>

@@ -109,8 +109,8 @@ export class TrackingComponent implements OnInit {
       res => {
         if (res['key'] === 'true') {
             this.ngOnInit();
-        }  else if(res['key'] === 'noaccess'){
-          alert("Order Has not been Confirmed BY the Seller.");
+        }  else if (res['key'] === 'noaccess') {
+          alert('Order Has not been Confirmed BY the Seller.');
         } else {
           console.log('error');
         }

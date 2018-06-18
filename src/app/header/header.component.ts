@@ -264,45 +264,15 @@ export class HeaderComponent implements OnInit {
 
   Sleep() {
     if (this.loginAuth.getUserType() === 'seller') {
-      localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
+      localStorage.setItem('SleepUsername', this.loginAuth.getSEmail());
       localStorage.setItem('SleepType', 'seller');
-      localStorage.removeItem('sessionShopUserID');
-      localStorage.removeItem('sessionShopName');
-      localStorage.removeItem('sessionShopEmail');
-      localStorage.removeItem('sessionShopUserType');
-      localStorage.setItem('SloggedIn', 'false');
-      this.loginAuth.setSUserLoggedIn('false');
       this.router.navigate(['lockscreen']);
     } else {
       localStorage.setItem('SleepUsername', this.loginAuth.getEmail());
       localStorage.setItem('SleepType', 'superadmin');
-      localStorage.removeItem('sessionUserID');
-      localStorage.removeItem('sessionName');
-      localStorage.removeItem('sessionEmail');
-      localStorage.removeItem('sessionUserType');
-      localStorage.setItem('loggedIn', 'false');
-      this.loginAuth.setUserLoggedIn('false');
       this.router.navigate(['lockscreen']);
     }
-
-    // this.loginAuth
-    //   .setServerLogout(this.loginAuth.getEmail(), this.loginAuth.getUserType())
-    //   .subscribe(
-    //     res => {
-    //       if (res.json()['key'] === 'true') {
-    //         localStorage.removeItem('sessionUserID');
-    //         localStorage.removeItem('sessionName');
-    //         localStorage.removeItem('sessionEmail');
-    //         localStorage.removeItem('sessionUserType');
-    //         localStorage.setItem('loggedIn', 'false');
-    //         this.loginAuth.setUserLoggedIn(false);
-    //         this.router.navigate(['lockscreen']);
-    //       }
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
+    this.loginAuth.logout(true);
   }
 
   logout() {
@@ -322,7 +292,7 @@ export class HeaderComponent implements OnInit {
     this.superadminservice.ClearAllNotification('0')
     .subscribe(
       res => {
-        if(res['key'] === 'true'){
+        if (res['key'] === 'true'){
           this.NotificationCount = 0;
         }
       });
