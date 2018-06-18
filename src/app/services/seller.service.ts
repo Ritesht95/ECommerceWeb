@@ -504,4 +504,10 @@ export class SellerService {
       .pipe(map(res => res.json()));
   }
 
+  SellerDashBoard(ID: string){
+    return this._http
+      .get(environment.apiURL + 'Dashborard/SellerDashboard.php?id='+ID)
+      .pipe(map(res => res.json())); 
+  }
+
 }

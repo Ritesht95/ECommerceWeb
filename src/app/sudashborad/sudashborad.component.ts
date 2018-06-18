@@ -21,12 +21,20 @@ export class SudashboradComponent implements OnInit {
   env = environment.apiURL;
   NoOfUser : number = 0;
   NoofShop : number = 0;
+  Value: number = 0;
 
   constructor(private loginAuth: LoginauthService, private superadminservice: SuperAdminService) { }
 
   ngOnInit() {
     this.UserID = this.loginAuth.getUserID();
     this.Name = this.loginAuth.getName();
+
+    this.superadminservice.TotalValue()
+    .subscribe(
+      res => {
+        this.Value = res['Amount'];
+      });
+
     this.superadminservice.DashboardCounts()
     .subscribe(
       res => {
