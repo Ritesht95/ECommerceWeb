@@ -24,7 +24,14 @@ export class CategoryDataComponent implements OnInit {
       pagingType: 'full_numbers',
       pageLength: 10
     };
+<<<<<<< HEAD
+
+    // get user id
+
+    this.sellerservice.getAllCategories(this.loginAuth.getSUserID()).subscribe(
+=======
     this.sellerservice.getAllShopCategories(this.loginAuth.getSUserID()).subscribe(
+>>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
       res => {
         this.categoryData = res['records'];
         if (this.NoOfTrigger === 0) {

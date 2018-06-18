@@ -60,6 +60,8 @@ export class LockscreenComponent implements OnInit {
     alertDiv.style.display = val ? 'block' : 'none';
   }
 
+  // log in function
+
   login(Password: string) {
     alert(localStorage.getItem('SleepUsername'));
     if (localStorage.getItem('SleepUsername') === null) {

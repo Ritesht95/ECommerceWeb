@@ -87,6 +87,8 @@ export class CategoryComponent implements OnInit {
     alertDiv.style.display = val ? 'block' : 'none';
   }
 
+  // verify file type
+
   upload(event: any) {
     const files = this.elem.nativeElement.querySelector('#imageCategory').files;
     this.formData.append('image', files[0], files[0].name);
@@ -97,6 +99,8 @@ export class CategoryComponent implements OnInit {
       this.fileToUpload = files.item(0);
     }
   }
+
+  // check file type
 
   validateFile(name) {
     const ext = name.substring(name.lastIndexOf('.') + 1);
@@ -112,6 +116,8 @@ export class CategoryComponent implements OnInit {
       return false;
     }
   }
+
+  // add category
 
   AddCategory(
     CategoryName: string,
@@ -157,6 +163,8 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  // add property
+
   addProperties(
     ID: string,
     PropertyName: string,
@@ -193,6 +201,8 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  // edit property of product
+
   EditProperty(Property: any, ID: string) {
     console.log('new' + this.propertyData.ID + this.propertyData);
     if (this.propertyData.ID !== 'new' && this.propertyData !== '') {
@@ -212,6 +222,8 @@ export class CategoryComponent implements OnInit {
     this.propertyData = Property;
     console.log('this.propertyData: ' + this.propertyData.PropertyName);
   }
+
+  // delete property of product
 
   DeleteProperty(PropertyID: number) {
     this.sellerservice
