@@ -73,7 +73,7 @@ export class DiscountComponent implements OnInit {
   }
 
   FillProductData() {
-    this.ID = "new";
+    this.ID = 'new';
     this.clearDropDown();
     this.sellerservice.getAllDiscountProducts(this.loginAuth.getSUserID())
       .subscribe(

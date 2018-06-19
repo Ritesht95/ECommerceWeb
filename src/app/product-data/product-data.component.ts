@@ -50,8 +50,6 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
-  // add stock
-
   AddStock(ProductID: string, Stock: number) {
     this.sellerservice.addStock(ProductID, Stock).subscribe(res => {
       if (res['key'] === 'true') {
@@ -65,8 +63,6 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
-  // delete image
-
   deleteImage(ProductID: string, ID: number) {
     this.sellerservice.deleteImage(ID).subscribe(res => {
       if (res['key'] === 'true') {
@@ -77,10 +73,6 @@ export class ProductDataComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
- // get property detail
-=======
   SetActive(pid: any) {
     this.sellerservice.setProductActive(pid, '1').subscribe(res => {
       this.ngOnInit();
@@ -92,10 +84,6 @@ export class ProductDataComponent implements OnInit {
       this.ngOnInit();
     });
   }
->>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
-=======
- // get property detail
->>>>>>> comment done
 
   getProperty(cid: any, pid: any) {
     this.categoryID = cid;
