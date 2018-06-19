@@ -1,0 +1,114 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Shops
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Shops</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary" id="tableNewShops">
+      <div class="box-body">
+        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" datatable>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Shop Name</th>
+              <th>Shop Type</th>
+              <th>Email</th>
+              <th>Contact No</th>
+              <th>Owner Name</th>
+              <th>Is Active?</th>
+              <th>Is Approved?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let shop of shopsDataN">
+              <td>
+                <button (click)="SetShopDelete(shop.ShopID);">
+                  <span class="fa fa-2x fa-trash-alt"></span>
+                </button>
+              </td>
+              <td>{{ shop.ShopName }}</td>
+              <td>{{ shop.ShopType }}</td>
+              <td>{{ shop.Email }}</td>
+              <td>{{ shop.PhoneNo }}</td>
+              <td>{{ shop.OwnerName }}</td>
+              <td *ngIf="shop.IsActive == 1">
+                <button (click)="SetInactive(shop.ShopID);">
+                  <span style="color: green;" class="fa fa-2x fa-check"></span>
+                </button>
+              </td>
+              <td *ngIf="shop.IsActive == 0">
+                <button (click)="SetActive(shop.ShopID);">
+                  <span style="color: red;" class="fa fa-2x fa-times"></span>
+                </button>
+              </td>
+              <td *ngIf="shop.IsApproved == 1">
+                <button (click)="SetNApproved(shop.ShopID);">
+                  <span style="color: green;" class="fa fa-2x fa-check"></span>
+                </button>
+              </td>
+              <td *ngIf="shop.IsApproved == 0">
+                <button (click)="SetApproved(shop.ShopID);">
+                  <span style="color: red;" class="fa fa-2x fa-times"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="box box-primary" id="tableShops">
+      <div class="box-body">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Shop Name</th>
+              <th>Shop Type</th>
+              <th>Email</th>
+              <th>Contact No</th>
+              <th>Owner Name</th>
+              <th>Is Approved?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let shop of shopsData">
+              <td>
+                <a [routerLink]="['/shopDetail']" [queryParams]="{shopID : shop.ShopID}">
+                  <span class="fa fa-2x fa-info-circle"></span>
+                </a>
+              </td>
+              <td>{{ shop.ShopName }}</td>
+              <td>{{ shop.ShopType }}</td>
+              <td>{{ shop.Email }}</td>
+              <td>{{ shop.PhoneNo }}</td>
+              <td>{{ shop.OwnerName }}</td>
+              <td *ngIf="shop.IsApproved == 1">
+                <button (click)="SetNApproved(shop.ShopID);">
+                  <span style="color: green;" class="fa fa-2x fa-check"></span>
+                </button>
+              </td>
+              <td *ngIf="shop.IsApproved == 0">
+                <button (click)="SetApproved(shop.ShopID);">
+                  <span style="color: red;" class="fa fa-2x fa-times"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  </section>
+</div>

@@ -1,0 +1,54 @@
+<!-- header component for header of website -->
+
+<app-header></app-header>
+
+<!-- side bar component for side bar -->
+
+<app-sidebar></app-sidebar>
+
+<!-- breadcrumb -->
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-home"></i> Home
+        </a>
+      </li>
+      <li class="active">About Us</li>
+    </ol>
+  </section>
+
+  <!-- about us form and social media link -->
+
+  <section class="content" style="padding: 30px;">
+    <div class="box box-primary">
+      <div class="container">
+        <div class="row">
+          <div style="text-align: center;">
+            <font size="6">About Us</font>
+          </div>
+          <hr>
+          <br>
+          <div style="text-align: center;">
+            <font size="3"> {{ webInfo.AboutUs }}</font>
+          </div>
+          <br>
+          <br>
+          <div style="text-align: center;">
+            <button class="btn btn-blue-outline btn-md" (click)="contact()">Contact Us</button>
+          </div><br><br>
+          <div style="text-align: center;">
+              <ul class="social-network social-circle">
+                  <li><a href="{{ webInfo.FacebookLink }}" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="{{ webInfo.TwitterLink }}" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="{{ webInfo.InstagramLink }}" class="instagram" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="{{ webInfo.YoutubeLink }}" class="youtube" title="youtube"><i class="fa fa-youtube"></i></a></li>
+              </ul>
+  </div><br><br>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,161 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <h1>
+      Add Product
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-home"></i> Home
+        </a>
+      </li>
+      <li class="active">Product</li>
+      <li class="active">Add Product</li>
+    </ol>
+  </section>
+
+  <!-- product detail -->
+
+  <section class="content">
+    <div class="col-md-offset-2 col-md-8">
+      <div class="box box-primary">
+        <form role="form" #frm="ngForm">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="txtProDetail">Product Detail
+                  </label>
+                </div>
+                <input type="hidden" id="txtProID" #txtProID="ngModel" [(ngModel)]="this.productID" name="txtProID" value="">
+                <div style="display: flex; justify-content: center;">
+                  <img id="profileImageIn" *ngFor="let imgURL of urls" [src]="imgURL" #image (change)="imagePreview($event)" style="height:130px; width:130px;margin: 10px;"
+                    class="image"> &nbsp;
+                  <span *ngFor="let imgURL of singleProductData['image']">
+                    <img id="prodImages" src='{{env}}Assets/ProductImages/{{imgURL.image}}' #imagesP="ngModel" ngModel name="imagesP" style="height:130px; width:130px;margin: 10px;"
+                      class="image"> &nbsp;
+                  </span>
+                </div>
+                <!-- <div style="display: flex; justify-content: center;">
+                    <img id="prodImages" *ngFor="let imgURL of singleProductData.image" [src]="imgURL" #imagesP="ngModel" ngModel style="height:130px; width:130px;margin: 10px;"
+                      class="image"> &nbsp;
+                  </div> -->
+                <div class="form-group">
+                  <label for="txtProName">Product Name</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['ProductName']" id="txtProName" name="txtProName"
+                    #txtProName="ngModel" placeholder="Product Name" pattern="[a-zA-Z0-9 ]+" required>
+                </div>
+                <div class="form-group">
+                  <label for="txtDescription">Description
+                  </label>
+                  <textarea class="form-control" [(ngModel)]="singleProductData['ProductDesc']" id="txtDescription" name="txtDescription" #txtDescription="ngModel"
+                    rows="2" placeholder="Description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="txtlogo">Product Image
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input type="file" id="imageWebInfo" (change)="imagePreview($event)" name="imageWebInfo" ngModel #imageWebInfo="ngModel"
+                    multiple>
+                </div>
+                <div class="form-group">
+                  <label for="txtDescription">Category
+                    <span class="text-danger">*</span>
+                  </label>
+                  <select class="form-control" id="ddCategory" #ddCategory="ngModel" name="ddCategory" [(ngModel)]="categoriesData.CategoryID">
+                    <!--  <option selected>dsjvdsjk</option> -->
+                    <!-- <template *ngFor="let cat of categoriesData"> -->
+                    <option *ngFor="let cat of categoriesData" [attr.selected]="cat.CategoryID === singleProductData['CategoryID'] ? 'selected' : null"
+                      value="{{cat.CategoryID}}">{{cat.CategoryName}}</option>
+                    <!-- <option *ngIf="cat.CategoryID === singleProductData['CategoryID']" value="{{cat.CategoryID}}" selected>{{cat.CategoryName}}</option> -->
+                    <!-- </template> -->
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="txtlogoalt">Logo Alternate</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" [(ngModel)]="singleProductData['ImageAlt']"
+                    required #txtlogoalt="ngModel">
+                </div>
+                <div class="form-group">
+                  <label for="txtUnit">Unit</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['Unit']" id="txtUnit" name="txtUnit" #txtUnit="ngModel"
+                    placeholder="Unit" pattern="[a-zA-Z ]+" required>
+                </div>
+                <div class="form-group">
+                  <label for="txtPrice">Price</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['Price']" id="txtPrice" name="txtPrice" #txtPrice="ngModel"
+                    placeholder="Price" pattern="[0-9]+" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="txtMinStock">Minimum Stock</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" class="form-control" [(ngModel)]="singleProductData['MinStock']" id="txtMinStock" name="txtMinStock" #txtMinStock="ngModel"
+                    placeholder="Miinimum Stock" pattern="[0-9]+" required>
+                </div>
+
+                <button type="reset" class="btn btn-primary">Cancel</button> &nbsp;
+                <button type="submit" class="btn btn-primary" [disabled]="frm.invalid" (click)="AddProduct(txtProName.value,txtDescription.value,txtlogoalt.value,txtUnit.value,txtPrice.value,txtMinStock.value,ddCategory.value,txtProID.value)">Submit</button>
+                <div *ngIf="txtProName.touched || txtDescription.touched || txtUnit.touched || txtPrice.touched || txtMinStock.touched">
+                  <div *ngIf="txtProName.errors?.required && txtProName.touched">
+                    <span class="text-danger">Product Name is required</span>
+                  </div>
+                  <div *ngIf="txtProName.errors?.pattern && txtProName.touched">
+                    <span class="text-danger">Product Name is Invalid</span>
+                  </div>
+                  <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
+                    <span class="text-danger">Logo Alternate is required</span>
+                  </div>
+                  <!-- <div *ngIf="flag && imageWebInfo.touched">
+                    <span class="text-danger">Select .png, .jpg and .jpeg only</span>
+                  </div> -->
+                  <!-- <div *ngIf="imageWebInfo.errors?.required && imageWebInfo.touched">
+                    <span class="text-danger">Product image is required</span>
+                  </div> -->
+                  <div *ngIf="txtDescription.errors?.required && txtDescription.touched">
+                    <span class="text-danger">Description required</span>
+                  </div>
+                  <div *ngIf="txtUnit.errors?.required && txtUnit.touched">
+                    <span class="text-danger">Unit is required</span>
+                  </div>
+                  <div *ngIf="txtUnit.errors?.pattern && txtUnit.touched">
+                    <span class="text-danger">Unit is Invalid</span>
+                  </div>
+                  <div *ngIf="txtPrice.errors?.required && txtPrice.touched">
+                    <span class="text-danger">Price is required</span>
+                  </div>
+                  <div *ngIf="txtPrice.errors?.pattern && txtPrice.touched">
+                    <span class="text-danger">Price is Invalid</span>
+                  </div>
+                  <div *ngIf="txtMinStock.errors?.required && txtMinStock.touched">
+                    <span class="text-danger">Minimun Stock is required</span>
+                  </div>
+                  <div *ngIf="txtMinStock.errors?.pattern && txtMinStock.touched">
+                    <span class="text-danger">Minimum Stock Invalid</span>
+                  </div>
+                  <!-- <div *ngIf="ddCategory.errors?.required">
+                    <span class="text-danger">Current Stock is required</span>
+                  </div> -->
+                  <!-- <div *ngIf="txtCurStock.errors?.pattern && txtCurStock.touched">
+                    <span class="text-danger">Current Stock Invalid</span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+  </section>
+</div>

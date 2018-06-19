@@ -1,0 +1,197 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+
+  <section class="content-header">
+    <h1>
+      Add Category
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-home"></i> Home
+        </a>
+      </li>
+      <li class="active">Category</li>
+      <li class="active">Add category</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="row">
+      <div class="container col-md-12" >
+        <div class="box box-primary">
+          <div class="box-body">
+            <!-- <p> Category added successfully, now added it's properties. </p> -->
+            <div class="row" id="categoryFormDiv">
+              <form role="form" #frm="ngForm">
+                <div>
+                  <input type="hidden" [(ngModel)]="updateID" id="txtId" name="txtId" #txtId="ngModel">
+                  <input type="hidden" [(ngModel)]="categoryData.CategoryImage" id="txthdnImg" name="txthdnImg" #txthdnImg="ngModel">
+                  <div class="form-group col-md-12">
+                    <table>
+                      <tr>
+                        <td class="col-md-3">
+                          <div class="container" style=" width:36%;">
+                            <div style="display: flex; justify-content: center;">
+                              <img id="categoryLogoImg" src="../../assets/img/category_default.png" style="height:130px; width:150px;" class="img-circle image">
+                            </div>
+                          </div>
+                        </td>
+                        <td class="col-md-7">
+                          <div class="form-group">
+                            <label for="txtlogo">Logo
+                              <span class="text-danger">*</span>
+                            </label>
+                            <input type="file" id="imageCategory" (change)="upload($event)" name="imageCategory" ngModel #imageCategory="ngModel">
+                          </div>
+                          <div class="form-group">
+                            <label for="txtlogoalt">Logo Alternate</label>
+                            <span class="text-danger">*</span>
+                            <input type="text" class="form-control" id="txtlogoalt" placeholder="Logo Alternate" name="txtlogoalt" [(ngModel)]="categoryData.CategoryImageAlt" required #txtlogoalt="ngModel">
+                          </div>
+                          <div class="form-group">
+                            <label for="txtCatName">Category Name</label>
+                            <span class="text-danger">*</span>
+                            <input type="text" class="form-control" [(ngModel)]="categoryData.CategoryName" id="txtCatName" name="txtCatName" #txtCatName="ngModel" placeholder="Category Name"
+                              pattern="[a-zA-Z0-9 ]+" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="txtCatDis">Description</label>
+                            <textarea class="form-control" [(ngModel)]="categoryData.CategoryDesc" id="txtDis" name="txtDis" #txtDis="ngModel" rows="2" placeholder="Category Description" ></textarea>
+                          </div>
+                          <div class="col-md-offset-8">
+                            <button class="btn btn-primary" type="reset">Cancel</button> &nbsp;
+                            <button class="btn btn-primary" type="submit" id='btnCatSubmit' [disabled]="frm.invalid" (click)="AddCategory(txtCatName.value, txtDis.value, txthdnImg.value, txtlogoalt.value);" >Submit</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- validation of form -->
+
+                    <div *ngIf="txtCatName.touched || txtDis.touched || imageCategory.touched || txtlogoalt.touched">
+                      <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
+                        <span class="text-danger">Logo Alternate is required</span>
+                      </div>
+                      <div *ngIf="flag && imageCategory.touched">
+                        <span class="text-danger">Select .png, .jpg and .jpeg only</span>
+                      </div>
+                      <div *ngIf="txtCatName.touched && txtCatName.errors?.required">
+                        <span class="text-danger">Category Name is required</span>
+                      </div>
+                      <div *ngIf="txtCatName.touched && txtCatName.errors?.pattern">
+                        <span class="text-danger">Category Name is invalid</span>
+                      </div>
+                      <div id='alertDiv'>
+                        <div ng-if="!errorMessage == null">
+                          <span class="text-danger">{{errorMessage}}</span>
+                        </div>
+                      </div>
+                      <div id='alertDivS'>
+                        <div ng-if="!successMessage == null">
+                          <span class="text-successc">{{successMessage}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="box box-primary">
+          <div class="box-body">
+            <div class="col-md-6">
+              <div class="row">
+                <form role="form" #frm2="ngForm">
+                  <div>
+                    <input type="hidden" [(ngModel)]="propertyData.ID" id="txtPId" name="txtPId" #txtPId="ngModel">
+                    <div class="form-group col-sm-12 ">
+
+                      <!-- add properties -->
+
+                      <h3>
+                        <label for="txtWebsiteName">Add Properties
+                          <span class="text-danger">*</span>
+                        </label>
+                      </h3>
+
+                      <div class="form-group">
+                        <label for="txtProName">Property Name</label>
+                        <span class="text-danger">*</span>
+                        <input type="text" class="form-control" [(ngModel)]="propertyData.PropertyName" id="txtProName" name="txtProName" #txtProName="ngModel" placeholder="Property Name"
+                          required pattern="[a-zA-Z]+">
+                      </div>
+                      <div class="form-group">
+                        <label for="txtProDis">Property Description
+                          <span class="text-danger">*</span>
+                        </label>
+                        <textarea class="form-control" [(ngModel)]="propertyData.PropertyDesc" id="txtProDis" name="txtProDis" #txtProDis="ngModel" rows="2" placeholder="Property Description"></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="txtProDis">Order Number
+                            <span class="text-danger">*</span>
+                          </label>
+                          <input type="number" class="form-control" [(ngModel)]="propertyData.ColumnOrder" id="txtColOrd" name="txtColOrd" #txtColOrd="ngModel">
+                        </div>
+                      <div class="form-group">
+                        <label for="txtProDis">Is Filterable?
+                        </label>
+                        <input type="checkbox" [(ngModel)]="propertyData.IsFilterable" id="chkFilter" name="chkFilter" #chkFilter="ngModel">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+              <button class="btn btn-primary" type="reset">Cancel</button> &nbsp;
+              <button class="btn btn-primary" (click)="addProperties(txtPId.value,txtProName.value, txtProDis.value, chkFilter.value, txtColOrd.value);">Add</button> &nbsp;
+
+            </div>
+            <div class="col-md-6 ">
+
+              <h3>
+                <label for="txtWebsiteName">Category Properties
+                  <span class="text-danger">*</span>
+                </label>
+              </h3>
+              <br>
+              <table datatable class="row-border hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Property Name</th>
+                    <th>Property Description</th>
+                    <th>Filter</th>
+                    <th>Order</th>
+                  </tr>
+                </thead>
+
+                <!-- property data -->
+
+                <tbody>
+                  <tr *ngFor="let property of propertiesData">
+                    <td>
+                      <input type="hidden" [(ngModel)]="property.ID" id="txtPID" name="txtPID">
+                      <span (click)="EditProperty(property,property.ID);" class="fa fa-pencil-alt"></span>
+
+                    </td>
+                    <td><span (click)="DeleteProperty(property.ID);"class="fa fa-trash"></span></td>
+                    <td>{{ property.PropertyName }}</td>
+                    <td>{{ property.PropertyDesc }}</td>
+                    <td>{{ property.IsFilterable }}</td>
+                    <td>{{ property.ColumnOrder }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

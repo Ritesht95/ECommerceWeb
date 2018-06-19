@@ -1,0 +1,166 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Product Data
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Product</li>
+      <li class="active">Product Data</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary">
+      <div class="box-body">
+        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="row-border hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Minimum Stock</th>
+              <th>Current Stock</th>
+              <th>Is Approved?</th>
+              <th>Product Property</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productsData">
+              <td>
+                <button (click)="getSingleProduct(product.ProductID);" data-toggle="modal" data-target="#productDetailsModal" class="transbtn">
+                  <span class="fa fa-info"></span>
+                </button>
+              </td>
+              <td>{{product.ProductName}}</td>
+              <td>{{product.Price}}</td>
+              <td>{{product.MinStock}}</td>
+              <td>{{product.CurrentStock}}</td>
+              <td *ngIf="product.IsApproved == 1">
+                <button (click)="setApproved(product.ProductID,false);">
+                  <span style="color: green;" class="fa fa-2x fa-check"></span>
+                </button>
+              </td>
+              <td *ngIf="product.IsApproved == 0">
+                <button (click)="setApproved(product.ProductID,true);">
+                  <span style="color: red;" class="fa fa-2x fa-times"></span>
+                </button>
+              </td>
+              <td>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#propertyModal" (click)="getProperty(product.CategoryID,product.ProductID)">
+                  <i class="fa fa-eye"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <h1 class="modalTitle" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
+            <small>({{productSingleData.CategoryName}})</small>
+          </h1>
+        </div>
+        <div class="row text-center">
+          <span *ngFor="let image of productSingleData.image">
+            <img style="margin: 10px;" height="100" width="100" class="img-rounded img-bordered" src="{{env}}Assets/ProductImages/{{image.image}}">
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <div>
+                <label class="labelTitle">Description: </label>
+              </div>
+              <div>
+                <span class="labelValue">{{productSingleData.ProductDesc}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="labelTitle">Price:</label>
+              <span class="labelValue">{{productSingleData.Price}}</span>
+            </div>
+            <div class="form-group">
+              <label class="labelTitle">Unit:</label>
+              <span class="labelValue">{{productSingleData.Unit}}</span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="labelTitle">Minimum Stock:</label>
+              <span class="labelValue">{{productSingleData.MinStock}}</span>
+            </div>
+            <div class="form-group">
+              <label class="labelTitle">Current Stock:</label>
+              <span class="labelValue">{{productSingleData.CurrentStock}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="propertyModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="exampleModalLabel">Product Property Details</h5>
+      </div>
+      <div class="modal-body">
+
+        <div class="box-body">
+          <h1 class="col-md-offset-1 col-md-10" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
+            <small>({{productSingleData.CategoryName}})</small>
+          </h1>
+          <h3 class="col-md-offset-1 col-md-10" style="margin: 2px; padding: 5px;">Description:
+            <small>{{productSingleData.ProductDesc}}</small>
+          </h3>
+          <div class="row">
+            <br>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-responsive" style="border: 0;">
+                <tr *ngFor="let property of categoryProperties">
+                  <td class="propertytable col-md-6">
+                    <h5><strong>{{property['PropertyName']}} :</strong></h5>
+                  </td>
+                  <td class="propertytable col-md-6">
+                    <h5>{{ property.Value }}</h5>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

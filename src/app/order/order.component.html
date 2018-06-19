@@ -1,0 +1,248 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Order Detail
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Order Detail</li>
+    </ol>
+  </section>
+
+  <section class="content">
+    <div class="box box-primary">
+      <div class="box-body">
+        <table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="row-border hover">
+          <thead>
+            <tr>
+              <th>Order No</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th style="text-align: center">Confirm Order</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let o of order">
+              <td>{{ o.OrderDetailID }}</td>
+              <td>{{ o.ProductName }}</td>
+              <td>{{ o.Price }}</td>
+              <td>{{ o.Qty }}</td>
+              <td>{{ o.Status }}</td>
+              <td style="text-align: center" *ngIf="o.Status === 'Pending'">
+                <button class="fas fa-times btn btn-danger" (click)="sendOrderId(o.OrderDetailID)"></button>
+              </td>
+              <td style="text-align: center" *ngIf="o.Status !== 'Pending'">
+                <button class="fas fa-check-circle btn btn-success"></button>
+              </td>
+              <td>
+                <button class="fab fa-product-hunt btn btn-warning" data-toggle="modal" data-target="#productDetailsModal" (click)="getSingleProduct(o.ProductID)"></button> &nbsp;
+                <button class="fas fa-users btn btn-primary" data-toggle="modal" data-target="#userModal" (click)="getCustomer(o.OrderID,o.CustomerID)"></button> &nbsp;
+                <button class="fas fa-truck-moving btn btn-info" routerLink="/sellertracking" [queryParams]="{'ODID':o.OrderDetailID}"></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- tracking detail -->
+
+   <div class="modal fade" id="trackingModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h5 class="modal-title" id="exampleModalLabel">Tracking Detail</h5>
+        </div>
+        <div class="modal-body">
+          hello tracking detail
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- product detail -->
+
+  <div class="modal fade" id="productDetailsModal" tabindex="-1" role="dialog" aria-labelledby="productDetailsModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <h1 class="modalTitle" style="margin: 2px; padding: 5px;">{{productSingleData.ProductName}}
+                <small>({{productSingleData.CategoryName}})</small>
+              </h1>
+            </div>
+            <!-- <div class="row text-center">
+              <span *ngFor="let image of productSingleData.image" class="detailsImage">
+                <img style="margin: 10px;" height="100" width="100" class="img-rounded img-bordered" src="{{env}}Assets/ProductImages/{{image.image}}">
+              </span>
+            </div> -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <div>
+                    <label class="labelTitle">Description: </label>
+                  </div>
+                  <div>
+                    <span class="labelValue">{{productSingleData.ProductDesc}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="labelTitle">Price:</label>
+                  <span class="labelValue">{{productSingleData.Price}}</span>
+                </div>
+                <div class="form-group">
+                  <label class="labelTitle">Unit:</label>
+                  <span class="labelValue">{{productSingleData.Unit}}</span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="labelTitle">Minimum Stock:</label>
+                  <span class="labelValue">{{productSingleData.MinStock}}</span>
+                </div>
+                <div class="form-group">
+                  <label class="labelTitle">Current Stock:</label>
+                  <span class="labelValue">{{productSingleData.CurrentStock}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="exampleModalLabel">Customer Detail</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6" style="background-color: #4693be; margin-right: 10px;">
+              <h3>
+                <font color="white">Customer Information</font>
+              </h3>
+            </div>
+            <div name="info1" id="info1" class="info1">
+              <div class="col-md-6">
+                <table class="table">
+                  <tr>
+                    <th style="border-top: 0;">Name:</th>
+                    <td style="border-top: 0;">{{ customer.Name }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Email:</th>
+                    <td style="border-top: 0;">{{ customer.Email }}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <table class="table">
+                  <tr>
+                    <th style="border-top: 0;">Phone no.:</th>
+                    <td style="border-top: 0;">{{ customer.PhoneNo }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Gender:</th>
+                    <td style="border-top: 0;">{{ customer.Gender }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-6" style="background-color: #4693be; margin-right: 10px;">
+              <h3>
+                <font color="white">Shipping Information</font>
+              </h3>
+            </div>
+            <div name="info2" id="info2" class="info2">
+              <div class="col-md-6">
+                <table class="table">
+                  <tr>
+                    <th style="border-top: 0;">Name:</th>
+                    <td style="border-top: 0;">{{ customer.AddressName }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Phone no.:</th>
+                    <td style="border-top: 0;">{{ customer.AddressPhoneNo }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Locality:</th>
+                    <td style="border-top: 0;">{{ customer.Locality }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Address Type:</th>
+                    <td style="border-top: 0;">{{ customer.AddressType }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Country:</th>
+                    <td style="border-top: 0;">{{ customer.Country }}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="col-md-6">
+                <table class="table" style="border-top: 0;">
+                  <tr>
+                    <th style="border-top: 0;">Address:</th>
+                    <td style="border-top: 0;">{{ customer.Address }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Pincode:</th>
+                    <td style="border-top: 0;">{{ customer.Pincode }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">City:</th>
+                    <td style="border-top: 0;">{{ customer.City }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">State:</th>
+                    <td style="border-top: 0;">{{ customer.State }}</td>
+                  </tr>
+                  <tr>
+                    <th style="border-top: 0;">Landmark:</th>
+                    <td style="border-top: 0;">{{ customer.LandMark }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

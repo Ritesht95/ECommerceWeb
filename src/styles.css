@@ -3,7 +3,8 @@
 @import "./assets/dist/css/main.css";
 @import "./assets/dist/css/demo.css";
 @import "./assets/bower_components/bootstrap/dist/css/bootstrap.min.css";
-@import "./assets/bower_components/font-awesome/css/font-awesome.min.css";
+/* @import "./assets/bower_components/font-awesome/css/font-awesome.min.css"; */
+@import "./assets/bower_components/fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.min.css";
 @import "./assets/bower_components/Ionicons/css/ionicons.min.css";
 @import "./assets/dist/css/skins/_all-skins.min.css";
 @import "./assets/bower_components/morris.js/morris.css";
@@ -11,4 +12,6 @@
 @import "./assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
 @import "./assets/bower_components/bootstrap-daterangepicker/daterangepicker.css";
 @import "./assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css";
-@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
+@import "../node_modules/datatables.net-dt/css/jquery.dataTables.css";
+@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic";
+@import "./assets/plugins/timepicker/bootstrap-timepicker.min.css";

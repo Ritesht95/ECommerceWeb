@@ -1,0 +1,55 @@
+<!-- <body class="hold-transition lockscreen"> -->
+<!-- Automatic element centering -->
+<div class="lockscreen-wrapper">
+  <div class="lockscreen-logo">
+    <a routerLink="/lockscreen">
+      {{webInfo.Name}}</a>
+  </div>
+  <!-- User name -->
+  <div class="lockscreen-name" *ngIf="userData">{{userData.ShopName}}</div>
+  <div class="lockscreen-name" *ngIf="adminData">{{adminData.Adminname}}</div>
+
+  <!-- START LOCK SCREEN ITEM -->
+  <div class="lockscreen-item">
+    <!-- lockscreen image -->
+    <div class="lockscreen-image" *ngIf="userData">
+      <img src="{{env}}Assets/ShopLogo/{{userData.LogoImage}}" alt="User Image">
+    </div>
+    <div class="lockscreen-image" *ngIf="adminData">
+      <img src="{{env}}Assets/AdminImages/{{adminData.AdminImage}}" alt="User Image">
+    </div>
+    <!-- /.lockscreen-image -->
+
+    <!-- lockscreen credentials (contains the form) -->
+    <form class="lockscreen-credentials">
+      <div class="input-group">
+        <input type="password" class="form-control" ngModel #txtPassword="ngModel" id="txtPassword" name="txtPassword" placeholder="password">
+
+        <div class="input-group-btn">
+          <button type="button" class="btn" (click)="login(txtPassword.value);">
+            <i class="fa fa-arrow-right text-muted"></i>
+          </button>
+        </div>
+        <div id='alertDiv'>
+          <div ng-if="!loginErrorMsg == null">
+            <span class="text-danger">{{loginErrorMsg}}</span>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- /.lockscreen credentials -->
+
+  </div>
+  <!-- /.lockscreen-item -->
+  <div class="help-block text-center">
+    Enter your password to retrieve your session
+  </div>
+  <div class="text-center">
+    <a routerLink="/login" (click)="setDesign();" >Or sign in as a different user</a>
+  </div>
+  <div class="lockscreen-footer text-center">
+    Copyright &copy; 2014-2016
+    <br> All rights reserved
+  </div>
+</div>
+<!-- </body> -->

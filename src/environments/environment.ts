@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+<<<<<<< HEAD
+   apiURL: 'http://192.168.0.108/OnlinestoreApi/'
+  //  apiURL: 'http://onlinestoreapi.riteshtailor.in/OnlinestoreApi/'
+
+
+=======
+  //apiURL: 'http://onlinestoreapi.riteshtailor.in/OnlinestoreApi/'
+  apiURL: 'http://192.168.0.109/OnlinestoreApi/'
+>>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
 };
 
 /*

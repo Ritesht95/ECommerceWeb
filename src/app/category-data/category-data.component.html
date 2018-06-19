@@ -1,0 +1,64 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Categories Data
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Category</li>
+      <li class="active">Category Data</li>
+    </ol>
+  </section>
+
+  <!-- form of add category -->
+
+  <section class="content">
+    <div class="box box-primary">
+      <div class="box-body">
+        <a routerLink="/category" class="btn btn-info col-sm-4 col-md-2 col-lg-2" style="background-color: #367fa9; margin: 20px;">Add Category</a>
+        <div class="clearfix">&nbsp;<br></div>
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Is Active?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categoryData">
+              <td>
+                <a [routerLink]="['/category']" [queryParams]="{CategoryID : category.CategoryID}">
+                  <span class="fa fa-2x fa-info-circle"></span>
+                </a>
+              </td>
+              <td class="text-center">
+                <img width="50" height="50" src='{{env}}Assets/CategoryImages/{{category.CategoryImage}}'>
+              </td>
+              <td>{{ category.CategoryName }}</td>
+              <td>{{ category.CategoryDesc }}</td>
+              <td *ngIf="category.IsActive == 1">
+                <!-- <button (click)="SetInactive(category.CategoryID);"> -->
+                <span style="color: green;" class="fa fa-2x fa-check"></span>
+                <!-- </button> -->
+              </td>
+              <td *ngIf="category.IsActive == 0">
+                <!-- <button (click)="SetActive(category.CategoryID);"> -->
+                <span style="color: red;" class="fa fa-2x fa-times"></span>
+                <!-- </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

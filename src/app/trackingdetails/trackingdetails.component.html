@@ -1,0 +1,71 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>
+      Order Tracking
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="#">
+          <i class="fa fa-dashboard"></i> Home
+        </a>
+      </li>
+      <li class="active">Order</li>
+      <li class="active">Order Tracking</li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="form-group">
+          <input type="text" class="form-control col-md-5" [(ngModel)]="orderDetailsID" #txtOrderDetailsID="ngModel" name="txtOrderDetailsID"
+            id="txtOrderDetailsID" placeholder="Enter Order-Detail ID here">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="track(txtOrderDetailsID.value);">Track</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">&nbsp;
+      <br>
+    </div>
+    <div class="row" id="divAlert">
+      <div class="col-md-12">
+        <div class="alert-danger" style="font-size: 18pt; padding: 10px;">
+          Entered Order Detail number is wrong.
+        </div>
+      </div>
+    </div>
+    <div class="row" id="divTimeline">
+      <ul class="timeline">
+        <li *ngFor="let item of trackingData">
+          <i *ngIf="item.Status === 'Pending'" class="fa fa-stopwatch bg-orange"></i>
+          <i *ngIf="item.Status === 'Confirmed'" class="fa fa-thumbs-up bg-navy"></i>
+          <i *ngIf="item.Status === 'Shipped'" class="fa fa-truck-loading bg-maroon"></i>
+          <i *ngIf="item.Status === 'Delievered'" class="fa fa-home bg-green"></i>
+          <i *ngIf="item.Status === 'Transist'" class="fa fa-truck bg-green"></i>
+          <div class="timeline-item">
+            <span class="time">
+            </span>
+            <div class="timeline-body">
+              <i class="fa fa-clock-o"></i>Arrival Time: {{item.ArrivedTime}}
+              <br>
+              <i class="fa fa-clock-o"></i>Departure Time: {{item.DispatchedTime}}
+              <br>
+              <br>
+              <p class="lead">{{item.Text}}</p>
+            </div>
+          </div>
+        </li>
+        <li *ngIf="flag">
+          <i class="fa fa-check bg-lime"></i>
+        </li>
+        <li *ngIf="!flag">
+          <i class="fa fa-clock bg-gray"></i>
+        </li>
+      </ul>
+    </div>
+  </section>
