@@ -78,6 +78,7 @@ export class ProductDataComponent implements OnInit {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  // get property detail
 =======
   SetActive(pid: any) {
@@ -92,6 +93,9 @@ export class ProductDataComponent implements OnInit {
     });
   }
 >>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
+=======
+ // get property detail
+>>>>>>> comment done
 
   getProperty(cid: any, pid: any) {
     this.categoryID = cid;

@@ -25,6 +25,9 @@ export class CategoryDataComponent implements OnInit {
       pageLength: 10
     };
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> comment done
 
     // get user id
 

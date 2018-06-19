@@ -17,6 +17,9 @@ export class ForgotpasswordComponent implements OnInit {
   // ex. after some time alert will closed automatically
   // timeout will parellally work with showalert
 
+  // ex. after some time alert will closed automatically
+  // timeout will parellally work with showalert
+
   timeout(val: boolean) {
     this.ShowAlert(true);
     setTimeout( this.ShowAlert, 5000 , val);

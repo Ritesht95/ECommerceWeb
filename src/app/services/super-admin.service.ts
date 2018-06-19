@@ -148,6 +148,9 @@ export class SuperAdminService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> comment done
   // get admin data
 
   getAdminData(UserID: number) {
@@ -438,6 +441,9 @@ export class SuperAdminService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> comment done
   // send reply of feedback
 
   sendReply(Id: number, Subject: string , Reply: string) {
@@ -455,6 +461,9 @@ export class SuperAdminService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> comment done
   // send tracking info
 
   sendTracking(Id: number, ttext: string , adate: string, atime: string, ddate: string, dtime: string) {

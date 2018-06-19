@@ -213,6 +213,9 @@ export class SellerService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> comment done
   // get all categories
 
   getAllCategories(ShopID: string) {
@@ -231,9 +234,13 @@ export class SellerService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   // add property of product
 =======
 >>>>>>> 9dd5c1792e0b1b975feb89128d0dbed5305dc075
+=======
+  // add property of product
+>>>>>>> comment done
 
   addProperty(CategoryID: number, Property: any) {
     const headers = new Headers({
@@ -372,6 +379,9 @@ export class SellerService {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> comment done
   // get seller profile
 
   getSellerProfile(ShopID: number) {
