@@ -14,6 +14,9 @@ export class ForgotpasswordComponent implements OnInit {
   webinfoData: any = '';
   env = environment.apiURL;
 
+  // ex. after some time alert will closed automatically
+  // timeout will parellally work with showalert
+
   timeout(val: boolean) {
     this.ShowAlert(true);
     setTimeout( this.ShowAlert, 5000 , val);
@@ -33,6 +36,8 @@ export class ForgotpasswordComponent implements OnInit {
       }
     );
   }
+
+  // function of forget password
 
   ForgotPassword(Username: string, Type: string) {
     if (Type === 'Admin') {

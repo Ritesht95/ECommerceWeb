@@ -68,6 +68,8 @@
                       </tr>
                     </table>
 
+                    <!-- validation of form -->
+
                     <div *ngIf="txtCatName.touched || txtDis.touched || imageCategory.touched || txtlogoalt.touched">
                       <div *ngIf="txtlogoalt.errors?.required && txtlogoalt.touched">
                         <span class="text-danger">Logo Alternate is required</span>
@@ -108,6 +110,9 @@
                   <div>
                     <input type="hidden" [(ngModel)]="propertyData.ID" id="txtPId" name="txtPId" #txtPId="ngModel">
                     <div class="form-group col-sm-12 ">
+
+                      <!-- add properties -->
+
                       <h3>
                         <label for="txtWebsiteName">Add Properties
                           <span class="text-danger">*</span>
@@ -165,6 +170,9 @@
                     <th>Order</th>
                   </tr>
                 </thead>
+
+                <!-- property data -->
+
                 <tbody>
                   <tr *ngFor="let property of propertiesData">
                     <td>
