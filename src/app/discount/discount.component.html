@@ -79,7 +79,7 @@
             <label for="txtDescription">Product
               <span class="text-danger">*</span>
             </label>
-            <select class="form-control" id="ddProduct" #ddProduct="ngModel" name="ddProduct" [(ngModel)]="singleDiscount.ProductID" required (change)="getSinglePrice(ddProduct.value)">
+            <select class="form-control" id="ddProduct" #ddProduct="ngModel" name="ddProduct" [(ngModel)]="singleDiscount['ProductID']" required (change)="getSinglePrice(ddProduct.value)">
               <option *ngFor="let pro of ProductData" value="{{pro.ProductID}}">{{pro.ProductName}}</option>
             </select>
           </div>

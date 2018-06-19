@@ -15,8 +15,8 @@ export class DiscountComponent implements OnInit {
   DiscountData: any = [];
   singleDiscount = '';
   ProductData: any = [];
-  ID: string = "new";
-  ProdPrice: string = '';
+  ID = 'new';
+  ProdPrice = '';
   errorMsg = null;
   successMsg = null;
   type = '';

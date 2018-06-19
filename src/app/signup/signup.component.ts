@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from '../services/seller.service';
-import { SuperAdminService } from '../services/super-admin.service';v
+import { SuperAdminService } from '../services/super-admin.service';
 import { environment } from '../../environments/environment';
 
 
