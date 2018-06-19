@@ -110,6 +110,7 @@ export class WebInfoComponent implements OnInit {
       )
       .subscribe(res => {
         if (res['key'] === 'true') {
+          document.getElementById('webnameText').innerHTML = this.webInfo.Name;
           this.SuccessMsg = 'Information Succesfully Updated.';
             this.ShowAlert(true);
             this.timeout(false);
