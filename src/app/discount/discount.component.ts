@@ -15,8 +15,8 @@ export class DiscountComponent implements OnInit {
   DiscountData: any = [];
   singleDiscount = '';
   ProductData: any = [];
-  ID: string = "new";
-  ProdPrice: string = '';
+  ID = 'new';
+  ProdPrice = '';
   errorMsg = null;
   successMsg = null;
   type = '';
@@ -73,7 +73,7 @@ export class DiscountComponent implements OnInit {
   }
 
   FillProductData() {
-    this.ID = "new";
+    this.ID = 'new';
     this.clearDropDown();
     this.sellerservice.getAllDiscountProducts(this.loginAuth.getSUserID())
       .subscribe(
