@@ -23,7 +23,7 @@
             <td class="col-md-2">
               <div class="container" style=" width:36%;">
                 <div style="display: flex; justify-content: center;">
-                  <img id="profileImageIn" src="{{env}}Assets/WebsiteLogo/{{webInfo.Logo}}" style="height:130px; width:130px;" class="img-circle image">
+                  <img id="profileImageIn" src="{{env}}Assets/WebsiteLogo/{{webInfo.Logo}}" alt="{{webInfo['LogoAlt']}}" style="height:130px; width:130px;" class="img-circle image">
                 </div>
               </div>
             </td>
@@ -157,7 +157,7 @@
                 <div *ngIf="txtContactUs.errors?.required && txtContactUs.touched">
                   <span class="text-danger">Contact Us is required</span>
                 </div>
-                
+
               </div>
               <div id='alertDiv'>
                 <div ng-if="SuccessMsg !== null">

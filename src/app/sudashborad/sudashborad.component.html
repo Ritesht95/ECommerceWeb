@@ -100,7 +100,7 @@
                         <ul class="users-list clearfix">
                             <li *ngFor="let NewUser of NewUserData">
                                 <img src="{{env}}Assets/UserImages/{{NewUser.ProfileImage}}" alt="User Image" Style="width: 140px; height: 120px;">
-                                <a class="users-list-name" href="#">{{NewUser.Name}}</a>
+                                <a class="users-list-name">{{NewUser.Name}}</a>
                                 <span class="users-list-date">{{NewUser.CreatedOn}}</span>
                             </li>
                         </ul>
@@ -134,7 +134,7 @@
                         <ul class="users-list clearfix">
                             <li *ngFor="let NewUser of NewShopData">
                                 <img src="{{env}}Assets/ShopLogo/{{NewUser.LogoImage}}" alt="User Image" Style="width: 140px; height: 120px;">
-                                <a class="users-list-name" href="#">{{NewUser.ShopName}}</a>
+                                <a class="users-list-name" routerLink="/shopDetail" [queryParams]="{shopID: NewUser.ShopID }">{{NewUser.ShopName}}</a>
                                 <span class="users-list-date">{{NewUser.CreatedOn}}</span>
                             </li>
                         </ul>

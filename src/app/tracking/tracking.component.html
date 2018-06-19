@@ -34,7 +34,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let o of order">
-              <td>{{ o.OrderDetailID }}</td>
+              <td><a routerLink="/sutracking" [queryParams]="{'ODID':o.OrderDetailID}">{{ o.OrderDetailID }}</a></td>
               <td>{{ o.ProductName }}</td>
               <td>{{ o.Price }}</td>
               <td>{{ o.Qty }}</td>

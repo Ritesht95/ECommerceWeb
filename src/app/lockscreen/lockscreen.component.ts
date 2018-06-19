@@ -63,7 +63,6 @@ export class LockscreenComponent implements OnInit {
   // log in function
 
   login(Password: string) {
-    alert(localStorage.getItem('SleepUsername'));
     if (localStorage.getItem('SleepUsername') === null) {
       this.router.navigate(['login']);
     } else {
