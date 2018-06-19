@@ -62,6 +62,8 @@ export class LoginComponent {
     });
   }
 
+  //  check login
+
   CheckLogin(Email: string, Password: string, Type: string) {
     if (Type === 'Admin') {
       this.superadminservice.checkLogin(Email, Password).subscribe(
@@ -113,6 +115,8 @@ export class LoginComponent {
     }
   }
 
+  // set user log in
+
   InitSetup(NUsername: string, NPassword: string) {
     this.sellerservice
       .InitialSetup(this.UserID, NUsername, NPassword)
@@ -136,6 +140,8 @@ export class LoginComponent {
         }
       });
   }
+
+  // check user name
 
   checkUsername(Username: string) {
     this.sellerservice.checkUsername(Username).subscribe(

@@ -40,6 +40,8 @@ export class OrderComponent implements OnInit {
     );
   }
 
+  // send order
+
   sendOrderId(orderid: number) {
     console.log(orderid);
     this.sellerservice.sendOrder(orderid).subscribe(

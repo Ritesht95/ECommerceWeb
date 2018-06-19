@@ -45,11 +45,15 @@ export class ShopsComponent implements OnInit {
     });
   }
 
+  // set active or not
+
   SetActive(ShopID: number) {
     this.superadminservice.setShopStatus(ShopID, 1).subscribe(res => {
       this.ngOnInit();
     });
   }
+
+  // set inavtive
 
   SetInactive(ShopID: number) {
     this.superadminservice.setShopStatus(ShopID, 0).subscribe(res => {
@@ -57,17 +61,23 @@ export class ShopsComponent implements OnInit {
     });
   }
 
+  // set approved or not
+
   SetApproved(ShopID: number) {
     this.superadminservice.setShopApproveStatus(ShopID, 1).subscribe(res => {
       this.ngOnInit();
     });
   }
 
+  // set not approved
+
   SetNApproved(ShopID: number) {
     this.superadminservice.setShopApproveStatus(ShopID, 0).subscribe(res => {
       this.ngOnInit();
     });
   }
+
+  // set delete shop
 
   SetShopDelete(ShopID: number) {
     this.superadminservice.setShopDelete(ShopID).subscribe(res => {
