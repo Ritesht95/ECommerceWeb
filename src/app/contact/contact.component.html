@@ -4,6 +4,7 @@
 <div class="content-wrapper">
 
   <section class="content-header">
+    <h1>Contact Us</h1>
     <ol class="breadcrumb">
       <li>
         <a href="#">
@@ -14,14 +15,13 @@
     </ol>
   </section>
 
-  <section class="content" style="padding: inherit;">
-
+  <section class="content">
     <div class="box box-primary">
-      <div class="container">
+      <div class="box-body">
         <div class="row">
-          <div style="text-align: center;">
+          <!-- <div style="text-align: center;">
             <font size="6" color="#357ca5">Contact Us</font>
-          </div>
+          </div> -->
           <form role="form" #frm="ngForm">
             <div class="col-md-6">
               <!-- <div class="form-group">
@@ -29,30 +29,33 @@
                 <input type="text" class="form-control" value="{{ user }}" ngModel id="txtName" name="txtName" #txtName="ngModel" placeholder="Name" required>
               </div> -->
               <div class="form-group">
-                <label for="txtEmail">Email</label><span class="text-danger">*</span>
-                <input type="text" class="form-control" [(ngModel)]='email' id="txtEmail" placeholder="Email" name="txtEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #txtEmail="ngModel">
+                <label for="txtEmail">Email</label>
+                <span class="text-danger">*</span>
+                <input type="text" class="form-control" [(ngModel)]='email' id="txtEmail" placeholder="Email" name="txtEmail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  #txtEmail="ngModel">
               </div>
               <div class="form-group">
-                <label for="txtMsg">Message</label><span class="text-danger">*</span>
-                <textarea class="form-control" ngModel id="txtMsg" name="txtMsg" #txtMsg="ngModel" rows="2" placeholder="Message"
-                required></textarea>
+                <label for="txtMsg">Message</label>
+                <span class="text-danger">*</span>
+                <textarea class="form-control" ngModel id="txtMsg" name="txtMsg" #txtMsg="ngModel" rows="2" placeholder="Message" required></textarea>
               </div>
               <button class="btn btn-primary" type="submit" [disabled]="frm.invalid" (click)="sendFeedback(txtEmail.value, txtMsg.value)">Submit</button> &nbsp;
               <button class="btn btn-primary" type="reset">Cancel</button>
               <div *ngIf="txtEmail.touched || txtMsg.touched ">
-                  <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
-                      <span class="text-danger">Email is required</span>
-                    </div>
-                    <div *ngIf="txtEmail.errors?.pattern && txtEmail.touched">
-                      <span class="text-danger">Email is Invalid</span>
-                  </div>
-                  <div *ngIf="txtMsg.errors?.required && txtMsg.touched">
-                      <span class="text-danger">Message Invalid</span>
-                  </div>
+                <div *ngIf="txtEmail.errors?.required && txtEmail.touched">
+                  <span class="text-danger">Email is required</span>
+                </div>
+                <div *ngIf="txtEmail.errors?.pattern && txtEmail.touched">
+                  <span class="text-danger">Email is Invalid</span>
+                </div>
+                <div *ngIf="txtMsg.errors?.required && txtMsg.touched">
+                  <span class="text-danger">Message Invalid</span>
+                </div>
 
               </div>
             </div>
-            <br><br>
+            <br>
+            <br>
             <div class="col-md-6">
               <!-- <div style="text-align: center;">
                 <i class="fas fa-map-marker fa-3x"></i>
@@ -67,7 +70,9 @@
                 <i class="fas fa-envelope fa-3x"></i>
                 <h4>{{ infoEmail.Email }}</h4>
               </div>
-            </div><br><br>
+            </div>
+            <br>
+            <br>
           </form>
         </div>
       </div>
