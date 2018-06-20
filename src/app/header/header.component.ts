@@ -110,7 +110,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.loginAuth.getSUserLoggedIn()) {
+    if (this.loginAuth.getSUserLoggedIn() === 'true') {
       this.userType = true;
     } else {
       this.userType = false;
