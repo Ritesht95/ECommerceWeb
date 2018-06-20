@@ -40,11 +40,17 @@ export class LoginauthService {
   }
 
   setUserLoggedIn(value: string) {
+    if (value === 'true') {
+      this.clearAll();
+    }
     this.IsUserLoggedIn = value;
     localStorage.setItem('loggedIn', value);
   }
 
   setSUserLoggedIn(value: string) {
+    if (value === 'true') {
+      this.clearAll();
+    }
     this.IsSUserLoggedIn = value;
     localStorage.setItem('SloggedIn', value);
   }
@@ -128,4 +134,16 @@ export class LoginauthService {
     }
   }
 
+  clearAll() {
+      localStorage.removeItem('sessionUserID');
+      localStorage.removeItem('sessionName');
+      localStorage.removeItem('sessionEmail');
+      localStorage.setItem('loggedIn', 'false');
+      this.setUserLoggedIn('false');
+      localStorage.removeItem('sessionShopUserID');
+      localStorage.removeItem('sessionShopName');
+      localStorage.removeItem('sessionShopEmail');
+      localStorage.setItem('SloggedIn', 'false');
+      this.setSUserLoggedIn('false');
+  }
 }
