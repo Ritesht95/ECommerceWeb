@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'http://192.168.0.108/OnlinestoreApi/'
+  apiURL: 'http://onlinestoreapi.riteshtailor.in/OnlinestoreApi/'
 };
