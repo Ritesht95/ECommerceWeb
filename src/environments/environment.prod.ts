@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: 'http://onlinestoreapi.riteshtailor.in/OnlinestoreApi/'
+  apiURL: 'https://onlinestoreapi.riteshtailor.in/OnlinestoreApi/'
 };
