@@ -35,6 +35,8 @@ export class ShopDashboardComponent implements OnInit {
       if (res['records'] !== undefined) {
         if (res['records'].length > 10) {
           this.orders = res['records'].slice(0, 10);
+        } else {
+          this.orders = res['records'];
         }
       }
     });
