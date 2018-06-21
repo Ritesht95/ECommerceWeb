@@ -1,9 +1,6 @@
 //Install express server
 const express = require('express');
 const path = require('path');
-var fs = require('fs');
-var gracefulFs = require('graceful-fs');
-gracefulFs.gracefulify(fs);
 
 const app = express();
 
